@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/vantage/blob/main/json-schema/resource.json",
+  "title": "Vantage Resource",
+  "description": "A cloud Resource with associated cost, provider, service, and regional metadata.",
+  "type": "object",
+  "properties": {
+    "token": {
+      "type": "string",
+      "description": "The unique identifier for the Resource."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the Resource."
+    },
+    "provider": {
+      "type": "string",
+      "description": "The cloud provider."
+    },
+    "service": {
+      "type": "string",
+      "description": "The cloud service."
+    },
+    "account_id": {
+      "type": "string",
+      "description": "The cloud account identifier."
+    },
+    "region": {
+      "type": "string",
+      "description": "The region of the resource."
+    },
+    "cost": {
+      "type": "string",
+      "description": "The cost associated with the resource."
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional metadata about the resource."
+    }
+  }
+}

@@ -1,0 +1,322 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "vantage": "https://docs.vantage.sh/",
+    "CostReport": {
+      "@id": "vantage:cost_reports",
+      "@context": {
+        "token": "https://schema.org/identifier",
+        "title": "https://schema.org/name",
+        "filter": "https://schema.org/query",
+        "groupings": "https://schema.org/category",
+        "folder_token": {
+          "@id": "vantage:folders",
+          "@type": "@id"
+        },
+        "saved_filter_tokens": {
+          "@id": "vantage:saved_filters",
+          "@type": "@id"
+        },
+        "workspace_token": {
+          "@id": "vantage:workspaces",
+          "@type": "@id"
+        },
+        "created_at": "https://schema.org/dateCreated"
+      }
+    },
+    "Cost": {
+      "@id": "vantage:cost_reports",
+      "@context": {
+        "date": "https://schema.org/date",
+        "amount": "https://schema.org/price",
+        "currency": "https://schema.org/priceCurrency",
+        "provider": "https://schema.org/provider",
+        "service": "https://schema.org/serviceType",
+        "account_id": "https://schema.org/identifier",
+        "region": "https://schema.org/areaServed",
+        "category": "https://schema.org/category",
+        "subcategory": "https://schema.org/category"
+      }
+    },
+    "Folder": {
+      "@id": "vantage:folders",
+      "@context": {
+        "token": "https://schema.org/identifier",
+        "title": "https://schema.org/name",
+        "parent_folder_token": {
+          "@id": "vantage:folders",
+          "@type": "@id"
+        },
+        "workspace_token": {
+          "@id": "vantage:workspaces",
+          "@type": "@id"
+        },
+        "created_at": "https://schema.org/dateCreated"
+      }
+    },
+    "Dashboard": {
+      "@id": "vantage:dashboards",
+      "@context": {
+        "token": "https://schema.org/identifier",
+        "title": "https://schema.org/name",
+        "widget_tokens": "https://schema.org/hasPart",
+        "workspace_token": {
+          "@id": "vantage:workspaces",
+          "@type": "@id"
+        },
+        "created_at": "https://schema.org/dateCreated"
+      }
+    },
+    "SavedFilter": {
+      "@id": "vantage:saved_filters",
+      "@context": {
+        "token": "https://schema.org/identifier",
+        "title": "https://schema.org/name",
+        "filter": "https://schema.org/query",
+        "workspace_token": {
+          "@id": "vantage:workspaces",
+          "@type": "@id"
+        },
+        "created_at": "https://schema.org/dateCreated"
+      }
+    },
+    "Workspace": {
+      "@id": "vantage:workspaces",
+      "@context": {
+        "token": "https://schema.org/identifier",
+        "name": "https://schema.org/name",
+        "created_at": "https://schema.org/dateCreated"
+      }
+    },
+    "Team": {
+      "@id": "vantage:teams",
+      "@context": {
+        "token": "https://schema.org/identifier",
+        "name": "https://schema.org/name",
+        "description": "https://schema.org/description",
+        "workspace_token": {
+          "@id": "vantage:workspaces",
+          "@type": "@id"
+        },
+        "user_tokens": "https://schema.org/member",
+        "created_at": "https://schema.org/dateCreated"
+      }
+    },
+    "AccessGrant": {
+      "@id": "vantage:access_grants",
+      "@context": {
+        "token": "https://schema.org/identifier",
+        "team_token": {
+          "@id": "vantage:teams",
+          "@type": "@id"
+        },
+        "resource_token": "https://schema.org/object",
+        "access": "https://schema.org/permissionType",
+        "created_at": "https://schema.org/dateCreated"
+      }
+    },
+    "BudgetAlert": {
+      "@id": "vantage:budget_alerts",
+      "@context": {
+        "token": "https://schema.org/identifier",
+        "cost_report_token": {
+          "@id": "vantage:cost_reports",
+          "@type": "@id"
+        },
+        "budget": "https://schema.org/price",
+        "period": "https://schema.org/billingPeriod",
+        "created_at": "https://schema.org/dateCreated"
+      }
+    },
+    "AnomalyAlert": {
+      "@id": "vantage:anomaly_alerts",
+      "@context": {
+        "token": "https://schema.org/identifier",
+        "cost_report_token": {
+          "@id": "vantage:cost_reports",
+          "@type": "@id"
+        },
+        "threshold": "https://schema.org/value",
+        "created_at": "https://schema.org/dateCreated"
+      }
+    },
+    "Recommendation": {
+      "@id": "vantage:recommendations",
+      "@context": {
+        "token": "https://schema.org/identifier",
+        "type": "https://schema.org/category",
+        "description": "https://schema.org/description",
+        "estimated_savings": "https://schema.org/price",
+        "provider": "https://schema.org/provider",
+        "service": "https://schema.org/serviceType",
+        "resource_id": "https://schema.org/identifier",
+        "created_at": "https://schema.org/dateCreated"
+      }
+    },
+    "Segment": {
+      "@id": "vantage:segments",
+      "@context": {
+        "token": "https://schema.org/identifier",
+        "title": "https://schema.org/name",
+        "filter": "https://schema.org/query",
+        "priority": "https://schema.org/position",
+        "workspace_token": {
+          "@id": "vantage:workspaces",
+          "@type": "@id"
+        },
+        "created_at": "https://schema.org/dateCreated"
+      }
+    },
+    "Integration": {
+      "@id": "vantage:integrations",
+      "@context": {
+        "token": "https://schema.org/identifier",
+        "provider": "https://schema.org/provider",
+        "status": "https://schema.org/status",
+        "account_identifier": "https://schema.org/identifier",
+        "created_at": "https://schema.org/dateCreated"
+      }
+    },
+    "ManagedAccount": {
+      "@id": "vantage:managed_accounts",
+      "@context": {
+        "token": "https://schema.org/identifier",
+        "name": "https://schema.org/name",
+        "account_identifier": "https://schema.org/identifier",
+        "provider": "https://schema.org/provider",
+        "created_at": "https://schema.org/dateCreated"
+      }
+    },
+    "BusinessMetric": {
+      "@id": "vantage:business_metrics",
+      "@context": {
+        "token": "https://schema.org/identifier",
+        "title": "https://schema.org/name",
+        "values": "https://schema.org/value",
+        "created_at": "https://schema.org/dateCreated"
+      }
+    },
+    "ResourceReport": {
+      "@id": "vantage:resource_reports",
+      "@context": {
+        "token": "https://schema.org/identifier",
+        "title": "https://schema.org/name",
+        "filter": "https://schema.org/query",
+        "workspace_token": {
+          "@id": "vantage:workspaces",
+          "@type": "@id"
+        },
+        "created_at": "https://schema.org/dateCreated"
+      }
+    },
+    "Resource": {
+      "@id": "vantage:resources",
+      "@context": {
+        "token": "https://schema.org/identifier",
+        "name": "https://schema.org/name",
+        "provider": "https://schema.org/provider",
+        "service": "https://schema.org/serviceType",
+        "account_id": "https://schema.org/identifier",
+        "region": "https://schema.org/areaServed",
+        "cost": "https://schema.org/price",
+        "metadata": "https://schema.org/additionalProperty"
+      }
+    },
+    "NetworkFlowReport": {
+      "@id": "vantage:network_flow_reports",
+      "@context": {
+        "token": "https://schema.org/identifier",
+        "title": "https://schema.org/name",
+        "workspace_token": {
+          "@id": "vantage:workspaces",
+          "@type": "@id"
+        },
+        "created_at": "https://schema.org/dateCreated"
+      }
+    },
+    "FinancialCommitmentReport": {
+      "@id": "vantage:financial_commitment_reports",
+      "@context": {
+        "token": "https://schema.org/identifier",
+        "title": "https://schema.org/name",
+        "workspace_token": {
+          "@id": "vantage:workspaces",
+          "@type": "@id"
+        },
+        "created_at": "https://schema.org/dateCreated"
+      }
+    },
+    "KubernetesEfficiencyReport": {
+      "@id": "vantage:kubernetes",
+      "@context": {
+        "token": "https://schema.org/identifier",
+        "cluster_name": "https://schema.org/name",
+        "namespace": "https://schema.org/identifier",
+        "idle_cost": "https://schema.org/price",
+        "total_cost": "https://schema.org/price",
+        "efficiency": "https://schema.org/value",
+        "created_at": "https://schema.org/dateCreated"
+      }
+    },
+    "CostProvider": {
+      "@id": "vantage:cost_providers",
+      "@context": {
+        "token": "https://schema.org/identifier",
+        "name": "https://schema.org/name",
+        "description": "https://schema.org/description"
+      }
+    },
+    "Provider": {
+      "@id": "vantage:providers",
+      "@context": {
+        "id": "https://schema.org/identifier",
+        "name": "https://schema.org/name",
+        "services_count": "https://schema.org/value"
+      }
+    },
+    "Service": {
+      "@id": "vantage:services",
+      "@context": {
+        "id": "https://schema.org/identifier",
+        "name": "https://schema.org/name",
+        "provider_id": {
+          "@id": "vantage:providers",
+          "@type": "@id"
+        },
+        "products_count": "https://schema.org/value"
+      }
+    },
+    "Product": {
+      "@id": "vantage:products",
+      "@context": {
+        "id": "https://schema.org/identifier",
+        "name": "https://schema.org/name",
+        "provider_id": {
+          "@id": "vantage:providers",
+          "@type": "@id"
+        },
+        "service_id": {
+          "@id": "vantage:services",
+          "@type": "@id"
+        },
+        "details": "https://schema.org/additionalProperty",
+        "prices": "https://schema.org/offers"
+      }
+    },
+    "Price": {
+      "@id": "vantage:prices",
+      "@context": {
+        "id": "https://schema.org/identifier",
+        "unit": "https://schema.org/unitText",
+        "price": "https://schema.org/price",
+        "currency": "https://schema.org/priceCurrency",
+        "region": "https://schema.org/areaServed",
+        "description": "https://schema.org/description",
+        "product_id": {
+          "@id": "vantage:products",
+          "@type": "@id"
+        }
+      }
+    }
+  }
+}

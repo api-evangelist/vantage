@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/vantage/blob/main/json-schema/saved-filter.json",
+  "title": "Vantage Saved Filter",
+  "description": "A Saved Filter containing a reusable VQL filter expression that can be applied to Cost Reports.",
+  "type": "object",
+  "properties": {
+    "token": {
+      "type": "string",
+      "description": "The unique token identifier for the Saved Filter."
+    },
+    "title": {
+      "type": "string",
+      "description": "The title of the Saved Filter."
+    },
+    "filter": {
+      "type": "string",
+      "description": "The VQL filter expression."
+    },
+    "workspace_token": {
+      "type": "string",
+      "description": "The token of the Workspace this Saved Filter belongs to."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the Saved Filter was created."
+    }
+  }
+}

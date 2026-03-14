@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/vantage/blob/main/json-schema/team.json",
+  "title": "Vantage Team",
+  "description": "A Team that groups users together for managing access to Vantage resources within a Workspace.",
+  "type": "object",
+  "properties": {
+    "token": {
+      "type": "string",
+      "description": "The unique token identifier for the Team."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the Team."
+    },
+    "description": {
+      "type": "string",
+      "description": "The description of the Team."
+    },
+    "workspace_token": {
+      "type": "string",
+      "description": "The token of the Workspace this Team belongs to."
+    },
+    "user_tokens": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tokens of users who are members of the Team."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the Team was created."
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/vantage/blob/main/json-schema/product.json",
+  "title": "Vantage Cloud Pricing Product",
+  "description": "A cloud infrastructure Product with pricing details, such as an EC2 instance type or storage tier.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier for the Product."
+    },
+    "name": {
+      "type": "string",
+      "description": "The display name of the Product."
+    },
+    "provider_id": {
+      "type": "string",
+      "description": "The identifier of the cloud Provider."
+    },
+    "service_id": {
+      "type": "string",
+      "description": "The identifier of the Service."
+    },
+    "details": {
+      "type": "object",
+      "description": "Product-specific details such as vCPUs, memory, storage, network performance, etc."
+    },
+    "prices": {
+      "type": "array",
+      "items": {
+        "$ref": "price.json"
+      },
+      "description": "Pricing data for this Product across regions."
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/vantage/blob/main/json-schema/service.json",
+  "title": "Vantage Cloud Pricing Service",
+  "description": "A cloud Service within a Provider, containing products with pricing data.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier for the Service."
+    },
+    "name": {
+      "type": "string",
+      "description": "The display name of the Service."
+    },
+    "provider_id": {
+      "type": "string",
+      "description": "The identifier of the Provider this Service belongs to."
+    },
+    "products_count": {
+      "type": "integer",
+      "description": "The number of products available in this Service."
+    }
+  }
+}

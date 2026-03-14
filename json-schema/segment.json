@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/vantage/blob/main/json-schema/segment.json",
+  "title": "Vantage Segment",
+  "description": "A Segment for allocating cloud costs using VQL filters with priority-based ordering.",
+  "type": "object",
+  "properties": {
+    "token": {
+      "type": "string",
+      "description": "The unique token identifier for the Segment."
+    },
+    "title": {
+      "type": "string",
+      "description": "The title of the Segment."
+    },
+    "filter": {
+      "type": "string",
+      "description": "The VQL filter expression for the Segment."
+    },
+    "priority": {
+      "type": "integer",
+      "description": "The priority order of the Segment."
+    },
+    "workspace_token": {
+      "type": "string",
+      "description": "The token of the Workspace this Segment belongs to."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the Segment was created."
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/vantage/blob/main/json-schema/network-flow-report.json",
+  "title": "Vantage Network Flow Report",
+  "description": "A Network Flow Report that tracks and analyzes network traffic costs across cloud infrastructure.",
+  "type": "object",
+  "properties": {
+    "token": {
+      "type": "string",
+      "description": "The unique token identifier for the Network Flow Report."
+    },
+    "title": {
+      "type": "string",
+      "description": "The title of the Network Flow Report."
+    },
+    "workspace_token": {
+      "type": "string",
+      "description": "The token of the Workspace this report belongs to."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the report was created."
+    }
+  }
+}

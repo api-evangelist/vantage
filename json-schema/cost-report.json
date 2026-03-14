@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/vantage/blob/main/json-schema/cost-report.json",
+  "title": "Vantage Cost Report",
+  "description": "A Cost Report in Vantage that tracks and visualizes cloud spending using VQL filters and groupings across providers.",
+  "type": "object",
+  "properties": {
+    "token": {
+      "type": "string",
+      "description": "The unique token identifier for the Cost Report."
+    },
+    "title": {
+      "type": "string",
+      "description": "The title of the Cost Report."
+    },
+    "filter": {
+      "type": "string",
+      "description": "The VQL filter applied to the Cost Report."
+    },
+    "groupings": {
+      "type": "string",
+      "description": "The groupings applied to the Cost Report."
+    },
+    "folder_token": {
+      "type": "string",
+      "description": "The token of the Folder this report belongs to."
+    },
+    "saved_filter_tokens": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tokens of Saved Filters applied to this report."
+    },
+    "workspace_token": {
+      "type": "string",
+      "description": "The token of the Workspace this report belongs to."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the Cost Report was created."
+    }
+  }
+}

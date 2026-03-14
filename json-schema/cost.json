@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/vantage/blob/main/json-schema/cost.json",
+  "title": "Vantage Cost",
+  "description": "A cost data entry representing cloud spending for a specific date, provider, service, and account.",
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "The date of the cost entry."
+    },
+    "amount": {
+      "type": "string",
+      "description": "The cost amount."
+    },
+    "currency": {
+      "type": "string",
+      "description": "The currency of the cost amount."
+    },
+    "provider": {
+      "type": "string",
+      "description": "The cloud provider (e.g., aws, azure, gcp)."
+    },
+    "service": {
+      "type": "string",
+      "description": "The cloud service name."
+    },
+    "account_id": {
+      "type": "string",
+      "description": "The cloud account identifier."
+    },
+    "region": {
+      "type": "string",
+      "description": "The cloud region."
+    },
+    "category": {
+      "type": "string",
+      "description": "The cost category."
+    },
+    "subcategory": {
+      "type": "string",
+      "description": "The cost subcategory."
+    }
+  }
+}

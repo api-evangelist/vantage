@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/vantage/blob/main/json-schema/workspace.json",
+  "title": "Vantage Workspace",
+  "description": "A Workspace that serves as an organizational container for teams, reports, and other Vantage resources.",
+  "type": "object",
+  "properties": {
+    "token": {
+      "type": "string",
+      "description": "The unique token identifier for the Workspace."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the Workspace."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the Workspace was created."
+    }
+  }
+}

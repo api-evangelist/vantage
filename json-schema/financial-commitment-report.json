@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/vantage/blob/main/json-schema/financial-commitment-report.json",
+  "title": "Vantage Financial Commitment Report",
+  "description": "A Financial Commitment Report that tracks reserved instances, savings plans, and other financial commitments across cloud providers.",
+  "type": "object",
+  "properties": {
+    "token": {
+      "type": "string",
+      "description": "The unique token identifier for the report."
+    },
+    "title": {
+      "type": "string",
+      "description": "The title of the Financial Commitment Report."
+    },
+    "workspace_token": {
+      "type": "string",
+      "description": "The token of the Workspace this report belongs to."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the report was created."
+    }
+  }
+}

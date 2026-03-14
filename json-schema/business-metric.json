@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/vantage/blob/main/json-schema/business-metric.json",
+  "title": "Vantage Business Metric",
+  "description": "A Business Metric that tracks custom business values over time and can be associated with Cost Reports for unit economics.",
+  "type": "object",
+  "properties": {
+    "token": {
+      "type": "string",
+      "description": "The unique token identifier for the Business Metric."
+    },
+    "title": {
+      "type": "string",
+      "description": "The title of the Business Metric."
+    },
+    "cost_report_tokens_with_metadata": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "description": "Associated cost reports with metadata."
+    },
+    "values": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "amount": {
+            "type": "number"
+          }
+        }
+      },
+      "description": "The values of the Business Metric over time."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the Business Metric was created."
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/vantage/blob/main/json-schema/managed-account.json",
+  "title": "Vantage Managed Account",
+  "description": "A Managed Account representing a linked cloud provider account within Vantage.",
+  "type": "object",
+  "properties": {
+    "token": {
+      "type": "string",
+      "description": "The unique token identifier for the Managed Account."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the Managed Account."
+    },
+    "account_identifier": {
+      "type": "string",
+      "description": "The cloud provider account identifier."
+    },
+    "provider": {
+      "type": "string",
+      "description": "The cloud provider."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the Managed Account was created."
+    }
+  }
+}

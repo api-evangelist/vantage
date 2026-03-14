@@ -21,6 +21,50 @@ apis:
         type: OpenAPI
       - url: https://api.vantage.sh/v2/swagger.json
         type: Swagger
+      - url: json-schema/cost-report.json
+        type: JSONSchema
+      - url: json-schema/cost.json
+        type: JSONSchema
+      - url: json-schema/folder.json
+        type: JSONSchema
+      - url: json-schema/dashboard.json
+        type: JSONSchema
+      - url: json-schema/saved-filter.json
+        type: JSONSchema
+      - url: json-schema/workspace.json
+        type: JSONSchema
+      - url: json-schema/team.json
+        type: JSONSchema
+      - url: json-schema/access-grant.json
+        type: JSONSchema
+      - url: json-schema/budget-alert.json
+        type: JSONSchema
+      - url: json-schema/anomaly-alert.json
+        type: JSONSchema
+      - url: json-schema/recommendation.json
+        type: JSONSchema
+      - url: json-schema/segment.json
+        type: JSONSchema
+      - url: json-schema/integration.json
+        type: JSONSchema
+      - url: json-schema/managed-account.json
+        type: JSONSchema
+      - url: json-schema/cost-provider.json
+        type: JSONSchema
+      - url: json-schema/business-metric.json
+        type: JSONSchema
+      - url: json-schema/resource-report.json
+        type: JSONSchema
+      - url: json-schema/resource.json
+        type: JSONSchema
+      - url: json-schema/network-flow-report.json
+        type: JSONSchema
+      - url: json-schema/financial-commitment-report.json
+        type: JSONSchema
+      - url: json-schema/kubernetes-efficiency-report.json
+        type: JSONSchema
+      - url: json-ld/vantage-context.jsonld
+        type: JSONLD
     description: >-
       The Vantage Cost Management API (v2) provides programmatic access to cloud
       cost data and enables automation of cost management workflows. Create and
@@ -46,6 +90,16 @@ apis:
         type: OpenAPI
       - url: https://api.vantage.sh/v1/swagger.json
         type: Swagger
+      - url: json-schema/provider.json
+        type: JSONSchema
+      - url: json-schema/service.json
+        type: JSONSchema
+      - url: json-schema/product.json
+        type: JSONSchema
+      - url: json-schema/price.json
+        type: JSONSchema
+      - url: json-ld/vantage-context.jsonld
+        type: JSONLD
     description: >-
       The Vantage Cloud Pricing API (v1) provides programmatic access to cloud
       infrastructure pricing data across multiple providers including AWS, Azure,

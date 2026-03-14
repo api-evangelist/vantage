@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/vantage/blob/main/json-schema/price.json",
+  "title": "Vantage Cloud Pricing Price",
+  "description": "A Price entry representing the cost of a cloud Product in a specific region and unit.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier for the Price."
+    },
+    "unit": {
+      "type": "string",
+      "description": "The pricing unit (e.g., per hour, per GB-month)."
+    },
+    "price": {
+      "type": "string",
+      "description": "The price amount."
+    },
+    "currency": {
+      "type": "string",
+      "description": "The currency of the price."
+    },
+    "region": {
+      "type": "string",
+      "description": "The cloud region this price applies to."
+    },
+    "description": {
+      "type": "string",
+      "description": "A description of the pricing tier or option."
+    },
+    "product_id": {
+      "type": "string",
+      "description": "The identifier of the associated Product."
+    }
+  }
+}

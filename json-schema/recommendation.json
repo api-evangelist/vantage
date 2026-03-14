@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/vantage/blob/main/json-schema/recommendation.json",
+  "title": "Vantage Recommendation",
+  "description": "A cost optimization Recommendation identifying potential savings for a specific cloud resource.",
+  "type": "object",
+  "properties": {
+    "token": {
+      "type": "string",
+      "description": "The unique token identifier for the Recommendation."
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of recommendation."
+    },
+    "description": {
+      "type": "string",
+      "description": "A description of the recommendation."
+    },
+    "estimated_savings": {
+      "type": "string",
+      "description": "The estimated monthly savings."
+    },
+    "provider": {
+      "type": "string",
+      "description": "The cloud provider."
+    },
+    "service": {
+      "type": "string",
+      "description": "The cloud service."
+    },
+    "resource_id": {
+      "type": "string",
+      "description": "The resource identifier."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the Recommendation was generated."
+    }
+  }
+}

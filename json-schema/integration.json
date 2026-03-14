@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-evangelist/vantage/blob/main/json-schema/integration.json",
+  "title": "Vantage Integration",
+  "description": "An Integration connecting a cloud provider account to Vantage for cost data collection.",
+  "type": "object",
+  "properties": {
+    "token": {
+      "type": "string",
+      "description": "The unique token identifier for the Integration."
+    },
+    "provider": {
+      "type": "string",
+      "description": "The cloud provider (e.g., aws, azure, gcp)."
+    },
+    "status": {
+      "type": "string",
+      "description": "The current status of the Integration."
+    },
+    "account_identifier": {
+      "type": "string",
+      "description": "The cloud account identifier for the Integration."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the Integration was created."
+    }
+  }
+}

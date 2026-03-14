@@ -2,28 +2,69 @@ aid: vantage
 url: >-
   https://raw.githubusercontent.com/api-evangelist/vantage/refs/heads/main/apis.yml
 apis:
-  - aid: vantage:vantage
-    name: Vantage
+  - aid: vantage:cost-management-api
+    name: Vantage Cost Management API
     tags:
-      - API
-    humanURL: https://www.vantage.sh/
+      - Cloud Costs
+      - FinOps
+      - Cost Reports
+      - Budgets
+      - Anomaly Detection
+      - Dashboards
+    humanURL: https://docs.vantage.sh/api
     properties:
-      - url: https://www.vantage.sh/
+      - url: https://vantage.readme.io/reference/general
         type: Documentation
+      - url: openapi/vantage-cost-management-api-openapi.yml
+        type: OpenAPI
+      - url: https://api.vantage.sh/v2/oas_v3.json
+        type: OpenAPI
+      - url: https://api.vantage.sh/v2/swagger.json
+        type: Swagger
     description: >-
-      Join the thousands of companies that use Vantage to manage cloud
-      infrastructure costs and build a more efficient business 
+      The Vantage Cost Management API (v2) provides programmatic access to cloud
+      cost data and enables automation of cost management workflows. Create and
+      manage Cost Reports, Folders, Dashboards, Saved Filters, Teams, Budgets,
+      Anomaly Alerts, Business Metrics, Network Flow Reports, Financial
+      Commitment Reports, Resource Reports, Segments, Integrations, and more.
+      Supports the Vantage Query Language (VQL) for filtering cost data across
+      multiple cloud providers.
+    baseURL: https://api.vantage.sh/v2
+  - aid: vantage:cloud-pricing-api
+    name: Vantage Cloud Pricing API
+    tags:
+      - Cloud Pricing
+      - Infrastructure Pricing
+      - AWS
+      - Azure
+      - GCP
+    humanURL: https://docs.vantage.sh/api
+    properties:
+      - url: https://vantage.readme.io/reference/general
+        type: Documentation
+      - url: openapi/vantage-cloud-pricing-api-openapi.yml
+        type: OpenAPI
+      - url: https://api.vantage.sh/v1/swagger.json
+        type: Swagger
+    description: >-
+      The Vantage Cloud Pricing API (v1) provides programmatic access to cloud
+      infrastructure pricing data across multiple providers including AWS, Azure,
+      and GCP. Query providers, services, products, and prices to retrieve
+      up-to-date pricing information for cloud infrastructure. The API is free
+      for all registered Vantage users.
+    baseURL: https://api.vantage.sh/v1
 name: Vantage
 tags:
   - FinOps
   - Cost Management
   - Costs
   - Budgets
+  - Cloud Pricing
 type: Contract
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 created: '2026-01-02'
-modified: '2026-01-03'
+modified: '2026-03-14'
 position: Consuming
 description: >-
   Vantage is a cloud cost management platform designed for modern engineering
@@ -31,7 +72,7 @@ description: >-
   across multiple providers. The platform helps companies identify immediate
   cost savings through features like automated purchasing of savings plans, cost
   recommendations, and Kubernetes rightsizing, while also preventing future cost
-  overruns with anomaly detection, custom alerts, and budget tracking. 
+  overruns with anomaly detection, custom alerts, and budget tracking.
 maintainers:
   - FN: Kin Lane
     email: info@apievangelist.com
@@ -73,3 +114,15 @@ common:
     description: 'null'
     url: https://docs.vantage.sh/getting_started
     type: GettingStarted
+  - name: Vantage API Reference
+    description: 'null'
+    url: https://vantage.readme.io/reference/general
+    type: APIReference
+  - name: Vantage Python SDK
+    description: 'null'
+    url: https://github.com/vantage-sh/vantage-python
+    type: SDK
+  - name: Vantage JavaScript SDK
+    description: 'null'
+    url: https://github.com/vantage-sh/vantage-js
+    type: SDK

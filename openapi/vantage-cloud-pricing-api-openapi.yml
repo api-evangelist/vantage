@@ -1,0 +1,380 @@
+openapi: 3.1.0
+info:
+  title: Vantage Cloud Pricing API
+  description: >-
+    The Vantage Cloud Pricing API provides programmatic access to cloud
+    infrastructure pricing data across multiple cloud providers. You can query
+    products, services, and providers to retrieve up-to-date pricing information
+    for AWS, Azure, GCP, and other supported cloud platforms. The API is free for
+    all registered Vantage users and returns JSON-encoded responses. An OpenAPI
+    specification is always available at https://api.vantage.sh/v1/swagger.json.
+  version: 1.0.0
+  contact:
+    name: Vantage Support
+    url: https://www.vantage.sh/
+  license:
+    name: Proprietary
+    url: https://www.vantage.sh/terms
+  termsOfService: https://www.vantage.sh/terms
+servers:
+  - url: https://api.vantage.sh/v1
+    description: Vantage Cloud Pricing API v1 Production
+security:
+  - bearerAuth: []
+tags:
+  - name: Providers
+    description: Retrieve available cloud providers.
+  - name: Services
+    description: Retrieve services available from cloud providers.
+  - name: Products
+    description: >-
+      Query cloud infrastructure products and their pricing across providers and
+      services.
+  - name: Prices
+    description: Retrieve pricing details for specific products.
+paths:
+  /providers:
+    get:
+      operationId: getProviders
+      summary: Get all Providers
+      description: >-
+        Returns all supported cloud Providers with pricing data available in the
+        Vantage database.
+      tags:
+        - Providers
+      parameters:
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful response with a list of cloud Providers.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  providers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Provider'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /providers/{provider_id}:
+    get:
+      operationId: getProvider
+      summary: Get a Provider
+      description: Returns a specific cloud Provider by identifier.
+      tags:
+        - Providers
+      parameters:
+        - name: provider_id
+          in: path
+          required: true
+          description: >-
+            The identifier of the cloud provider (e.g., aws, azure, gcp).
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response with the Provider.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Provider'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /services:
+    get:
+      operationId: getServices
+      summary: Get all Services
+      description: >-
+        Returns all Services available across all cloud Providers or filtered by
+        a specific Provider.
+      tags:
+        - Services
+      parameters:
+        - name: provider_id
+          in: query
+          description: Filter services by a specific cloud provider identifier.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful response with a list of Services.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  services:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Service'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /services/{service_id}:
+    get:
+      operationId: getService
+      summary: Get a Service
+      description: Returns a specific Service by identifier.
+      tags:
+        - Services
+      parameters:
+        - name: service_id
+          in: path
+          required: true
+          description: The identifier of the service.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response with the Service.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /products:
+    get:
+      operationId: getProducts
+      summary: Get all Products
+      description: >-
+        Returns all Products for a given Provider and Service. For example, with
+        a Provider of AWS and a Service of EC2, Products will be a list of all
+        EC2 instance types with their pricing information.
+      tags:
+        - Products
+      parameters:
+        - name: provider_id
+          in: query
+          description: Filter products by a specific cloud provider identifier.
+          schema:
+            type: string
+        - name: service_id
+          in: query
+          description: Filter products by a specific service identifier.
+          schema:
+            type: string
+        - name: name
+          in: query
+          description: Filter products by name.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful response with a list of Products.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  products:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /products/{product_id}:
+    get:
+      operationId: getProduct
+      summary: Get a Product
+      description: Returns a specific Product by identifier with its pricing details.
+      tags:
+        - Products
+      parameters:
+        - name: product_id
+          in: path
+          required: true
+          description: The identifier of the product.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response with the Product.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /prices:
+    get:
+      operationId: getPrices
+      summary: Get Prices
+      description: >-
+        Returns pricing data for products. Can be filtered by product, provider,
+        service, and region.
+      tags:
+        - Prices
+      parameters:
+        - name: product_id
+          in: query
+          description: Filter prices by a specific product identifier.
+          schema:
+            type: string
+        - name: provider_id
+          in: query
+          description: Filter prices by a specific cloud provider identifier.
+          schema:
+            type: string
+        - name: service_id
+          in: query
+          description: Filter prices by a specific service identifier.
+          schema:
+            type: string
+        - name: region
+          in: query
+          description: Filter prices by a specific cloud region.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful response with pricing data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  prices:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Price'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        Vantage API token. Create a free API key from your Vantage account page
+        at https://console.vantage.sh/account/api_access_tokens.
+  parameters:
+    PageParam:
+      name: page
+      in: query
+      description: The page of results to return.
+      schema:
+        type: integer
+        default: 1
+    LimitParam:
+      name: limit
+      in: query
+      description: The number of results per page.
+      schema:
+        type: integer
+        default: 25
+  schemas:
+    Provider:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the Provider.
+        name:
+          type: string
+          description: The display name of the Provider.
+        services_count:
+          type: integer
+          description: The number of services available from this Provider.
+    Service:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the Service.
+        name:
+          type: string
+          description: The display name of the Service.
+        provider_id:
+          type: string
+          description: The identifier of the Provider this Service belongs to.
+        products_count:
+          type: integer
+          description: The number of products available in this Service.
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the Product.
+        name:
+          type: string
+          description: The display name of the Product.
+        provider_id:
+          type: string
+          description: The identifier of the cloud Provider.
+        service_id:
+          type: string
+          description: The identifier of the Service.
+        details:
+          type: object
+          description: >-
+            Product-specific details such as vCPUs, memory, storage, network
+            performance, etc.
+        prices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Price'
+          description: Pricing data for this Product across regions.
+    Price:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the Price.
+        unit:
+          type: string
+          description: The pricing unit (e.g., per hour, per GB-month).
+        price:
+          type: string
+          description: The price amount.
+        currency:
+          type: string
+          description: The currency of the price.
+        region:
+          type: string
+          description: The cloud region this price applies to.
+        description:
+          type: string
+          description: A description of the pricing tier or option.
+        product_id:
+          type: string
+          description: The identifier of the associated Product.
+    Error:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+                description: A human-readable error message.
+  responses:
+    Unauthorized:
+      description: Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

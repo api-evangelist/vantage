@@ -36,7 +36,7 @@ paths:
   /providers:
     get:
       operationId: getProviders
-      summary: Get all Providers
+      summary: Vantage Get all Providers
       description: >-
         Returns all supported cloud Providers with pricing data available in the
         Vantage database.
@@ -62,7 +62,7 @@ paths:
   /providers/{provider_id}:
     get:
       operationId: getProvider
-      summary: Get a Provider
+      summary: Vantage Get a Provider
       description: Returns a specific cloud Provider by identifier.
       tags:
         - Providers
@@ -88,7 +88,7 @@ paths:
   /services:
     get:
       operationId: getServices
-      summary: Get all Services
+      summary: Vantage Get all Services
       description: >-
         Returns all Services available across all cloud Providers or filtered by
         a specific Provider.
@@ -119,7 +119,7 @@ paths:
   /services/{service_id}:
     get:
       operationId: getService
-      summary: Get a Service
+      summary: Vantage Get a Service
       description: Returns a specific Service by identifier.
       tags:
         - Services
@@ -144,7 +144,7 @@ paths:
   /products:
     get:
       operationId: getProducts
-      summary: Get all Products
+      summary: Vantage Get all Products
       description: >-
         Returns all Products for a given Provider and Service. For example, with
         a Provider of AWS and a Service of EC2, Products will be a list of all
@@ -186,7 +186,7 @@ paths:
   /products/{product_id}:
     get:
       operationId: getProduct
-      summary: Get a Product
+      summary: Vantage Get a Product
       description: Returns a specific Product by identifier with its pricing details.
       tags:
         - Products
@@ -211,7 +211,7 @@ paths:
   /prices:
     get:
       operationId: getPrices
-      summary: Get Prices
+      summary: Vantage Get Prices
       description: >-
         Returns pricing data for products. Can be filtered by product, provider,
         service, and region.

@@ -24,48 +24,48 @@ servers:
 security:
   - bearerAuth: []
 tags:
+  - name: Access Grants
+    description: Manage resource access grants for teams.
+  - name: Anomaly Alerts
+    description: Create and manage cost anomaly alerts.
+  - name: Budget Alerts
+    description: Create and manage budget alerts.
+  - name: Business Metrics
+    description: Create, update, and delete business metrics.
+  - name: Cost Providers
+    description: Retrieve available cost providers.
   - name: Cost Reports
     description: Create, read, update, and delete Cost Reports.
   - name: Costs
     description: Retrieve cost data for Cost Reports or VQL filters.
-  - name: Folders
-    description: Manage folders for organizing Cost Reports.
   - name: Dashboards
     description: Create and manage cost dashboards.
-  - name: Saved Filters
-    description: Manage saved filters for cost data.
-  - name: Workspaces
-    description: Manage workspaces and workspace access.
-  - name: Teams
-    description: Create and manage teams.
-  - name: Access Grants
-    description: Manage resource access grants for teams.
-  - name: Budget Alerts
-    description: Create and manage budget alerts.
-  - name: Anomaly Alerts
-    description: Create and manage cost anomaly alerts.
-  - name: Recommendations
-    description: Retrieve cost optimization recommendations.
-  - name: Segments
-    description: Create, update, and delete cost allocation segments.
+  - name: Financial Commitment Reports
+    description: Create and manage financial commitment reports.
+  - name: Folders
+    description: Manage folders for organizing Cost Reports.
   - name: Integrations
     description: Manage cloud provider integrations.
+  - name: Kubernetes
+    description: Manage Kubernetes cost data and efficiency reports.
   - name: Managed Accounts
     description: Manage linked cloud provider accounts.
-  - name: Cost Providers
-    description: Retrieve available cost providers.
-  - name: Business Metrics
-    description: Create, update, and delete business metrics.
+  - name: Network Flow Reports
+    description: Create and manage network flow reports.
+  - name: Recommendations
+    description: Retrieve cost optimization recommendations.
   - name: Resource Reports
     description: Create and manage resource reports.
   - name: Resources
     description: Retrieve resource data from reports.
-  - name: Network Flow Reports
-    description: Create and manage network flow reports.
-  - name: Financial Commitment Reports
-    description: Create and manage financial commitment reports.
-  - name: Kubernetes
-    description: Manage Kubernetes cost data and efficiency reports.
+  - name: Saved Filters
+    description: Manage saved filters for cost data.
+  - name: Segments
+    description: Create, update, and delete cost allocation segments.
+  - name: Teams
+    description: Create and manage teams.
+  - name: Workspaces
+    description: Manage workspaces and workspace access.
 paths:
   /cost_reports:
     get:

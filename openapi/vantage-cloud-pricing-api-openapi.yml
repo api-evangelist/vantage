@@ -22,16 +22,14 @@ servers:
 security:
   - bearerAuth: []
 tags:
-  - name: Providers
-    description: Retrieve available cloud providers.
-  - name: Services
-    description: Retrieve services available from cloud providers.
+  - name: Prices
+    description: Retrieve pricing details for specific products.
   - name: Products
     description: >-
       Query cloud infrastructure products and their pricing across providers and
       services.
-  - name: Prices
-    description: Retrieve pricing details for specific products.
+  - name: Providers
+    description: Retrieve available cloud providers.
 paths:
   /providers:
     get:
@@ -92,8 +90,7 @@ paths:
       description: >-
         Returns all Services available across all cloud Providers or filtered by
         a specific Provider.
-      tags:
-        - Services
+      tags: []
       parameters:
         - name: provider_id
           in: query
@@ -121,8 +118,7 @@ paths:
       operationId: getService
       summary: Vantage Get a Service
       description: Returns a specific Service by identifier.
-      tags:
-        - Services
+      tags: []
       parameters:
         - name: service_id
           in: path

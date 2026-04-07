@@ -5,12 +5,12 @@ apis:
   - aid: vantage:cost-management-api
     name: Vantage Cost Management API
     tags:
-      - Cloud Costs
-      - FinOps
-      - Cost Reports
-      - Budgets
       - Anomaly Detection
+      - Budgets
+      - Cloud Costs
+      - Cost Reports
       - Dashboards
+      - FinOps
     humanURL: https://docs.vantage.sh/api
     properties:
       - url: https://vantage.readme.io/reference/general
@@ -77,11 +77,11 @@ apis:
   - aid: vantage:cloud-pricing-api
     name: Vantage Cloud Pricing API
     tags:
-      - Cloud Pricing
-      - Infrastructure Pricing
       - AWS
       - Azure
+      - Cloud Pricing
       - GCP
+      - Infrastructure Pricing
     humanURL: https://docs.vantage.sh/api
     properties:
       - url: https://vantage.readme.io/reference/general
@@ -109,11 +109,11 @@ apis:
     baseURL: https://api.vantage.sh/v1
 name: Vantage
 tags:
-  - FinOps
-  - Cost Management
-  - Costs
   - Budgets
   - Cloud Pricing
+  - Cost Management
+  - Costs
+  - FinOps
 type: Contract
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party

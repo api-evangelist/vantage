@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "IntegrationInput",
+  "type": "object",
+  "properties": {
+    "provider": {
+      "type": "string",
+      "description": "The cloud provider to integrate with."
+    },
+    "account_identifier": {
+      "type": "string",
+      "description": "The cloud account identifier."
+    }
+  }
+}

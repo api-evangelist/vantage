@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BudgetAlert",
+  "type": "object",
+  "properties": {
+    "token": {
+      "type": "string",
+      "description": "The unique token identifier for the Budget Alert."
+    },
+    "cost_report_token": {
+      "type": "string",
+      "description": "The token of the associated Cost Report."
+    },
+    "budget": {
+      "type": "string",
+      "description": "The budget amount."
+    },
+    "period": {
+      "type": "string",
+      "description": "The budget period (e.g., monthly)."
+    },
+    "created_at": {
+      "type": "string",
+      "description": "The date and time the Budget Alert was created."
+    }
+  }
+}

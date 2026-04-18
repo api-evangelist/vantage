@@ -1,0 +1,6 @@
+{
+  "title": "Example Title",
+  "filter": "example_value",
+  "priority": 10,
+  "workspace_token": "example_value"
+}

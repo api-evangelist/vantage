@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SegmentInput",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "The title of the Segment."
+    },
+    "filter": {
+      "type": "string",
+      "description": "The VQL filter expression."
+    },
+    "priority": {
+      "type": "integer",
+      "description": "The priority order of the Segment."
+    },
+    "workspace_token": {
+      "type": "string",
+      "description": "The token of the Workspace for the Segment."
+    }
+  }
+}

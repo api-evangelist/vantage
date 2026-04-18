@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FinancialCommitmentReportInput",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "The title of the Financial Commitment Report."
+    },
+    "workspace_token": {
+      "type": "string",
+      "description": "The token of the Workspace for the report."
+    }
+  }
+}

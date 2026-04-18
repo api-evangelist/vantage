@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CostReportInput",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "The title of the Cost Report."
+    },
+    "filter": {
+      "type": "string",
+      "description": "VQL filter expression for the Cost Report."
+    },
+    "groupings": {
+      "type": "string",
+      "description": "Groupings for the Cost Report."
+    },
+    "folder_token": {
+      "type": "string",
+      "description": "The token of the Folder to place the report in."
+    },
+    "saved_filter_tokens": {
+      "type": "array",
+      "description": "Tokens of Saved Filters to apply."
+    },
+    "workspace_token": {
+      "type": "string",
+      "description": "The token of the Workspace for the report."
+    }
+  }
+}

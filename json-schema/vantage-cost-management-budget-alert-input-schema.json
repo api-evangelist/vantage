@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BudgetAlertInput",
+  "type": "object",
+  "properties": {
+    "cost_report_token": {
+      "type": "string",
+      "description": "The token of the Cost Report to set the budget for."
+    },
+    "budget": {
+      "type": "string",
+      "description": "The budget amount."
+    },
+    "period": {
+      "type": "string",
+      "description": "The budget period (e.g., monthly)."
+    }
+  }
+}

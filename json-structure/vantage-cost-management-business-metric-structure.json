@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "BusinessMetric",
+  "type": "object",
+  "properties": {
+    "token": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "cost_report_tokens_with_metadata": {
+      "type": "array"
+    },
+    "values": {
+      "type": "array"
+    },
+    "created_at": {
+      "type": "string"
+    }
+  }
+}

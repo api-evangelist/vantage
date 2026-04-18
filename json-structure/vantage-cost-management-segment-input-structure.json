@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "SegmentInput",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "filter": {
+      "type": "string"
+    },
+    "priority": {
+      "type": "integer"
+    },
+    "workspace_token": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,31 @@
+name: vantage API Vocabulary
+provider: vantage
+created: '2026-04-18'
+modified: '2026-04-18'
+operations: 81
+schemas: 41
+tags:
+- Access Grants
+- Anomaly Alerts
+- Budget Alerts
+- Business Metrics
+- Cost Providers
+- Cost Reports
+- Costs
+- Dashboards
+- Financial Commitment Reports
+- Folders
+- Integrations
+- Kubernetes
+- Managed Accounts
+- Network Flow Reports
+- Prices
+- Products
+- Providers
+- Recommendations
+- Resource Reports
+- Resources
+- Saved Filters
+- Segments
+- Teams
+- Workspaces

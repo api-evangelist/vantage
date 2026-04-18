@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Product",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "provider_id": {
+      "type": "string"
+    },
+    "service_id": {
+      "type": "string"
+    },
+    "details": {
+      "type": "object"
+    },
+    "prices": {
+      "type": "array"
+    }
+  }
+}

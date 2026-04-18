@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "AnomalyAlertInput",
+  "type": "object",
+  "properties": {
+    "cost_report_token": {
+      "type": "string"
+    },
+    "threshold": {
+      "type": "number"
+    }
+  }
+}

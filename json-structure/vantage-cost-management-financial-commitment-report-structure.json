@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "FinancialCommitmentReport",
+  "type": "object",
+  "properties": {
+    "token": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "workspace_token": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    }
+  }
+}

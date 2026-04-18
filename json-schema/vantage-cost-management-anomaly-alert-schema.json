@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AnomalyAlert",
+  "type": "object",
+  "properties": {
+    "token": {
+      "type": "string",
+      "description": "The unique token identifier for the Anomaly Alert."
+    },
+    "cost_report_token": {
+      "type": "string",
+      "description": "The token of the associated Cost Report."
+    },
+    "threshold": {
+      "type": "number",
+      "description": "The threshold percentage for anomaly detection."
+    },
+    "created_at": {
+      "type": "string",
+      "description": "The date and time the Anomaly Alert was created."
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "token": "example_value",
+  "name": "Example Title",
+  "provider": "example_value",
+  "service": "example_value",
+  "account_id": "500123",
+  "region": "example_value",
+  "cost": "example_value",
+  "metadata": "example_value"
+}

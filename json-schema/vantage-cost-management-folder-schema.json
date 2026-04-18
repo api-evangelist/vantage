@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Folder",
+  "type": "object",
+  "properties": {
+    "token": {
+      "type": "string",
+      "description": "The unique token identifier for the Folder."
+    },
+    "title": {
+      "type": "string",
+      "description": "The title of the Folder."
+    },
+    "parent_folder_token": {
+      "type": "string",
+      "description": "The token of the parent Folder, if nested."
+    },
+    "workspace_token": {
+      "type": "string",
+      "description": "The token of the Workspace this Folder belongs to."
+    },
+    "created_at": {
+      "type": "string",
+      "description": "The date and time the Folder was created."
+    }
+  }
+}

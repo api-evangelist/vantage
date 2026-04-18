@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "KubernetesEfficiencyReport",
+  "type": "object",
+  "properties": {
+    "token": {
+      "type": "string"
+    },
+    "cluster_name": {
+      "type": "string"
+    },
+    "namespace": {
+      "type": "string"
+    },
+    "idle_cost": {
+      "type": "string"
+    },
+    "total_cost": {
+      "type": "string"
+    },
+    "efficiency": {
+      "type": "number"
+    },
+    "created_at": {
+      "type": "string"
+    }
+  }
+}

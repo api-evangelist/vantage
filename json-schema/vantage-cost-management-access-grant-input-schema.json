@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AccessGrantInput",
+  "type": "object",
+  "properties": {
+    "team_token": {
+      "type": "string",
+      "description": "The token of the Team to grant access to."
+    },
+    "resource_token": {
+      "type": "string",
+      "description": "The token of the resource to grant access to."
+    },
+    "access": {
+      "type": "string",
+      "description": "The level of access to grant."
+    }
+  }
+}

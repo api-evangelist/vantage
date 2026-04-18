@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Recommendation",
+  "type": "object",
+  "properties": {
+    "token": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "estimated_savings": {
+      "type": "string"
+    },
+    "provider": {
+      "type": "string"
+    },
+    "service": {
+      "type": "string"
+    },
+    "resource_id": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SavedFilterInput",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "The title of the Saved Filter."
+    },
+    "filter": {
+      "type": "string",
+      "description": "The VQL filter expression."
+    },
+    "workspace_token": {
+      "type": "string",
+      "description": "The token of the Workspace for the Saved Filter."
+    }
+  }
+}

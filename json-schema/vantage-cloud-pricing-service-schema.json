@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Service",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier for the Service."
+    },
+    "name": {
+      "type": "string",
+      "description": "The display name of the Service."
+    },
+    "provider_id": {
+      "type": "string",
+      "description": "The identifier of the Provider this Service belongs to."
+    },
+    "products_count": {
+      "type": "integer",
+      "description": "The number of products available in this Service."
+    }
+  }
+}

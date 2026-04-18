@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Workspace",
+  "type": "object",
+  "properties": {
+    "token": {
+      "type": "string",
+      "description": "The unique token identifier for the Workspace."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the Workspace."
+    },
+    "created_at": {
+      "type": "string",
+      "description": "The date and time the Workspace was created."
+    }
+  }
+}

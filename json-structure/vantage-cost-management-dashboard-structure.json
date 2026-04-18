@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Dashboard",
+  "type": "object",
+  "properties": {
+    "token": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "widget_tokens": {
+      "type": "array"
+    },
+    "workspace_token": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    }
+  }
+}

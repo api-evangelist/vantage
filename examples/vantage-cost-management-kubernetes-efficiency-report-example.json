@@ -1,0 +1,9 @@
+{
+  "token": "example_value",
+  "cluster_name": "example_value",
+  "namespace": "example_value",
+  "idle_cost": "example_value",
+  "total_cost": "example_value",
+  "efficiency": 42.5,
+  "created_at": "2026-01-15T10:30:00Z"
+}

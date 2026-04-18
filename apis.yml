@@ -20,7 +20,7 @@ apis:
       - url: https://api.vantage.sh/v2/oas_v3.json
         type: OpenAPI
       - url: https://api.vantage.sh/v2/swagger.json
-        type: Swagger
+        type: OpenAPI
       - url: json-schema/cost-report.json
         type: JSONSchema
       - url: json-schema/cost.json
@@ -89,7 +89,7 @@ apis:
       - url: openapi/vantage-cloud-pricing-api-openapi.yml
         type: OpenAPI
       - url: https://api.vantage.sh/v1/swagger.json
-        type: Swagger
+        type: OpenAPI
       - url: json-schema/provider.json
         type: JSONSchema
       - url: json-schema/service.json
@@ -118,8 +118,8 @@ type: Contract
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 created: '2026-01-02'
-modified: '2026-03-16'
-position: Consuming
+modified: '2026-04-18'
+position: Consumer
 description: >-
   Vantage is a cloud cost management platform designed for modern engineering
   teams to monitor, optimize, and control their cloud infrastructure spending
@@ -135,7 +135,7 @@ common:
   - name: 'Vantage: Multi Cloud Cost Management & Optimization Tool'
     description: 'null'
     url: https://www.vantage.sh/
-    type: Website
+    type: DeveloperPortal
   - name: Integrations | Vantage
     description: 'null'
     url: https://www.vantage.sh/integrations
@@ -155,7 +155,7 @@ common:
   - name: About Vantage | Vantage
     description: 'null'
     url: https://www.vantage.sh/about
-    type: About
+    type: Documentation
   - name: Partners | Vantage
     description: 'null'
     url: https://www.vantage.sh/vantage-partners
@@ -180,3 +180,63 @@ common:
     description: 'null'
     url: https://github.com/vantage-sh/vantage-js
     type: SDK
+  - name: GitHubOrganization
+    url: https://github.com/vantage-sh
+    type: GitHubOrganization
+  - name: Vantage Terraform Provider
+    url: https://github.com/vantage-sh/terraform-provider-vantage
+    type: SDK
+  - name: Features
+    type: Features
+    data:
+      - name: Cost Reports
+      - name: Cost Dashboards
+      - name: Budget Alerts
+      - name: Anomaly Detection
+      - name: Cost Recommendations
+      - name: Saved Filters
+      - name: Vantage Query Language (VQL)
+      - name: Multi-Cloud Support
+      - name: Kubernetes Cost Tracking
+      - name: Network Flow Reports
+      - name: Financial Commitment Reports
+      - name: Resource Reports
+      - name: Business Metrics
+      - name: Segments
+      - name: Teams and Access Control
+      - name: Cloud Pricing Database
+  - name: Use Cases
+    type: UseCases
+    data:
+      - name: Monitor Cloud Spending
+      - name: Optimize Cloud Costs
+      - name: Detect Cost Anomalies
+      - name: Set Budget Alerts
+      - name: Track Kubernetes Costs
+      - name: Compare Cloud Pricing
+      - name: Generate Financial Reports
+      - name: Allocate Costs by Team
+  - name: Integrations
+    type: Integrations
+    data:
+      - name: AWS
+      - name: Azure
+      - name: Google Cloud
+      - name: Kubernetes
+      - name: Datadog
+      - name: Snowflake
+      - name: Databricks
+      - name: MongoDB Atlas
+      - name: New Relic
+      - name: Oracle Cloud
+      - name: Confluent
+  - url: rules/vantage-spectral-rules.yml
+    type: Rules
+  - url: vocabulary/vantage-vocabulary.yaml
+    type: Vocabulary
+  - url: capabilities/shared/cost-management.yaml
+    type: Capabilities
+  - url: capabilities/shared/cloud-pricing.yaml
+    type: Capabilities
+  - url: capabilities/cloud-cost-management.yaml
+    type: Capabilities

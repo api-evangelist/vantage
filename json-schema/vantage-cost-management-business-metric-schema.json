@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BusinessMetric",
+  "type": "object",
+  "properties": {
+    "token": {
+      "type": "string",
+      "description": "The unique token identifier for the Business Metric."
+    },
+    "title": {
+      "type": "string",
+      "description": "The title of the Business Metric."
+    },
+    "cost_report_tokens_with_metadata": {
+      "type": "array",
+      "description": "Associated cost reports with metadata."
+    },
+    "values": {
+      "type": "array",
+      "description": "The values of the Business Metric over time."
+    },
+    "created_at": {
+      "type": "string",
+      "description": "The date and time the Business Metric was created."
+    }
+  }
+}

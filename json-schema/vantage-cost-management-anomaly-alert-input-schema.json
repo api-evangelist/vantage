@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AnomalyAlertInput",
+  "type": "object",
+  "properties": {
+    "cost_report_token": {
+      "type": "string",
+      "description": "The token of the Cost Report to monitor."
+    },
+    "threshold": {
+      "type": "number",
+      "description": "The threshold percentage for anomaly detection."
+    }
+  }
+}

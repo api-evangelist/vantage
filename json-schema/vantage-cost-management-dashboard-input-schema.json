@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DashboardInput",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "The title of the Dashboard."
+    },
+    "widget_tokens": {
+      "type": "array",
+      "description": "Tokens of widgets to include."
+    },
+    "workspace_token": {
+      "type": "string",
+      "description": "The token of the Workspace for the Dashboard."
+    }
+  }
+}

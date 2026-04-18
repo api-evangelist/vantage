@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "BudgetAlertInput",
+  "type": "object",
+  "properties": {
+    "cost_report_token": {
+      "type": "string"
+    },
+    "budget": {
+      "type": "string"
+    },
+    "period": {
+      "type": "string"
+    }
+  }
+}

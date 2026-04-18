@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "AnomalyAlert",
+  "type": "object",
+  "properties": {
+    "token": {
+      "type": "string"
+    },
+    "cost_report_token": {
+      "type": "string"
+    },
+    "threshold": {
+      "type": "number"
+    },
+    "created_at": {
+      "type": "string"
+    }
+  }
+}

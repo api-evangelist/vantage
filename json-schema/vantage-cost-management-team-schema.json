@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Team",
+  "type": "object",
+  "properties": {
+    "token": {
+      "type": "string",
+      "description": "The unique token identifier for the Team."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the Team."
+    },
+    "description": {
+      "type": "string",
+      "description": "The description of the Team."
+    },
+    "workspace_token": {
+      "type": "string",
+      "description": "The token of the Workspace this Team belongs to."
+    },
+    "user_tokens": {
+      "type": "array",
+      "description": "Tokens of users who are members of the Team."
+    },
+    "created_at": {
+      "type": "string",
+      "description": "The date and time the Team was created."
+    }
+  }
+}

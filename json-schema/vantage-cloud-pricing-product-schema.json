@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Product",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier for the Product."
+    },
+    "name": {
+      "type": "string",
+      "description": "The display name of the Product."
+    },
+    "provider_id": {
+      "type": "string",
+      "description": "The identifier of the cloud Provider."
+    },
+    "service_id": {
+      "type": "string",
+      "description": "The identifier of the Service."
+    },
+    "details": {
+      "type": "object",
+      "description": "Product-specific details such as vCPUs, memory, storage, network performance, etc."
+    },
+    "prices": {
+      "type": "array",
+      "description": "Pricing data for this Product across regions."
+    }
+  }
+}

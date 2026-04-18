@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Dashboard",
+  "type": "object",
+  "properties": {
+    "token": {
+      "type": "string",
+      "description": "The unique token identifier for the Dashboard."
+    },
+    "title": {
+      "type": "string",
+      "description": "The title of the Dashboard."
+    },
+    "widget_tokens": {
+      "type": "array",
+      "description": "Tokens of widgets included in the Dashboard."
+    },
+    "workspace_token": {
+      "type": "string",
+      "description": "The token of the Workspace this Dashboard belongs to."
+    },
+    "created_at": {
+      "type": "string",
+      "description": "The date and time the Dashboard was created."
+    }
+  }
+}

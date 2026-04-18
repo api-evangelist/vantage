@@ -1,0 +1,9 @@
+{
+  "id": "abc123",
+  "unit": "example_value",
+  "price": "example_value",
+  "currency": "example_value",
+  "region": "example_value",
+  "description": "A sample description.",
+  "product_id": "500123"
+}

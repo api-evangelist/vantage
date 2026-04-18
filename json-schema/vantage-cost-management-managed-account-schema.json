@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ManagedAccount",
+  "type": "object",
+  "properties": {
+    "token": {
+      "type": "string",
+      "description": "The unique token identifier for the Managed Account."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the Managed Account."
+    },
+    "account_identifier": {
+      "type": "string",
+      "description": "The cloud provider account identifier."
+    },
+    "provider": {
+      "type": "string",
+      "description": "The cloud provider."
+    },
+    "created_at": {
+      "type": "string",
+      "description": "The date and time the Managed Account was created."
+    }
+  }
+}

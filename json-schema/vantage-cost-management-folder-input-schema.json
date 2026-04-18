@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FolderInput",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "The title of the Folder."
+    },
+    "parent_folder_token": {
+      "type": "string",
+      "description": "The token of the parent Folder for nesting."
+    },
+    "workspace_token": {
+      "type": "string",
+      "description": "The token of the Workspace for the Folder."
+    }
+  }
+}

@@ -6,17 +6,17 @@ Vantage is a cloud cost management platform designed for modern engineering team
 ## Scope
 
 - **Type:** Contract 
-- **Position:** Consuming 
+- **Position:** Consumer 
 - **Access:** 3rd-Party 
 
 ## Tags:
 
- - FinOps, Cost Management, Costs, Budgets, Cloud Pricing
+ - Budgets, Cloud Pricing, Cost Management, Costs, FinOps
 
 ## Timestamps
 
 - **Created:** 2026-01-02 
-- **Modified:** 2026-03-16 
+- **Modified:** 2026-04-18 
 
 ## APIs
 
@@ -25,17 +25,18 @@ The Vantage Cost Management API (v2) provides programmatic access to cloud cost 
 
 **Human URL:** [https://docs.vantage.sh/api](https://docs.vantage.sh/api)
 
+**Base URL:** https://api.vantage.sh/v2
 
 #### Tags:
 
- - Cloud Costs, FinOps, Cost Reports, Budgets, Anomaly Detection, Dashboards
+ - Anomaly Detection, Budgets, Cloud Costs, Cost Reports, Dashboards, FinOps
 
 #### Properties
 
 - [Documentation](https://vantage.readme.io/reference/general)
 - [OpenAPI](openapi/vantage-cost-management-api-openapi.yml)
 - [OpenAPI](https://api.vantage.sh/v2/oas_v3.json)
-- [Swagger](https://api.vantage.sh/v2/swagger.json)
+- [OpenAPI](https://api.vantage.sh/v2/swagger.json)
 - [JSONSchema](json-schema/cost-report.json)
 - [JSONSchema](json-schema/cost.json)
 - [JSONSchema](json-schema/folder.json)
@@ -64,16 +65,17 @@ The Vantage Cloud Pricing API (v1) provides programmatic access to cloud infrast
 
 **Human URL:** [https://docs.vantage.sh/api](https://docs.vantage.sh/api)
 
+**Base URL:** https://api.vantage.sh/v1
 
 #### Tags:
 
- - Cloud Pricing, Infrastructure Pricing, AWS, Azure, GCP
+ - AWS, Azure, Cloud Pricing, GCP, Infrastructure Pricing
 
 #### Properties
 
 - [Documentation](https://vantage.readme.io/reference/general)
 - [OpenAPI](openapi/vantage-cloud-pricing-api-openapi.yml)
-- [Swagger](https://api.vantage.sh/v1/swagger.json)
+- [OpenAPI](https://api.vantage.sh/v1/swagger.json)
 - [JSONSchema](json-schema/provider.json)
 - [JSONSchema](json-schema/service.json)
 - [JSONSchema](json-schema/product.json)
@@ -82,18 +84,33 @@ The Vantage Cloud Pricing API (v1) provides programmatic access to cloud infrast
 
 ## Common Properties
 
-- [Website](https://www.vantage.sh/)
+- [DeveloperPortal](https://www.vantage.sh/)
 - [Integrations](https://www.vantage.sh/integrations)
 - [Documentation](https://docs.vantage.sh/)
 - [Blog](https://www.vantage.sh/blog)
 - [Pricing](https://www.vantage.sh/pricing)
-- [About](https://www.vantage.sh/about)
+- [Documentation](https://www.vantage.sh/about)
 - [Partners](https://www.vantage.sh/vantage-partners)
 - [ChangeLog](https://docs.vantage.sh/changelog)
 - [GettingStarted](https://docs.vantage.sh/getting_started)
 - [APIReference](https://vantage.readme.io/reference/general)
 - [SDK](https://github.com/vantage-sh/vantage-python)
 - [SDK](https://github.com/vantage-sh/vantage-js)
+- [GitHubOrganization](https://github.com/vantage-sh)
+- [SDK](https://github.com/vantage-sh/terraform-provider-vantage)
+
+## Capabilities
+
+| Capability | Type | APIs | Tools |
+|---|---|---|---|
+| [Cloud Cost Management](capabilities/cloud-cost-management.yaml) | Workflow | 2 | 28 |
+
+### Shared Definitions
+
+| Definition | API |
+|---|---|
+| [cost-management](capabilities/shared/cost-management.yaml) | Vantage Cost Management API |
+| [cloud-pricing](capabilities/shared/cloud-pricing.yaml) | Vantage Cloud Pricing API |
 
 ## Maintainers
 

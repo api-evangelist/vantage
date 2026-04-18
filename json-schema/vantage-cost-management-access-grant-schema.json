@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AccessGrant",
+  "type": "object",
+  "properties": {
+    "token": {
+      "type": "string",
+      "description": "The unique token identifier for the Access Grant."
+    },
+    "team_token": {
+      "type": "string",
+      "description": "The token of the Team the grant applies to."
+    },
+    "resource_token": {
+      "type": "string",
+      "description": "The token of the resource being granted access to."
+    },
+    "access": {
+      "type": "string",
+      "description": "The level of access granted."
+    },
+    "created_at": {
+      "type": "string",
+      "description": "The date and time the Access Grant was created."
+    }
+  }
+}

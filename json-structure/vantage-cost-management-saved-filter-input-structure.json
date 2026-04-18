@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "SavedFilterInput",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "filter": {
+      "type": "string"
+    },
+    "workspace_token": {
+      "type": "string"
+    }
+  }
+}

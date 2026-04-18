@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "KubernetesEfficiencyReport",
+  "type": "object",
+  "properties": {
+    "token": {
+      "type": "string",
+      "description": "The unique token identifier for the report."
+    },
+    "cluster_name": {
+      "type": "string",
+      "description": "The Kubernetes cluster name."
+    },
+    "namespace": {
+      "type": "string",
+      "description": "The Kubernetes namespace."
+    },
+    "idle_cost": {
+      "type": "string",
+      "description": "The idle cost for the cluster/namespace."
+    },
+    "total_cost": {
+      "type": "string",
+      "description": "The total cost for the cluster/namespace."
+    },
+    "efficiency": {
+      "type": "number",
+      "description": "The efficiency percentage."
+    },
+    "created_at": {
+      "type": "string",
+      "description": "The date and time the report was generated."
+    }
+  }
+}

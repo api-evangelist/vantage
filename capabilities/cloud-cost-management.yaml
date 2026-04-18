@@ -1,0 +1,616 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Vantage Cloud Cost Management"
+  description: "Unified workflow for cloud cost management combining cost reporting, alerting, optimization recommendations, and cloud pricing comparison. Used by FinOps teams and cloud engineers to monitor, optimize, and control cloud spending."
+  tags:
+    - Vantage
+    - FinOps
+    - Cloud Costs
+    - Cost Management
+    - Cloud Pricing
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      VANTAGE_API_TOKEN: VANTAGE_API_TOKEN
+
+capability:
+  consumes:
+    - import: vantage-cost-mgmt
+      location: ./shared/cost-management.yaml
+    - import: vantage-pricing
+      location: ./shared/cloud-pricing.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: vantage-finops-api
+      description: "Unified REST API for cloud cost management, optimization, and pricing comparison."
+      resources:
+        - path: /v1/cost-reports
+          name: cost-reports
+          description: "Manage Cost Reports."
+          operations:
+            - method: GET
+              name: list-cost-reports
+              description: "List all Cost Reports."
+              call: "vantage-cost-mgmt.get-cost-reports"
+              with:
+                page: "rest.page"
+                limit: "rest.limit"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-cost-report
+              description: "Create a new Cost Report."
+              call: "vantage-cost-mgmt.create-cost-report"
+              with:
+                title: "rest.title"
+                filter: "rest.filter"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/cost-reports/{cost_report_token}
+          name: cost-report
+          description: "Manage a specific Cost Report."
+          operations:
+            - method: GET
+              name: get-cost-report
+              description: "Get a specific Cost Report."
+              call: "vantage-cost-mgmt.get-cost-report"
+              with:
+                cost_report_token: "rest.cost_report_token"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: PUT
+              name: update-cost-report
+              description: "Update a Cost Report."
+              call: "vantage-cost-mgmt.update-cost-report"
+              with:
+                cost_report_token: "rest.cost_report_token"
+                title: "rest.title"
+                filter: "rest.filter"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-cost-report
+              description: "Delete a Cost Report."
+              call: "vantage-cost-mgmt.delete-cost-report"
+              with:
+                cost_report_token: "rest.cost_report_token"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/costs
+          name: costs
+          description: "Retrieve cost data."
+          operations:
+            - method: GET
+              name: get-costs
+              description: "Get costs for a report or VQL filter."
+              call: "vantage-cost-mgmt.get-costs"
+              with:
+                cost_report_token: "rest.cost_report_token"
+                start_date: "rest.start_date"
+                end_date: "rest.end_date"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/dashboards
+          name: dashboards
+          description: "Manage cost dashboards."
+          operations:
+            - method: GET
+              name: list-dashboards
+              description: "List all Dashboards."
+              call: "vantage-cost-mgmt.get-dashboards"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-dashboard
+              description: "Create a new Dashboard."
+              call: "vantage-cost-mgmt.create-dashboard"
+              with:
+                title: "rest.title"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/budget-alerts
+          name: budget-alerts
+          description: "Manage budget alerts."
+          operations:
+            - method: GET
+              name: list-budget-alerts
+              description: "List all Budget Alerts."
+              call: "vantage-cost-mgmt.get-budget-alerts"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-budget-alert
+              description: "Create a new Budget Alert."
+              call: "vantage-cost-mgmt.create-budget-alert"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/anomaly-alerts
+          name: anomaly-alerts
+          description: "Manage anomaly detection alerts."
+          operations:
+            - method: GET
+              name: list-anomaly-alerts
+              description: "List all Anomaly Alerts."
+              call: "vantage-cost-mgmt.get-anomaly-alerts"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-anomaly-alert
+              description: "Create a new Anomaly Alert."
+              call: "vantage-cost-mgmt.create-anomaly-alert"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/recommendations
+          name: recommendations
+          description: "Cost optimization recommendations."
+          operations:
+            - method: GET
+              name: list-recommendations
+              description: "List cost optimization recommendations."
+              call: "vantage-cost-mgmt.get-recommendations"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/segments
+          name: segments
+          description: "Manage cost allocation segments."
+          operations:
+            - method: GET
+              name: list-segments
+              description: "List all Segments."
+              call: "vantage-cost-mgmt.get-segments"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/integrations
+          name: integrations
+          description: "Manage cloud provider integrations."
+          operations:
+            - method: GET
+              name: list-integrations
+              description: "List all Integrations."
+              call: "vantage-cost-mgmt.get-integrations"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/providers
+          name: providers
+          description: "Cloud pricing providers."
+          operations:
+            - method: GET
+              name: list-providers
+              description: "List all cloud pricing providers."
+              call: "vantage-pricing.get-providers"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/providers/{provider_id}
+          name: provider
+          description: "Get a specific cloud provider."
+          operations:
+            - method: GET
+              name: get-provider
+              description: "Get a specific cloud provider."
+              call: "vantage-pricing.get-provider"
+              with:
+                provider_id: "rest.provider_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/services
+          name: services
+          description: "Cloud pricing services."
+          operations:
+            - method: GET
+              name: list-services
+              description: "List cloud services."
+              call: "vantage-pricing.get-services"
+              with:
+                provider_id: "rest.provider_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/products
+          name: products
+          description: "Cloud infrastructure products."
+          operations:
+            - method: GET
+              name: list-products
+              description: "List cloud products with pricing."
+              call: "vantage-pricing.get-products"
+              with:
+                provider_id: "rest.provider_id"
+                service_id: "rest.service_id"
+                name: "rest.name"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/prices
+          name: prices
+          description: "Cloud infrastructure pricing."
+          operations:
+            - method: GET
+              name: list-prices
+              description: "Get pricing data for products."
+              call: "vantage-pricing.get-prices"
+              with:
+                product_id: "rest.product_id"
+                provider_id: "rest.provider_id"
+                service_id: "rest.service_id"
+                region: "rest.region"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: vantage-finops-mcp
+      transport: http
+      description: "MCP server for AI-assisted cloud cost management and pricing comparison."
+      tools:
+        - name: list-cost-reports
+          description: "List all Cost Reports."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "vantage-cost-mgmt.get-cost-reports"
+          with:
+            page: "tools.page"
+            limit: "tools.limit"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: create-cost-report
+          description: "Create a new Cost Report with VQL filter."
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "vantage-cost-mgmt.create-cost-report"
+          with:
+            title: "tools.title"
+            filter: "tools.filter"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-cost-report
+          description: "Get a specific Cost Report by token."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "vantage-cost-mgmt.get-cost-report"
+          with:
+            cost_report_token: "tools.cost_report_token"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: update-cost-report
+          description: "Update an existing Cost Report."
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "vantage-cost-mgmt.update-cost-report"
+          with:
+            cost_report_token: "tools.cost_report_token"
+            title: "tools.title"
+            filter: "tools.filter"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: delete-cost-report
+          description: "Delete a Cost Report."
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "vantage-cost-mgmt.delete-cost-report"
+          with:
+            cost_report_token: "tools.cost_report_token"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-costs
+          description: "Get costs for a report or VQL filter."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "vantage-cost-mgmt.get-costs"
+          with:
+            cost_report_token: "tools.cost_report_token"
+            start_date: "tools.start_date"
+            end_date: "tools.end_date"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-folders
+          description: "List all Folders."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "vantage-cost-mgmt.get-folders"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-dashboards
+          description: "List all Dashboards."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "vantage-cost-mgmt.get-dashboards"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-saved-filters
+          description: "List all Saved Filters."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "vantage-cost-mgmt.get-saved-filters"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-teams
+          description: "List all Teams."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "vantage-cost-mgmt.get-teams"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-budget-alerts
+          description: "List all Budget Alerts."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "vantage-cost-mgmt.get-budget-alerts"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-anomaly-alerts
+          description: "List all Anomaly Alerts."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "vantage-cost-mgmt.get-anomaly-alerts"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-recommendations
+          description: "List cost optimization recommendations."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "vantage-cost-mgmt.get-recommendations"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-segments
+          description: "List all cost allocation Segments."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "vantage-cost-mgmt.get-segments"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-integrations
+          description: "List all cloud provider Integrations."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "vantage-cost-mgmt.get-integrations"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-workspaces
+          description: "List all Workspaces."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "vantage-cost-mgmt.get-workspaces"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-managed-accounts
+          description: "List all managed cloud accounts."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "vantage-cost-mgmt.get-managed-accounts"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-cost-providers
+          description: "List all cost providers."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "vantage-cost-mgmt.get-cost-providers"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-business-metrics
+          description: "List all Business Metrics."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "vantage-cost-mgmt.get-business-metrics"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-resource-reports
+          description: "List all Resource Reports."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "vantage-cost-mgmt.get-resource-reports"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-network-flow-reports
+          description: "List all Network Flow Reports."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "vantage-cost-mgmt.get-network-flow-reports"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-financial-commitment-reports
+          description: "List all Financial Commitment Reports."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "vantage-cost-mgmt.get-financial-commitment-reports"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-kubernetes-efficiency-reports
+          description: "List all Kubernetes Efficiency Reports."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "vantage-cost-mgmt.get-kubernetes-efficiency-reports"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-pricing-providers
+          description: "List all cloud pricing providers."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "vantage-pricing.get-providers"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-pricing-provider
+          description: "Get a specific cloud pricing provider."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "vantage-pricing.get-provider"
+          with:
+            provider_id: "tools.provider_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-pricing-services
+          description: "List cloud services with pricing data."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "vantage-pricing.get-services"
+          with:
+            provider_id: "tools.provider_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-pricing-service
+          description: "Get a specific cloud service."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "vantage-pricing.get-service"
+          with:
+            service_id: "tools.service_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-pricing-products
+          description: "List cloud products with pricing."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "vantage-pricing.get-products"
+          with:
+            provider_id: "tools.provider_id"
+            service_id: "tools.service_id"
+            name: "tools.name"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: get-pricing-product
+          description: "Get a specific cloud product with pricing details."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "vantage-pricing.get-product"
+          with:
+            product_id: "tools.product_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-prices
+          description: "Get pricing data filtered by product, provider, service, or region."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "vantage-pricing.get-prices"
+          with:
+            product_id: "tools.product_id"
+            provider_id: "tools.provider_id"
+            service_id: "tools.service_id"
+            region: "tools.region"
+          outputParameters:
+            - type: object
+              mapping: "$."

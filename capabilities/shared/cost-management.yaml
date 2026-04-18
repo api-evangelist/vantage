@@ -1,0 +1,1057 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Vantage Cost Management API"
+  description: "Programmatic access to cloud cost data and automation of cost management workflows including Cost Reports, Dashboards, Budgets, Anomaly Alerts, Business Metrics, and more."
+  tags:
+    - Cloud Costs
+    - FinOps
+    - Cost Management
+    - Budgets
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      VANTAGE_API_TOKEN: VANTAGE_API_TOKEN
+
+capability:
+  consumes:
+    - type: http
+      namespace: vantage-cost-mgmt
+      baseUri: https://api.vantage.sh/v2
+      description: "Vantage Cost Management API v2 for managing cloud cost data and workflows."
+      authentication:
+        type: bearer
+        token: "{{VANTAGE_API_TOKEN}}"
+      resources:
+        - name: cost-reports
+          path: /cost_reports
+          description: "Create, read, update, and delete Cost Reports."
+          operations:
+            - name: get-cost-reports
+              method: GET
+              description: "Returns all Cost Reports."
+              inputParameters:
+                - name: page
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The page of results to return."
+                - name: limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The number of results per page."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-cost-report
+              method: POST
+              description: "Creates a new Cost Report."
+              inputParameters:
+                - name: title
+                  in: body
+                  type: string
+                  required: true
+                  description: "Title of the cost report."
+                - name: filter
+                  in: body
+                  type: string
+                  required: false
+                  description: "VQL filter expression."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  title: "{{tools.title}}"
+                  filter: "{{tools.filter}}"
+            - name: get-cost-report
+              method: GET
+              description: "Returns a specific Cost Report by token."
+              inputParameters:
+                - name: cost_report_token
+                  in: path
+                  type: string
+                  required: true
+                  description: "The token of the Cost Report."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: update-cost-report
+              method: PUT
+              description: "Updates an existing Cost Report."
+              inputParameters:
+                - name: cost_report_token
+                  in: path
+                  type: string
+                  required: true
+                  description: "The token of the Cost Report."
+                - name: title
+                  in: body
+                  type: string
+                  required: false
+                  description: "Updated title."
+                - name: filter
+                  in: body
+                  type: string
+                  required: false
+                  description: "Updated VQL filter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  title: "{{tools.title}}"
+                  filter: "{{tools.filter}}"
+            - name: delete-cost-report
+              method: DELETE
+              description: "Deletes an existing Cost Report."
+              inputParameters:
+                - name: cost_report_token
+                  in: path
+                  type: string
+                  required: true
+                  description: "The token of the Cost Report."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: costs
+          path: /costs
+          description: "Retrieve cost data."
+          operations:
+            - name: get-costs
+              method: GET
+              description: "Returns all Costs for a CostReport or VQL filter."
+              inputParameters:
+                - name: cost_report_token
+                  in: query
+                  type: string
+                  required: false
+                  description: "The token of the Cost Report."
+                - name: start_date
+                  in: query
+                  type: string
+                  required: false
+                  description: "Start date (YYYY-MM-DD)."
+                - name: end_date
+                  in: query
+                  type: string
+                  required: false
+                  description: "End date (YYYY-MM-DD)."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: folders
+          path: /folders
+          description: "Manage folders for organizing Cost Reports."
+          operations:
+            - name: get-folders
+              method: GET
+              description: "Returns all Folders."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-folder
+              method: POST
+              description: "Creates a new Folder."
+              inputParameters:
+                - name: title
+                  in: body
+                  type: string
+                  required: true
+                  description: "Folder title."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  title: "{{tools.title}}"
+            - name: get-folder
+              method: GET
+              description: "Returns a specific Folder."
+              inputParameters:
+                - name: folder_token
+                  in: path
+                  type: string
+                  required: true
+                  description: "The token of the Folder."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: update-folder
+              method: PUT
+              description: "Updates an existing Folder."
+              inputParameters:
+                - name: folder_token
+                  in: path
+                  type: string
+                  required: true
+                  description: "The token of the Folder."
+                - name: title
+                  in: body
+                  type: string
+                  required: false
+                  description: "Updated title."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  title: "{{tools.title}}"
+            - name: delete-folder
+              method: DELETE
+              description: "Deletes a Folder."
+              inputParameters:
+                - name: folder_token
+                  in: path
+                  type: string
+                  required: true
+                  description: "The token of the Folder."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: dashboards
+          path: /dashboards
+          description: "Create and manage cost dashboards."
+          operations:
+            - name: get-dashboards
+              method: GET
+              description: "Returns all Dashboards."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-dashboard
+              method: POST
+              description: "Creates a new Dashboard."
+              inputParameters:
+                - name: title
+                  in: body
+                  type: string
+                  required: true
+                  description: "Dashboard title."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  title: "{{tools.title}}"
+            - name: get-dashboard
+              method: GET
+              description: "Returns a specific Dashboard."
+              inputParameters:
+                - name: dashboard_token
+                  in: path
+                  type: string
+                  required: true
+                  description: "The token of the Dashboard."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: update-dashboard
+              method: PUT
+              description: "Updates a Dashboard."
+              inputParameters:
+                - name: dashboard_token
+                  in: path
+                  type: string
+                  required: true
+                  description: "The token of the Dashboard."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-dashboard
+              method: DELETE
+              description: "Deletes a Dashboard."
+              inputParameters:
+                - name: dashboard_token
+                  in: path
+                  type: string
+                  required: true
+                  description: "The token of the Dashboard."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: saved-filters
+          path: /saved_filters
+          description: "Manage saved filters for cost data."
+          operations:
+            - name: get-saved-filters
+              method: GET
+              description: "Returns all Saved Filters."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-saved-filter
+              method: POST
+              description: "Creates a new Saved Filter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-saved-filter
+              method: GET
+              description: "Returns a specific Saved Filter."
+              inputParameters:
+                - name: saved_filter_token
+                  in: path
+                  type: string
+                  required: true
+                  description: "The token of the Saved Filter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: update-saved-filter
+              method: PUT
+              description: "Updates a Saved Filter."
+              inputParameters:
+                - name: saved_filter_token
+                  in: path
+                  type: string
+                  required: true
+                  description: "The token of the Saved Filter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-saved-filter
+              method: DELETE
+              description: "Deletes a Saved Filter."
+              inputParameters:
+                - name: saved_filter_token
+                  in: path
+                  type: string
+                  required: true
+                  description: "The token of the Saved Filter."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: teams
+          path: /teams
+          description: "Create and manage teams."
+          operations:
+            - name: get-teams
+              method: GET
+              description: "Returns all Teams."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-team
+              method: POST
+              description: "Creates a new Team."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-team
+              method: GET
+              description: "Returns a specific Team."
+              inputParameters:
+                - name: team_token
+                  in: path
+                  type: string
+                  required: true
+                  description: "The token of the Team."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: update-team
+              method: PUT
+              description: "Updates a Team."
+              inputParameters:
+                - name: team_token
+                  in: path
+                  type: string
+                  required: true
+                  description: "The token of the Team."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-team
+              method: DELETE
+              description: "Deletes a Team."
+              inputParameters:
+                - name: team_token
+                  in: path
+                  type: string
+                  required: true
+                  description: "The token of the Team."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: access-grants
+          path: /access_grants
+          description: "Manage resource access grants for teams."
+          operations:
+            - name: get-access-grants
+              method: GET
+              description: "Returns all Access Grants."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-access-grant
+              method: POST
+              description: "Creates a new Access Grant."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-access-grant
+              method: GET
+              description: "Returns a specific Access Grant."
+              inputParameters:
+                - name: access_grant_token
+                  in: path
+                  type: string
+                  required: true
+                  description: "The token of the Access Grant."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-access-grant
+              method: DELETE
+              description: "Deletes an Access Grant."
+              inputParameters:
+                - name: access_grant_token
+                  in: path
+                  type: string
+                  required: true
+                  description: "The token of the Access Grant."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: budget-alerts
+          path: /budget_alerts
+          description: "Create and manage budget alerts."
+          operations:
+            - name: get-budget-alerts
+              method: GET
+              description: "Returns all Budget Alerts."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-budget-alert
+              method: POST
+              description: "Creates a new Budget Alert."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-budget-alert
+              method: GET
+              description: "Returns a specific Budget Alert."
+              inputParameters:
+                - name: budget_alert_token
+                  in: path
+                  type: string
+                  required: true
+                  description: "The token of the Budget Alert."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: update-budget-alert
+              method: PUT
+              description: "Updates a Budget Alert."
+              inputParameters:
+                - name: budget_alert_token
+                  in: path
+                  type: string
+                  required: true
+                  description: "The token of the Budget Alert."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-budget-alert
+              method: DELETE
+              description: "Deletes a Budget Alert."
+              inputParameters:
+                - name: budget_alert_token
+                  in: path
+                  type: string
+                  required: true
+                  description: "The token of the Budget Alert."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: anomaly-alerts
+          path: /anomaly_alerts
+          description: "Create and manage cost anomaly alerts."
+          operations:
+            - name: get-anomaly-alerts
+              method: GET
+              description: "Returns all Anomaly Alerts."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-anomaly-alert
+              method: POST
+              description: "Creates a new Anomaly Alert."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-anomaly-alert
+              method: GET
+              description: "Returns a specific Anomaly Alert."
+              inputParameters:
+                - name: anomaly_alert_token
+                  in: path
+                  type: string
+                  required: true
+                  description: "The token of the Anomaly Alert."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: update-anomaly-alert
+              method: PUT
+              description: "Updates an Anomaly Alert."
+              inputParameters:
+                - name: anomaly_alert_token
+                  in: path
+                  type: string
+                  required: true
+                  description: "The token of the Anomaly Alert."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-anomaly-alert
+              method: DELETE
+              description: "Deletes an Anomaly Alert."
+              inputParameters:
+                - name: anomaly_alert_token
+                  in: path
+                  type: string
+                  required: true
+                  description: "The token of the Anomaly Alert."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: recommendations
+          path: /recommendations
+          description: "Retrieve cost optimization recommendations."
+          operations:
+            - name: get-recommendations
+              method: GET
+              description: "Returns all cost optimization Recommendations."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: segments
+          path: /segments
+          description: "Create, update, and delete cost allocation segments."
+          operations:
+            - name: get-segments
+              method: GET
+              description: "Returns all Segments."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-segment
+              method: POST
+              description: "Creates a new Segment."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-segment
+              method: GET
+              description: "Returns a specific Segment."
+              inputParameters:
+                - name: segment_token
+                  in: path
+                  type: string
+                  required: true
+                  description: "The token of the Segment."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: update-segment
+              method: PUT
+              description: "Updates a Segment."
+              inputParameters:
+                - name: segment_token
+                  in: path
+                  type: string
+                  required: true
+                  description: "The token of the Segment."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-segment
+              method: DELETE
+              description: "Deletes a Segment."
+              inputParameters:
+                - name: segment_token
+                  in: path
+                  type: string
+                  required: true
+                  description: "The token of the Segment."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: integrations
+          path: /integrations
+          description: "Manage cloud provider integrations."
+          operations:
+            - name: get-integrations
+              method: GET
+              description: "Returns all Integrations."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-integration
+              method: POST
+              description: "Creates a new Integration."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-integration
+              method: GET
+              description: "Returns a specific Integration."
+              inputParameters:
+                - name: integration_token
+                  in: path
+                  type: string
+                  required: true
+                  description: "The token of the Integration."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-integration
+              method: DELETE
+              description: "Deletes an Integration."
+              inputParameters:
+                - name: integration_token
+                  in: path
+                  type: string
+                  required: true
+                  description: "The token of the Integration."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: workspaces
+          path: /workspaces
+          description: "Manage workspaces."
+          operations:
+            - name: get-workspaces
+              method: GET
+              description: "Returns all Workspaces."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-workspace
+              method: GET
+              description: "Returns a specific Workspace."
+              inputParameters:
+                - name: workspace_token
+                  in: path
+                  type: string
+                  required: true
+                  description: "The token of the Workspace."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: managed-accounts
+          path: /managed_accounts
+          description: "Manage linked cloud provider accounts."
+          operations:
+            - name: get-managed-accounts
+              method: GET
+              description: "Returns all Managed Accounts."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: cost-providers
+          path: /cost_providers
+          description: "Retrieve available cost providers."
+          operations:
+            - name: get-cost-providers
+              method: GET
+              description: "Returns all Cost Providers."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: business-metrics
+          path: /business_metrics
+          description: "Create, update, and delete business metrics."
+          operations:
+            - name: get-business-metrics
+              method: GET
+              description: "Returns all Business Metrics."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-business-metric
+              method: POST
+              description: "Creates a new Business Metric."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-business-metric
+              method: GET
+              description: "Returns a specific Business Metric."
+              inputParameters:
+                - name: business_metric_token
+                  in: path
+                  type: string
+                  required: true
+                  description: "The token of the Business Metric."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: update-business-metric
+              method: PUT
+              description: "Updates a Business Metric."
+              inputParameters:
+                - name: business_metric_token
+                  in: path
+                  type: string
+                  required: true
+                  description: "The token of the Business Metric."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-business-metric
+              method: DELETE
+              description: "Deletes a Business Metric."
+              inputParameters:
+                - name: business_metric_token
+                  in: path
+                  type: string
+                  required: true
+                  description: "The token of the Business Metric."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: resource-reports
+          path: /resource_reports
+          description: "Create and manage resource reports."
+          operations:
+            - name: get-resource-reports
+              method: GET
+              description: "Returns all Resource Reports."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-resource-report
+              method: POST
+              description: "Creates a new Resource Report."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-resource-report
+              method: GET
+              description: "Returns a specific Resource Report."
+              inputParameters:
+                - name: resource_report_token
+                  in: path
+                  type: string
+                  required: true
+                  description: "The token of the Resource Report."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: update-resource-report
+              method: PUT
+              description: "Updates a Resource Report."
+              inputParameters:
+                - name: resource_report_token
+                  in: path
+                  type: string
+                  required: true
+                  description: "The token of the Resource Report."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-resource-report
+              method: DELETE
+              description: "Deletes a Resource Report."
+              inputParameters:
+                - name: resource_report_token
+                  in: path
+                  type: string
+                  required: true
+                  description: "The token of the Resource Report."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: resources
+          path: /resources
+          description: "Retrieve resource data from reports."
+          operations:
+            - name: get-resources
+              method: GET
+              description: "Returns Resources for a Resource Report."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: network-flow-reports
+          path: /network_flow_reports
+          description: "Create and manage network flow reports."
+          operations:
+            - name: get-network-flow-reports
+              method: GET
+              description: "Returns all Network Flow Reports."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-network-flow-report
+              method: POST
+              description: "Creates a new Network Flow Report."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-network-flow-report
+              method: GET
+              description: "Returns a specific Network Flow Report."
+              inputParameters:
+                - name: network_flow_report_token
+                  in: path
+                  type: string
+                  required: true
+                  description: "The token of the Network Flow Report."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-network-flow-report
+              method: DELETE
+              description: "Deletes a Network Flow Report."
+              inputParameters:
+                - name: network_flow_report_token
+                  in: path
+                  type: string
+                  required: true
+                  description: "The token of the Network Flow Report."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: financial-commitment-reports
+          path: /financial_commitment_reports
+          description: "Create and manage financial commitment reports."
+          operations:
+            - name: get-financial-commitment-reports
+              method: GET
+              description: "Returns all Financial Commitment Reports."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-financial-commitment-report
+              method: POST
+              description: "Creates a new Financial Commitment Report."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-financial-commitment-report
+              method: GET
+              description: "Returns a specific Financial Commitment Report."
+              inputParameters:
+                - name: financial_commitment_report_token
+                  in: path
+                  type: string
+                  required: true
+                  description: "The token of the Financial Commitment Report."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-financial-commitment-report
+              method: DELETE
+              description: "Deletes a Financial Commitment Report."
+              inputParameters:
+                - name: financial_commitment_report_token
+                  in: path
+                  type: string
+                  required: true
+                  description: "The token of the Financial Commitment Report."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: kubernetes-efficiency-reports
+          path: /kubernetes_efficiency_reports
+          description: "Manage Kubernetes cost data and efficiency reports."
+          operations:
+            - name: get-kubernetes-efficiency-reports
+              method: GET
+              description: "Returns all Kubernetes Efficiency Reports."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: vantage-cost-mgmt-rest
+      resources: []
+
+    - type: mcp
+      port: 9100
+      namespace: vantage-cost-mgmt-mcp
+      transport: http
+      tools: []

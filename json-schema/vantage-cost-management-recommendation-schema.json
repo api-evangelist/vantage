@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Recommendation",
+  "type": "object",
+  "properties": {
+    "token": {
+      "type": "string",
+      "description": "The unique token identifier for the Recommendation."
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of recommendation."
+    },
+    "description": {
+      "type": "string",
+      "description": "A description of the recommendation."
+    },
+    "estimated_savings": {
+      "type": "string",
+      "description": "The estimated monthly savings."
+    },
+    "provider": {
+      "type": "string",
+      "description": "The cloud provider."
+    },
+    "service": {
+      "type": "string",
+      "description": "The cloud service."
+    },
+    "resource_id": {
+      "type": "string",
+      "description": "The resource identifier."
+    },
+    "created_at": {
+      "type": "string",
+      "description": "The date and time the Recommendation was generated."
+    }
+  }
+}

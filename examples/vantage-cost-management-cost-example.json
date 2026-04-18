@@ -1,0 +1,11 @@
+{
+  "date": "example_value",
+  "amount": "example_value",
+  "currency": "example_value",
+  "provider": "example_value",
+  "service": "example_value",
+  "account_id": "500123",
+  "region": "example_value",
+  "category": "example_value",
+  "subcategory": "example_value"
+}

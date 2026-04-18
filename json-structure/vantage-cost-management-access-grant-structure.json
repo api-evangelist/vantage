@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "AccessGrant",
+  "type": "object",
+  "properties": {
+    "token": {
+      "type": "string"
+    },
+    "team_token": {
+      "type": "string"
+    },
+    "resource_token": {
+      "type": "string"
+    },
+    "access": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    }
+  }
+}

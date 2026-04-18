@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "CostReport",
+  "type": "object",
+  "properties": {
+    "token": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "filter": {
+      "type": "string"
+    },
+    "groupings": {
+      "type": "string"
+    },
+    "folder_token": {
+      "type": "string"
+    },
+    "saved_filter_tokens": {
+      "type": "array"
+    },
+    "workspace_token": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    }
+  }
+}

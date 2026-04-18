@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "DashboardInput",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "widget_tokens": {
+      "type": "array"
+    },
+    "workspace_token": {
+      "type": "string"
+    }
+  }
+}

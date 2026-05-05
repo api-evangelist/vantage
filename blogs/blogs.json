@@ -1,0 +1,13 @@
+{
+  "repo": "vantage",
+  "feeds": [
+    {
+      "source": "https://www.vantage.sh/blog",
+      "feed_url": "https://www.vantage.sh/blog/rss.xml",
+      "saved": 10,
+      "title": "Blog \u2014 Vantage"
+    }
+  ],
+  "post_count": 10,
+  "fetched": "2026-05-03T23:38:01Z"
+}

@@ -127,6 +127,36 @@ description: >-
   cost savings through features like automated purchasing of savings plans, cost
   recommendations, and Kubernetes rightsizing, while also preventing future cost
   overruns with anomaly detection, custom alerts, and budget tracking.
+integrations:
+  - name: AWS
+  - name: Azure
+  - name: Google Cloud
+  - name: Kubernetes
+  - name: Datadog
+  - name: Snowflake
+  - name: OpenAI
+  - name: Anthropic
+  - name: Cursor
+  - name: MongoDB
+  - name: Databricks
+  - name: Grafana
+  - name: GitHub
+  - name: New Relic
+  - name: Confluent
+  - name: Twilio
+  - name: PlanetScale
+  - name: ClickHouse
+  - name: Linode
+  - name: Coralogix
+  - name: Vercel
+  - name: Fastly
+  - name: Oracle Cloud
+  - name: Temporal
+  - name: Redis
+  - name: CircleCI
+  - name: Elastic
+  - name: Anyscale
+  - name: Custom Providers
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

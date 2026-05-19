@@ -1,0 +1,197 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Vantage Cost Management API — Segments
+  description: 'Vantage Cost Management API — Segments. 5 operations. Lead operation: Vantage Get All Segments. Self-contained
+    Naftiko capability covering one Vantage business surface.'
+  tags:
+  - Vantage
+  - Segments
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    VANTAGE_API_KEY: VANTAGE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cost-management-segments
+    baseUri: https://api.vantage.sh/v2
+    description: Vantage Cost Management API — Segments business capability. Self-contained, no shared references.
+    resources:
+    - name: segments
+      path: /segments
+      operations:
+      - name: getsegments
+        method: GET
+        description: Vantage Get All Segments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createsegment
+        method: POST
+        description: Vantage Create a Segment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: segments-segment_token
+      path: /segments/{segment_token}
+      operations:
+      - name: getsegment
+        method: GET
+        description: Vantage Get a Segment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatesegment
+        method: PUT
+        description: Vantage Update a Segment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletesegment
+        method: DELETE
+        description: Vantage Delete a Segment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.VANTAGE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cost-management-segments-rest
+    port: 8080
+    description: REST adapter for Vantage Cost Management API — Segments. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/segments
+      name: segments
+      description: REST surface for segments.
+      operations:
+      - method: GET
+        name: getsegments
+        description: Vantage Get All Segments
+        call: cost-management-segments.getsegments
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createsegment
+        description: Vantage Create a Segment
+        call: cost-management-segments.createsegment
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/segments/{segment-token}
+      name: segments-segment-token
+      description: REST surface for segments-segment_token.
+      operations:
+      - method: GET
+        name: getsegment
+        description: Vantage Get a Segment
+        call: cost-management-segments.getsegment
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatesegment
+        description: Vantage Update a Segment
+        call: cost-management-segments.updatesegment
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletesegment
+        description: Vantage Delete a Segment
+        call: cost-management-segments.deletesegment
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cost-management-segments-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Vantage Cost Management API — Segments. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: vantage-get-all-segments
+      description: Vantage Get All Segments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cost-management-segments.getsegments
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: vantage-create-segment
+      description: Vantage Create a Segment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: cost-management-segments.createsegment
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: vantage-get-segment
+      description: Vantage Get a Segment
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cost-management-segments.getsegment
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: vantage-update-segment
+      description: Vantage Update a Segment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: cost-management-segments.updatesegment
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: vantage-delete-segment
+      description: Vantage Delete a Segment
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: cost-management-segments.deletesegment
+      outputParameters:
+      - type: object
+        mapping: $.

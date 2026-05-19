@@ -1,0 +1,163 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Vantage Cost Management API — Financial Commitment Reports
+  description: 'Vantage Cost Management API — Financial Commitment Reports. 4 operations. Lead operation: Vantage Get All
+    Financial Commitment Reports. Self-contained Naftiko capability covering one Vantage business surface.'
+  tags:
+  - Vantage
+  - Financial Commitment Reports
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    VANTAGE_API_KEY: VANTAGE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cost-management-financial-commitment-reports
+    baseUri: https://api.vantage.sh/v2
+    description: Vantage Cost Management API — Financial Commitment Reports business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: financial_commitment_reports
+      path: /financial_commitment_reports
+      operations:
+      - name: getfinancialcommitmentreports
+        method: GET
+        description: Vantage Get All Financial Commitment Reports
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createfinancialcommitmentreport
+        method: POST
+        description: Vantage Create a Financial Commitment Report
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: financial_commitment_reports-financial_commitment_report_token
+      path: /financial_commitment_reports/{financial_commitment_report_token}
+      operations:
+      - name: getfinancialcommitmentreport
+        method: GET
+        description: Vantage Get a Financial Commitment Report
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deletefinancialcommitmentreport
+        method: DELETE
+        description: Vantage Delete a Financial Commitment Report
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.VANTAGE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cost-management-financial-commitment-reports-rest
+    port: 8080
+    description: REST adapter for Vantage Cost Management API — Financial Commitment Reports. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/financial-commitment-reports
+      name: financial-commitment-reports
+      description: REST surface for financial_commitment_reports.
+      operations:
+      - method: GET
+        name: getfinancialcommitmentreports
+        description: Vantage Get All Financial Commitment Reports
+        call: cost-management-financial-commitment-reports.getfinancialcommitmentreports
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createfinancialcommitmentreport
+        description: Vantage Create a Financial Commitment Report
+        call: cost-management-financial-commitment-reports.createfinancialcommitmentreport
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/financial-commitment-reports/{financial-commitment-report-token}
+      name: financial-commitment-reports-financial-commitment-report-token
+      description: REST surface for financial_commitment_reports-financial_commitment_report_token.
+      operations:
+      - method: GET
+        name: getfinancialcommitmentreport
+        description: Vantage Get a Financial Commitment Report
+        call: cost-management-financial-commitment-reports.getfinancialcommitmentreport
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletefinancialcommitmentreport
+        description: Vantage Delete a Financial Commitment Report
+        call: cost-management-financial-commitment-reports.deletefinancialcommitmentreport
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cost-management-financial-commitment-reports-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Vantage Cost Management API — Financial Commitment Reports. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: vantage-get-all-financial-commitment
+      description: Vantage Get All Financial Commitment Reports
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cost-management-financial-commitment-reports.getfinancialcommitmentreports
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: vantage-create-financial-commitment-report
+      description: Vantage Create a Financial Commitment Report
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: cost-management-financial-commitment-reports.createfinancialcommitmentreport
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: vantage-get-financial-commitment-report
+      description: Vantage Get a Financial Commitment Report
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cost-management-financial-commitment-reports.getfinancialcommitmentreport
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: vantage-delete-financial-commitment-report
+      description: Vantage Delete a Financial Commitment Report
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: cost-management-financial-commitment-reports.deletefinancialcommitmentreport
+      outputParameters:
+      - type: object
+        mapping: $.

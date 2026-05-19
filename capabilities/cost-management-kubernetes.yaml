@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Vantage Cost Management API — Kubernetes
+  description: 'Vantage Cost Management API — Kubernetes. 1 operations. Lead operation: Vantage Get Kubernetes Efficiency
+    Reports. Self-contained Naftiko capability covering one Vantage business surface.'
+  tags:
+  - Vantage
+  - Kubernetes
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    VANTAGE_API_KEY: VANTAGE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cost-management-kubernetes
+    baseUri: https://api.vantage.sh/v2
+    description: Vantage Cost Management API — Kubernetes business capability. Self-contained, no shared references.
+    resources:
+    - name: kubernetes
+      path: /kubernetes
+      operations:
+      - name: getkubernetesefficiencyreports
+        method: GET
+        description: Vantage Get Kubernetes Efficiency Reports
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.VANTAGE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cost-management-kubernetes-rest
+    port: 8080
+    description: REST adapter for Vantage Cost Management API — Kubernetes. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/kubernetes
+      name: kubernetes
+      description: REST surface for kubernetes.
+      operations:
+      - method: GET
+        name: getkubernetesefficiencyreports
+        description: Vantage Get Kubernetes Efficiency Reports
+        call: cost-management-kubernetes.getkubernetesefficiencyreports
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cost-management-kubernetes-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Vantage Cost Management API — Kubernetes. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: vantage-get-kubernetes-efficiency-reports
+      description: Vantage Get Kubernetes Efficiency Reports
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cost-management-kubernetes.getkubernetesefficiencyreports
+      outputParameters:
+      - type: object
+        mapping: $.

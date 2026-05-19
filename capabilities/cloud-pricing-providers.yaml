@@ -1,0 +1,112 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Vantage Cloud Pricing API — Providers
+  description: 'Vantage Cloud Pricing API — Providers. 2 operations. Lead operation: Vantage Get All Providers. Self-contained
+    Naftiko capability covering one Vantage business surface.'
+  tags:
+  - Vantage
+  - Providers
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    VANTAGE_API_KEY: VANTAGE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cloud-pricing-providers
+    baseUri: https://api.vantage.sh/v1
+    description: Vantage Cloud Pricing API — Providers business capability. Self-contained, no shared references.
+    resources:
+    - name: providers
+      path: /providers
+      operations:
+      - name: getproviders
+        method: GET
+        description: Vantage Get All Providers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: providers-provider_id
+      path: /providers/{provider_id}
+      operations:
+      - name: getprovider
+        method: GET
+        description: Vantage Get a Provider
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: provider_id
+          in: path
+          type: string
+          description: The identifier of the cloud provider (e.g., aws, azure, gcp).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.VANTAGE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cloud-pricing-providers-rest
+    port: 8080
+    description: REST adapter for Vantage Cloud Pricing API — Providers. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/providers
+      name: providers
+      description: REST surface for providers.
+      operations:
+      - method: GET
+        name: getproviders
+        description: Vantage Get All Providers
+        call: cloud-pricing-providers.getproviders
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/providers/{provider-id}
+      name: providers-provider-id
+      description: REST surface for providers-provider_id.
+      operations:
+      - method: GET
+        name: getprovider
+        description: Vantage Get a Provider
+        call: cloud-pricing-providers.getprovider
+        with:
+          provider_id: rest.provider_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cloud-pricing-providers-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Vantage Cloud Pricing API — Providers. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: vantage-get-all-providers
+      description: Vantage Get All Providers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-pricing-providers.getproviders
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: vantage-get-provider
+      description: Vantage Get a Provider
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-pricing-providers.getprovider
+      with:
+        provider_id: tools.provider_id
+      outputParameters:
+      - type: object
+        mapping: $.

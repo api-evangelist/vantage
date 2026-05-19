@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Vantage Cost Management API — Cost Providers
+  description: 'Vantage Cost Management API — Cost Providers. 1 operations. Lead operation: Vantage Get All Cost Providers.
+    Self-contained Naftiko capability covering one Vantage business surface.'
+  tags:
+  - Vantage
+  - Cost Providers
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    VANTAGE_API_KEY: VANTAGE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cost-management-cost-providers
+    baseUri: https://api.vantage.sh/v2
+    description: Vantage Cost Management API — Cost Providers business capability. Self-contained, no shared references.
+    resources:
+    - name: cost_providers
+      path: /cost_providers
+      operations:
+      - name: getcostproviders
+        method: GET
+        description: Vantage Get All Cost Providers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.VANTAGE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cost-management-cost-providers-rest
+    port: 8080
+    description: REST adapter for Vantage Cost Management API — Cost Providers. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/cost-providers
+      name: cost-providers
+      description: REST surface for cost_providers.
+      operations:
+      - method: GET
+        name: getcostproviders
+        description: Vantage Get All Cost Providers
+        call: cost-management-cost-providers.getcostproviders
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cost-management-cost-providers-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Vantage Cost Management API — Cost Providers. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: vantage-get-all-cost-providers
+      description: Vantage Get All Cost Providers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cost-management-cost-providers.getcostproviders
+      outputParameters:
+      - type: object
+        mapping: $.

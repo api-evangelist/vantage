@@ -1,0 +1,197 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Vantage Cost Management API — Business Metrics
+  description: 'Vantage Cost Management API — Business Metrics. 5 operations. Lead operation: Vantage Get All Business Metrics.
+    Self-contained Naftiko capability covering one Vantage business surface.'
+  tags:
+  - Vantage
+  - Business Metrics
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    VANTAGE_API_KEY: VANTAGE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cost-management-business-metrics
+    baseUri: https://api.vantage.sh/v2
+    description: Vantage Cost Management API — Business Metrics business capability. Self-contained, no shared references.
+    resources:
+    - name: business_metrics
+      path: /business_metrics
+      operations:
+      - name: getbusinessmetrics
+        method: GET
+        description: Vantage Get All Business Metrics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createbusinessmetric
+        method: POST
+        description: Vantage Create a Business Metric
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: business_metrics-business_metric_token
+      path: /business_metrics/{business_metric_token}
+      operations:
+      - name: getbusinessmetric
+        method: GET
+        description: Vantage Get a Business Metric
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatebusinessmetric
+        method: PUT
+        description: Vantage Update a Business Metric
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletebusinessmetric
+        method: DELETE
+        description: Vantage Delete a Business Metric
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.VANTAGE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cost-management-business-metrics-rest
+    port: 8080
+    description: REST adapter for Vantage Cost Management API — Business Metrics. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/business-metrics
+      name: business-metrics
+      description: REST surface for business_metrics.
+      operations:
+      - method: GET
+        name: getbusinessmetrics
+        description: Vantage Get All Business Metrics
+        call: cost-management-business-metrics.getbusinessmetrics
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createbusinessmetric
+        description: Vantage Create a Business Metric
+        call: cost-management-business-metrics.createbusinessmetric
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/business-metrics/{business-metric-token}
+      name: business-metrics-business-metric-token
+      description: REST surface for business_metrics-business_metric_token.
+      operations:
+      - method: GET
+        name: getbusinessmetric
+        description: Vantage Get a Business Metric
+        call: cost-management-business-metrics.getbusinessmetric
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatebusinessmetric
+        description: Vantage Update a Business Metric
+        call: cost-management-business-metrics.updatebusinessmetric
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletebusinessmetric
+        description: Vantage Delete a Business Metric
+        call: cost-management-business-metrics.deletebusinessmetric
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cost-management-business-metrics-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Vantage Cost Management API — Business Metrics. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: vantage-get-all-business-metrics
+      description: Vantage Get All Business Metrics
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cost-management-business-metrics.getbusinessmetrics
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: vantage-create-business-metric
+      description: Vantage Create a Business Metric
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: cost-management-business-metrics.createbusinessmetric
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: vantage-get-business-metric
+      description: Vantage Get a Business Metric
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cost-management-business-metrics.getbusinessmetric
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: vantage-update-business-metric
+      description: Vantage Update a Business Metric
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: cost-management-business-metrics.updatebusinessmetric
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: vantage-delete-business-metric
+      description: Vantage Delete a Business Metric
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: cost-management-business-metrics.deletebusinessmetric
+      outputParameters:
+      - type: object
+        mapping: $.

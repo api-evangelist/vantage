@@ -1,0 +1,197 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Vantage Cost Management API — Folders
+  description: 'Vantage Cost Management API — Folders. 5 operations. Lead operation: Vantage Get All Folders. Self-contained
+    Naftiko capability covering one Vantage business surface.'
+  tags:
+  - Vantage
+  - Folders
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    VANTAGE_API_KEY: VANTAGE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cost-management-folders
+    baseUri: https://api.vantage.sh/v2
+    description: Vantage Cost Management API — Folders business capability. Self-contained, no shared references.
+    resources:
+    - name: folders
+      path: /folders
+      operations:
+      - name: getfolders
+        method: GET
+        description: Vantage Get All Folders
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createfolder
+        method: POST
+        description: Vantage Create a Folder
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: folders-folder_token
+      path: /folders/{folder_token}
+      operations:
+      - name: getfolder
+        method: GET
+        description: Vantage Get a Folder
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatefolder
+        method: PUT
+        description: Vantage Update a Folder
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletefolder
+        method: DELETE
+        description: Vantage Delete a Folder
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.VANTAGE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cost-management-folders-rest
+    port: 8080
+    description: REST adapter for Vantage Cost Management API — Folders. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/folders
+      name: folders
+      description: REST surface for folders.
+      operations:
+      - method: GET
+        name: getfolders
+        description: Vantage Get All Folders
+        call: cost-management-folders.getfolders
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createfolder
+        description: Vantage Create a Folder
+        call: cost-management-folders.createfolder
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/folders/{folder-token}
+      name: folders-folder-token
+      description: REST surface for folders-folder_token.
+      operations:
+      - method: GET
+        name: getfolder
+        description: Vantage Get a Folder
+        call: cost-management-folders.getfolder
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatefolder
+        description: Vantage Update a Folder
+        call: cost-management-folders.updatefolder
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletefolder
+        description: Vantage Delete a Folder
+        call: cost-management-folders.deletefolder
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cost-management-folders-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Vantage Cost Management API — Folders. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: vantage-get-all-folders
+      description: Vantage Get All Folders
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cost-management-folders.getfolders
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: vantage-create-folder
+      description: Vantage Create a Folder
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: cost-management-folders.createfolder
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: vantage-get-folder
+      description: Vantage Get a Folder
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cost-management-folders.getfolder
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: vantage-update-folder
+      description: Vantage Update a Folder
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: cost-management-folders.updatefolder
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: vantage-delete-folder
+      description: Vantage Delete a Folder
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: cost-management-folders.deletefolder
+      outputParameters:
+      - type: object
+        mapping: $.

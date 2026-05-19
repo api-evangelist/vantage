@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Vantage Cost Management API — Managed Accounts
+  description: 'Vantage Cost Management API — Managed Accounts. 1 operations. Lead operation: Vantage Get All Managed Accounts.
+    Self-contained Naftiko capability covering one Vantage business surface.'
+  tags:
+  - Vantage
+  - Managed Accounts
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    VANTAGE_API_KEY: VANTAGE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cost-management-managed-accounts
+    baseUri: https://api.vantage.sh/v2
+    description: Vantage Cost Management API — Managed Accounts business capability. Self-contained, no shared references.
+    resources:
+    - name: managed_accounts
+      path: /managed_accounts
+      operations:
+      - name: getmanagedaccounts
+        method: GET
+        description: Vantage Get All Managed Accounts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.VANTAGE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cost-management-managed-accounts-rest
+    port: 8080
+    description: REST adapter for Vantage Cost Management API — Managed Accounts. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/managed-accounts
+      name: managed-accounts
+      description: REST surface for managed_accounts.
+      operations:
+      - method: GET
+        name: getmanagedaccounts
+        description: Vantage Get All Managed Accounts
+        call: cost-management-managed-accounts.getmanagedaccounts
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cost-management-managed-accounts-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Vantage Cost Management API — Managed Accounts. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: vantage-get-all-managed-accounts
+      description: Vantage Get All Managed Accounts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cost-management-managed-accounts.getmanagedaccounts
+      outputParameters:
+      - type: object
+        mapping: $.

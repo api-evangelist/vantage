@@ -1,0 +1,133 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Vantage Cloud Pricing API — Products
+  description: 'Vantage Cloud Pricing API — Products. 2 operations. Lead operation: Vantage Get All Products. Self-contained
+    Naftiko capability covering one Vantage business surface.'
+  tags:
+  - Vantage
+  - Products
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    VANTAGE_API_KEY: VANTAGE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cloud-pricing-products
+    baseUri: https://api.vantage.sh/v1
+    description: Vantage Cloud Pricing API — Products business capability. Self-contained, no shared references.
+    resources:
+    - name: products
+      path: /products
+      operations:
+      - name: getproducts
+        method: GET
+        description: Vantage Get All Products
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: provider_id
+          in: query
+          type: string
+          description: Filter products by a specific cloud provider identifier.
+        - name: service_id
+          in: query
+          type: string
+          description: Filter products by a specific service identifier.
+        - name: name
+          in: query
+          type: string
+          description: Filter products by name.
+    - name: products-product_id
+      path: /products/{product_id}
+      operations:
+      - name: getproduct
+        method: GET
+        description: Vantage Get a Product
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: product_id
+          in: path
+          type: string
+          description: The identifier of the product.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.VANTAGE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cloud-pricing-products-rest
+    port: 8080
+    description: REST adapter for Vantage Cloud Pricing API — Products. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/products
+      name: products
+      description: REST surface for products.
+      operations:
+      - method: GET
+        name: getproducts
+        description: Vantage Get All Products
+        call: cloud-pricing-products.getproducts
+        with:
+          provider_id: rest.provider_id
+          service_id: rest.service_id
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/products/{product-id}
+      name: products-product-id
+      description: REST surface for products-product_id.
+      operations:
+      - method: GET
+        name: getproduct
+        description: Vantage Get a Product
+        call: cloud-pricing-products.getproduct
+        with:
+          product_id: rest.product_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cloud-pricing-products-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Vantage Cloud Pricing API — Products. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: vantage-get-all-products
+      description: Vantage Get All Products
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-pricing-products.getproducts
+      with:
+        provider_id: tools.provider_id
+        service_id: tools.service_id
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: vantage-get-product
+      description: Vantage Get a Product
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-pricing-products.getproduct
+      with:
+        product_id: tools.product_id
+      outputParameters:
+      - type: object
+        mapping: $.

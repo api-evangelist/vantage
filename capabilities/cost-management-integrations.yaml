@@ -1,0 +1,162 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Vantage Cost Management API — Integrations
+  description: 'Vantage Cost Management API — Integrations. 4 operations. Lead operation: Vantage Get All Integrations. Self-contained
+    Naftiko capability covering one Vantage business surface.'
+  tags:
+  - Vantage
+  - Integrations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    VANTAGE_API_KEY: VANTAGE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cost-management-integrations
+    baseUri: https://api.vantage.sh/v2
+    description: Vantage Cost Management API — Integrations business capability. Self-contained, no shared references.
+    resources:
+    - name: integrations
+      path: /integrations
+      operations:
+      - name: getintegrations
+        method: GET
+        description: Vantage Get All Integrations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createintegration
+        method: POST
+        description: Vantage Create an Integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: integrations-integration_token
+      path: /integrations/{integration_token}
+      operations:
+      - name: getintegration
+        method: GET
+        description: Vantage Get an Integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteintegration
+        method: DELETE
+        description: Vantage Delete an Integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.VANTAGE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cost-management-integrations-rest
+    port: 8080
+    description: REST adapter for Vantage Cost Management API — Integrations. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/integrations
+      name: integrations
+      description: REST surface for integrations.
+      operations:
+      - method: GET
+        name: getintegrations
+        description: Vantage Get All Integrations
+        call: cost-management-integrations.getintegrations
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createintegration
+        description: Vantage Create an Integration
+        call: cost-management-integrations.createintegration
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/integrations/{integration-token}
+      name: integrations-integration-token
+      description: REST surface for integrations-integration_token.
+      operations:
+      - method: GET
+        name: getintegration
+        description: Vantage Get an Integration
+        call: cost-management-integrations.getintegration
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteintegration
+        description: Vantage Delete an Integration
+        call: cost-management-integrations.deleteintegration
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cost-management-integrations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Vantage Cost Management API — Integrations. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: vantage-get-all-integrations
+      description: Vantage Get All Integrations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cost-management-integrations.getintegrations
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: vantage-create-integration
+      description: Vantage Create an Integration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: cost-management-integrations.createintegration
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: vantage-get-integration
+      description: Vantage Get an Integration
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cost-management-integrations.getintegration
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: vantage-delete-integration
+      description: Vantage Delete an Integration
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: cost-management-integrations.deleteintegration
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -118,7 +118,7 @@ kind: contract
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 created: '2026-01-02'
-modified: '2026-04-18'
+modified: '2026-05-19'
 position: Consumer
 description: >-
   Vantage is a cloud cost management platform designed for modern engineering
@@ -270,3 +270,6 @@ common:
     type: Capabilities
   - url: capabilities/cloud-cost-management.yaml
     type: Capabilities
+  - name: MCP Server
+    url: https://github.com/vantage-sh/vantage-mcp-server
+    type: MCPServer

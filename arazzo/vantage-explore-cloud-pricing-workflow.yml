@@ -1,0 +1,93 @@
+arazzo: 1.0.1
+info:
+  title: Vantage Explore Cloud Pricing From Provider to Price
+  summary: Drill from a cloud provider down through its services and products to concrete prices.
+  description: >-
+    A Vantage Cloud Pricing discovery pattern. The workflow lists supported cloud
+    Providers, selects the first one and lists its Services, lists the Products
+    for that provider and service, and finally retrieves the concrete Prices for
+    that product. Each step narrows the scope using identifiers returned by the
+    previous call. Every step spells out its request inline — including the
+    Bearer token — so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: cloudPricingApi
+  url: ../openapi/vantage-cloud-pricing-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: explore-cloud-pricing
+  summary: Walk from a Provider through Services and Products to Prices.
+  description: >-
+    Lists Providers, lists Services for the first provider, lists Products for
+    that provider and service, and retrieves Prices for the first product.
+  inputs:
+    type: object
+    required:
+    - apiToken
+    properties:
+      apiToken:
+        type: string
+        description: Vantage API token used as the Bearer credential.
+  steps:
+  - stepId: listProviders
+    description: List the supported cloud Providers with pricing data.
+    operationId: getProviders
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiToken
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      providerId: $response.body#/providers/0/id
+  - stepId: listServices
+    description: List the Services available for the selected Provider.
+    operationId: getServices
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiToken
+    - name: provider_id
+      in: query
+      value: $steps.listProviders.outputs.providerId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      serviceId: $response.body#/services/0/id
+  - stepId: listProducts
+    description: List the Products for the selected Provider and Service.
+    operationId: getProducts
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiToken
+    - name: provider_id
+      in: query
+      value: $steps.listProviders.outputs.providerId
+    - name: service_id
+      in: query
+      value: $steps.listServices.outputs.serviceId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      productId: $response.body#/products/0/id
+  - stepId: getPrices
+    description: Retrieve the concrete Prices for the selected Product.
+    operationId: getPrices
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiToken
+    - name: product_id
+      in: query
+      value: $steps.listProducts.outputs.productId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      prices: $response.body#/prices
+  outputs:
+    providerId: $steps.listProviders.outputs.providerId
+    serviceId: $steps.listServices.outputs.serviceId
+    productId: $steps.listProducts.outputs.productId
+    prices: $steps.getPrices.outputs.prices

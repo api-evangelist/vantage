@@ -1,0 +1,103 @@
+arazzo: 1.0.1
+info:
+  title: Vantage Set Up a Financial Commitment Report and Segment
+  summary: Create a Financial Commitment Report and a cost allocation Segment in the same workspace.
+  description: >-
+    A Vantage commitment-tracking pattern. The workflow creates a Financial
+    Commitment Report for reservations and savings plans, reads it back by token
+    to confirm it persisted, and then creates a cost allocation Segment in the
+    same workspace so committed spend can be attributed. Every step spells out
+    its request inline — including the Bearer token — so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: costManagementApi
+  url: ../openapi/vantage-cost-management-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: financial-commitment-report-setup
+  summary: Create a Financial Commitment Report and a cost allocation Segment.
+  description: >-
+    Creates a Financial Commitment Report, fetches it back by token, and creates
+    a Segment in the same workspace.
+  inputs:
+    type: object
+    required:
+    - apiToken
+    - reportTitle
+    - workspaceToken
+    - segmentTitle
+    - segmentFilter
+    properties:
+      apiToken:
+        type: string
+        description: Vantage API token used as the Bearer credential.
+      reportTitle:
+        type: string
+        description: Title for the new Financial Commitment Report.
+      workspaceToken:
+        type: string
+        description: The workspace token the Report and Segment belong to.
+      segmentTitle:
+        type: string
+        description: Title for the new cost allocation Segment.
+      segmentFilter:
+        type: string
+        description: A VQL filter expression scoping the Segment.
+      segmentPriority:
+        type: integer
+        description: The priority of the Segment relative to others.
+  steps:
+  - stepId: createCommitmentReport
+    description: Create a Financial Commitment Report in the supplied workspace.
+    operationId: createFinancialCommitmentReport
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiToken
+    requestBody:
+      contentType: application/json
+      payload:
+        title: $inputs.reportTitle
+        workspace_token: $inputs.workspaceToken
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      commitmentReportToken: $response.body#/token
+  - stepId: getCommitmentReport
+    description: Read the Financial Commitment Report back by token to confirm it persisted.
+    operationId: getFinancialCommitmentReport
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiToken
+    - name: financial_commitment_report_token
+      in: path
+      value: $steps.createCommitmentReport.outputs.commitmentReportToken
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      title: $response.body#/title
+  - stepId: createSegment
+    description: >-
+      Create a cost allocation Segment in the same workspace to attribute
+      committed spend.
+    operationId: createSegment
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiToken
+    requestBody:
+      contentType: application/json
+      payload:
+        title: $inputs.segmentTitle
+        filter: $inputs.segmentFilter
+        priority: $inputs.segmentPriority
+        workspace_token: $inputs.workspaceToken
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      segmentToken: $response.body#/token
+  outputs:
+    commitmentReportToken: $steps.createCommitmentReport.outputs.commitmentReportToken
+    segmentToken: $steps.createSegment.outputs.segmentToken

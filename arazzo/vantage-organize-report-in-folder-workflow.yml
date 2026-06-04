@@ -1,0 +1,97 @@
+arazzo: 1.0.1
+info:
+  title: Vantage Organize a Cost Report Inside a Folder
+  summary: Create a Folder and a Cost Report that lives inside it.
+  description: >-
+    A Vantage organization pattern for keeping Cost Reports tidy. The workflow
+    creates a Folder in a workspace, creates a Cost Report that references the
+    new folder's token, and reads the Folder back to confirm it exists. Every
+    step spells out its request inline — including the Bearer token — so the flow
+    can be read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: costManagementApi
+  url: ../openapi/vantage-cost-management-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: organize-report-in-folder
+  summary: Create a Folder and place a new Cost Report into it.
+  description: >-
+    Creates a Folder, creates a Cost Report whose folder_token points at the new
+    folder, and fetches the Folder back by token.
+  inputs:
+    type: object
+    required:
+    - apiToken
+    - folderTitle
+    - reportTitle
+    - filter
+    - workspaceToken
+    properties:
+      apiToken:
+        type: string
+        description: Vantage API token used as the Bearer credential.
+      folderTitle:
+        type: string
+        description: Title for the new Folder.
+      reportTitle:
+        type: string
+        description: Title for the new Cost Report.
+      filter:
+        type: string
+        description: A VQL filter expression scoping the Cost Report.
+      workspaceToken:
+        type: string
+        description: The workspace token both the Folder and Cost Report belong to.
+  steps:
+  - stepId: createFolder
+    description: Create the Folder that will hold the Cost Report.
+    operationId: createFolder
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiToken
+    requestBody:
+      contentType: application/json
+      payload:
+        title: $inputs.folderTitle
+        workspace_token: $inputs.workspaceToken
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      folderToken: $response.body#/token
+  - stepId: createReport
+    description: Create a Cost Report nested inside the new Folder.
+    operationId: createCostReport
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiToken
+    requestBody:
+      contentType: application/json
+      payload:
+        title: $inputs.reportTitle
+        filter: $inputs.filter
+        folder_token: $steps.createFolder.outputs.folderToken
+        workspace_token: $inputs.workspaceToken
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      costReportToken: $response.body#/token
+  - stepId: getFolder
+    description: Read the Folder back by token to confirm it exists.
+    operationId: getFolder
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiToken
+    - name: folder_token
+      in: path
+      value: $steps.createFolder.outputs.folderToken
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      title: $response.body#/title
+  outputs:
+    folderToken: $steps.createFolder.outputs.folderToken
+    costReportToken: $steps.createReport.outputs.costReportToken

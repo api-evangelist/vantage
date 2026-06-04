@@ -1,0 +1,100 @@
+arazzo: 1.0.1
+info:
+  title: Vantage Reuse a Saved Filter on a New Cost Report
+  summary: Create a reusable Saved Filter and apply it to a new Cost Report.
+  description: >-
+    A Vantage reuse pattern for standardizing filtering across reports. The
+    workflow creates a Saved Filter from a VQL expression, creates a Cost Report
+    that references the saved filter by token, and reads the report back to
+    confirm the saved filter was attached. Every step spells out its request
+    inline — including the Bearer token — so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: costManagementApi
+  url: ../openapi/vantage-cost-management-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: saved-filter-to-cost-report
+  summary: Create a Saved Filter and a Cost Report that uses it.
+  description: >-
+    Creates a Saved Filter, creates a Cost Report whose saved_filter_tokens
+    include the new filter token, and fetches the report back by token.
+  inputs:
+    type: object
+    required:
+    - apiToken
+    - filterTitle
+    - filter
+    - workspaceToken
+    - reportTitle
+    properties:
+      apiToken:
+        type: string
+        description: Vantage API token used as the Bearer credential.
+      filterTitle:
+        type: string
+        description: Title for the new Saved Filter.
+      filter:
+        type: string
+        description: A VQL filter expression for the Saved Filter.
+      workspaceToken:
+        type: string
+        description: The workspace token the Saved Filter and Report belong to.
+      reportTitle:
+        type: string
+        description: Title for the new Cost Report.
+  steps:
+  - stepId: createSavedFilter
+    description: Create a reusable Saved Filter from the supplied VQL expression.
+    operationId: createSavedFilter
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiToken
+    requestBody:
+      contentType: application/json
+      payload:
+        title: $inputs.filterTitle
+        filter: $inputs.filter
+        workspace_token: $inputs.workspaceToken
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      savedFilterToken: $response.body#/token
+  - stepId: createReport
+    description: Create a Cost Report that references the new Saved Filter.
+    operationId: createCostReport
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiToken
+    requestBody:
+      contentType: application/json
+      payload:
+        title: $inputs.reportTitle
+        saved_filter_tokens:
+        - $steps.createSavedFilter.outputs.savedFilterToken
+        workspace_token: $inputs.workspaceToken
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      costReportToken: $response.body#/token
+  - stepId: getReport
+    description: >-
+      Read the Cost Report back by token to confirm the Saved Filter is attached.
+    operationId: getCostReport
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiToken
+    - name: cost_report_token
+      in: path
+      value: $steps.createReport.outputs.costReportToken
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      savedFilterTokens: $response.body#/saved_filter_tokens
+  outputs:
+    savedFilterToken: $steps.createSavedFilter.outputs.savedFilterToken
+    costReportToken: $steps.createReport.outputs.costReportToken

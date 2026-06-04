@@ -1,0 +1,88 @@
+arazzo: 1.0.1
+info:
+  title: Vantage Fetch Costs for an Existing Cost Report
+  summary: List existing Cost Reports and pull cost data for the first one, branching when none exist.
+  description: >-
+    A Vantage read-only analysis pattern for working with reports that already
+    exist. The workflow lists the Cost Reports the token can access and branches:
+    when at least one report is present it retrieves that report's cost line
+    items for a date range, and when none are present it ends without attempting
+    a costs call. Every step spells out its request inline — including the Bearer
+    token — so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: costManagementApi
+  url: ../openapi/vantage-cost-management-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: fetch-costs-for-existing-report
+  summary: List Cost Reports and fetch costs for the first available one.
+  description: >-
+    Lists accessible Cost Reports, branches on whether any exist, and retrieves
+    the cost data for the first report over the requested date range.
+  inputs:
+    type: object
+    required:
+    - apiToken
+    properties:
+      apiToken:
+        type: string
+        description: Vantage API token used as the Bearer credential.
+      startDate:
+        type: string
+        description: Start date for the cost data (YYYY-MM-DD).
+      endDate:
+        type: string
+        description: End date for the cost data (YYYY-MM-DD).
+  steps:
+  - stepId: listReports
+    description: >-
+      List the Cost Reports the token can access and branch on whether any were
+      returned.
+    operationId: getCostReports
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiToken
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstReportToken: $response.body#/cost_reports/0/token
+    onSuccess:
+    - name: reportsExist
+      type: goto
+      stepId: getCosts
+      criteria:
+      - context: $response.body
+        condition: $.cost_reports.length > 0
+        type: jsonpath
+    - name: noReports
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.cost_reports.length == 0
+        type: jsonpath
+  - stepId: getCosts
+    description: Retrieve the cost line items for the first Cost Report over the date range.
+    operationId: getCosts
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiToken
+    - name: cost_report_token
+      in: query
+      value: $steps.listReports.outputs.firstReportToken
+    - name: start_date
+      in: query
+      value: $inputs.startDate
+    - name: end_date
+      in: query
+      value: $inputs.endDate
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      costs: $response.body#/costs
+  outputs:
+    firstReportToken: $steps.listReports.outputs.firstReportToken
+    costs: $steps.getCosts.outputs.costs

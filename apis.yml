@@ -201,6 +201,42 @@ maintainers:
     email: kin@apievangelist.com
 specificationVersion: '0.19'
 common:
+  - type: ArazzoWorkflows
+    url: arazzo/
+    workflows:
+    - url: arazzo/vantage-build-cost-dashboard-workflow.yml
+      name: Vantage Build a Cost Dashboard From a New Report
+      summary: Create a Cost Report and surface it as a widget on a new Dashboard.
+    - url: arazzo/vantage-create-anomaly-alert-for-report-workflow.yml
+      name: Vantage Create an Anomaly Alert for a New Cost Report
+      summary: Create a Cost Report and attach an anomaly alert with a spend threshold.
+    - url: arazzo/vantage-create-budget-alert-for-report-workflow.yml
+      name: Vantage Create a Budget Alert for a New Cost Report
+      summary: Stand up a Cost Report and attach a budget alert that watches its spend.
+    - url: arazzo/vantage-create-cost-report-and-fetch-costs-workflow.yml
+      name: Vantage Create a Cost Report and Fetch Its Costs
+      summary: Create a Cost Report from a VQL filter and immediately retrieve its cost data.
+    - url: arazzo/vantage-explore-cloud-pricing-workflow.yml
+      name: Vantage Explore Cloud Pricing From Provider to Price
+      summary: Drill from a cloud provider down through its services and products to concrete prices.
+    - url: arazzo/vantage-fetch-costs-for-existing-report-workflow.yml
+      name: Vantage Fetch Costs for an Existing Cost Report
+      summary: List existing Cost Reports and pull cost data for the first one, branching when none exist.
+    - url: arazzo/vantage-financial-commitment-report-setup-workflow.yml
+      name: Vantage Set Up a Financial Commitment Report and Segment
+      summary: Create a Financial Commitment Report and a cost allocation Segment in the same workspace.
+    - url: arazzo/vantage-organize-report-in-folder-workflow.yml
+      name: Vantage Organize a Cost Report Inside a Folder
+      summary: Create a Folder and a Cost Report that lives inside it.
+    - url: arazzo/vantage-resource-report-and-resources-workflow.yml
+      name: Vantage Create a Resource Report and List Its Resources
+      summary: Create a Resource Report and retrieve the resource-level cost data it captures.
+    - url: arazzo/vantage-review-recommendations-by-provider-workflow.yml
+      name: Vantage Review Cost Recommendations Against Providers
+      summary: List available cost providers, then pull optimization recommendations and branch on whether any exist.
+    - url: arazzo/vantage-saved-filter-to-cost-report-workflow.yml
+      name: Vantage Reuse a Saved Filter on a New Cost Report
+      summary: Create a reusable Saved Filter and apply it to a new Cost Report.
   - type: LinkedIn
     url: https://www.linkedin.com/company/vantage-data-centers
   - name: 'Vantage: Multi Cloud Cost Management & Optimization Tool'

@@ -1,0 +1,99 @@
+arazzo: 1.0.1
+info:
+  title: Vantage Create an Anomaly Alert for a New Cost Report
+  summary: Create a Cost Report and attach an anomaly alert with a spend threshold.
+  description: >-
+    A proactive Vantage detection pattern. The workflow creates a Cost Report
+    scoped to a VQL filter, attaches an Anomaly Alert with a numeric threshold so
+    Vantage flags unexpected spend on that report, and reads the alert back to
+    confirm it was created. Every step spells out its request inline — including
+    the Bearer token — so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: costManagementApi
+  url: ../openapi/vantage-cost-management-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: create-anomaly-alert-for-report
+  summary: Create a Cost Report and an Anomaly Alert that watches it.
+  description: >-
+    Creates a Cost Report, creates an Anomaly Alert referencing that report's
+    token with a threshold, and fetches the alert back by token.
+  inputs:
+    type: object
+    required:
+    - apiToken
+    - title
+    - filter
+    - workspaceToken
+    - threshold
+    properties:
+      apiToken:
+        type: string
+        description: Vantage API token used as the Bearer credential.
+      title:
+        type: string
+        description: Human-readable title for the new Cost Report.
+      filter:
+        type: string
+        description: A VQL filter expression scoping the Cost Report.
+      workspaceToken:
+        type: string
+        description: The workspace token the Cost Report belongs to.
+      threshold:
+        type: number
+        description: The anomaly detection threshold for the alert.
+  steps:
+  - stepId: createReport
+    description: Create the Cost Report the anomaly alert will monitor.
+    operationId: createCostReport
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiToken
+    requestBody:
+      contentType: application/json
+      payload:
+        title: $inputs.title
+        filter: $inputs.filter
+        workspace_token: $inputs.workspaceToken
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      costReportToken: $response.body#/token
+  - stepId: createAnomalyAlert
+    description: >-
+      Create an Anomaly Alert that watches the new Cost Report at the supplied
+      threshold.
+    operationId: createAnomalyAlert
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiToken
+    requestBody:
+      contentType: application/json
+      payload:
+        cost_report_token: $steps.createReport.outputs.costReportToken
+        threshold: $inputs.threshold
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      anomalyAlertToken: $response.body#/token
+  - stepId: getAnomalyAlert
+    description: Read the Anomaly Alert back by token to confirm it was created.
+    operationId: getAnomalyAlert
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiToken
+    - name: anomaly_alert_token
+      in: path
+      value: $steps.createAnomalyAlert.outputs.anomalyAlertToken
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      threshold: $response.body#/threshold
+  outputs:
+    costReportToken: $steps.createReport.outputs.costReportToken
+    anomalyAlertToken: $steps.createAnomalyAlert.outputs.anomalyAlertToken

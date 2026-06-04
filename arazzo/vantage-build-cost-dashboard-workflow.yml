@@ -1,0 +1,102 @@
+arazzo: 1.0.1
+info:
+  title: Vantage Build a Cost Dashboard From a New Report
+  summary: Create a Cost Report and surface it as a widget on a new Dashboard.
+  description: >-
+    A Vantage reporting pattern that turns raw cost data into a shareable view.
+    The workflow creates a Cost Report, builds a Dashboard whose widget token
+    references that report, and reads the Dashboard back to confirm the widget
+    was attached. Note that Vantage Dashboards reference widgets by token, so the
+    new Cost Report token is supplied as the dashboard's widget_token. Every step
+    spells out its request inline — including the Bearer token — so the flow can
+    be read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: costManagementApi
+  url: ../openapi/vantage-cost-management-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: build-cost-dashboard
+  summary: Create a Cost Report and a Dashboard that displays it as a widget.
+  description: >-
+    Creates a Cost Report, creates a Dashboard whose widget_tokens include the
+    new report token, and fetches the Dashboard back by token.
+  inputs:
+    type: object
+    required:
+    - apiToken
+    - reportTitle
+    - filter
+    - workspaceToken
+    - dashboardTitle
+    properties:
+      apiToken:
+        type: string
+        description: Vantage API token used as the Bearer credential.
+      reportTitle:
+        type: string
+        description: Title for the new Cost Report.
+      filter:
+        type: string
+        description: A VQL filter expression scoping the Cost Report.
+      workspaceToken:
+        type: string
+        description: The workspace token the Report and Dashboard belong to.
+      dashboardTitle:
+        type: string
+        description: Title for the new Dashboard.
+  steps:
+  - stepId: createReport
+    description: Create the Cost Report that will back the dashboard widget.
+    operationId: createCostReport
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiToken
+    requestBody:
+      contentType: application/json
+      payload:
+        title: $inputs.reportTitle
+        filter: $inputs.filter
+        workspace_token: $inputs.workspaceToken
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      costReportToken: $response.body#/token
+  - stepId: createDashboard
+    description: >-
+      Create a Dashboard whose widget references the new Cost Report token.
+    operationId: createDashboard
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiToken
+    requestBody:
+      contentType: application/json
+      payload:
+        title: $inputs.dashboardTitle
+        widget_tokens:
+        - $steps.createReport.outputs.costReportToken
+        workspace_token: $inputs.workspaceToken
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      dashboardToken: $response.body#/token
+  - stepId: getDashboard
+    description: Read the Dashboard back by token to confirm the widget attached.
+    operationId: getDashboard
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiToken
+    - name: dashboard_token
+      in: path
+      value: $steps.createDashboard.outputs.dashboardToken
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      title: $response.body#/title
+      widgetTokens: $response.body#/widget_tokens
+  outputs:
+    costReportToken: $steps.createReport.outputs.costReportToken
+    dashboardToken: $steps.createDashboard.outputs.dashboardToken

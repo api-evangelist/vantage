@@ -1,0 +1,105 @@
+arazzo: 1.0.1
+info:
+  title: Vantage Create a Budget Alert for a New Cost Report
+  summary: Stand up a Cost Report and attach a budget alert that watches its spend.
+  description: >-
+    A common Vantage governance pattern. The workflow creates a Cost Report
+    scoped to a VQL filter, attaches a Budget Alert to that report with a budget
+    amount and period, and reads the alert back to confirm it was registered
+    against the report. Every step spells out its request inline — including the
+    Bearer token — so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: costManagementApi
+  url: ../openapi/vantage-cost-management-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: create-budget-alert-for-report
+  summary: Create a Cost Report and a Budget Alert that monitors it.
+  description: >-
+    Creates a Cost Report, creates a Budget Alert referencing that report's
+    token, and fetches the alert back by token.
+  inputs:
+    type: object
+    required:
+    - apiToken
+    - title
+    - filter
+    - workspaceToken
+    - budget
+    - period
+    properties:
+      apiToken:
+        type: string
+        description: Vantage API token used as the Bearer credential.
+      title:
+        type: string
+        description: Human-readable title for the new Cost Report.
+      filter:
+        type: string
+        description: A VQL filter expression scoping the Cost Report.
+      workspaceToken:
+        type: string
+        description: The workspace token the Cost Report belongs to.
+      budget:
+        type: string
+        description: The budget amount for the alert.
+      period:
+        type: string
+        description: The budget period (e.g. monthly).
+  steps:
+  - stepId: createReport
+    description: Create the Cost Report the budget alert will monitor.
+    operationId: createCostReport
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiToken
+    requestBody:
+      contentType: application/json
+      payload:
+        title: $inputs.title
+        filter: $inputs.filter
+        workspace_token: $inputs.workspaceToken
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      costReportToken: $response.body#/token
+  - stepId: createBudgetAlert
+    description: >-
+      Create a Budget Alert that watches the new Cost Report against the supplied
+      budget and period.
+    operationId: createBudgetAlert
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiToken
+    requestBody:
+      contentType: application/json
+      payload:
+        cost_report_token: $steps.createReport.outputs.costReportToken
+        budget: $inputs.budget
+        period: $inputs.period
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      budgetAlertToken: $response.body#/token
+  - stepId: getBudgetAlert
+    description: Read the Budget Alert back by token to confirm it was registered.
+    operationId: getBudgetAlert
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiToken
+    - name: budget_alert_token
+      in: path
+      value: $steps.createBudgetAlert.outputs.budgetAlertToken
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      budget: $response.body#/budget
+      period: $response.body#/period
+  outputs:
+    costReportToken: $steps.createReport.outputs.costReportToken
+    budgetAlertToken: $steps.createBudgetAlert.outputs.budgetAlertToken

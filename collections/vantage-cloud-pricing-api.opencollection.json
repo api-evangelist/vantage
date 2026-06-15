@@ -1,0 +1,253 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vantage Cloud Pricing API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Providers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vantage Get All Providers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v1/providers",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns all supported cloud Providers with pricing data available in the Vantage database."
+        },
+        {
+          "info": {
+            "name": "Vantage Get a Provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v1/providers/:provider_id",
+            "params": [
+              {
+                "name": "provider_id",
+                "value": "500123",
+                "type": "path",
+                "description": "The identifier of the cloud provider (e.g., aws, azure, gcp)."
+              }
+            ]
+          },
+          "docs": "Returns a specific cloud Provider by identifier."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Default",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vantage Get All Services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v1/services",
+            "params": [
+              {
+                "name": "provider_id",
+                "value": "500123",
+                "type": "query",
+                "description": "Filter services by a specific cloud provider identifier."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns all Services available across all cloud Providers or filtered by a specific Provider."
+        },
+        {
+          "info": {
+            "name": "Vantage Get a Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v1/services/:service_id",
+            "params": [
+              {
+                "name": "service_id",
+                "value": "500123",
+                "type": "path",
+                "description": "The identifier of the service."
+              }
+            ]
+          },
+          "docs": "Returns a specific Service by identifier."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Products",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vantage Get All Products",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v1/products",
+            "params": [
+              {
+                "name": "provider_id",
+                "value": "500123",
+                "type": "query",
+                "description": "Filter products by a specific cloud provider identifier."
+              },
+              {
+                "name": "service_id",
+                "value": "500123",
+                "type": "query",
+                "description": "Filter products by a specific service identifier."
+              },
+              {
+                "name": "name",
+                "value": "Example Title",
+                "type": "query",
+                "description": "Filter products by name."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns all Products for a given Provider and Service. For example, with a Provider of AWS and a Service of EC2, Products will be a list of all EC2 instance types with their pricing information."
+        },
+        {
+          "info": {
+            "name": "Vantage Get a Product",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v1/products/:product_id",
+            "params": [
+              {
+                "name": "product_id",
+                "value": "500123",
+                "type": "path",
+                "description": "The identifier of the product."
+              }
+            ]
+          },
+          "docs": "Returns a specific Product by identifier with its pricing details."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Prices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vantage Get Prices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v1/prices",
+            "params": [
+              {
+                "name": "product_id",
+                "value": "500123",
+                "type": "query",
+                "description": "Filter prices by a specific product identifier."
+              },
+              {
+                "name": "provider_id",
+                "value": "500123",
+                "type": "query",
+                "description": "Filter prices by a specific cloud provider identifier."
+              },
+              {
+                "name": "service_id",
+                "value": "500123",
+                "type": "query",
+                "description": "Filter prices by a specific service identifier."
+              },
+              {
+                "name": "region",
+                "value": "example_value",
+                "type": "query",
+                "description": "Filter prices by a specific cloud region."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns pricing data for products. Can be filtered by product, provider, service, and region."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

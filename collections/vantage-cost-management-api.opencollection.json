@@ -1,0 +1,1722 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vantage Cost Management API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cost Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vantage Get All Cost Reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v2/cost_reports",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns all Cost Reports that the current API token has access to."
+        },
+        {
+          "info": {
+            "name": "Vantage Create a Cost Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vantage.sh/v2/cost_reports",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Cost Report."
+        },
+        {
+          "info": {
+            "name": "Vantage Get a Cost Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v2/cost_reports/:cost_report_token",
+            "params": [
+              {
+                "name": "cost_report_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Cost Report."
+              }
+            ]
+          },
+          "docs": "Returns a specific Cost Report by token."
+        },
+        {
+          "info": {
+            "name": "Vantage Update a Cost Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.vantage.sh/v2/cost_reports/:cost_report_token",
+            "params": [
+              {
+                "name": "cost_report_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Cost Report."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing Cost Report."
+        },
+        {
+          "info": {
+            "name": "Vantage Delete a Cost Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.vantage.sh/v2/cost_reports/:cost_report_token",
+            "params": [
+              {
+                "name": "cost_report_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Cost Report."
+              }
+            ]
+          },
+          "docs": "Deletes an existing Cost Report."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Costs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vantage Get Costs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v2/costs",
+            "params": [
+              {
+                "name": "cost_report_token",
+                "value": "example_value",
+                "type": "query",
+                "description": "The token of the Cost Report to retrieve costs for."
+              },
+              {
+                "name": "start_date",
+                "value": "2026-01-15",
+                "type": "query",
+                "description": "The start date for the cost data (YYYY-MM-DD)."
+              },
+              {
+                "name": "end_date",
+                "value": "2026-01-15",
+                "type": "query",
+                "description": "The end date for the cost data (YYYY-MM-DD)."
+              },
+              {
+                "name": "groupings",
+                "value": "example_value",
+                "type": "query",
+                "description": "Comma-separated list of groupings for cost data."
+              },
+              {
+                "name": "vql",
+                "value": "example_value",
+                "type": "query",
+                "description": "A VQL filter expression to query cost data."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns all Costs for a CostReport or VQL filter. You can filter by cost_report_token or provide a VQL query to retrieve specific cost data."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Folders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vantage Get All Folders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v2/folders",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns all Folders that the current API token has access to."
+        },
+        {
+          "info": {
+            "name": "Vantage Create a Folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vantage.sh/v2/folders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Folder for organizing Cost Reports."
+        },
+        {
+          "info": {
+            "name": "Vantage Get a Folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v2/folders/:folder_token",
+            "params": [
+              {
+                "name": "folder_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Folder."
+              }
+            ]
+          },
+          "docs": "Returns a specific Folder by token."
+        },
+        {
+          "info": {
+            "name": "Vantage Update a Folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.vantage.sh/v2/folders/:folder_token",
+            "params": [
+              {
+                "name": "folder_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Folder."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing Folder."
+        },
+        {
+          "info": {
+            "name": "Vantage Delete a Folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.vantage.sh/v2/folders/:folder_token",
+            "params": [
+              {
+                "name": "folder_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Folder."
+              }
+            ]
+          },
+          "docs": "Deletes an existing Folder."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Dashboards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vantage Get All Dashboards",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v2/dashboards",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns all Dashboards that the current API token has access to."
+        },
+        {
+          "info": {
+            "name": "Vantage Create a Dashboard",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vantage.sh/v2/dashboards",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Dashboard."
+        },
+        {
+          "info": {
+            "name": "Vantage Get a Dashboard",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v2/dashboards/:dashboard_token",
+            "params": [
+              {
+                "name": "dashboard_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Dashboard."
+              }
+            ]
+          },
+          "docs": "Returns a specific Dashboard by token."
+        },
+        {
+          "info": {
+            "name": "Vantage Update a Dashboard",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.vantage.sh/v2/dashboards/:dashboard_token",
+            "params": [
+              {
+                "name": "dashboard_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Dashboard."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing Dashboard."
+        },
+        {
+          "info": {
+            "name": "Vantage Delete a Dashboard",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.vantage.sh/v2/dashboards/:dashboard_token",
+            "params": [
+              {
+                "name": "dashboard_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Dashboard."
+              }
+            ]
+          },
+          "docs": "Deletes an existing Dashboard."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Saved Filters",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vantage Get All Saved Filters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v2/saved_filters",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns all Saved Filters that the current API token has access to."
+        },
+        {
+          "info": {
+            "name": "Vantage Create a Saved Filter",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vantage.sh/v2/saved_filters",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Saved Filter."
+        },
+        {
+          "info": {
+            "name": "Vantage Get a Saved Filter",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v2/saved_filters/:saved_filter_token",
+            "params": [
+              {
+                "name": "saved_filter_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Saved Filter."
+              }
+            ]
+          },
+          "docs": "Returns a specific Saved Filter by token."
+        },
+        {
+          "info": {
+            "name": "Vantage Update a Saved Filter",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.vantage.sh/v2/saved_filters/:saved_filter_token",
+            "params": [
+              {
+                "name": "saved_filter_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Saved Filter."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing Saved Filter."
+        },
+        {
+          "info": {
+            "name": "Vantage Delete a Saved Filter",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.vantage.sh/v2/saved_filters/:saved_filter_token",
+            "params": [
+              {
+                "name": "saved_filter_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Saved Filter."
+              }
+            ]
+          },
+          "docs": "Deletes an existing Saved Filter."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Workspaces",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vantage Get All Workspaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v2/workspaces",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns all Workspaces that the current API token has access to."
+        },
+        {
+          "info": {
+            "name": "Vantage Get a Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v2/workspaces/:workspace_token",
+            "params": [
+              {
+                "name": "workspace_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Workspace."
+              }
+            ]
+          },
+          "docs": "Returns a specific Workspace by token."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Teams",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vantage Get All Teams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v2/teams",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns all Teams that the current API token has access to."
+        },
+        {
+          "info": {
+            "name": "Vantage Create a Team",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vantage.sh/v2/teams",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Team."
+        },
+        {
+          "info": {
+            "name": "Vantage Get a Team",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v2/teams/:team_token",
+            "params": [
+              {
+                "name": "team_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Team."
+              }
+            ]
+          },
+          "docs": "Returns a specific Team by token."
+        },
+        {
+          "info": {
+            "name": "Vantage Update a Team",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.vantage.sh/v2/teams/:team_token",
+            "params": [
+              {
+                "name": "team_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Team."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing Team."
+        },
+        {
+          "info": {
+            "name": "Vantage Delete a Team",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.vantage.sh/v2/teams/:team_token",
+            "params": [
+              {
+                "name": "team_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Team."
+              }
+            ]
+          },
+          "docs": "Deletes an existing Team."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Access Grants",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vantage Get All Access Grants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v2/access_grants",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns all Access Grants that the current API token has access to."
+        },
+        {
+          "info": {
+            "name": "Vantage Create an Access Grant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vantage.sh/v2/access_grants",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Access Grant for a team."
+        },
+        {
+          "info": {
+            "name": "Vantage Get an Access Grant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v2/access_grants/:access_grant_token",
+            "params": [
+              {
+                "name": "access_grant_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Access Grant."
+              }
+            ]
+          },
+          "docs": "Returns a specific Access Grant by token."
+        },
+        {
+          "info": {
+            "name": "Vantage Delete an Access Grant",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.vantage.sh/v2/access_grants/:access_grant_token",
+            "params": [
+              {
+                "name": "access_grant_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Access Grant."
+              }
+            ]
+          },
+          "docs": "Deletes an existing Access Grant."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Budget Alerts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vantage Get All Budget Alerts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v2/budget_alerts",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns all Budget Alerts that the current API token has access to."
+        },
+        {
+          "info": {
+            "name": "Vantage Create a Budget Alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vantage.sh/v2/budget_alerts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Budget Alert."
+        },
+        {
+          "info": {
+            "name": "Vantage Get a Budget Alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v2/budget_alerts/:budget_alert_token",
+            "params": [
+              {
+                "name": "budget_alert_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Budget Alert."
+              }
+            ]
+          },
+          "docs": "Returns a specific Budget Alert by token."
+        },
+        {
+          "info": {
+            "name": "Vantage Update a Budget Alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.vantage.sh/v2/budget_alerts/:budget_alert_token",
+            "params": [
+              {
+                "name": "budget_alert_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Budget Alert."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing Budget Alert."
+        },
+        {
+          "info": {
+            "name": "Vantage Delete a Budget Alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.vantage.sh/v2/budget_alerts/:budget_alert_token",
+            "params": [
+              {
+                "name": "budget_alert_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Budget Alert."
+              }
+            ]
+          },
+          "docs": "Deletes an existing Budget Alert."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Anomaly Alerts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vantage Get All Anomaly Alerts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v2/anomaly_alerts",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns all Anomaly Alerts that the current API token has access to."
+        },
+        {
+          "info": {
+            "name": "Vantage Create an Anomaly Alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vantage.sh/v2/anomaly_alerts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Anomaly Alert."
+        },
+        {
+          "info": {
+            "name": "Vantage Get an Anomaly Alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v2/anomaly_alerts/:anomaly_alert_token",
+            "params": [
+              {
+                "name": "anomaly_alert_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Anomaly Alert."
+              }
+            ]
+          },
+          "docs": "Returns a specific Anomaly Alert by token."
+        },
+        {
+          "info": {
+            "name": "Vantage Update an Anomaly Alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.vantage.sh/v2/anomaly_alerts/:anomaly_alert_token",
+            "params": [
+              {
+                "name": "anomaly_alert_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Anomaly Alert."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing Anomaly Alert."
+        },
+        {
+          "info": {
+            "name": "Vantage Delete an Anomaly Alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.vantage.sh/v2/anomaly_alerts/:anomaly_alert_token",
+            "params": [
+              {
+                "name": "anomaly_alert_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Anomaly Alert."
+              }
+            ]
+          },
+          "docs": "Deletes an existing Anomaly Alert."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Recommendations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vantage Get All Recommendations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v2/recommendations",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns all cost optimization Recommendations that the current API token has access to."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Segments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vantage Get All Segments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v2/segments",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns all cost allocation Segments that the current API token has access to."
+        },
+        {
+          "info": {
+            "name": "Vantage Create a Segment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vantage.sh/v2/segments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new cost allocation Segment."
+        },
+        {
+          "info": {
+            "name": "Vantage Get a Segment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v2/segments/:segment_token",
+            "params": [
+              {
+                "name": "segment_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Segment."
+              }
+            ]
+          },
+          "docs": "Returns a specific Segment by token."
+        },
+        {
+          "info": {
+            "name": "Vantage Update a Segment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.vantage.sh/v2/segments/:segment_token",
+            "params": [
+              {
+                "name": "segment_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Segment."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing Segment."
+        },
+        {
+          "info": {
+            "name": "Vantage Delete a Segment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.vantage.sh/v2/segments/:segment_token",
+            "params": [
+              {
+                "name": "segment_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Segment."
+              }
+            ]
+          },
+          "docs": "Deletes an existing Segment."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vantage Get All Integrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v2/integrations",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns all cloud provider Integrations that the current API token has access to."
+        },
+        {
+          "info": {
+            "name": "Vantage Create an Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vantage.sh/v2/integrations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new cloud provider Integration (e.g., Azure, GCP)."
+        },
+        {
+          "info": {
+            "name": "Vantage Get an Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v2/integrations/:integration_token",
+            "params": [
+              {
+                "name": "integration_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Integration."
+              }
+            ]
+          },
+          "docs": "Returns a specific Integration by token."
+        },
+        {
+          "info": {
+            "name": "Vantage Delete an Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.vantage.sh/v2/integrations/:integration_token",
+            "params": [
+              {
+                "name": "integration_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Integration."
+              }
+            ]
+          },
+          "docs": "Deletes an existing Integration."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Managed Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vantage Get All Managed Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v2/managed_accounts",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns all Managed Accounts (linked cloud provider accounts) that the current API token has access to."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Cost Providers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vantage Get All Cost Providers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v2/cost_providers"
+          },
+          "docs": "Returns all available Cost Providers."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Business Metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vantage Get All Business Metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v2/business_metrics",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns all Business Metrics that the current API token has access to."
+        },
+        {
+          "info": {
+            "name": "Vantage Create a Business Metric",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vantage.sh/v2/business_metrics",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Business Metric."
+        },
+        {
+          "info": {
+            "name": "Vantage Get a Business Metric",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v2/business_metrics/:business_metric_token",
+            "params": [
+              {
+                "name": "business_metric_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Business Metric."
+              }
+            ]
+          },
+          "docs": "Returns a specific Business Metric by token."
+        },
+        {
+          "info": {
+            "name": "Vantage Update a Business Metric",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.vantage.sh/v2/business_metrics/:business_metric_token",
+            "params": [
+              {
+                "name": "business_metric_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Business Metric."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing Business Metric."
+        },
+        {
+          "info": {
+            "name": "Vantage Delete a Business Metric",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.vantage.sh/v2/business_metrics/:business_metric_token",
+            "params": [
+              {
+                "name": "business_metric_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Business Metric."
+              }
+            ]
+          },
+          "docs": "Deletes an existing Business Metric."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Resource Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vantage Get All Resource Reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v2/resource_reports",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns all Resource Reports that the current API token has access to."
+        },
+        {
+          "info": {
+            "name": "Vantage Create a Resource Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vantage.sh/v2/resource_reports",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Resource Report."
+        },
+        {
+          "info": {
+            "name": "Vantage Get a Resource Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v2/resource_reports/:resource_report_token",
+            "params": [
+              {
+                "name": "resource_report_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Resource Report."
+              }
+            ]
+          },
+          "docs": "Returns a specific Resource Report by token."
+        },
+        {
+          "info": {
+            "name": "Vantage Update a Resource Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.vantage.sh/v2/resource_reports/:resource_report_token",
+            "params": [
+              {
+                "name": "resource_report_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Resource Report."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing Resource Report."
+        },
+        {
+          "info": {
+            "name": "Vantage Delete a Resource Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.vantage.sh/v2/resource_reports/:resource_report_token",
+            "params": [
+              {
+                "name": "resource_report_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Resource Report."
+              }
+            ]
+          },
+          "docs": "Deletes an existing Resource Report."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Resources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vantage Get Resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v2/resources",
+            "params": [
+              {
+                "name": "resource_report_token",
+                "value": "example_value",
+                "type": "query",
+                "description": "The token of the Resource Report to retrieve resources for."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns Resources for a Resource Report. Provides detailed resource-level cost and usage data."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Network Flow Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vantage Get All Network Flow Reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v2/network_flow_reports",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns all Network Flow Reports that the current API token has access to."
+        },
+        {
+          "info": {
+            "name": "Vantage Create a Network Flow Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vantage.sh/v2/network_flow_reports",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Network Flow Report."
+        },
+        {
+          "info": {
+            "name": "Vantage Get a Network Flow Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v2/network_flow_reports/:network_flow_report_token",
+            "params": [
+              {
+                "name": "network_flow_report_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Network Flow Report."
+              }
+            ]
+          },
+          "docs": "Returns a specific Network Flow Report by token."
+        },
+        {
+          "info": {
+            "name": "Vantage Delete a Network Flow Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.vantage.sh/v2/network_flow_reports/:network_flow_report_token",
+            "params": [
+              {
+                "name": "network_flow_report_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Network Flow Report."
+              }
+            ]
+          },
+          "docs": "Deletes an existing Network Flow Report."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Financial Commitment Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vantage Get All Financial Commitment Reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v2/financial_commitment_reports",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns all Financial Commitment Reports that the current API token has access to."
+        },
+        {
+          "info": {
+            "name": "Vantage Create a Financial Commitment Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vantage.sh/v2/financial_commitment_reports",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Financial Commitment Report."
+        },
+        {
+          "info": {
+            "name": "Vantage Get a Financial Commitment Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v2/financial_commitment_reports/:financial_commitment_report_token",
+            "params": [
+              {
+                "name": "financial_commitment_report_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Financial Commitment Report."
+              }
+            ]
+          },
+          "docs": "Returns a specific Financial Commitment Report by token."
+        },
+        {
+          "info": {
+            "name": "Vantage Delete a Financial Commitment Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.vantage.sh/v2/financial_commitment_reports/:financial_commitment_report_token",
+            "params": [
+              {
+                "name": "financial_commitment_report_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Financial Commitment Report."
+              }
+            ]
+          },
+          "docs": "Deletes an existing Financial Commitment Report."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Kubernetes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vantage Get Kubernetes Efficiency Reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v2/kubernetes",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns Kubernetes efficiency data that the current API token has access to."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

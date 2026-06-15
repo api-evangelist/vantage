@@ -1,0 +1,1369 @@
+{
+  "info": {
+    "_postman_id": "1ec0b176-5309-4c4a-850d-ca02df7b4cf4",
+    "name": "Vantage Cloud Pricing API",
+    "description": "The Vantage Cloud Pricing API provides programmatic access to cloud infrastructure pricing data across multiple cloud providers. You can query products, services, and providers to retrieve up-to-date pricing information for AWS, Azure, GCP, and other supported cloud platforms. The API is free for all registered Vantage users and returns JSON-encoded responses. An OpenAPI specification is always available at https://api.vantage.sh/v1/swagger.json.\n\nContact Support:\n Name: Vantage Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:19:33.000Z",
+    "updatedAt": "2026-06-05T15:19:33.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-1ec0b176-5309-4c4a-850d-ca02df7b4cf4"
+  },
+  "item": [
+    {
+      "name": "providers",
+      "item": [
+        {
+          "name": "{provider_id}",
+          "item": [
+            {
+              "name": "Vantage Get a Provider",
+              "id": "8255697f-ef0c-4ffc-84bd-ab40ce286f3a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/providers/:provider_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "providers",
+                    ":provider_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "a83b3d14-8709-4493-8a1f-215d91e0aa37",
+                      "key": "provider_id",
+                      "value": "<string>",
+                      "description": "(Required) The identifier of the cloud provider (e.g., aws, azure, gcp)."
+                    }
+                  ]
+                },
+                "description": "Returns a specific cloud Provider by identifier."
+              },
+              "response": [
+                {
+                  "id": "cc5eddb0-8ac3-4da5-9e55-10469b813815",
+                  "name": "Successful response with the Provider.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/providers/:provider_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "providers",
+                        ":provider_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "provider_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"services_count\": \"<integer>\"\n}",
+                  "createdAt": "2026-06-05T15:19:33.000Z",
+                  "updatedAt": "2026-06-05T15:19:33.000Z",
+                  "uid": "35240-cc5eddb0-8ac3-4da5-9e55-10469b813815"
+                },
+                {
+                  "id": "8ef03a5b-efe5-409e-93ee-46ac5a81de2d",
+                  "name": "Authentication credentials are missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/providers/:provider_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "providers",
+                        ":provider_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "provider_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:19:33.000Z",
+                  "updatedAt": "2026-06-05T15:19:33.000Z",
+                  "uid": "35240-8ef03a5b-efe5-409e-93ee-46ac5a81de2d"
+                },
+                {
+                  "id": "41a72b67-2b7e-4fd8-8342-1f339bb41563",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/providers/:provider_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "providers",
+                        ":provider_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "provider_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:19:33.000Z",
+                  "updatedAt": "2026-06-05T15:19:33.000Z",
+                  "uid": "35240-41a72b67-2b7e-4fd8-8342-1f339bb41563"
+                }
+              ],
+              "createdAt": "2026-06-05T15:19:33.000Z",
+              "updatedAt": "2026-06-05T15:19:33.000Z",
+              "uid": "35240-8255697f-ef0c-4ffc-84bd-ab40ce286f3a"
+            }
+          ],
+          "id": "c2b59ad1-237a-4ddc-bec2-945678ae2d64",
+          "createdAt": "2026-06-05T15:19:33.000Z",
+          "updatedAt": "2026-06-05T15:19:33.000Z",
+          "uid": "35240-c2b59ad1-237a-4ddc-bec2-945678ae2d64"
+        },
+        {
+          "name": "Vantage Get All Providers",
+          "id": "58fe1a77-7ec2-4549-9809-226811792102",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/providers?page=1&limit=25",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "providers"
+              ],
+              "query": [
+                {
+                  "description": "The page of results to return.",
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "description": "The number of results per page.",
+                  "key": "limit",
+                  "value": "25"
+                }
+              ]
+            },
+            "description": "Returns all supported cloud Providers with pricing data available in the Vantage database."
+          },
+          "response": [
+            {
+              "id": "3c519f5b-9351-47ee-a095-8538c27143b5",
+              "name": "Successful response with a list of cloud Providers.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/providers?page=1&limit=25",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "providers"
+                  ],
+                  "query": [
+                    {
+                      "description": "The page of results to return.",
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "25"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"providers\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"services_count\": \"<integer>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"services_count\": \"<integer>\"\n    }\n  ]\n}",
+              "createdAt": "2026-06-05T15:19:33.000Z",
+              "updatedAt": "2026-06-05T15:19:33.000Z",
+              "uid": "35240-3c519f5b-9351-47ee-a095-8538c27143b5"
+            },
+            {
+              "id": "4af4b804-424b-4c65-a983-49ee98d9a19c",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/providers?page=1&limit=25",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "providers"
+                  ],
+                  "query": [
+                    {
+                      "description": "The page of results to return.",
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "25"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-06-05T15:19:33.000Z",
+              "updatedAt": "2026-06-05T15:19:33.000Z",
+              "uid": "35240-4af4b804-424b-4c65-a983-49ee98d9a19c"
+            }
+          ],
+          "createdAt": "2026-06-05T15:19:33.000Z",
+          "updatedAt": "2026-06-05T15:19:33.000Z",
+          "uid": "35240-58fe1a77-7ec2-4549-9809-226811792102"
+        }
+      ],
+      "id": "e6228ffe-fcc8-40ce-b0b5-5d5c6e2a7770",
+      "createdAt": "2026-06-05T15:19:33.000Z",
+      "updatedAt": "2026-06-05T15:19:33.000Z",
+      "uid": "35240-e6228ffe-fcc8-40ce-b0b5-5d5c6e2a7770"
+    },
+    {
+      "name": "services",
+      "item": [
+        {
+          "name": "{service_id}",
+          "item": [
+            {
+              "name": "Vantage Get a Service",
+              "id": "412dac6c-79a1-420a-9e0a-2a0098bc9e48",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/services/:service_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "services",
+                    ":service_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "e5bb558f-32a9-48fd-a226-72d0185bfd19",
+                      "key": "service_id",
+                      "value": "<string>",
+                      "description": "(Required) The identifier of the service."
+                    }
+                  ]
+                },
+                "description": "Returns a specific Service by identifier."
+              },
+              "response": [
+                {
+                  "id": "515a4a82-9ddd-4eac-9d3b-81818c378a8f",
+                  "name": "Successful response with the Service.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/services/:service_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "services",
+                        ":service_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "service_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"provider_id\": \"<string>\",\n  \"products_count\": \"<integer>\"\n}",
+                  "createdAt": "2026-06-05T15:19:33.000Z",
+                  "updatedAt": "2026-06-05T15:19:33.000Z",
+                  "uid": "35240-515a4a82-9ddd-4eac-9d3b-81818c378a8f"
+                },
+                {
+                  "id": "80d5e111-505e-4cfb-8560-e29d2c1560a0",
+                  "name": "Authentication credentials are missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/services/:service_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "services",
+                        ":service_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "service_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:19:33.000Z",
+                  "updatedAt": "2026-06-05T15:19:33.000Z",
+                  "uid": "35240-80d5e111-505e-4cfb-8560-e29d2c1560a0"
+                },
+                {
+                  "id": "89ff4eb4-33e5-44aa-964e-3293acfeb5ef",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/services/:service_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "services",
+                        ":service_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "service_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:19:33.000Z",
+                  "updatedAt": "2026-06-05T15:19:33.000Z",
+                  "uid": "35240-89ff4eb4-33e5-44aa-964e-3293acfeb5ef"
+                }
+              ],
+              "createdAt": "2026-06-05T15:19:33.000Z",
+              "updatedAt": "2026-06-05T15:19:33.000Z",
+              "uid": "35240-412dac6c-79a1-420a-9e0a-2a0098bc9e48"
+            }
+          ],
+          "id": "db21f6b8-cf25-4d41-9b28-40dc0a52e0bf",
+          "createdAt": "2026-06-05T15:19:33.000Z",
+          "updatedAt": "2026-06-05T15:19:33.000Z",
+          "uid": "35240-db21f6b8-cf25-4d41-9b28-40dc0a52e0bf"
+        },
+        {
+          "name": "Vantage Get All Services",
+          "id": "af58c7e7-c9ab-473b-81f4-24de3e067cfd",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/services?provider_id=<string>&page=1&limit=25",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "services"
+              ],
+              "query": [
+                {
+                  "description": "Filter services by a specific cloud provider identifier.",
+                  "key": "provider_id",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The page of results to return.",
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "description": "The number of results per page.",
+                  "key": "limit",
+                  "value": "25"
+                }
+              ]
+            },
+            "description": "Returns all Services available across all cloud Providers or filtered by a specific Provider."
+          },
+          "response": [
+            {
+              "id": "6b413ca6-7dbd-4e0b-81c9-03bdefe4c71b",
+              "name": "Successful response with a list of Services.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/services?provider_id=<string>&page=1&limit=25",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "services"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter services by a specific cloud provider identifier.",
+                      "key": "provider_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The page of results to return.",
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "25"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"services\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"provider_id\": \"<string>\",\n      \"products_count\": \"<integer>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"provider_id\": \"<string>\",\n      \"products_count\": \"<integer>\"\n    }\n  ]\n}",
+              "createdAt": "2026-06-05T15:19:33.000Z",
+              "updatedAt": "2026-06-05T15:19:33.000Z",
+              "uid": "35240-6b413ca6-7dbd-4e0b-81c9-03bdefe4c71b"
+            },
+            {
+              "id": "00ad17f1-dc1f-491f-acd4-c21ba7114123",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/services?provider_id=<string>&page=1&limit=25",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "services"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter services by a specific cloud provider identifier.",
+                      "key": "provider_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The page of results to return.",
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "25"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-06-05T15:19:33.000Z",
+              "updatedAt": "2026-06-05T15:19:33.000Z",
+              "uid": "35240-00ad17f1-dc1f-491f-acd4-c21ba7114123"
+            }
+          ],
+          "createdAt": "2026-06-05T15:19:33.000Z",
+          "updatedAt": "2026-06-05T15:19:33.000Z",
+          "uid": "35240-af58c7e7-c9ab-473b-81f4-24de3e067cfd"
+        }
+      ],
+      "id": "ce74a20a-f857-40a4-9a75-dac09c14dec2",
+      "createdAt": "2026-06-05T15:19:33.000Z",
+      "updatedAt": "2026-06-05T15:19:33.000Z",
+      "uid": "35240-ce74a20a-f857-40a4-9a75-dac09c14dec2"
+    },
+    {
+      "name": "products",
+      "item": [
+        {
+          "name": "{product_id}",
+          "item": [
+            {
+              "name": "Vantage Get a Product",
+              "id": "34722959-8918-46d9-bc68-420a8f187593",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/products/:product_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products",
+                    ":product_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "e66809b5-7710-4101-927f-3ccbf5a544a2",
+                      "key": "product_id",
+                      "value": "<string>",
+                      "description": "(Required) The identifier of the product."
+                    }
+                  ]
+                },
+                "description": "Returns a specific Product by identifier with its pricing details."
+              },
+              "response": [
+                {
+                  "id": "4f2b97bc-bc97-425c-a296-35d388874454",
+                  "name": "Successful response with the Product.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/products/:product_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "products",
+                        ":product_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "product_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"provider_id\": \"<string>\",\n  \"service_id\": \"<string>\",\n  \"details\": {},\n  \"prices\": [\n    {\n      \"id\": \"<string>\",\n      \"unit\": \"<string>\",\n      \"price\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"region\": \"<string>\",\n      \"description\": \"<string>\",\n      \"product_id\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"unit\": \"<string>\",\n      \"price\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"region\": \"<string>\",\n      \"description\": \"<string>\",\n      \"product_id\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:19:33.000Z",
+                  "updatedAt": "2026-06-05T15:19:33.000Z",
+                  "uid": "35240-4f2b97bc-bc97-425c-a296-35d388874454"
+                },
+                {
+                  "id": "bf9a8686-1337-482f-97e1-7b2f84809b7e",
+                  "name": "Authentication credentials are missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/products/:product_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "products",
+                        ":product_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "product_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:19:33.000Z",
+                  "updatedAt": "2026-06-05T15:19:33.000Z",
+                  "uid": "35240-bf9a8686-1337-482f-97e1-7b2f84809b7e"
+                },
+                {
+                  "id": "2a6f7f92-60ed-4978-8191-1cb10ff32fb6",
+                  "name": "The requested resource was not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/products/:product_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "products",
+                        ":product_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "product_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:19:33.000Z",
+                  "updatedAt": "2026-06-05T15:19:33.000Z",
+                  "uid": "35240-2a6f7f92-60ed-4978-8191-1cb10ff32fb6"
+                }
+              ],
+              "createdAt": "2026-06-05T15:19:33.000Z",
+              "updatedAt": "2026-06-05T15:19:33.000Z",
+              "uid": "35240-34722959-8918-46d9-bc68-420a8f187593"
+            }
+          ],
+          "id": "d7428a93-be7b-4967-96d8-3735f48fb135",
+          "createdAt": "2026-06-05T15:19:33.000Z",
+          "updatedAt": "2026-06-05T15:19:33.000Z",
+          "uid": "35240-d7428a93-be7b-4967-96d8-3735f48fb135"
+        },
+        {
+          "name": "Vantage Get All Products",
+          "id": "a19f2031-6da2-4940-a6f9-38673caa400e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/products?provider_id=<string>&service_id=<string>&name=<string>&page=1&limit=25",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "products"
+              ],
+              "query": [
+                {
+                  "description": "Filter products by a specific cloud provider identifier.",
+                  "key": "provider_id",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter products by a specific service identifier.",
+                  "key": "service_id",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter products by name.",
+                  "key": "name",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The page of results to return.",
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "description": "The number of results per page.",
+                  "key": "limit",
+                  "value": "25"
+                }
+              ]
+            },
+            "description": "Returns all Products for a given Provider and Service. For example, with a Provider of AWS and a Service of EC2, Products will be a list of all EC2 instance types with their pricing information."
+          },
+          "response": [
+            {
+              "id": "1cfdbcdf-0a91-4c64-a173-78dfab633878",
+              "name": "Successful response with a list of Products.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/products?provider_id=<string>&service_id=<string>&name=<string>&page=1&limit=25",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter products by a specific cloud provider identifier.",
+                      "key": "provider_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter products by a specific service identifier.",
+                      "key": "service_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter products by name.",
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The page of results to return.",
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "25"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"products\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"provider_id\": \"<string>\",\n      \"service_id\": \"<string>\",\n      \"details\": {},\n      \"prices\": [\n        {\n          \"id\": \"<string>\",\n          \"unit\": \"<string>\",\n          \"price\": \"<string>\",\n          \"currency\": \"<string>\",\n          \"region\": \"<string>\",\n          \"description\": \"<string>\",\n          \"product_id\": \"<string>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"unit\": \"<string>\",\n          \"price\": \"<string>\",\n          \"currency\": \"<string>\",\n          \"region\": \"<string>\",\n          \"description\": \"<string>\",\n          \"product_id\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"provider_id\": \"<string>\",\n      \"service_id\": \"<string>\",\n      \"details\": {},\n      \"prices\": [\n        {\n          \"id\": \"<string>\",\n          \"unit\": \"<string>\",\n          \"price\": \"<string>\",\n          \"currency\": \"<string>\",\n          \"region\": \"<string>\",\n          \"description\": \"<string>\",\n          \"product_id\": \"<string>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"unit\": \"<string>\",\n          \"price\": \"<string>\",\n          \"currency\": \"<string>\",\n          \"region\": \"<string>\",\n          \"description\": \"<string>\",\n          \"product_id\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+              "createdAt": "2026-06-05T15:19:33.000Z",
+              "updatedAt": "2026-06-05T15:19:33.000Z",
+              "uid": "35240-1cfdbcdf-0a91-4c64-a173-78dfab633878"
+            },
+            {
+              "id": "b4a82520-405a-4094-87af-f473fc14dd30",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/products?provider_id=<string>&service_id=<string>&name=<string>&page=1&limit=25",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "products"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter products by a specific cloud provider identifier.",
+                      "key": "provider_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter products by a specific service identifier.",
+                      "key": "service_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter products by name.",
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The page of results to return.",
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "25"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-06-05T15:19:33.000Z",
+              "updatedAt": "2026-06-05T15:19:33.000Z",
+              "uid": "35240-b4a82520-405a-4094-87af-f473fc14dd30"
+            }
+          ],
+          "createdAt": "2026-06-05T15:19:33.000Z",
+          "updatedAt": "2026-06-05T15:19:33.000Z",
+          "uid": "35240-a19f2031-6da2-4940-a6f9-38673caa400e"
+        }
+      ],
+      "id": "38b0de9c-4255-4a35-8207-ac25cea7f772",
+      "createdAt": "2026-06-05T15:19:33.000Z",
+      "updatedAt": "2026-06-05T15:19:33.000Z",
+      "uid": "35240-38b0de9c-4255-4a35-8207-ac25cea7f772"
+    },
+    {
+      "name": "prices",
+      "item": [
+        {
+          "name": "Vantage Get Prices",
+          "id": "b30a29c4-c540-4f38-b622-e362248962a4",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/prices?product_id=<string>&provider_id=<string>&service_id=<string>&region=<string>&page=1&limit=25",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "prices"
+              ],
+              "query": [
+                {
+                  "description": "Filter prices by a specific product identifier.",
+                  "key": "product_id",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter prices by a specific cloud provider identifier.",
+                  "key": "provider_id",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter prices by a specific service identifier.",
+                  "key": "service_id",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter prices by a specific cloud region.",
+                  "key": "region",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The page of results to return.",
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "description": "The number of results per page.",
+                  "key": "limit",
+                  "value": "25"
+                }
+              ]
+            },
+            "description": "Returns pricing data for products. Can be filtered by product, provider, service, and region."
+          },
+          "response": [
+            {
+              "id": "791a9144-4004-48b9-b214-105a5af03751",
+              "name": "Successful response with pricing data.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/prices?product_id=<string>&provider_id=<string>&service_id=<string>&region=<string>&page=1&limit=25",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "prices"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter prices by a specific product identifier.",
+                      "key": "product_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter prices by a specific cloud provider identifier.",
+                      "key": "provider_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter prices by a specific service identifier.",
+                      "key": "service_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter prices by a specific cloud region.",
+                      "key": "region",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The page of results to return.",
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "25"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"prices\": [\n    {\n      \"id\": \"<string>\",\n      \"unit\": \"<string>\",\n      \"price\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"region\": \"<string>\",\n      \"description\": \"<string>\",\n      \"product_id\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"unit\": \"<string>\",\n      \"price\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"region\": \"<string>\",\n      \"description\": \"<string>\",\n      \"product_id\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-06-05T15:19:33.000Z",
+              "updatedAt": "2026-06-05T15:19:33.000Z",
+              "uid": "35240-791a9144-4004-48b9-b214-105a5af03751"
+            },
+            {
+              "id": "1ac21454-d350-4760-ad53-9845e4add693",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/prices?product_id=<string>&provider_id=<string>&service_id=<string>&region=<string>&page=1&limit=25",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "prices"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter prices by a specific product identifier.",
+                      "key": "product_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter prices by a specific cloud provider identifier.",
+                      "key": "provider_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter prices by a specific service identifier.",
+                      "key": "service_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter prices by a specific cloud region.",
+                      "key": "region",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The page of results to return.",
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "The number of results per page.",
+                      "key": "limit",
+                      "value": "25"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": [\n    {\n      \"message\": \"<string>\"\n    },\n    {\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-06-05T15:19:33.000Z",
+              "updatedAt": "2026-06-05T15:19:33.000Z",
+              "uid": "35240-1ac21454-d350-4760-ad53-9845e4add693"
+            }
+          ],
+          "createdAt": "2026-06-05T15:19:33.000Z",
+          "updatedAt": "2026-06-05T15:19:33.000Z",
+          "uid": "35240-b30a29c4-c540-4f38-b622-e362248962a4"
+        }
+      ],
+      "id": "b56ab54f-138b-49bf-8a0b-9be7ea375c93",
+      "createdAt": "2026-06-05T15:19:33.000Z",
+      "updatedAt": "2026-06-05T15:19:33.000Z",
+      "uid": "35240-b56ab54f-138b-49bf-8a0b-9be7ea375c93"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.vantage.sh/v1"
+    }
+  ]
+}

@@ -4,150 +4,103 @@ apis:
   - aid: vantage:cost-management-api
     name: Vantage Cost Management API
     tags:
-    - Anomaly Detection
-    - Budgets
-    - Cloud Costs
-    - Cost Reports
-    - Dashboards
-    - FinOps
+      - Anomaly Detection
+      - Budgets
+      - Cloud Costs
+      - Cost Reports
+      - Dashboards
+      - FinOps
     humanURL: https://docs.vantage.sh/api
     properties:
-    - url: https://vantage.readme.io/reference/general
-      type: Documentation
-    - url: openapi/vantage-cost-management-api-openapi.yml
-      type: OpenAPI
-    - url: https://api.vantage.sh/v2/oas_v3.json
-      type: OpenAPI
-    - url: https://api.vantage.sh/v2/swagger.json
-      type: OpenAPI
-    - url: json-schema/cost-report.json
-      type: JSONSchema
-    - url: json-schema/cost.json
-      type: JSONSchema
-    - url: json-schema/folder.json
-      type: JSONSchema
-    - url: json-schema/dashboard.json
-      type: JSONSchema
-    - url: json-schema/saved-filter.json
-      type: JSONSchema
-    - url: json-schema/workspace.json
-      type: JSONSchema
-    - url: json-schema/team.json
-      type: JSONSchema
-    - url: json-schema/access-grant.json
-      type: JSONSchema
-    - url: json-schema/budget-alert.json
-      type: JSONSchema
-    - url: json-schema/anomaly-alert.json
-      type: JSONSchema
-    - url: json-schema/recommendation.json
-      type: JSONSchema
-    - url: json-schema/segment.json
-      type: JSONSchema
-    - url: json-schema/integration.json
-      type: JSONSchema
-    - url: json-schema/managed-account.json
-      type: JSONSchema
-    - url: json-schema/cost-provider.json
-      type: JSONSchema
-    - url: json-schema/business-metric.json
-      type: JSONSchema
-    - url: json-schema/resource-report.json
-      type: JSONSchema
-    - url: json-schema/resource.json
-      type: JSONSchema
-    - url: json-schema/network-flow-report.json
-      type: JSONSchema
-    - url: json-schema/financial-commitment-report.json
-      type: JSONSchema
-    - url: json-schema/kubernetes-efficiency-report.json
-      type: JSONSchema
-    - url: json-ld/vantage-context.jsonld
-      type: JSONLD
-    - type: NaftikoCapability
-      url: capabilities/cost-management-access-grants.yaml
-    - type: NaftikoCapability
-      url: capabilities/cost-management-anomaly-alerts.yaml
-    - type: NaftikoCapability
-      url: capabilities/cost-management-budget-alerts.yaml
-    - type: NaftikoCapability
-      url: capabilities/cost-management-business-metrics.yaml
-    - type: NaftikoCapability
-      url: capabilities/cost-management-cost-providers.yaml
-    - type: NaftikoCapability
-      url: capabilities/cost-management-cost-reports.yaml
-    - type: NaftikoCapability
-      url: capabilities/cost-management-costs.yaml
-    - type: NaftikoCapability
-      url: capabilities/cost-management-dashboards.yaml
-    - type: NaftikoCapability
-      url: capabilities/cost-management-financial-commitment-reports.yaml
-    - type: NaftikoCapability
-      url: capabilities/cost-management-folders.yaml
-    - type: NaftikoCapability
-      url: capabilities/cost-management-integrations.yaml
-    - type: NaftikoCapability
-      url: capabilities/cost-management-kubernetes.yaml
-    - type: NaftikoCapability
-      url: capabilities/cost-management-managed-accounts.yaml
-    - type: NaftikoCapability
-      url: capabilities/cost-management-network-flow-reports.yaml
-    - type: NaftikoCapability
-      url: capabilities/cost-management-recommendations.yaml
-    - type: NaftikoCapability
-      url: capabilities/cost-management-resource-reports.yaml
-    - type: NaftikoCapability
-      url: capabilities/cost-management-resources.yaml
-    - type: NaftikoCapability
-      url: capabilities/cost-management-saved-filters.yaml
-    - type: NaftikoCapability
-      url: capabilities/cost-management-segments.yaml
-    - type: NaftikoCapability
-      url: capabilities/cost-management-teams.yaml
-    - type: NaftikoCapability
-      url: capabilities/cost-management-workspaces.yaml
-    description: The Vantage Cost Management API (v2) provides programmatic access to cloud cost data and enables automation
-      of cost management workflows. Create and manage Cost Reports, Folders, Dashboards, Saved Filters, Teams, Budgets, Anomaly
-      Alerts, Business Metrics, Network Flow Reports, Financial Commitment Reports, Resource Reports, Segments, Integrations,
-      and more. Supports the Vantage Query Language (VQL) for filtering cost data across multiple cloud providers.
+      - url: https://vantage.readme.io/reference/general
+        type: Documentation
+      - url: openapi/vantage-cost-management-api-openapi.yml
+        type: OpenAPI
+      - url: https://api.vantage.sh/v2/oas_v3.json
+        type: OpenAPI
+      - url: https://api.vantage.sh/v2/swagger.json
+        type: OpenAPI
+      - url: json-schema/cost-report.json
+        type: JSONSchema
+      - url: json-schema/cost.json
+        type: JSONSchema
+      - url: json-schema/folder.json
+        type: JSONSchema
+      - url: json-schema/dashboard.json
+        type: JSONSchema
+      - url: json-schema/saved-filter.json
+        type: JSONSchema
+      - url: json-schema/workspace.json
+        type: JSONSchema
+      - url: json-schema/team.json
+        type: JSONSchema
+      - url: json-schema/access-grant.json
+        type: JSONSchema
+      - url: json-schema/budget-alert.json
+        type: JSONSchema
+      - url: json-schema/anomaly-alert.json
+        type: JSONSchema
+      - url: json-schema/recommendation.json
+        type: JSONSchema
+      - url: json-schema/segment.json
+        type: JSONSchema
+      - url: json-schema/integration.json
+        type: JSONSchema
+      - url: json-schema/managed-account.json
+        type: JSONSchema
+      - url: json-schema/cost-provider.json
+        type: JSONSchema
+      - url: json-schema/business-metric.json
+        type: JSONSchema
+      - url: json-schema/resource-report.json
+        type: JSONSchema
+      - url: json-schema/resource.json
+        type: JSONSchema
+      - url: json-schema/network-flow-report.json
+        type: JSONSchema
+      - url: json-schema/financial-commitment-report.json
+        type: JSONSchema
+      - url: json-schema/kubernetes-efficiency-report.json
+        type: JSONSchema
+      - url: json-ld/vantage-context.jsonld
+        type: JSONLD
+    description: >-
+      The Vantage Cost Management API (v2) provides programmatic access to cloud cost data and enables automation of
+      cost management workflows. Create and manage Cost Reports, Folders, Dashboards, Saved Filters, Teams, Budgets,
+      Anomaly Alerts, Business Metrics, Network Flow Reports, Financial Commitment Reports, Resource Reports, Segments,
+      Integrations, and more. Supports the Vantage Query Language (VQL) for filtering cost data across multiple cloud
+      providers.
     baseURL: https://api.vantage.sh/v2
   - aid: vantage:cloud-pricing-api
     name: Vantage Cloud Pricing API
     tags:
-    - AWS
-    - Azure
-    - Cloud Pricing
-    - GCP
-    - Infrastructure Pricing
+      - AWS
+      - Azure
+      - Cloud Pricing
+      - GCP
+      - Infrastructure Pricing
     humanURL: https://docs.vantage.sh/api
     properties:
-    - url: https://vantage.readme.io/reference/general
-      type: Documentation
-    - url: openapi/vantage-cloud-pricing-api-openapi.yml
-      type: OpenAPI
-    - url: https://api.vantage.sh/v1/swagger.json
-      type: OpenAPI
-    - url: json-schema/provider.json
-      type: JSONSchema
-    - url: json-schema/service.json
-      type: JSONSchema
-    - url: json-schema/product.json
-      type: JSONSchema
-    - url: json-schema/price.json
-      type: JSONSchema
-    - url: json-ld/vantage-context.jsonld
-      type: JSONLD
-    - type: NaftikoCapability
-      url: capabilities/cloud-pricing-general.yaml
-    - type: NaftikoCapability
-      url: capabilities/cloud-pricing-prices.yaml
-    - type: NaftikoCapability
-      url: capabilities/cloud-pricing-products.yaml
-    - type: NaftikoCapability
-      url: capabilities/cloud-pricing-providers.yaml
-    description: The Vantage Cloud Pricing API (v1) provides programmatic access to cloud infrastructure pricing data across
-      multiple providers including AWS, Azure, and GCP. Query providers, services, products, and prices to retrieve up-to-date
-      pricing information for cloud infrastructure. The API is free for all registered Vantage users.
+      - url: https://vantage.readme.io/reference/general
+        type: Documentation
+      - url: openapi/vantage-cloud-pricing-api-openapi.yml
+        type: OpenAPI
+      - url: https://api.vantage.sh/v1/swagger.json
+        type: OpenAPI
+      - url: json-schema/provider.json
+        type: JSONSchema
+      - url: json-schema/service.json
+        type: JSONSchema
+      - url: json-schema/product.json
+        type: JSONSchema
+      - url: json-schema/price.json
+        type: JSONSchema
+      - url: json-ld/vantage-context.jsonld
+        type: JSONLD
+    description: >-
+      The Vantage Cloud Pricing API (v1) provides programmatic access to cloud infrastructure pricing data across
+      multiple providers including AWS, Azure, and GCP. Query providers, services, products, and prices to retrieve
+      up-to-date pricing information for cloud infrastructure. The API is free for all registered Vantage users.
     baseURL: https://api.vantage.sh/v1
 name: Vantage
 tags:
@@ -162,10 +115,11 @@ access: 3rd-Party
 created: '2026-01-02'
 modified: '2026-05-19'
 position: Consumer
-description: Vantage is a cloud cost management platform designed for modern engineering teams to monitor, optimize, and control
-  their cloud infrastructure spending across multiple providers. The platform helps companies identify immediate cost savings
-  through features like automated purchasing of savings plans, cost recommendations, and Kubernetes rightsizing, while also
-  preventing future cost overruns with anomaly detection, custom alerts, and budget tracking.
+description: >-
+  Vantage is a cloud cost management platform designed for modern engineering teams to monitor, optimize, and control
+  their cloud infrastructure spending across multiple providers. The platform helps companies identify immediate cost
+  savings through features like automated purchasing of savings plans, cost recommendations, and Kubernetes rightsizing,
+  while also preventing future cost overruns with anomaly detection, custom alerts, and budget tracking.
 integrations:
   - name: AWS
   - name: Azure
@@ -201,42 +155,44 @@ maintainers:
     email: kin@apievangelist.com
 specificationVersion: '0.19'
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/vantage/overview
   - type: ArazzoWorkflows
     url: arazzo/
     workflows:
-    - url: arazzo/vantage-build-cost-dashboard-workflow.yml
-      name: Vantage Build a Cost Dashboard From a New Report
-      summary: Create a Cost Report and surface it as a widget on a new Dashboard.
-    - url: arazzo/vantage-create-anomaly-alert-for-report-workflow.yml
-      name: Vantage Create an Anomaly Alert for a New Cost Report
-      summary: Create a Cost Report and attach an anomaly alert with a spend threshold.
-    - url: arazzo/vantage-create-budget-alert-for-report-workflow.yml
-      name: Vantage Create a Budget Alert for a New Cost Report
-      summary: Stand up a Cost Report and attach a budget alert that watches its spend.
-    - url: arazzo/vantage-create-cost-report-and-fetch-costs-workflow.yml
-      name: Vantage Create a Cost Report and Fetch Its Costs
-      summary: Create a Cost Report from a VQL filter and immediately retrieve its cost data.
-    - url: arazzo/vantage-explore-cloud-pricing-workflow.yml
-      name: Vantage Explore Cloud Pricing From Provider to Price
-      summary: Drill from a cloud provider down through its services and products to concrete prices.
-    - url: arazzo/vantage-fetch-costs-for-existing-report-workflow.yml
-      name: Vantage Fetch Costs for an Existing Cost Report
-      summary: List existing Cost Reports and pull cost data for the first one, branching when none exist.
-    - url: arazzo/vantage-financial-commitment-report-setup-workflow.yml
-      name: Vantage Set Up a Financial Commitment Report and Segment
-      summary: Create a Financial Commitment Report and a cost allocation Segment in the same workspace.
-    - url: arazzo/vantage-organize-report-in-folder-workflow.yml
-      name: Vantage Organize a Cost Report Inside a Folder
-      summary: Create a Folder and a Cost Report that lives inside it.
-    - url: arazzo/vantage-resource-report-and-resources-workflow.yml
-      name: Vantage Create a Resource Report and List Its Resources
-      summary: Create a Resource Report and retrieve the resource-level cost data it captures.
-    - url: arazzo/vantage-review-recommendations-by-provider-workflow.yml
-      name: Vantage Review Cost Recommendations Against Providers
-      summary: List available cost providers, then pull optimization recommendations and branch on whether any exist.
-    - url: arazzo/vantage-saved-filter-to-cost-report-workflow.yml
-      name: Vantage Reuse a Saved Filter on a New Cost Report
-      summary: Create a reusable Saved Filter and apply it to a new Cost Report.
+      - url: arazzo/vantage-build-cost-dashboard-workflow.yml
+        name: Vantage Build a Cost Dashboard From a New Report
+        summary: Create a Cost Report and surface it as a widget on a new Dashboard.
+      - url: arazzo/vantage-create-anomaly-alert-for-report-workflow.yml
+        name: Vantage Create an Anomaly Alert for a New Cost Report
+        summary: Create a Cost Report and attach an anomaly alert with a spend threshold.
+      - url: arazzo/vantage-create-budget-alert-for-report-workflow.yml
+        name: Vantage Create a Budget Alert for a New Cost Report
+        summary: Stand up a Cost Report and attach a budget alert that watches its spend.
+      - url: arazzo/vantage-create-cost-report-and-fetch-costs-workflow.yml
+        name: Vantage Create a Cost Report and Fetch Its Costs
+        summary: Create a Cost Report from a VQL filter and immediately retrieve its cost data.
+      - url: arazzo/vantage-explore-cloud-pricing-workflow.yml
+        name: Vantage Explore Cloud Pricing From Provider to Price
+        summary: Drill from a cloud provider down through its services and products to concrete prices.
+      - url: arazzo/vantage-fetch-costs-for-existing-report-workflow.yml
+        name: Vantage Fetch Costs for an Existing Cost Report
+        summary: List existing Cost Reports and pull cost data for the first one, branching when none exist.
+      - url: arazzo/vantage-financial-commitment-report-setup-workflow.yml
+        name: Vantage Set Up a Financial Commitment Report and Segment
+        summary: Create a Financial Commitment Report and a cost allocation Segment in the same workspace.
+      - url: arazzo/vantage-organize-report-in-folder-workflow.yml
+        name: Vantage Organize a Cost Report Inside a Folder
+        summary: Create a Folder and a Cost Report that lives inside it.
+      - url: arazzo/vantage-resource-report-and-resources-workflow.yml
+        name: Vantage Create a Resource Report and List Its Resources
+        summary: Create a Resource Report and retrieve the resource-level cost data it captures.
+      - url: arazzo/vantage-review-recommendations-by-provider-workflow.yml
+        name: Vantage Review Cost Recommendations Against Providers
+        summary: List available cost providers, then pull optimization recommendations and branch on whether any exist.
+      - url: arazzo/vantage-saved-filter-to-cost-report-workflow.yml
+        name: Vantage Reuse a Saved Filter on a New Cost Report
+        summary: Create a reusable Saved Filter and apply it to a new Cost Report.
   - type: LinkedIn
     url: https://www.linkedin.com/company/vantage-data-centers
   - name: 'Vantage: Multi Cloud Cost Management & Optimization Tool'
@@ -296,47 +252,47 @@ common:
   - name: Features
     type: Features
     data:
-    - name: Cost Reports
-    - name: Cost Dashboards
-    - name: Budget Alerts
-    - name: Anomaly Detection
-    - name: Cost Recommendations
-    - name: Saved Filters
-    - name: Vantage Query Language (VQL)
-    - name: Multi-Cloud Support
-    - name: Kubernetes Cost Tracking
-    - name: Network Flow Reports
-    - name: Financial Commitment Reports
-    - name: Resource Reports
-    - name: Business Metrics
-    - name: Segments
-    - name: Teams and Access Control
-    - name: Cloud Pricing Database
+      - name: Cost Reports
+      - name: Cost Dashboards
+      - name: Budget Alerts
+      - name: Anomaly Detection
+      - name: Cost Recommendations
+      - name: Saved Filters
+      - name: Vantage Query Language (VQL)
+      - name: Multi-Cloud Support
+      - name: Kubernetes Cost Tracking
+      - name: Network Flow Reports
+      - name: Financial Commitment Reports
+      - name: Resource Reports
+      - name: Business Metrics
+      - name: Segments
+      - name: Teams and Access Control
+      - name: Cloud Pricing Database
   - name: Use Cases
     type: UseCases
     data:
-    - name: Monitor Cloud Spending
-    - name: Optimize Cloud Costs
-    - name: Detect Cost Anomalies
-    - name: Set Budget Alerts
-    - name: Track Kubernetes Costs
-    - name: Compare Cloud Pricing
-    - name: Generate Financial Reports
-    - name: Allocate Costs by Team
+      - name: Monitor Cloud Spending
+      - name: Optimize Cloud Costs
+      - name: Detect Cost Anomalies
+      - name: Set Budget Alerts
+      - name: Track Kubernetes Costs
+      - name: Compare Cloud Pricing
+      - name: Generate Financial Reports
+      - name: Allocate Costs by Team
   - name: Integrations
     type: Integrations
     data:
-    - name: AWS
-    - name: Azure
-    - name: Google Cloud
-    - name: Kubernetes
-    - name: Datadog
-    - name: Snowflake
-    - name: Databricks
-    - name: MongoDB Atlas
-    - name: New Relic
-    - name: Oracle Cloud
-    - name: Confluent
+      - name: AWS
+      - name: Azure
+      - name: Google Cloud
+      - name: Kubernetes
+      - name: Datadog
+      - name: Snowflake
+      - name: Databricks
+      - name: MongoDB Atlas
+      - name: New Relic
+      - name: Oracle Cloud
+      - name: Confluent
   - url: rules/vantage-spectral-rules.yml
     type: Rules
   - url: vocabulary/vantage-vocabulary.yaml

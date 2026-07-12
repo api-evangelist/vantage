@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/vantage-cloud-pricing-api-openapi.yml, openapi/vantage-cost-management-api-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: Vantage API token. Create a free API key from your Vantage account page at https://console.vantage.sh/account/api_access_tokens.
+  sources:
+  - openapi/vantage-cloud-pricing-api-openapi.yml
+  - openapi/vantage-cost-management-api-openapi.yml

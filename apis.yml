@@ -155,6 +155,10 @@ maintainers:
     email: kin@apievangelist.com
 specificationVersion: '0.19'
 common:
+  - type: DomainSecurity
+    url: security/vantage-domain-security.yml
+  - type: Authentication
+    url: authentication/vantage-authentication.yml
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/vantage/overview
   - type: Arazzo

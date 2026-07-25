@@ -1,0 +1,338 @@
+openapi: 3.1.0
+info:
+  title: Vantage Cloud Pricing Access Grants Business Metrics API
+  description: The Vantage Cloud Pricing API provides programmatic access to cloud infrastructure pricing data across multiple cloud providers. You can query products, services, and providers to retrieve up-to-date pricing information for AWS, Azure, GCP, and other supported cloud platforms. The API is free for all registered Vantage users and returns JSON-encoded responses. An OpenAPI specification is always available at https://api.vantage.sh/v1/swagger.json.
+  version: 1.0.0
+  contact:
+    name: Vantage Support
+    url: https://www.vantage.sh/
+  license:
+    name: Proprietary
+    url: https://www.vantage.sh/terms
+  termsOfService: https://www.vantage.sh/terms
+servers:
+- url: https://api.vantage.sh/v1
+  description: Vantage Cloud Pricing API v1 Production
+security:
+- bearerAuth: []
+tags:
+- name: Business Metrics
+  description: Create, update, and delete business metrics.
+paths:
+  /business_metrics:
+    get:
+      operationId: getBusinessMetrics
+      summary: Vantage Get All Business Metrics
+      description: Returns all Business Metrics that the current API token has access to.
+      tags:
+      - Business Metrics
+      parameters:
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful response with a list of Business Metrics.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  business_metrics:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BusinessMetric'
+              examples:
+                Getbusinessmetrics200Example:
+                  summary: Default getBusinessMetrics 200 response
+                  x-microcks-default: true
+                  value:
+                    business_metrics:
+                    - token: example_value
+                      title: Example Title
+                      cost_report_tokens_with_metadata:
+                      - {}
+                      values:
+                      - {}
+                      created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createBusinessMetric
+      summary: Vantage Create a Business Metric
+      description: Creates a new Business Metric.
+      tags:
+      - Business Metrics
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BusinessMetricInput'
+            examples:
+              CreatebusinessmetricRequestExample:
+                summary: Default createBusinessMetric request
+                x-microcks-default: true
+                value:
+                  title: Example Title
+                  values:
+                  - date: '2026-01-15'
+                    amount: 42.5
+                  cost_report_tokens_with_metadata:
+                  - {}
+      responses:
+        '201':
+          description: Business Metric created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusinessMetric'
+              examples:
+                Createbusinessmetric201Example:
+                  summary: Default createBusinessMetric 201 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    cost_report_tokens_with_metadata:
+                    - {}
+                    values:
+                    - date: '2026-01-15'
+                      amount: 42.5
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /business_metrics/{business_metric_token}:
+    get:
+      operationId: getBusinessMetric
+      summary: Vantage Get a Business Metric
+      description: Returns a specific Business Metric by token.
+      tags:
+      - Business Metrics
+      parameters:
+      - $ref: '#/components/parameters/BusinessMetricToken'
+      responses:
+        '200':
+          description: Successful response with the Business Metric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusinessMetric'
+              examples:
+                Getbusinessmetric200Example:
+                  summary: Default getBusinessMetric 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    cost_report_tokens_with_metadata:
+                    - {}
+                    values:
+                    - date: '2026-01-15'
+                      amount: 42.5
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateBusinessMetric
+      summary: Vantage Update a Business Metric
+      description: Updates an existing Business Metric.
+      tags:
+      - Business Metrics
+      parameters:
+      - $ref: '#/components/parameters/BusinessMetricToken'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BusinessMetricInput'
+            examples:
+              UpdatebusinessmetricRequestExample:
+                summary: Default updateBusinessMetric request
+                x-microcks-default: true
+                value:
+                  title: Example Title
+                  values:
+                  - date: '2026-01-15'
+                    amount: 42.5
+                  cost_report_tokens_with_metadata:
+                  - {}
+      responses:
+        '200':
+          description: Business Metric updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusinessMetric'
+              examples:
+                Updatebusinessmetric200Example:
+                  summary: Default updateBusinessMetric 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    cost_report_tokens_with_metadata:
+                    - {}
+                    values:
+                    - date: '2026-01-15'
+                      amount: 42.5
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteBusinessMetric
+      summary: Vantage Delete a Business Metric
+      description: Deletes an existing Business Metric.
+      tags:
+      - Business Metrics
+      parameters:
+      - $ref: '#/components/parameters/BusinessMetricToken'
+      responses:
+        '204':
+          description: Business Metric deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    Unauthorized:
+      description: Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnprocessableEntity:
+      description: The request was well-formed but could not be processed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    BusinessMetric:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The unique token identifier for the Business Metric.
+          example: example_value
+        title:
+          type: string
+          description: The title of the Business Metric.
+          example: Example Title
+        cost_report_tokens_with_metadata:
+          type: array
+          items:
+            type: object
+          description: Associated cost reports with metadata.
+          example: []
+        values:
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                format: date
+              amount:
+                type: number
+          description: The values of the Business Metric over time.
+          example: []
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time the Business Metric was created.
+          example: '2026-01-15T10:30:00Z'
+    BusinessMetricInput:
+      type: object
+      required:
+      - title
+      properties:
+        title:
+          type: string
+          description: The title of the Business Metric.
+          example: Example Title
+        values:
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                format: date
+              amount:
+                type: number
+          description: The values of the Business Metric.
+          example: []
+        cost_report_tokens_with_metadata:
+          type: array
+          items:
+            type: object
+          description: Associated cost reports with metadata.
+          example: []
+    Error:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+                description: A human-readable error message.
+          example: []
+  parameters:
+    BusinessMetricToken:
+      name: business_metric_token
+      in: path
+      required: true
+      description: The unique token of the Business Metric.
+      schema:
+        type: string
+    LimitParam:
+      name: limit
+      in: query
+      description: The number of results per page.
+      schema:
+        type: integer
+        default: 25
+    PageParam:
+      name: page
+      in: query
+      description: The page of results to return.
+      schema:
+        type: integer
+        default: 1
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Vantage API token. Create a free API key from your Vantage account page at https://console.vantage.sh/account/api_access_tokens.

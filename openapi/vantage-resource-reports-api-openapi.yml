@@ -1,0 +1,301 @@
+openapi: 3.1.0
+info:
+  title: Vantage Cloud Pricing Access Grants Resource Reports API
+  description: The Vantage Cloud Pricing API provides programmatic access to cloud infrastructure pricing data across multiple cloud providers. You can query products, services, and providers to retrieve up-to-date pricing information for AWS, Azure, GCP, and other supported cloud platforms. The API is free for all registered Vantage users and returns JSON-encoded responses. An OpenAPI specification is always available at https://api.vantage.sh/v1/swagger.json.
+  version: 1.0.0
+  contact:
+    name: Vantage Support
+    url: https://www.vantage.sh/
+  license:
+    name: Proprietary
+    url: https://www.vantage.sh/terms
+  termsOfService: https://www.vantage.sh/terms
+servers:
+- url: https://api.vantage.sh/v1
+  description: Vantage Cloud Pricing API v1 Production
+security:
+- bearerAuth: []
+tags:
+- name: Resource Reports
+  description: Create and manage resource reports.
+paths:
+  /resource_reports:
+    get:
+      operationId: getResourceReports
+      summary: Vantage Get All Resource Reports
+      description: Returns all Resource Reports that the current API token has access to.
+      tags:
+      - Resource Reports
+      parameters:
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful response with a list of Resource Reports.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  resource_reports:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ResourceReport'
+              examples:
+                Getresourcereports200Example:
+                  summary: Default getResourceReports 200 response
+                  x-microcks-default: true
+                  value:
+                    resource_reports:
+                    - token: example_value
+                      title: Example Title
+                      filter: example_value
+                      workspace_token: example_value
+                      created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createResourceReport
+      summary: Vantage Create a Resource Report
+      description: Creates a new Resource Report.
+      tags:
+      - Resource Reports
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResourceReportInput'
+            examples:
+              CreateresourcereportRequestExample:
+                summary: Default createResourceReport request
+                x-microcks-default: true
+                value:
+                  title: Example Title
+                  filter: example_value
+                  workspace_token: example_value
+      responses:
+        '201':
+          description: Resource Report created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceReport'
+              examples:
+                Createresourcereport201Example:
+                  summary: Default createResourceReport 201 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    filter: example_value
+                    workspace_token: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /resource_reports/{resource_report_token}:
+    get:
+      operationId: getResourceReport
+      summary: Vantage Get a Resource Report
+      description: Returns a specific Resource Report by token.
+      tags:
+      - Resource Reports
+      parameters:
+      - $ref: '#/components/parameters/ResourceReportToken'
+      responses:
+        '200':
+          description: Successful response with the Resource Report.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceReport'
+              examples:
+                Getresourcereport200Example:
+                  summary: Default getResourceReport 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    filter: example_value
+                    workspace_token: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateResourceReport
+      summary: Vantage Update a Resource Report
+      description: Updates an existing Resource Report.
+      tags:
+      - Resource Reports
+      parameters:
+      - $ref: '#/components/parameters/ResourceReportToken'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResourceReportInput'
+            examples:
+              UpdateresourcereportRequestExample:
+                summary: Default updateResourceReport request
+                x-microcks-default: true
+                value:
+                  title: Example Title
+                  filter: example_value
+                  workspace_token: example_value
+      responses:
+        '200':
+          description: Resource Report updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceReport'
+              examples:
+                Updateresourcereport200Example:
+                  summary: Default updateResourceReport 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    filter: example_value
+                    workspace_token: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteResourceReport
+      summary: Vantage Delete a Resource Report
+      description: Deletes an existing Resource Report.
+      tags:
+      - Resource Reports
+      parameters:
+      - $ref: '#/components/parameters/ResourceReportToken'
+      responses:
+        '204':
+          description: Resource Report deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    Unauthorized:
+      description: Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnprocessableEntity:
+      description: The request was well-formed but could not be processed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    ResourceReportInput:
+      type: object
+      required:
+      - title
+      properties:
+        title:
+          type: string
+          description: The title of the Resource Report.
+          example: Example Title
+        filter:
+          type: string
+          description: VQL filter expression for the Resource Report.
+          example: example_value
+        workspace_token:
+          type: string
+          description: The token of the Workspace for the report.
+          example: example_value
+    ResourceReport:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The unique token identifier for the Resource Report.
+          example: example_value
+        title:
+          type: string
+          description: The title of the Resource Report.
+          example: Example Title
+        filter:
+          type: string
+          description: The VQL filter applied to the Resource Report.
+          example: example_value
+        workspace_token:
+          type: string
+          description: The token of the Workspace this report belongs to.
+          example: example_value
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time the Resource Report was created.
+          example: '2026-01-15T10:30:00Z'
+    Error:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+                description: A human-readable error message.
+          example: []
+  parameters:
+    LimitParam:
+      name: limit
+      in: query
+      description: The number of results per page.
+      schema:
+        type: integer
+        default: 25
+    ResourceReportToken:
+      name: resource_report_token
+      in: path
+      required: true
+      description: The unique token of the Resource Report.
+      schema:
+        type: string
+    PageParam:
+      name: page
+      in: query
+      description: The page of results to return.
+      schema:
+        type: integer
+        default: 1
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Vantage API token. Create a free API key from your Vantage account page at https://console.vantage.sh/account/api_access_tokens.

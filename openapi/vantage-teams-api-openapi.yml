@@ -1,0 +1,325 @@
+openapi: 3.1.0
+info:
+  title: Vantage Cloud Pricing Access Grants Teams API
+  description: The Vantage Cloud Pricing API provides programmatic access to cloud infrastructure pricing data across multiple cloud providers. You can query products, services, and providers to retrieve up-to-date pricing information for AWS, Azure, GCP, and other supported cloud platforms. The API is free for all registered Vantage users and returns JSON-encoded responses. An OpenAPI specification is always available at https://api.vantage.sh/v1/swagger.json.
+  version: 1.0.0
+  contact:
+    name: Vantage Support
+    url: https://www.vantage.sh/
+  license:
+    name: Proprietary
+    url: https://www.vantage.sh/terms
+  termsOfService: https://www.vantage.sh/terms
+servers:
+- url: https://api.vantage.sh/v1
+  description: Vantage Cloud Pricing API v1 Production
+security:
+- bearerAuth: []
+tags:
+- name: Teams
+  description: Create and manage teams.
+paths:
+  /teams:
+    get:
+      operationId: getTeams
+      summary: Vantage Get All Teams
+      description: Returns all Teams that the current API token has access to.
+      tags:
+      - Teams
+      parameters:
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful response with a list of Teams.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  teams:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Team'
+              examples:
+                Getteams200Example:
+                  summary: Default getTeams 200 response
+                  x-microcks-default: true
+                  value:
+                    teams:
+                    - token: example_value
+                      name: Example Title
+                      description: A sample description.
+                      workspace_token: example_value
+                      user_tokens:
+                      - {}
+                      created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createTeam
+      summary: Vantage Create a Team
+      description: Creates a new Team.
+      tags:
+      - Teams
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamInput'
+            examples:
+              CreateteamRequestExample:
+                summary: Default createTeam request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  description: A sample description.
+                  workspace_token: example_value
+                  user_tokens:
+                  - example_value
+      responses:
+        '201':
+          description: Team created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+              examples:
+                Createteam201Example:
+                  summary: Default createTeam 201 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    name: Example Title
+                    description: A sample description.
+                    workspace_token: example_value
+                    user_tokens:
+                    - example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /teams/{team_token}:
+    get:
+      operationId: getTeam
+      summary: Vantage Get a Team
+      description: Returns a specific Team by token.
+      tags:
+      - Teams
+      parameters:
+      - $ref: '#/components/parameters/TeamToken'
+      responses:
+        '200':
+          description: Successful response with the Team.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+              examples:
+                Getteam200Example:
+                  summary: Default getTeam 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    name: Example Title
+                    description: A sample description.
+                    workspace_token: example_value
+                    user_tokens:
+                    - example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateTeam
+      summary: Vantage Update a Team
+      description: Updates an existing Team.
+      tags:
+      - Teams
+      parameters:
+      - $ref: '#/components/parameters/TeamToken'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamInput'
+            examples:
+              UpdateteamRequestExample:
+                summary: Default updateTeam request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  description: A sample description.
+                  workspace_token: example_value
+                  user_tokens:
+                  - example_value
+      responses:
+        '200':
+          description: Team updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+              examples:
+                Updateteam200Example:
+                  summary: Default updateTeam 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    name: Example Title
+                    description: A sample description.
+                    workspace_token: example_value
+                    user_tokens:
+                    - example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteTeam
+      summary: Vantage Delete a Team
+      description: Deletes an existing Team.
+      tags:
+      - Teams
+      parameters:
+      - $ref: '#/components/parameters/TeamToken'
+      responses:
+        '204':
+          description: Team deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    TeamToken:
+      name: team_token
+      in: path
+      required: true
+      description: The unique token of the Team.
+      schema:
+        type: string
+    LimitParam:
+      name: limit
+      in: query
+      description: The number of results per page.
+      schema:
+        type: integer
+        default: 25
+    PageParam:
+      name: page
+      in: query
+      description: The page of results to return.
+      schema:
+        type: integer
+        default: 1
+  responses:
+    Unauthorized:
+      description: Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnprocessableEntity:
+      description: The request was well-formed but could not be processed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Team:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The unique token identifier for the Team.
+          example: example_value
+        name:
+          type: string
+          description: The name of the Team.
+          example: Example Title
+        description:
+          type: string
+          description: The description of the Team.
+          example: A sample description.
+        workspace_token:
+          type: string
+          description: The token of the Workspace this Team belongs to.
+          example: example_value
+        user_tokens:
+          type: array
+          items:
+            type: string
+          description: Tokens of users who are members of the Team.
+          example: []
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time the Team was created.
+          example: '2026-01-15T10:30:00Z'
+    Error:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+                description: A human-readable error message.
+          example: []
+    TeamInput:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: The name of the Team.
+          example: Example Title
+        description:
+          type: string
+          description: The description of the Team.
+          example: A sample description.
+        workspace_token:
+          type: string
+          description: The token of the Workspace for the Team.
+          example: example_value
+        user_tokens:
+          type: array
+          items:
+            type: string
+          description: Tokens of users to add to the Team.
+          example: []
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Vantage API token. Create a free API key from your Vantage account page at https://console.vantage.sh/account/api_access_tokens.

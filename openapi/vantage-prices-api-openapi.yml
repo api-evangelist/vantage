@@ -1,0 +1,157 @@
+openapi: 3.1.0
+info:
+  title: Vantage Cloud Pricing Access Grants Prices API
+  description: The Vantage Cloud Pricing API provides programmatic access to cloud infrastructure pricing data across multiple cloud providers. You can query products, services, and providers to retrieve up-to-date pricing information for AWS, Azure, GCP, and other supported cloud platforms. The API is free for all registered Vantage users and returns JSON-encoded responses. An OpenAPI specification is always available at https://api.vantage.sh/v1/swagger.json.
+  version: 1.0.0
+  contact:
+    name: Vantage Support
+    url: https://www.vantage.sh/
+  license:
+    name: Proprietary
+    url: https://www.vantage.sh/terms
+  termsOfService: https://www.vantage.sh/terms
+servers:
+- url: https://api.vantage.sh/v1
+  description: Vantage Cloud Pricing API v1 Production
+security:
+- bearerAuth: []
+tags:
+- name: Prices
+  description: Retrieve pricing details for specific products.
+paths:
+  /prices:
+    get:
+      operationId: getPrices
+      summary: Vantage Get Prices
+      description: Returns pricing data for products. Can be filtered by product, provider, service, and region.
+      tags:
+      - Prices
+      parameters:
+      - name: product_id
+        in: query
+        description: Filter prices by a specific product identifier.
+        schema:
+          type: string
+        example: '500123'
+      - name: provider_id
+        in: query
+        description: Filter prices by a specific cloud provider identifier.
+        schema:
+          type: string
+        example: '500123'
+      - name: service_id
+        in: query
+        description: Filter prices by a specific service identifier.
+        schema:
+          type: string
+        example: '500123'
+      - name: region
+        in: query
+        description: Filter prices by a specific cloud region.
+        schema:
+          type: string
+        example: example_value
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful response with pricing data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  prices:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Price'
+              examples:
+                Getprices200Example:
+                  summary: Default getPrices 200 response
+                  x-microcks-default: true
+                  value:
+                    prices:
+                    - id: abc123
+                      unit: example_value
+                      price: example_value
+                      currency: example_value
+                      region: example_value
+                      description: A sample description.
+                      product_id: '500123'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    Unauthorized:
+      description: Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Price:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the Price.
+          example: abc123
+        unit:
+          type: string
+          description: The pricing unit (e.g., per hour, per GB-month).
+          example: example_value
+        price:
+          type: string
+          description: The price amount.
+          example: example_value
+        currency:
+          type: string
+          description: The currency of the price.
+          example: example_value
+        region:
+          type: string
+          description: The cloud region this price applies to.
+          example: example_value
+        description:
+          type: string
+          description: A description of the pricing tier or option.
+          example: A sample description.
+        product_id:
+          type: string
+          description: The identifier of the associated Product.
+          example: '500123'
+    Error:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+                description: A human-readable error message.
+          example: []
+  parameters:
+    LimitParam:
+      name: limit
+      in: query
+      description: The number of results per page.
+      schema:
+        type: integer
+        default: 25
+    PageParam:
+      name: page
+      in: query
+      description: The page of results to return.
+      schema:
+        type: integer
+        default: 1
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Vantage API token. Create a free API key from your Vantage account page at https://console.vantage.sh/account/api_access_tokens.

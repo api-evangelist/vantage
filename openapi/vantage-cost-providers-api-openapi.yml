@@ -1,0 +1,95 @@
+openapi: 3.1.0
+info:
+  title: Vantage Cloud Pricing Access Grants Cost Providers API
+  description: The Vantage Cloud Pricing API provides programmatic access to cloud infrastructure pricing data across multiple cloud providers. You can query products, services, and providers to retrieve up-to-date pricing information for AWS, Azure, GCP, and other supported cloud platforms. The API is free for all registered Vantage users and returns JSON-encoded responses. An OpenAPI specification is always available at https://api.vantage.sh/v1/swagger.json.
+  version: 1.0.0
+  contact:
+    name: Vantage Support
+    url: https://www.vantage.sh/
+  license:
+    name: Proprietary
+    url: https://www.vantage.sh/terms
+  termsOfService: https://www.vantage.sh/terms
+servers:
+- url: https://api.vantage.sh/v1
+  description: Vantage Cloud Pricing API v1 Production
+security:
+- bearerAuth: []
+tags:
+- name: Cost Providers
+  description: Retrieve available cost providers.
+paths:
+  /cost_providers:
+    get:
+      operationId: getCostProviders
+      summary: Vantage Get All Cost Providers
+      description: Returns all available Cost Providers.
+      tags:
+      - Cost Providers
+      responses:
+        '200':
+          description: Successful response with a list of Cost Providers.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cost_providers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CostProvider'
+              examples:
+                Getcostproviders200Example:
+                  summary: Default getCostProviders 200 response
+                  x-microcks-default: true
+                  value:
+                    cost_providers:
+                    - token: example_value
+                      name: Example Title
+                      description: A sample description.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    CostProvider:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The unique token identifier for the Cost Provider.
+          example: example_value
+        name:
+          type: string
+          description: The name of the Cost Provider.
+          example: Example Title
+        description:
+          type: string
+          description: A description of the Cost Provider.
+          example: A sample description.
+    Error:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+                description: A human-readable error message.
+          example: []
+  responses:
+    Unauthorized:
+      description: Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Vantage API token. Create a free API key from your Vantage account page at https://console.vantage.sh/account/api_access_tokens.

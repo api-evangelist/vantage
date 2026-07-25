@@ -1,0 +1,145 @@
+openapi: 3.1.0
+info:
+  title: Vantage Cloud Pricing Access Grants Resources API
+  description: The Vantage Cloud Pricing API provides programmatic access to cloud infrastructure pricing data across multiple cloud providers. You can query products, services, and providers to retrieve up-to-date pricing information for AWS, Azure, GCP, and other supported cloud platforms. The API is free for all registered Vantage users and returns JSON-encoded responses. An OpenAPI specification is always available at https://api.vantage.sh/v1/swagger.json.
+  version: 1.0.0
+  contact:
+    name: Vantage Support
+    url: https://www.vantage.sh/
+  license:
+    name: Proprietary
+    url: https://www.vantage.sh/terms
+  termsOfService: https://www.vantage.sh/terms
+servers:
+- url: https://api.vantage.sh/v1
+  description: Vantage Cloud Pricing API v1 Production
+security:
+- bearerAuth: []
+tags:
+- name: Resources
+  description: Retrieve resource data from reports.
+paths:
+  /resources:
+    get:
+      operationId: getResources
+      summary: Vantage Get Resources
+      description: Returns Resources for a Resource Report. Provides detailed resource-level cost and usage data.
+      tags:
+      - Resources
+      parameters:
+      - name: resource_report_token
+        in: query
+        description: The token of the Resource Report to retrieve resources for.
+        required: true
+        schema:
+          type: string
+        example: example_value
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful response with resource data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  resources:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Resource'
+              examples:
+                Getresources200Example:
+                  summary: Default getResources 200 response
+                  x-microcks-default: true
+                  value:
+                    resources:
+                    - token: example_value
+                      name: Example Title
+                      provider: example_value
+                      service: example_value
+                      account_id: '500123'
+                      region: example_value
+                      cost: example_value
+                      metadata: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    Unauthorized:
+      description: Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+                description: A human-readable error message.
+          example: []
+    Resource:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The unique identifier for the Resource.
+          example: example_value
+        name:
+          type: string
+          description: The name of the Resource.
+          example: Example Title
+        provider:
+          type: string
+          description: The cloud provider.
+          example: example_value
+        service:
+          type: string
+          description: The cloud service.
+          example: example_value
+        account_id:
+          type: string
+          description: The cloud account identifier.
+          example: '500123'
+        region:
+          type: string
+          description: The region of the resource.
+          example: example_value
+        cost:
+          type: string
+          description: The cost associated with the resource.
+          example: example_value
+        metadata:
+          type: object
+          description: Additional metadata about the resource.
+          example: example_value
+  parameters:
+    LimitParam:
+      name: limit
+      in: query
+      description: The number of results per page.
+      schema:
+        type: integer
+        default: 25
+    PageParam:
+      name: page
+      in: query
+      description: The page of results to return.
+      schema:
+        type: integer
+        default: 1
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Vantage API token. Create a free API key from your Vantage account page at https://console.vantage.sh/account/api_access_tokens.

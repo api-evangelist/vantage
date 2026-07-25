@@ -1,0 +1,257 @@
+openapi: 3.1.0
+info:
+  title: Vantage Cloud Pricing Access Grants API
+  description: The Vantage Cloud Pricing API provides programmatic access to cloud infrastructure pricing data across multiple cloud providers. You can query products, services, and providers to retrieve up-to-date pricing information for AWS, Azure, GCP, and other supported cloud platforms. The API is free for all registered Vantage users and returns JSON-encoded responses. An OpenAPI specification is always available at https://api.vantage.sh/v1/swagger.json.
+  version: 1.0.0
+  contact:
+    name: Vantage Support
+    url: https://www.vantage.sh/
+  license:
+    name: Proprietary
+    url: https://www.vantage.sh/terms
+  termsOfService: https://www.vantage.sh/terms
+servers:
+- url: https://api.vantage.sh/v1
+  description: Vantage Cloud Pricing API v1 Production
+security:
+- bearerAuth: []
+tags:
+- name: Access Grants
+  description: Manage resource access grants for teams.
+paths:
+  /access_grants:
+    get:
+      operationId: getAccessGrants
+      summary: Vantage Get All Access Grants
+      description: Returns all Access Grants that the current API token has access to.
+      tags:
+      - Access Grants
+      parameters:
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful response with a list of Access Grants.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_grants:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AccessGrant'
+              examples:
+                Getaccessgrants200Example:
+                  summary: Default getAccessGrants 200 response
+                  x-microcks-default: true
+                  value:
+                    access_grants:
+                    - token: example_value
+                      team_token: example_value
+                      resource_token: example_value
+                      access: example_value
+                      created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createAccessGrant
+      summary: Vantage Create an Access Grant
+      description: Creates a new Access Grant for a team.
+      tags:
+      - Access Grants
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccessGrantInput'
+            examples:
+              CreateaccessgrantRequestExample:
+                summary: Default createAccessGrant request
+                x-microcks-default: true
+                value:
+                  team_token: example_value
+                  resource_token: example_value
+                  access: example_value
+      responses:
+        '201':
+          description: Access Grant created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessGrant'
+              examples:
+                Createaccessgrant201Example:
+                  summary: Default createAccessGrant 201 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    team_token: example_value
+                    resource_token: example_value
+                    access: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /access_grants/{access_grant_token}:
+    get:
+      operationId: getAccessGrant
+      summary: Vantage Get an Access Grant
+      description: Returns a specific Access Grant by token.
+      tags:
+      - Access Grants
+      parameters:
+      - $ref: '#/components/parameters/AccessGrantToken'
+      responses:
+        '200':
+          description: Successful response with the Access Grant.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessGrant'
+              examples:
+                Getaccessgrant200Example:
+                  summary: Default getAccessGrant 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    team_token: example_value
+                    resource_token: example_value
+                    access: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteAccessGrant
+      summary: Vantage Delete an Access Grant
+      description: Deletes an existing Access Grant.
+      tags:
+      - Access Grants
+      parameters:
+      - $ref: '#/components/parameters/AccessGrantToken'
+      responses:
+        '204':
+          description: Access Grant deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    AccessGrantToken:
+      name: access_grant_token
+      in: path
+      required: true
+      description: The unique token of the Access Grant.
+      schema:
+        type: string
+    LimitParam:
+      name: limit
+      in: query
+      description: The number of results per page.
+      schema:
+        type: integer
+        default: 25
+    PageParam:
+      name: page
+      in: query
+      description: The page of results to return.
+      schema:
+        type: integer
+        default: 1
+  responses:
+    Unauthorized:
+      description: Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnprocessableEntity:
+      description: The request was well-formed but could not be processed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    AccessGrantInput:
+      type: object
+      required:
+      - team_token
+      - resource_token
+      - access
+      properties:
+        team_token:
+          type: string
+          description: The token of the Team to grant access to.
+          example: example_value
+        resource_token:
+          type: string
+          description: The token of the resource to grant access to.
+          example: example_value
+        access:
+          type: string
+          description: The level of access to grant.
+          example: example_value
+    Error:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+                description: A human-readable error message.
+          example: []
+    AccessGrant:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The unique token identifier for the Access Grant.
+          example: example_value
+        team_token:
+          type: string
+          description: The token of the Team the grant applies to.
+          example: example_value
+        resource_token:
+          type: string
+          description: The token of the resource being granted access to.
+          example: example_value
+        access:
+          type: string
+          description: The level of access granted.
+          example: example_value
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time the Access Grant was created.
+          example: '2026-01-15T10:30:00Z'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Vantage API token. Create a free API key from your Vantage account page at https://console.vantage.sh/account/api_access_tokens.

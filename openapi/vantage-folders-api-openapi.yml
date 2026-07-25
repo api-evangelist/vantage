@@ -1,0 +1,301 @@
+openapi: 3.1.0
+info:
+  title: Vantage Cloud Pricing Access Grants Folders API
+  description: The Vantage Cloud Pricing API provides programmatic access to cloud infrastructure pricing data across multiple cloud providers. You can query products, services, and providers to retrieve up-to-date pricing information for AWS, Azure, GCP, and other supported cloud platforms. The API is free for all registered Vantage users and returns JSON-encoded responses. An OpenAPI specification is always available at https://api.vantage.sh/v1/swagger.json.
+  version: 1.0.0
+  contact:
+    name: Vantage Support
+    url: https://www.vantage.sh/
+  license:
+    name: Proprietary
+    url: https://www.vantage.sh/terms
+  termsOfService: https://www.vantage.sh/terms
+servers:
+- url: https://api.vantage.sh/v1
+  description: Vantage Cloud Pricing API v1 Production
+security:
+- bearerAuth: []
+tags:
+- name: Folders
+  description: Manage folders for organizing Cost Reports.
+paths:
+  /folders:
+    get:
+      operationId: getFolders
+      summary: Vantage Get All Folders
+      description: Returns all Folders that the current API token has access to.
+      tags:
+      - Folders
+      parameters:
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful response with a list of Folders.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  folders:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Folder'
+              examples:
+                Getfolders200Example:
+                  summary: Default getFolders 200 response
+                  x-microcks-default: true
+                  value:
+                    folders:
+                    - token: example_value
+                      title: Example Title
+                      parent_folder_token: example_value
+                      workspace_token: example_value
+                      created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createFolder
+      summary: Vantage Create a Folder
+      description: Creates a new Folder for organizing Cost Reports.
+      tags:
+      - Folders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FolderInput'
+            examples:
+              CreatefolderRequestExample:
+                summary: Default createFolder request
+                x-microcks-default: true
+                value:
+                  title: Example Title
+                  parent_folder_token: example_value
+                  workspace_token: example_value
+      responses:
+        '201':
+          description: Folder created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Folder'
+              examples:
+                Createfolder201Example:
+                  summary: Default createFolder 201 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    parent_folder_token: example_value
+                    workspace_token: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /folders/{folder_token}:
+    get:
+      operationId: getFolder
+      summary: Vantage Get a Folder
+      description: Returns a specific Folder by token.
+      tags:
+      - Folders
+      parameters:
+      - $ref: '#/components/parameters/FolderToken'
+      responses:
+        '200':
+          description: Successful response with the Folder.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Folder'
+              examples:
+                Getfolder200Example:
+                  summary: Default getFolder 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    parent_folder_token: example_value
+                    workspace_token: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateFolder
+      summary: Vantage Update a Folder
+      description: Updates an existing Folder.
+      tags:
+      - Folders
+      parameters:
+      - $ref: '#/components/parameters/FolderToken'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FolderInput'
+            examples:
+              UpdatefolderRequestExample:
+                summary: Default updateFolder request
+                x-microcks-default: true
+                value:
+                  title: Example Title
+                  parent_folder_token: example_value
+                  workspace_token: example_value
+      responses:
+        '200':
+          description: Folder updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Folder'
+              examples:
+                Updatefolder200Example:
+                  summary: Default updateFolder 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    parent_folder_token: example_value
+                    workspace_token: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteFolder
+      summary: Vantage Delete a Folder
+      description: Deletes an existing Folder.
+      tags:
+      - Folders
+      parameters:
+      - $ref: '#/components/parameters/FolderToken'
+      responses:
+        '204':
+          description: Folder deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    Unauthorized:
+      description: Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnprocessableEntity:
+      description: The request was well-formed but could not be processed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Folder:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The unique token identifier for the Folder.
+          example: example_value
+        title:
+          type: string
+          description: The title of the Folder.
+          example: Example Title
+        parent_folder_token:
+          type: string
+          description: The token of the parent Folder, if nested.
+          example: example_value
+        workspace_token:
+          type: string
+          description: The token of the Workspace this Folder belongs to.
+          example: example_value
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time the Folder was created.
+          example: '2026-01-15T10:30:00Z'
+    Error:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+                description: A human-readable error message.
+          example: []
+    FolderInput:
+      type: object
+      required:
+      - title
+      properties:
+        title:
+          type: string
+          description: The title of the Folder.
+          example: Example Title
+        parent_folder_token:
+          type: string
+          description: The token of the parent Folder for nesting.
+          example: example_value
+        workspace_token:
+          type: string
+          description: The token of the Workspace for the Folder.
+          example: example_value
+  parameters:
+    FolderToken:
+      name: folder_token
+      in: path
+      required: true
+      description: The unique token of the Folder.
+      schema:
+        type: string
+    LimitParam:
+      name: limit
+      in: query
+      description: The number of results per page.
+      schema:
+        type: integer
+        default: 25
+    PageParam:
+      name: page
+      in: query
+      description: The page of results to return.
+      schema:
+        type: integer
+        default: 1
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Vantage API token. Create a free API key from your Vantage account page at https://console.vantage.sh/account/api_access_tokens.

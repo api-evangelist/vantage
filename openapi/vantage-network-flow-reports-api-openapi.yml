@@ -1,0 +1,243 @@
+openapi: 3.1.0
+info:
+  title: Vantage Cloud Pricing Access Grants Network Flow Reports API
+  description: The Vantage Cloud Pricing API provides programmatic access to cloud infrastructure pricing data across multiple cloud providers. You can query products, services, and providers to retrieve up-to-date pricing information for AWS, Azure, GCP, and other supported cloud platforms. The API is free for all registered Vantage users and returns JSON-encoded responses. An OpenAPI specification is always available at https://api.vantage.sh/v1/swagger.json.
+  version: 1.0.0
+  contact:
+    name: Vantage Support
+    url: https://www.vantage.sh/
+  license:
+    name: Proprietary
+    url: https://www.vantage.sh/terms
+  termsOfService: https://www.vantage.sh/terms
+servers:
+- url: https://api.vantage.sh/v1
+  description: Vantage Cloud Pricing API v1 Production
+security:
+- bearerAuth: []
+tags:
+- name: Network Flow Reports
+  description: Create and manage network flow reports.
+paths:
+  /network_flow_reports:
+    get:
+      operationId: getNetworkFlowReports
+      summary: Vantage Get All Network Flow Reports
+      description: Returns all Network Flow Reports that the current API token has access to.
+      tags:
+      - Network Flow Reports
+      parameters:
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful response with a list of Network Flow Reports.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  network_flow_reports:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/NetworkFlowReport'
+              examples:
+                Getnetworkflowreports200Example:
+                  summary: Default getNetworkFlowReports 200 response
+                  x-microcks-default: true
+                  value:
+                    network_flow_reports:
+                    - token: example_value
+                      title: Example Title
+                      workspace_token: example_value
+                      created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createNetworkFlowReport
+      summary: Vantage Create a Network Flow Report
+      description: Creates a new Network Flow Report.
+      tags:
+      - Network Flow Reports
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NetworkFlowReportInput'
+            examples:
+              CreatenetworkflowreportRequestExample:
+                summary: Default createNetworkFlowReport request
+                x-microcks-default: true
+                value:
+                  title: Example Title
+                  workspace_token: example_value
+      responses:
+        '201':
+          description: Network Flow Report created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworkFlowReport'
+              examples:
+                Createnetworkflowreport201Example:
+                  summary: Default createNetworkFlowReport 201 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    workspace_token: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /network_flow_reports/{network_flow_report_token}:
+    get:
+      operationId: getNetworkFlowReport
+      summary: Vantage Get a Network Flow Report
+      description: Returns a specific Network Flow Report by token.
+      tags:
+      - Network Flow Reports
+      parameters:
+      - $ref: '#/components/parameters/NetworkFlowReportToken'
+      responses:
+        '200':
+          description: Successful response with the Network Flow Report.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworkFlowReport'
+              examples:
+                Getnetworkflowreport200Example:
+                  summary: Default getNetworkFlowReport 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    workspace_token: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteNetworkFlowReport
+      summary: Vantage Delete a Network Flow Report
+      description: Deletes an existing Network Flow Report.
+      tags:
+      - Network Flow Reports
+      parameters:
+      - $ref: '#/components/parameters/NetworkFlowReportToken'
+      responses:
+        '204':
+          description: Network Flow Report deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    Unauthorized:
+      description: Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnprocessableEntity:
+      description: The request was well-formed but could not be processed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    NetworkFlowReportInput:
+      type: object
+      required:
+      - title
+      properties:
+        title:
+          type: string
+          description: The title of the Network Flow Report.
+          example: Example Title
+        workspace_token:
+          type: string
+          description: The token of the Workspace for the report.
+          example: example_value
+    Error:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+                description: A human-readable error message.
+          example: []
+    NetworkFlowReport:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The unique token identifier for the Network Flow Report.
+          example: example_value
+        title:
+          type: string
+          description: The title of the Network Flow Report.
+          example: Example Title
+        workspace_token:
+          type: string
+          description: The token of the Workspace this report belongs to.
+          example: example_value
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time the report was created.
+          example: '2026-01-15T10:30:00Z'
+  parameters:
+    NetworkFlowReportToken:
+      name: network_flow_report_token
+      in: path
+      required: true
+      description: The unique token of the Network Flow Report.
+      schema:
+        type: string
+    LimitParam:
+      name: limit
+      in: query
+      description: The number of results per page.
+      schema:
+        type: integer
+        default: 25
+    PageParam:
+      name: page
+      in: query
+      description: The page of results to return.
+      schema:
+        type: integer
+        default: 1
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Vantage API token. Create a free API key from your Vantage account page at https://console.vantage.sh/account/api_access_tokens.

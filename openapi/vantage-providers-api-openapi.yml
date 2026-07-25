@@ -1,0 +1,156 @@
+openapi: 3.1.0
+info:
+  title: Vantage Cloud Pricing Access Grants Providers API
+  description: The Vantage Cloud Pricing API provides programmatic access to cloud infrastructure pricing data across multiple cloud providers. You can query products, services, and providers to retrieve up-to-date pricing information for AWS, Azure, GCP, and other supported cloud platforms. The API is free for all registered Vantage users and returns JSON-encoded responses. An OpenAPI specification is always available at https://api.vantage.sh/v1/swagger.json.
+  version: 1.0.0
+  contact:
+    name: Vantage Support
+    url: https://www.vantage.sh/
+  license:
+    name: Proprietary
+    url: https://www.vantage.sh/terms
+  termsOfService: https://www.vantage.sh/terms
+servers:
+- url: https://api.vantage.sh/v1
+  description: Vantage Cloud Pricing API v1 Production
+security:
+- bearerAuth: []
+tags:
+- name: Providers
+  description: Retrieve available cloud providers.
+paths:
+  /providers:
+    get:
+      operationId: getProviders
+      summary: Vantage Get All Providers
+      description: Returns all supported cloud Providers with pricing data available in the Vantage database.
+      tags:
+      - Providers
+      parameters:
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful response with a list of cloud Providers.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  providers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Provider'
+              examples:
+                Getproviders200Example:
+                  summary: Default getProviders 200 response
+                  x-microcks-default: true
+                  value:
+                    providers:
+                    - id: abc123
+                      name: Example Title
+                      services_count: 10
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /providers/{provider_id}:
+    get:
+      operationId: getProvider
+      summary: Vantage Get a Provider
+      description: Returns a specific cloud Provider by identifier.
+      tags:
+      - Providers
+      parameters:
+      - name: provider_id
+        in: path
+        required: true
+        description: The identifier of the cloud provider (e.g., aws, azure, gcp).
+        schema:
+          type: string
+        example: '500123'
+      responses:
+        '200':
+          description: Successful response with the Provider.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Provider'
+              examples:
+                Getprovider200Example:
+                  summary: Default getProvider 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    services_count: 10
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    Unauthorized:
+      description: Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+                description: A human-readable error message.
+          example: []
+    Provider:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the Provider.
+          example: abc123
+        name:
+          type: string
+          description: The display name of the Provider.
+          example: Example Title
+        services_count:
+          type: integer
+          description: The number of services available from this Provider.
+          example: 10
+  parameters:
+    LimitParam:
+      name: limit
+      in: query
+      description: The number of results per page.
+      schema:
+        type: integer
+        default: 25
+    PageParam:
+      name: page
+      in: query
+      description: The page of results to return.
+      schema:
+        type: integer
+        default: 1
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Vantage API token. Create a free API key from your Vantage account page at https://console.vantage.sh/account/api_access_tokens.

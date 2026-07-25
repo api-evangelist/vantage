@@ -1,0 +1,311 @@
+openapi: 3.1.0
+info:
+  title: Vantage Cloud Pricing Access Grants Dashboards API
+  description: The Vantage Cloud Pricing API provides programmatic access to cloud infrastructure pricing data across multiple cloud providers. You can query products, services, and providers to retrieve up-to-date pricing information for AWS, Azure, GCP, and other supported cloud platforms. The API is free for all registered Vantage users and returns JSON-encoded responses. An OpenAPI specification is always available at https://api.vantage.sh/v1/swagger.json.
+  version: 1.0.0
+  contact:
+    name: Vantage Support
+    url: https://www.vantage.sh/
+  license:
+    name: Proprietary
+    url: https://www.vantage.sh/terms
+  termsOfService: https://www.vantage.sh/terms
+servers:
+- url: https://api.vantage.sh/v1
+  description: Vantage Cloud Pricing API v1 Production
+security:
+- bearerAuth: []
+tags:
+- name: Dashboards
+  description: Create and manage cost dashboards.
+paths:
+  /dashboards:
+    get:
+      operationId: getDashboards
+      summary: Vantage Get All Dashboards
+      description: Returns all Dashboards that the current API token has access to.
+      tags:
+      - Dashboards
+      parameters:
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful response with a list of Dashboards.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  dashboards:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Dashboard'
+              examples:
+                Getdashboards200Example:
+                  summary: Default getDashboards 200 response
+                  x-microcks-default: true
+                  value:
+                    dashboards:
+                    - token: example_value
+                      title: Example Title
+                      widget_tokens:
+                      - {}
+                      workspace_token: example_value
+                      created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createDashboard
+      summary: Vantage Create a Dashboard
+      description: Creates a new Dashboard.
+      tags:
+      - Dashboards
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DashboardInput'
+            examples:
+              CreatedashboardRequestExample:
+                summary: Default createDashboard request
+                x-microcks-default: true
+                value:
+                  title: Example Title
+                  widget_tokens:
+                  - example_value
+                  workspace_token: example_value
+      responses:
+        '201':
+          description: Dashboard created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dashboard'
+              examples:
+                Createdashboard201Example:
+                  summary: Default createDashboard 201 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    widget_tokens:
+                    - example_value
+                    workspace_token: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /dashboards/{dashboard_token}:
+    get:
+      operationId: getDashboard
+      summary: Vantage Get a Dashboard
+      description: Returns a specific Dashboard by token.
+      tags:
+      - Dashboards
+      parameters:
+      - $ref: '#/components/parameters/DashboardToken'
+      responses:
+        '200':
+          description: Successful response with the Dashboard.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dashboard'
+              examples:
+                Getdashboard200Example:
+                  summary: Default getDashboard 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    widget_tokens:
+                    - example_value
+                    workspace_token: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateDashboard
+      summary: Vantage Update a Dashboard
+      description: Updates an existing Dashboard.
+      tags:
+      - Dashboards
+      parameters:
+      - $ref: '#/components/parameters/DashboardToken'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DashboardInput'
+            examples:
+              UpdatedashboardRequestExample:
+                summary: Default updateDashboard request
+                x-microcks-default: true
+                value:
+                  title: Example Title
+                  widget_tokens:
+                  - example_value
+                  workspace_token: example_value
+      responses:
+        '200':
+          description: Dashboard updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dashboard'
+              examples:
+                Updatedashboard200Example:
+                  summary: Default updateDashboard 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    widget_tokens:
+                    - example_value
+                    workspace_token: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteDashboard
+      summary: Vantage Delete a Dashboard
+      description: Deletes an existing Dashboard.
+      tags:
+      - Dashboards
+      parameters:
+      - $ref: '#/components/parameters/DashboardToken'
+      responses:
+        '204':
+          description: Dashboard deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    Unauthorized:
+      description: Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnprocessableEntity:
+      description: The request was well-formed but could not be processed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+                description: A human-readable error message.
+          example: []
+    Dashboard:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The unique token identifier for the Dashboard.
+          example: example_value
+        title:
+          type: string
+          description: The title of the Dashboard.
+          example: Example Title
+        widget_tokens:
+          type: array
+          items:
+            type: string
+          description: Tokens of widgets included in the Dashboard.
+          example: []
+        workspace_token:
+          type: string
+          description: The token of the Workspace this Dashboard belongs to.
+          example: example_value
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time the Dashboard was created.
+          example: '2026-01-15T10:30:00Z'
+    DashboardInput:
+      type: object
+      required:
+      - title
+      properties:
+        title:
+          type: string
+          description: The title of the Dashboard.
+          example: Example Title
+        widget_tokens:
+          type: array
+          items:
+            type: string
+          description: Tokens of widgets to include.
+          example: []
+        workspace_token:
+          type: string
+          description: The token of the Workspace for the Dashboard.
+          example: example_value
+  parameters:
+    DashboardToken:
+      name: dashboard_token
+      in: path
+      required: true
+      description: The unique token of the Dashboard.
+      schema:
+        type: string
+    LimitParam:
+      name: limit
+      in: query
+      description: The number of results per page.
+      schema:
+        type: integer
+        default: 25
+    PageParam:
+      name: page
+      in: query
+      description: The page of results to return.
+      schema:
+        type: integer
+        default: 1
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Vantage API token. Create a free API key from your Vantage account page at https://console.vantage.sh/account/api_access_tokens.

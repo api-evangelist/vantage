@@ -1,0 +1,363 @@
+openapi: 3.1.0
+info:
+  title: Vantage Cloud Pricing Access Grants Cost Reports API
+  description: The Vantage Cloud Pricing API provides programmatic access to cloud infrastructure pricing data across multiple cloud providers. You can query products, services, and providers to retrieve up-to-date pricing information for AWS, Azure, GCP, and other supported cloud platforms. The API is free for all registered Vantage users and returns JSON-encoded responses. An OpenAPI specification is always available at https://api.vantage.sh/v1/swagger.json.
+  version: 1.0.0
+  contact:
+    name: Vantage Support
+    url: https://www.vantage.sh/
+  license:
+    name: Proprietary
+    url: https://www.vantage.sh/terms
+  termsOfService: https://www.vantage.sh/terms
+servers:
+- url: https://api.vantage.sh/v1
+  description: Vantage Cloud Pricing API v1 Production
+security:
+- bearerAuth: []
+tags:
+- name: Cost Reports
+  description: Create, read, update, and delete Cost Reports.
+paths:
+  /cost_reports:
+    get:
+      operationId: getCostReports
+      summary: Vantage Get All Cost Reports
+      description: Returns all Cost Reports that the current API token has access to.
+      tags:
+      - Cost Reports
+      parameters:
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful response with a list of Cost Reports.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cost_reports:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CostReport'
+              examples:
+                Getcostreports200Example:
+                  summary: Default getCostReports 200 response
+                  x-microcks-default: true
+                  value:
+                    cost_reports:
+                    - token: example_value
+                      title: Example Title
+                      filter: example_value
+                      groupings: example_value
+                      folder_token: example_value
+                      saved_filter_tokens:
+                      - {}
+                      workspace_token: example_value
+                      created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createCostReport
+      summary: Vantage Create a Cost Report
+      description: Creates a new Cost Report.
+      tags:
+      - Cost Reports
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CostReportInput'
+            examples:
+              CreatecostreportRequestExample:
+                summary: Default createCostReport request
+                x-microcks-default: true
+                value:
+                  title: Example Title
+                  filter: example_value
+                  groupings: example_value
+                  folder_token: example_value
+                  saved_filter_tokens:
+                  - example_value
+                  workspace_token: example_value
+      responses:
+        '201':
+          description: Cost Report created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CostReport'
+              examples:
+                Createcostreport201Example:
+                  summary: Default createCostReport 201 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    filter: example_value
+                    groupings: example_value
+                    folder_token: example_value
+                    saved_filter_tokens:
+                    - example_value
+                    workspace_token: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /cost_reports/{cost_report_token}:
+    get:
+      operationId: getCostReport
+      summary: Vantage Get a Cost Report
+      description: Returns a specific Cost Report by token.
+      tags:
+      - Cost Reports
+      parameters:
+      - $ref: '#/components/parameters/CostReportToken'
+      responses:
+        '200':
+          description: Successful response with the Cost Report.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CostReport'
+              examples:
+                Getcostreport200Example:
+                  summary: Default getCostReport 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    filter: example_value
+                    groupings: example_value
+                    folder_token: example_value
+                    saved_filter_tokens:
+                    - example_value
+                    workspace_token: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateCostReport
+      summary: Vantage Update a Cost Report
+      description: Updates an existing Cost Report.
+      tags:
+      - Cost Reports
+      parameters:
+      - $ref: '#/components/parameters/CostReportToken'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CostReportInput'
+            examples:
+              UpdatecostreportRequestExample:
+                summary: Default updateCostReport request
+                x-microcks-default: true
+                value:
+                  title: Example Title
+                  filter: example_value
+                  groupings: example_value
+                  folder_token: example_value
+                  saved_filter_tokens:
+                  - example_value
+                  workspace_token: example_value
+      responses:
+        '200':
+          description: Cost Report updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CostReport'
+              examples:
+                Updatecostreport200Example:
+                  summary: Default updateCostReport 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    filter: example_value
+                    groupings: example_value
+                    folder_token: example_value
+                    saved_filter_tokens:
+                    - example_value
+                    workspace_token: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteCostReport
+      summary: Vantage Delete a Cost Report
+      description: Deletes an existing Cost Report.
+      tags:
+      - Cost Reports
+      parameters:
+      - $ref: '#/components/parameters/CostReportToken'
+      responses:
+        '204':
+          description: Cost Report deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    Unauthorized:
+      description: Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: The request was malformed or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnprocessableEntity:
+      description: The request was well-formed but could not be processed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    CostReportInput:
+      type: object
+      required:
+      - title
+      properties:
+        title:
+          type: string
+          description: The title of the Cost Report.
+          example: Example Title
+        filter:
+          type: string
+          description: VQL filter expression for the Cost Report.
+          example: example_value
+        groupings:
+          type: string
+          description: Groupings for the Cost Report.
+          example: example_value
+        folder_token:
+          type: string
+          description: The token of the Folder to place the report in.
+          example: example_value
+        saved_filter_tokens:
+          type: array
+          items:
+            type: string
+          description: Tokens of Saved Filters to apply.
+          example: []
+        workspace_token:
+          type: string
+          description: The token of the Workspace for the report.
+          example: example_value
+    Error:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+                description: A human-readable error message.
+          example: []
+    CostReport:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The unique token identifier for the Cost Report.
+          example: example_value
+        title:
+          type: string
+          description: The title of the Cost Report.
+          example: Example Title
+        filter:
+          type: string
+          description: The VQL filter applied to the Cost Report.
+          example: example_value
+        groupings:
+          type: string
+          description: The groupings applied to the Cost Report.
+          example: example_value
+        folder_token:
+          type: string
+          description: The token of the Folder this report belongs to.
+          example: example_value
+        saved_filter_tokens:
+          type: array
+          items:
+            type: string
+          description: Tokens of Saved Filters applied to this report.
+          example: []
+        workspace_token:
+          type: string
+          description: The token of the Workspace this report belongs to.
+          example: example_value
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time the Cost Report was created.
+          example: '2026-01-15T10:30:00Z'
+  parameters:
+    CostReportToken:
+      name: cost_report_token
+      in: path
+      required: true
+      description: The unique token of the Cost Report.
+      schema:
+        type: string
+    LimitParam:
+      name: limit
+      in: query
+      description: The number of results per page.
+      schema:
+        type: integer
+        default: 25
+    PageParam:
+      name: page
+      in: query
+      description: The page of results to return.
+      schema:
+        type: integer
+        default: 1
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Vantage API token. Create a free API key from your Vantage account page at https://console.vantage.sh/account/api_access_tokens.

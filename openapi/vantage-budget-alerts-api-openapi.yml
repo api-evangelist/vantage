@@ -1,0 +1,302 @@
+openapi: 3.1.0
+info:
+  title: Vantage Cloud Pricing Access Grants Budget Alerts API
+  description: The Vantage Cloud Pricing API provides programmatic access to cloud infrastructure pricing data across multiple cloud providers. You can query products, services, and providers to retrieve up-to-date pricing information for AWS, Azure, GCP, and other supported cloud platforms. The API is free for all registered Vantage users and returns JSON-encoded responses. An OpenAPI specification is always available at https://api.vantage.sh/v1/swagger.json.
+  version: 1.0.0
+  contact:
+    name: Vantage Support
+    url: https://www.vantage.sh/
+  license:
+    name: Proprietary
+    url: https://www.vantage.sh/terms
+  termsOfService: https://www.vantage.sh/terms
+servers:
+- url: https://api.vantage.sh/v1
+  description: Vantage Cloud Pricing API v1 Production
+security:
+- bearerAuth: []
+tags:
+- name: Budget Alerts
+  description: Create and manage budget alerts.
+paths:
+  /budget_alerts:
+    get:
+      operationId: getBudgetAlerts
+      summary: Vantage Get All Budget Alerts
+      description: Returns all Budget Alerts that the current API token has access to.
+      tags:
+      - Budget Alerts
+      parameters:
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful response with a list of Budget Alerts.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  budget_alerts:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BudgetAlert'
+              examples:
+                Getbudgetalerts200Example:
+                  summary: Default getBudgetAlerts 200 response
+                  x-microcks-default: true
+                  value:
+                    budget_alerts:
+                    - token: example_value
+                      cost_report_token: example_value
+                      budget: example_value
+                      period: example_value
+                      created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createBudgetAlert
+      summary: Vantage Create a Budget Alert
+      description: Creates a new Budget Alert.
+      tags:
+      - Budget Alerts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BudgetAlertInput'
+            examples:
+              CreatebudgetalertRequestExample:
+                summary: Default createBudgetAlert request
+                x-microcks-default: true
+                value:
+                  cost_report_token: example_value
+                  budget: example_value
+                  period: example_value
+      responses:
+        '201':
+          description: Budget Alert created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BudgetAlert'
+              examples:
+                Createbudgetalert201Example:
+                  summary: Default createBudgetAlert 201 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    cost_report_token: example_value
+                    budget: example_value
+                    period: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /budget_alerts/{budget_alert_token}:
+    get:
+      operationId: getBudgetAlert
+      summary: Vantage Get a Budget Alert
+      description: Returns a specific Budget Alert by token.
+      tags:
+      - Budget Alerts
+      parameters:
+      - $ref: '#/components/parameters/BudgetAlertToken'
+      responses:
+        '200':
+          description: Successful response with the Budget Alert.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BudgetAlert'
+              examples:
+                Getbudgetalert200Example:
+                  summary: Default getBudgetAlert 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    cost_report_token: example_value
+                    budget: example_value
+                    period: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateBudgetAlert
+      summary: Vantage Update a Budget Alert
+      description: Updates an existing Budget Alert.
+      tags:
+      - Budget Alerts
+      parameters:
+      - $ref: '#/components/parameters/BudgetAlertToken'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BudgetAlertInput'
+            examples:
+              UpdatebudgetalertRequestExample:
+                summary: Default updateBudgetAlert request
+                x-microcks-default: true
+                value:
+                  cost_report_token: example_value
+                  budget: example_value
+                  period: example_value
+      responses:
+        '200':
+          description: Budget Alert updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BudgetAlert'
+              examples:
+                Updatebudgetalert200Example:
+                  summary: Default updateBudgetAlert 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    cost_report_token: example_value
+                    budget: example_value
+                    period: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteBudgetAlert
+      summary: Vantage Delete a Budget Alert
+      description: Deletes an existing Budget Alert.
+      tags:
+      - Budget Alerts
+      parameters:
+      - $ref: '#/components/parameters/BudgetAlertToken'
+      responses:
+        '204':
+          description: Budget Alert deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    Unauthorized:
+      description: Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnprocessableEntity:
+      description: The request was well-formed but could not be processed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    BudgetAlertToken:
+      name: budget_alert_token
+      in: path
+      required: true
+      description: The unique token of the Budget Alert.
+      schema:
+        type: string
+    LimitParam:
+      name: limit
+      in: query
+      description: The number of results per page.
+      schema:
+        type: integer
+        default: 25
+    PageParam:
+      name: page
+      in: query
+      description: The page of results to return.
+      schema:
+        type: integer
+        default: 1
+  schemas:
+    BudgetAlert:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The unique token identifier for the Budget Alert.
+          example: example_value
+        cost_report_token:
+          type: string
+          description: The token of the associated Cost Report.
+          example: example_value
+        budget:
+          type: string
+          description: The budget amount.
+          example: example_value
+        period:
+          type: string
+          description: The budget period (e.g., monthly).
+          example: example_value
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time the Budget Alert was created.
+          example: '2026-01-15T10:30:00Z'
+    Error:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+                description: A human-readable error message.
+          example: []
+    BudgetAlertInput:
+      type: object
+      required:
+      - cost_report_token
+      - budget
+      properties:
+        cost_report_token:
+          type: string
+          description: The token of the Cost Report to set the budget for.
+          example: example_value
+        budget:
+          type: string
+          description: The budget amount.
+          example: example_value
+        period:
+          type: string
+          description: The budget period (e.g., monthly).
+          example: example_value
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Vantage API token. Create a free API key from your Vantage account page at https://console.vantage.sh/account/api_access_tokens.

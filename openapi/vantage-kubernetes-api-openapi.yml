@@ -1,0 +1,134 @@
+openapi: 3.1.0
+info:
+  title: Vantage Cloud Pricing Access Grants Kubernetes API
+  description: The Vantage Cloud Pricing API provides programmatic access to cloud infrastructure pricing data across multiple cloud providers. You can query products, services, and providers to retrieve up-to-date pricing information for AWS, Azure, GCP, and other supported cloud platforms. The API is free for all registered Vantage users and returns JSON-encoded responses. An OpenAPI specification is always available at https://api.vantage.sh/v1/swagger.json.
+  version: 1.0.0
+  contact:
+    name: Vantage Support
+    url: https://www.vantage.sh/
+  license:
+    name: Proprietary
+    url: https://www.vantage.sh/terms
+  termsOfService: https://www.vantage.sh/terms
+servers:
+- url: https://api.vantage.sh/v1
+  description: Vantage Cloud Pricing API v1 Production
+security:
+- bearerAuth: []
+tags:
+- name: Kubernetes
+  description: Manage Kubernetes cost data and efficiency reports.
+paths:
+  /kubernetes:
+    get:
+      operationId: getKubernetesEfficiencyReports
+      summary: Vantage Get Kubernetes Efficiency Reports
+      description: Returns Kubernetes efficiency data that the current API token has access to.
+      tags:
+      - Kubernetes
+      parameters:
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful response with Kubernetes efficiency data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  kubernetes_efficiency_reports:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/KubernetesEfficiencyReport'
+              examples:
+                Getkubernetesefficiencyreports200Example:
+                  summary: Default getKubernetesEfficiencyReports 200 response
+                  x-microcks-default: true
+                  value:
+                    kubernetes_efficiency_reports:
+                    - token: example_value
+                      cluster_name: example_value
+                      namespace: example_value
+                      idle_cost: example_value
+                      total_cost: example_value
+                      efficiency: 42.5
+                      created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    Unauthorized:
+      description: Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+                description: A human-readable error message.
+          example: []
+    KubernetesEfficiencyReport:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The unique token identifier for the report.
+          example: example_value
+        cluster_name:
+          type: string
+          description: The Kubernetes cluster name.
+          example: example_value
+        namespace:
+          type: string
+          description: The Kubernetes namespace.
+          example: example_value
+        idle_cost:
+          type: string
+          description: The idle cost for the cluster/namespace.
+          example: example_value
+        total_cost:
+          type: string
+          description: The total cost for the cluster/namespace.
+          example: example_value
+        efficiency:
+          type: number
+          description: The efficiency percentage.
+          example: 42.5
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time the report was generated.
+          example: '2026-01-15T10:30:00Z'
+  parameters:
+    LimitParam:
+      name: limit
+      in: query
+      description: The number of results per page.
+      schema:
+        type: integer
+        default: 25
+    PageParam:
+      name: page
+      in: query
+      description: The page of results to return.
+      schema:
+        type: integer
+        default: 1
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Vantage API token. Create a free API key from your Vantage account page at https://console.vantage.sh/account/api_access_tokens.

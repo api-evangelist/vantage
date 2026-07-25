@@ -1,0 +1,167 @@
+openapi: 3.1.0
+info:
+  title: Vantage Cloud Pricing Access Grants Services API
+  description: The Vantage Cloud Pricing API provides programmatic access to cloud infrastructure pricing data across multiple cloud providers. You can query products, services, and providers to retrieve up-to-date pricing information for AWS, Azure, GCP, and other supported cloud platforms. The API is free for all registered Vantage users and returns JSON-encoded responses. An OpenAPI specification is always available at https://api.vantage.sh/v1/swagger.json.
+  version: 1.0.0
+  contact:
+    name: Vantage Support
+    url: https://www.vantage.sh/
+  license:
+    name: Proprietary
+    url: https://www.vantage.sh/terms
+  termsOfService: https://www.vantage.sh/terms
+servers:
+- url: https://api.vantage.sh/v1
+  description: Vantage Cloud Pricing API v1 Production
+security:
+- bearerAuth: []
+tags:
+- name: Services
+paths:
+  /services:
+    get:
+      operationId: getServices
+      summary: Vantage Get All Services
+      description: Returns all Services available across all cloud Providers or filtered by a specific Provider.
+      tags:
+      - Services
+      parameters:
+      - name: provider_id
+        in: query
+        description: Filter services by a specific cloud provider identifier.
+        schema:
+          type: string
+        example: '500123'
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful response with a list of Services.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  services:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Service'
+              examples:
+                Getservices200Example:
+                  summary: Default getServices 200 response
+                  x-microcks-default: true
+                  value:
+                    services:
+                    - id: abc123
+                      name: Example Title
+                      provider_id: '500123'
+                      products_count: 10
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /services/{service_id}:
+    get:
+      operationId: getService
+      summary: Vantage Get a Service
+      description: Returns a specific Service by identifier.
+      tags:
+      - Services
+      parameters:
+      - name: service_id
+        in: path
+        required: true
+        description: The identifier of the service.
+        schema:
+          type: string
+        example: '500123'
+      responses:
+        '200':
+          description: Successful response with the Service.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+              examples:
+                Getservice200Example:
+                  summary: Default getService 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    provider_id: '500123'
+                    products_count: 10
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    Unauthorized:
+      description: Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Service:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the Service.
+          example: abc123
+        name:
+          type: string
+          description: The display name of the Service.
+          example: Example Title
+        provider_id:
+          type: string
+          description: The identifier of the Provider this Service belongs to.
+          example: '500123'
+        products_count:
+          type: integer
+          description: The number of products available in this Service.
+          example: 10
+    Error:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+                description: A human-readable error message.
+          example: []
+  parameters:
+    LimitParam:
+      name: limit
+      in: query
+      description: The number of results per page.
+      schema:
+        type: integer
+        default: 25
+    PageParam:
+      name: page
+      in: query
+      description: The page of results to return.
+      schema:
+        type: integer
+        default: 1
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Vantage API token. Create a free API key from your Vantage account page at https://console.vantage.sh/account/api_access_tokens.

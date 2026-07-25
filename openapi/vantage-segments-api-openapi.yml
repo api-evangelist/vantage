@@ -1,0 +1,315 @@
+openapi: 3.1.0
+info:
+  title: Vantage Cloud Pricing Access Grants Segments API
+  description: The Vantage Cloud Pricing API provides programmatic access to cloud infrastructure pricing data across multiple cloud providers. You can query products, services, and providers to retrieve up-to-date pricing information for AWS, Azure, GCP, and other supported cloud platforms. The API is free for all registered Vantage users and returns JSON-encoded responses. An OpenAPI specification is always available at https://api.vantage.sh/v1/swagger.json.
+  version: 1.0.0
+  contact:
+    name: Vantage Support
+    url: https://www.vantage.sh/
+  license:
+    name: Proprietary
+    url: https://www.vantage.sh/terms
+  termsOfService: https://www.vantage.sh/terms
+servers:
+- url: https://api.vantage.sh/v1
+  description: Vantage Cloud Pricing API v1 Production
+security:
+- bearerAuth: []
+tags:
+- name: Segments
+  description: Create, update, and delete cost allocation segments.
+paths:
+  /segments:
+    get:
+      operationId: getSegments
+      summary: Vantage Get All Segments
+      description: Returns all cost allocation Segments that the current API token has access to.
+      tags:
+      - Segments
+      parameters:
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful response with a list of Segments.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  segments:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Segment'
+              examples:
+                Getsegments200Example:
+                  summary: Default getSegments 200 response
+                  x-microcks-default: true
+                  value:
+                    segments:
+                    - token: example_value
+                      title: Example Title
+                      filter: example_value
+                      priority: 10
+                      workspace_token: example_value
+                      created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createSegment
+      summary: Vantage Create a Segment
+      description: Creates a new cost allocation Segment.
+      tags:
+      - Segments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SegmentInput'
+            examples:
+              CreatesegmentRequestExample:
+                summary: Default createSegment request
+                x-microcks-default: true
+                value:
+                  title: Example Title
+                  filter: example_value
+                  priority: 10
+                  workspace_token: example_value
+      responses:
+        '201':
+          description: Segment created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Segment'
+              examples:
+                Createsegment201Example:
+                  summary: Default createSegment 201 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    filter: example_value
+                    priority: 10
+                    workspace_token: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /segments/{segment_token}:
+    get:
+      operationId: getSegment
+      summary: Vantage Get a Segment
+      description: Returns a specific Segment by token.
+      tags:
+      - Segments
+      parameters:
+      - $ref: '#/components/parameters/SegmentToken'
+      responses:
+        '200':
+          description: Successful response with the Segment.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Segment'
+              examples:
+                Getsegment200Example:
+                  summary: Default getSegment 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    filter: example_value
+                    priority: 10
+                    workspace_token: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateSegment
+      summary: Vantage Update a Segment
+      description: Updates an existing Segment.
+      tags:
+      - Segments
+      parameters:
+      - $ref: '#/components/parameters/SegmentToken'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SegmentInput'
+            examples:
+              UpdatesegmentRequestExample:
+                summary: Default updateSegment request
+                x-microcks-default: true
+                value:
+                  title: Example Title
+                  filter: example_value
+                  priority: 10
+                  workspace_token: example_value
+      responses:
+        '200':
+          description: Segment updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Segment'
+              examples:
+                Updatesegment200Example:
+                  summary: Default updateSegment 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    filter: example_value
+                    priority: 10
+                    workspace_token: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteSegment
+      summary: Vantage Delete a Segment
+      description: Deletes an existing Segment.
+      tags:
+      - Segments
+      parameters:
+      - $ref: '#/components/parameters/SegmentToken'
+      responses:
+        '204':
+          description: Segment deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    Unauthorized:
+      description: Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnprocessableEntity:
+      description: The request was well-formed but could not be processed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    SegmentToken:
+      name: segment_token
+      in: path
+      required: true
+      description: The unique token of the Segment.
+      schema:
+        type: string
+    LimitParam:
+      name: limit
+      in: query
+      description: The number of results per page.
+      schema:
+        type: integer
+        default: 25
+    PageParam:
+      name: page
+      in: query
+      description: The page of results to return.
+      schema:
+        type: integer
+        default: 1
+  schemas:
+    Segment:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The unique token identifier for the Segment.
+          example: example_value
+        title:
+          type: string
+          description: The title of the Segment.
+          example: Example Title
+        filter:
+          type: string
+          description: The VQL filter expression for the Segment.
+          example: example_value
+        priority:
+          type: integer
+          description: The priority order of the Segment.
+          example: 10
+        workspace_token:
+          type: string
+          description: The token of the Workspace this Segment belongs to.
+          example: example_value
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time the Segment was created.
+          example: '2026-01-15T10:30:00Z'
+    Error:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+                description: A human-readable error message.
+          example: []
+    SegmentInput:
+      type: object
+      required:
+      - title
+      properties:
+        title:
+          type: string
+          description: The title of the Segment.
+          example: Example Title
+        filter:
+          type: string
+          description: The VQL filter expression.
+          example: example_value
+        priority:
+          type: integer
+          description: The priority order of the Segment.
+          example: 10
+        workspace_token:
+          type: string
+          description: The token of the Workspace for the Segment.
+          example: example_value
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Vantage API token. Create a free API key from your Vantage account page at https://console.vantage.sh/account/api_access_tokens.

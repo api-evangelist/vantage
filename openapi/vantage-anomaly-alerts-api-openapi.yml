@@ -1,0 +1,287 @@
+openapi: 3.1.0
+info:
+  title: Vantage Cloud Pricing Access Grants Anomaly Alerts API
+  description: The Vantage Cloud Pricing API provides programmatic access to cloud infrastructure pricing data across multiple cloud providers. You can query products, services, and providers to retrieve up-to-date pricing information for AWS, Azure, GCP, and other supported cloud platforms. The API is free for all registered Vantage users and returns JSON-encoded responses. An OpenAPI specification is always available at https://api.vantage.sh/v1/swagger.json.
+  version: 1.0.0
+  contact:
+    name: Vantage Support
+    url: https://www.vantage.sh/
+  license:
+    name: Proprietary
+    url: https://www.vantage.sh/terms
+  termsOfService: https://www.vantage.sh/terms
+servers:
+- url: https://api.vantage.sh/v1
+  description: Vantage Cloud Pricing API v1 Production
+security:
+- bearerAuth: []
+tags:
+- name: Anomaly Alerts
+  description: Create and manage cost anomaly alerts.
+paths:
+  /anomaly_alerts:
+    get:
+      operationId: getAnomalyAlerts
+      summary: Vantage Get All Anomaly Alerts
+      description: Returns all Anomaly Alerts that the current API token has access to.
+      tags:
+      - Anomaly Alerts
+      parameters:
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful response with a list of Anomaly Alerts.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  anomaly_alerts:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AnomalyAlert'
+              examples:
+                Getanomalyalerts200Example:
+                  summary: Default getAnomalyAlerts 200 response
+                  x-microcks-default: true
+                  value:
+                    anomaly_alerts:
+                    - token: example_value
+                      cost_report_token: example_value
+                      threshold: 42.5
+                      created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createAnomalyAlert
+      summary: Vantage Create an Anomaly Alert
+      description: Creates a new Anomaly Alert.
+      tags:
+      - Anomaly Alerts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnomalyAlertInput'
+            examples:
+              CreateanomalyalertRequestExample:
+                summary: Default createAnomalyAlert request
+                x-microcks-default: true
+                value:
+                  cost_report_token: example_value
+                  threshold: 42.5
+      responses:
+        '201':
+          description: Anomaly Alert created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnomalyAlert'
+              examples:
+                Createanomalyalert201Example:
+                  summary: Default createAnomalyAlert 201 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    cost_report_token: example_value
+                    threshold: 42.5
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /anomaly_alerts/{anomaly_alert_token}:
+    get:
+      operationId: getAnomalyAlert
+      summary: Vantage Get an Anomaly Alert
+      description: Returns a specific Anomaly Alert by token.
+      tags:
+      - Anomaly Alerts
+      parameters:
+      - $ref: '#/components/parameters/AnomalyAlertToken'
+      responses:
+        '200':
+          description: Successful response with the Anomaly Alert.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnomalyAlert'
+              examples:
+                Getanomalyalert200Example:
+                  summary: Default getAnomalyAlert 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    cost_report_token: example_value
+                    threshold: 42.5
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateAnomalyAlert
+      summary: Vantage Update an Anomaly Alert
+      description: Updates an existing Anomaly Alert.
+      tags:
+      - Anomaly Alerts
+      parameters:
+      - $ref: '#/components/parameters/AnomalyAlertToken'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnomalyAlertInput'
+            examples:
+              UpdateanomalyalertRequestExample:
+                summary: Default updateAnomalyAlert request
+                x-microcks-default: true
+                value:
+                  cost_report_token: example_value
+                  threshold: 42.5
+      responses:
+        '200':
+          description: Anomaly Alert updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnomalyAlert'
+              examples:
+                Updateanomalyalert200Example:
+                  summary: Default updateAnomalyAlert 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    cost_report_token: example_value
+                    threshold: 42.5
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteAnomalyAlert
+      summary: Vantage Delete an Anomaly Alert
+      description: Deletes an existing Anomaly Alert.
+      tags:
+      - Anomaly Alerts
+      parameters:
+      - $ref: '#/components/parameters/AnomalyAlertToken'
+      responses:
+        '204':
+          description: Anomaly Alert deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    AnomalyAlert:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The unique token identifier for the Anomaly Alert.
+          example: example_value
+        cost_report_token:
+          type: string
+          description: The token of the associated Cost Report.
+          example: example_value
+        threshold:
+          type: number
+          description: The threshold percentage for anomaly detection.
+          example: 42.5
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time the Anomaly Alert was created.
+          example: '2026-01-15T10:30:00Z'
+    AnomalyAlertInput:
+      type: object
+      required:
+      - cost_report_token
+      properties:
+        cost_report_token:
+          type: string
+          description: The token of the Cost Report to monitor.
+          example: example_value
+        threshold:
+          type: number
+          description: The threshold percentage for anomaly detection.
+          example: 42.5
+    Error:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+                description: A human-readable error message.
+          example: []
+  responses:
+    Unauthorized:
+      description: Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnprocessableEntity:
+      description: The request was well-formed but could not be processed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    AnomalyAlertToken:
+      name: anomaly_alert_token
+      in: path
+      required: true
+      description: The unique token of the Anomaly Alert.
+      schema:
+        type: string
+    LimitParam:
+      name: limit
+      in: query
+      description: The number of results per page.
+      schema:
+        type: integer
+        default: 25
+    PageParam:
+      name: page
+      in: query
+      description: The page of results to return.
+      schema:
+        type: integer
+        default: 1
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Vantage API token. Create a free API key from your Vantage account page at https://console.vantage.sh/account/api_access_tokens.

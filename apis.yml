@@ -1,107 +1,1606 @@
 aid: vantage
 url: https://raw.githubusercontent.com/api-evangelist/vantage/refs/heads/main/apis.yml
 apis:
-  - aid: vantage:cost-management-api
-    name: Vantage Cost Management API
-    tags:
-      - Anomaly Detection
-      - Budgets
-      - Cloud Costs
-      - Cost Reports
-      - Dashboards
-      - FinOps
-    humanURL: https://docs.vantage.sh/api
-    properties:
-      - url: https://vantage.readme.io/reference/general
-        type: Documentation
-      - url: openapi/vantage-cost-management-api-openapi.yml
-        type: OpenAPI
-      - url: https://api.vantage.sh/v2/oas_v3.json
-        type: OpenAPI
-      - url: https://api.vantage.sh/v2/swagger.json
-        type: OpenAPI
-      - url: json-schema/cost-report.json
-        type: JSONSchema
-      - url: json-schema/cost.json
-        type: JSONSchema
-      - url: json-schema/folder.json
-        type: JSONSchema
-      - url: json-schema/dashboard.json
-        type: JSONSchema
-      - url: json-schema/saved-filter.json
-        type: JSONSchema
-      - url: json-schema/workspace.json
-        type: JSONSchema
-      - url: json-schema/team.json
-        type: JSONSchema
-      - url: json-schema/access-grant.json
-        type: JSONSchema
-      - url: json-schema/budget-alert.json
-        type: JSONSchema
-      - url: json-schema/anomaly-alert.json
-        type: JSONSchema
-      - url: json-schema/recommendation.json
-        type: JSONSchema
-      - url: json-schema/segment.json
-        type: JSONSchema
-      - url: json-schema/integration.json
-        type: JSONSchema
-      - url: json-schema/managed-account.json
-        type: JSONSchema
-      - url: json-schema/cost-provider.json
-        type: JSONSchema
-      - url: json-schema/business-metric.json
-        type: JSONSchema
-      - url: json-schema/resource-report.json
-        type: JSONSchema
-      - url: json-schema/resource.json
-        type: JSONSchema
-      - url: json-schema/network-flow-report.json
-        type: JSONSchema
-      - url: json-schema/financial-commitment-report.json
-        type: JSONSchema
-      - url: json-schema/kubernetes-efficiency-report.json
-        type: JSONSchema
-      - url: json-ld/vantage-context.jsonld
-        type: JSONLD
-    description: >-
-      The Vantage Cost Management API (v2) provides programmatic access to cloud cost data and enables automation of
-      cost management workflows. Create and manage Cost Reports, Folders, Dashboards, Saved Filters, Teams, Budgets,
-      Anomaly Alerts, Business Metrics, Network Flow Reports, Financial Commitment Reports, Resource Reports, Segments,
-      Integrations, and more. Supports the Vantage Query Language (VQL) for filtering cost data across multiple cloud
-      providers.
-    baseURL: https://api.vantage.sh/v2
-  - aid: vantage:cloud-pricing-api
-    name: Vantage Cloud Pricing API
-    tags:
-      - AWS
-      - Azure
-      - Cloud Pricing
-      - GCP
-      - Infrastructure Pricing
-    humanURL: https://docs.vantage.sh/api
-    properties:
-      - url: https://vantage.readme.io/reference/general
-        type: Documentation
-      - url: openapi/vantage-cloud-pricing-api-openapi.yml
-        type: OpenAPI
-      - url: https://api.vantage.sh/v1/swagger.json
-        type: OpenAPI
-      - url: json-schema/provider.json
-        type: JSONSchema
-      - url: json-schema/service.json
-        type: JSONSchema
-      - url: json-schema/product.json
-        type: JSONSchema
-      - url: json-schema/price.json
-        type: JSONSchema
-      - url: json-ld/vantage-context.jsonld
-        type: JSONLD
-    description: >-
-      The Vantage Cloud Pricing API (v1) provides programmatic access to cloud infrastructure pricing data across
-      multiple providers including AWS, Azure, and GCP. Query providers, services, products, and prices to retrieve
-      up-to-date pricing information for cloud infrastructure. The API is free for all registered Vantage users.
-    baseURL: https://api.vantage.sh/v1
+- aid: vantage:vantage-access-grants-api
+  name: Vantage Access Grants API
+  description: Manage resource access grants for teams.
+  humanURL: https://docs.vantage.sh/api
+  baseURL: https://api.vantage.sh/v2
+  tags:
+  - Access Grants
+  properties:
+  - type: OpenAPI
+    url: openapi/vantage-access-grants-api-openapi.yml
+  - type: Documentation
+    url: https://vantage.readme.io/reference/general
+  - type: JSONSchema
+    url: json-schema/cost-report.json
+  - type: JSONSchema
+    url: json-schema/cost.json
+  - type: JSONSchema
+    url: json-schema/folder.json
+  - type: JSONSchema
+    url: json-schema/dashboard.json
+  - type: JSONSchema
+    url: json-schema/saved-filter.json
+  - type: JSONSchema
+    url: json-schema/workspace.json
+  - type: JSONSchema
+    url: json-schema/team.json
+  - type: JSONSchema
+    url: json-schema/access-grant.json
+  - type: JSONSchema
+    url: json-schema/budget-alert.json
+  - type: JSONSchema
+    url: json-schema/anomaly-alert.json
+  - type: JSONSchema
+    url: json-schema/recommendation.json
+  - type: JSONSchema
+    url: json-schema/segment.json
+  - type: JSONSchema
+    url: json-schema/integration.json
+  - type: JSONSchema
+    url: json-schema/managed-account.json
+  - type: JSONSchema
+    url: json-schema/cost-provider.json
+  - type: JSONSchema
+    url: json-schema/business-metric.json
+  - type: JSONSchema
+    url: json-schema/resource-report.json
+  - type: JSONSchema
+    url: json-schema/resource.json
+  - type: JSONSchema
+    url: json-schema/network-flow-report.json
+  - type: JSONSchema
+    url: json-schema/financial-commitment-report.json
+  - type: JSONSchema
+    url: json-schema/kubernetes-efficiency-report.json
+  - type: JSONLD
+    url: json-ld/vantage-context.jsonld
+  - type: JSONSchema
+    url: json-schema/provider.json
+  - type: JSONSchema
+    url: json-schema/service.json
+  - type: JSONSchema
+    url: json-schema/product.json
+  - type: JSONSchema
+    url: json-schema/price.json
+- aid: vantage:vantage-anomaly-alerts-api
+  name: Vantage Anomaly Alerts API
+  description: Create and manage cost anomaly alerts.
+  humanURL: https://docs.vantage.sh/api
+  baseURL: https://api.vantage.sh/v2
+  tags:
+  - Anomaly Alerts
+  properties:
+  - type: OpenAPI
+    url: openapi/vantage-anomaly-alerts-api-openapi.yml
+  - type: Documentation
+    url: https://vantage.readme.io/reference/general
+  - type: JSONSchema
+    url: json-schema/cost-report.json
+  - type: JSONSchema
+    url: json-schema/cost.json
+  - type: JSONSchema
+    url: json-schema/folder.json
+  - type: JSONSchema
+    url: json-schema/dashboard.json
+  - type: JSONSchema
+    url: json-schema/saved-filter.json
+  - type: JSONSchema
+    url: json-schema/workspace.json
+  - type: JSONSchema
+    url: json-schema/team.json
+  - type: JSONSchema
+    url: json-schema/access-grant.json
+  - type: JSONSchema
+    url: json-schema/budget-alert.json
+  - type: JSONSchema
+    url: json-schema/anomaly-alert.json
+  - type: JSONSchema
+    url: json-schema/recommendation.json
+  - type: JSONSchema
+    url: json-schema/segment.json
+  - type: JSONSchema
+    url: json-schema/integration.json
+  - type: JSONSchema
+    url: json-schema/managed-account.json
+  - type: JSONSchema
+    url: json-schema/cost-provider.json
+  - type: JSONSchema
+    url: json-schema/business-metric.json
+  - type: JSONSchema
+    url: json-schema/resource-report.json
+  - type: JSONSchema
+    url: json-schema/resource.json
+  - type: JSONSchema
+    url: json-schema/network-flow-report.json
+  - type: JSONSchema
+    url: json-schema/financial-commitment-report.json
+  - type: JSONSchema
+    url: json-schema/kubernetes-efficiency-report.json
+  - type: JSONLD
+    url: json-ld/vantage-context.jsonld
+  - type: JSONSchema
+    url: json-schema/provider.json
+  - type: JSONSchema
+    url: json-schema/service.json
+  - type: JSONSchema
+    url: json-schema/product.json
+  - type: JSONSchema
+    url: json-schema/price.json
+- aid: vantage:vantage-budget-alerts-api
+  name: Vantage Budget Alerts API
+  description: Create and manage budget alerts.
+  humanURL: https://docs.vantage.sh/api
+  baseURL: https://api.vantage.sh/v2
+  tags:
+  - Budget Alerts
+  properties:
+  - type: OpenAPI
+    url: openapi/vantage-budget-alerts-api-openapi.yml
+  - type: Documentation
+    url: https://vantage.readme.io/reference/general
+  - type: JSONSchema
+    url: json-schema/cost-report.json
+  - type: JSONSchema
+    url: json-schema/cost.json
+  - type: JSONSchema
+    url: json-schema/folder.json
+  - type: JSONSchema
+    url: json-schema/dashboard.json
+  - type: JSONSchema
+    url: json-schema/saved-filter.json
+  - type: JSONSchema
+    url: json-schema/workspace.json
+  - type: JSONSchema
+    url: json-schema/team.json
+  - type: JSONSchema
+    url: json-schema/access-grant.json
+  - type: JSONSchema
+    url: json-schema/budget-alert.json
+  - type: JSONSchema
+    url: json-schema/anomaly-alert.json
+  - type: JSONSchema
+    url: json-schema/recommendation.json
+  - type: JSONSchema
+    url: json-schema/segment.json
+  - type: JSONSchema
+    url: json-schema/integration.json
+  - type: JSONSchema
+    url: json-schema/managed-account.json
+  - type: JSONSchema
+    url: json-schema/cost-provider.json
+  - type: JSONSchema
+    url: json-schema/business-metric.json
+  - type: JSONSchema
+    url: json-schema/resource-report.json
+  - type: JSONSchema
+    url: json-schema/resource.json
+  - type: JSONSchema
+    url: json-schema/network-flow-report.json
+  - type: JSONSchema
+    url: json-schema/financial-commitment-report.json
+  - type: JSONSchema
+    url: json-schema/kubernetes-efficiency-report.json
+  - type: JSONLD
+    url: json-ld/vantage-context.jsonld
+  - type: JSONSchema
+    url: json-schema/provider.json
+  - type: JSONSchema
+    url: json-schema/service.json
+  - type: JSONSchema
+    url: json-schema/product.json
+  - type: JSONSchema
+    url: json-schema/price.json
+- aid: vantage:vantage-business-metrics-api
+  name: Vantage Business Metrics API
+  description: Create, update, and delete business metrics.
+  humanURL: https://docs.vantage.sh/api
+  baseURL: https://api.vantage.sh/v2
+  tags:
+  - Business Metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/vantage-business-metrics-api-openapi.yml
+  - type: Documentation
+    url: https://vantage.readme.io/reference/general
+  - type: JSONSchema
+    url: json-schema/cost-report.json
+  - type: JSONSchema
+    url: json-schema/cost.json
+  - type: JSONSchema
+    url: json-schema/folder.json
+  - type: JSONSchema
+    url: json-schema/dashboard.json
+  - type: JSONSchema
+    url: json-schema/saved-filter.json
+  - type: JSONSchema
+    url: json-schema/workspace.json
+  - type: JSONSchema
+    url: json-schema/team.json
+  - type: JSONSchema
+    url: json-schema/access-grant.json
+  - type: JSONSchema
+    url: json-schema/budget-alert.json
+  - type: JSONSchema
+    url: json-schema/anomaly-alert.json
+  - type: JSONSchema
+    url: json-schema/recommendation.json
+  - type: JSONSchema
+    url: json-schema/segment.json
+  - type: JSONSchema
+    url: json-schema/integration.json
+  - type: JSONSchema
+    url: json-schema/managed-account.json
+  - type: JSONSchema
+    url: json-schema/cost-provider.json
+  - type: JSONSchema
+    url: json-schema/business-metric.json
+  - type: JSONSchema
+    url: json-schema/resource-report.json
+  - type: JSONSchema
+    url: json-schema/resource.json
+  - type: JSONSchema
+    url: json-schema/network-flow-report.json
+  - type: JSONSchema
+    url: json-schema/financial-commitment-report.json
+  - type: JSONSchema
+    url: json-schema/kubernetes-efficiency-report.json
+  - type: JSONLD
+    url: json-ld/vantage-context.jsonld
+  - type: JSONSchema
+    url: json-schema/provider.json
+  - type: JSONSchema
+    url: json-schema/service.json
+  - type: JSONSchema
+    url: json-schema/product.json
+  - type: JSONSchema
+    url: json-schema/price.json
+- aid: vantage:vantage-cost-providers-api
+  name: Vantage Cost Providers API
+  description: Retrieve available cost providers.
+  humanURL: https://docs.vantage.sh/api
+  baseURL: https://api.vantage.sh/v2
+  tags:
+  - Cost Providers
+  properties:
+  - type: OpenAPI
+    url: openapi/vantage-cost-providers-api-openapi.yml
+  - type: Documentation
+    url: https://vantage.readme.io/reference/general
+  - type: JSONSchema
+    url: json-schema/cost-report.json
+  - type: JSONSchema
+    url: json-schema/cost.json
+  - type: JSONSchema
+    url: json-schema/folder.json
+  - type: JSONSchema
+    url: json-schema/dashboard.json
+  - type: JSONSchema
+    url: json-schema/saved-filter.json
+  - type: JSONSchema
+    url: json-schema/workspace.json
+  - type: JSONSchema
+    url: json-schema/team.json
+  - type: JSONSchema
+    url: json-schema/access-grant.json
+  - type: JSONSchema
+    url: json-schema/budget-alert.json
+  - type: JSONSchema
+    url: json-schema/anomaly-alert.json
+  - type: JSONSchema
+    url: json-schema/recommendation.json
+  - type: JSONSchema
+    url: json-schema/segment.json
+  - type: JSONSchema
+    url: json-schema/integration.json
+  - type: JSONSchema
+    url: json-schema/managed-account.json
+  - type: JSONSchema
+    url: json-schema/cost-provider.json
+  - type: JSONSchema
+    url: json-schema/business-metric.json
+  - type: JSONSchema
+    url: json-schema/resource-report.json
+  - type: JSONSchema
+    url: json-schema/resource.json
+  - type: JSONSchema
+    url: json-schema/network-flow-report.json
+  - type: JSONSchema
+    url: json-schema/financial-commitment-report.json
+  - type: JSONSchema
+    url: json-schema/kubernetes-efficiency-report.json
+  - type: JSONLD
+    url: json-ld/vantage-context.jsonld
+  - type: JSONSchema
+    url: json-schema/provider.json
+  - type: JSONSchema
+    url: json-schema/service.json
+  - type: JSONSchema
+    url: json-schema/product.json
+  - type: JSONSchema
+    url: json-schema/price.json
+- aid: vantage:vantage-cost-reports-api
+  name: Vantage Cost Reports API
+  description: Create, read, update, and delete Cost Reports.
+  humanURL: https://docs.vantage.sh/api
+  baseURL: https://api.vantage.sh/v2
+  tags:
+  - Cost Reports
+  properties:
+  - type: OpenAPI
+    url: openapi/vantage-cost-reports-api-openapi.yml
+  - type: Documentation
+    url: https://vantage.readme.io/reference/general
+  - type: JSONSchema
+    url: json-schema/cost-report.json
+  - type: JSONSchema
+    url: json-schema/cost.json
+  - type: JSONSchema
+    url: json-schema/folder.json
+  - type: JSONSchema
+    url: json-schema/dashboard.json
+  - type: JSONSchema
+    url: json-schema/saved-filter.json
+  - type: JSONSchema
+    url: json-schema/workspace.json
+  - type: JSONSchema
+    url: json-schema/team.json
+  - type: JSONSchema
+    url: json-schema/access-grant.json
+  - type: JSONSchema
+    url: json-schema/budget-alert.json
+  - type: JSONSchema
+    url: json-schema/anomaly-alert.json
+  - type: JSONSchema
+    url: json-schema/recommendation.json
+  - type: JSONSchema
+    url: json-schema/segment.json
+  - type: JSONSchema
+    url: json-schema/integration.json
+  - type: JSONSchema
+    url: json-schema/managed-account.json
+  - type: JSONSchema
+    url: json-schema/cost-provider.json
+  - type: JSONSchema
+    url: json-schema/business-metric.json
+  - type: JSONSchema
+    url: json-schema/resource-report.json
+  - type: JSONSchema
+    url: json-schema/resource.json
+  - type: JSONSchema
+    url: json-schema/network-flow-report.json
+  - type: JSONSchema
+    url: json-schema/financial-commitment-report.json
+  - type: JSONSchema
+    url: json-schema/kubernetes-efficiency-report.json
+  - type: JSONLD
+    url: json-ld/vantage-context.jsonld
+  - type: JSONSchema
+    url: json-schema/provider.json
+  - type: JSONSchema
+    url: json-schema/service.json
+  - type: JSONSchema
+    url: json-schema/product.json
+  - type: JSONSchema
+    url: json-schema/price.json
+- aid: vantage:vantage-costs-api
+  name: Vantage Costs API
+  description: Retrieve cost data for Cost Reports or VQL filters.
+  humanURL: https://docs.vantage.sh/api
+  baseURL: https://api.vantage.sh/v2
+  tags:
+  - Costs
+  properties:
+  - type: OpenAPI
+    url: openapi/vantage-costs-api-openapi.yml
+  - type: Documentation
+    url: https://vantage.readme.io/reference/general
+  - type: JSONSchema
+    url: json-schema/cost-report.json
+  - type: JSONSchema
+    url: json-schema/cost.json
+  - type: JSONSchema
+    url: json-schema/folder.json
+  - type: JSONSchema
+    url: json-schema/dashboard.json
+  - type: JSONSchema
+    url: json-schema/saved-filter.json
+  - type: JSONSchema
+    url: json-schema/workspace.json
+  - type: JSONSchema
+    url: json-schema/team.json
+  - type: JSONSchema
+    url: json-schema/access-grant.json
+  - type: JSONSchema
+    url: json-schema/budget-alert.json
+  - type: JSONSchema
+    url: json-schema/anomaly-alert.json
+  - type: JSONSchema
+    url: json-schema/recommendation.json
+  - type: JSONSchema
+    url: json-schema/segment.json
+  - type: JSONSchema
+    url: json-schema/integration.json
+  - type: JSONSchema
+    url: json-schema/managed-account.json
+  - type: JSONSchema
+    url: json-schema/cost-provider.json
+  - type: JSONSchema
+    url: json-schema/business-metric.json
+  - type: JSONSchema
+    url: json-schema/resource-report.json
+  - type: JSONSchema
+    url: json-schema/resource.json
+  - type: JSONSchema
+    url: json-schema/network-flow-report.json
+  - type: JSONSchema
+    url: json-schema/financial-commitment-report.json
+  - type: JSONSchema
+    url: json-schema/kubernetes-efficiency-report.json
+  - type: JSONLD
+    url: json-ld/vantage-context.jsonld
+  - type: JSONSchema
+    url: json-schema/provider.json
+  - type: JSONSchema
+    url: json-schema/service.json
+  - type: JSONSchema
+    url: json-schema/product.json
+  - type: JSONSchema
+    url: json-schema/price.json
+- aid: vantage:vantage-dashboards-api
+  name: Vantage Dashboards API
+  description: Create and manage cost dashboards.
+  humanURL: https://docs.vantage.sh/api
+  baseURL: https://api.vantage.sh/v2
+  tags:
+  - Dashboards
+  properties:
+  - type: OpenAPI
+    url: openapi/vantage-dashboards-api-openapi.yml
+  - type: Documentation
+    url: https://vantage.readme.io/reference/general
+  - type: JSONSchema
+    url: json-schema/cost-report.json
+  - type: JSONSchema
+    url: json-schema/cost.json
+  - type: JSONSchema
+    url: json-schema/folder.json
+  - type: JSONSchema
+    url: json-schema/dashboard.json
+  - type: JSONSchema
+    url: json-schema/saved-filter.json
+  - type: JSONSchema
+    url: json-schema/workspace.json
+  - type: JSONSchema
+    url: json-schema/team.json
+  - type: JSONSchema
+    url: json-schema/access-grant.json
+  - type: JSONSchema
+    url: json-schema/budget-alert.json
+  - type: JSONSchema
+    url: json-schema/anomaly-alert.json
+  - type: JSONSchema
+    url: json-schema/recommendation.json
+  - type: JSONSchema
+    url: json-schema/segment.json
+  - type: JSONSchema
+    url: json-schema/integration.json
+  - type: JSONSchema
+    url: json-schema/managed-account.json
+  - type: JSONSchema
+    url: json-schema/cost-provider.json
+  - type: JSONSchema
+    url: json-schema/business-metric.json
+  - type: JSONSchema
+    url: json-schema/resource-report.json
+  - type: JSONSchema
+    url: json-schema/resource.json
+  - type: JSONSchema
+    url: json-schema/network-flow-report.json
+  - type: JSONSchema
+    url: json-schema/financial-commitment-report.json
+  - type: JSONSchema
+    url: json-schema/kubernetes-efficiency-report.json
+  - type: JSONLD
+    url: json-ld/vantage-context.jsonld
+  - type: JSONSchema
+    url: json-schema/provider.json
+  - type: JSONSchema
+    url: json-schema/service.json
+  - type: JSONSchema
+    url: json-schema/product.json
+  - type: JSONSchema
+    url: json-schema/price.json
+- aid: vantage:vantage-financial-commitment-reports-api
+  name: Vantage Financial Commitment Reports API
+  description: Create and manage financial commitment reports.
+  humanURL: https://docs.vantage.sh/api
+  baseURL: https://api.vantage.sh/v2
+  tags:
+  - Financial Commitment Reports
+  properties:
+  - type: OpenAPI
+    url: openapi/vantage-financial-commitment-reports-api-openapi.yml
+  - type: Documentation
+    url: https://vantage.readme.io/reference/general
+  - type: JSONSchema
+    url: json-schema/cost-report.json
+  - type: JSONSchema
+    url: json-schema/cost.json
+  - type: JSONSchema
+    url: json-schema/folder.json
+  - type: JSONSchema
+    url: json-schema/dashboard.json
+  - type: JSONSchema
+    url: json-schema/saved-filter.json
+  - type: JSONSchema
+    url: json-schema/workspace.json
+  - type: JSONSchema
+    url: json-schema/team.json
+  - type: JSONSchema
+    url: json-schema/access-grant.json
+  - type: JSONSchema
+    url: json-schema/budget-alert.json
+  - type: JSONSchema
+    url: json-schema/anomaly-alert.json
+  - type: JSONSchema
+    url: json-schema/recommendation.json
+  - type: JSONSchema
+    url: json-schema/segment.json
+  - type: JSONSchema
+    url: json-schema/integration.json
+  - type: JSONSchema
+    url: json-schema/managed-account.json
+  - type: JSONSchema
+    url: json-schema/cost-provider.json
+  - type: JSONSchema
+    url: json-schema/business-metric.json
+  - type: JSONSchema
+    url: json-schema/resource-report.json
+  - type: JSONSchema
+    url: json-schema/resource.json
+  - type: JSONSchema
+    url: json-schema/network-flow-report.json
+  - type: JSONSchema
+    url: json-schema/financial-commitment-report.json
+  - type: JSONSchema
+    url: json-schema/kubernetes-efficiency-report.json
+  - type: JSONLD
+    url: json-ld/vantage-context.jsonld
+  - type: JSONSchema
+    url: json-schema/provider.json
+  - type: JSONSchema
+    url: json-schema/service.json
+  - type: JSONSchema
+    url: json-schema/product.json
+  - type: JSONSchema
+    url: json-schema/price.json
+- aid: vantage:vantage-folders-api
+  name: Vantage Folders API
+  description: Manage folders for organizing Cost Reports.
+  humanURL: https://docs.vantage.sh/api
+  baseURL: https://api.vantage.sh/v2
+  tags:
+  - Folders
+  properties:
+  - type: OpenAPI
+    url: openapi/vantage-folders-api-openapi.yml
+  - type: Documentation
+    url: https://vantage.readme.io/reference/general
+  - type: JSONSchema
+    url: json-schema/cost-report.json
+  - type: JSONSchema
+    url: json-schema/cost.json
+  - type: JSONSchema
+    url: json-schema/folder.json
+  - type: JSONSchema
+    url: json-schema/dashboard.json
+  - type: JSONSchema
+    url: json-schema/saved-filter.json
+  - type: JSONSchema
+    url: json-schema/workspace.json
+  - type: JSONSchema
+    url: json-schema/team.json
+  - type: JSONSchema
+    url: json-schema/access-grant.json
+  - type: JSONSchema
+    url: json-schema/budget-alert.json
+  - type: JSONSchema
+    url: json-schema/anomaly-alert.json
+  - type: JSONSchema
+    url: json-schema/recommendation.json
+  - type: JSONSchema
+    url: json-schema/segment.json
+  - type: JSONSchema
+    url: json-schema/integration.json
+  - type: JSONSchema
+    url: json-schema/managed-account.json
+  - type: JSONSchema
+    url: json-schema/cost-provider.json
+  - type: JSONSchema
+    url: json-schema/business-metric.json
+  - type: JSONSchema
+    url: json-schema/resource-report.json
+  - type: JSONSchema
+    url: json-schema/resource.json
+  - type: JSONSchema
+    url: json-schema/network-flow-report.json
+  - type: JSONSchema
+    url: json-schema/financial-commitment-report.json
+  - type: JSONSchema
+    url: json-schema/kubernetes-efficiency-report.json
+  - type: JSONLD
+    url: json-ld/vantage-context.jsonld
+  - type: JSONSchema
+    url: json-schema/provider.json
+  - type: JSONSchema
+    url: json-schema/service.json
+  - type: JSONSchema
+    url: json-schema/product.json
+  - type: JSONSchema
+    url: json-schema/price.json
+- aid: vantage:vantage-integrations-api
+  name: Vantage Integrations API
+  description: Manage cloud provider integrations.
+  humanURL: https://docs.vantage.sh/api
+  baseURL: https://api.vantage.sh/v2
+  tags:
+  - Integrations
+  properties:
+  - type: OpenAPI
+    url: openapi/vantage-integrations-api-openapi.yml
+  - type: Documentation
+    url: https://vantage.readme.io/reference/general
+  - type: JSONSchema
+    url: json-schema/cost-report.json
+  - type: JSONSchema
+    url: json-schema/cost.json
+  - type: JSONSchema
+    url: json-schema/folder.json
+  - type: JSONSchema
+    url: json-schema/dashboard.json
+  - type: JSONSchema
+    url: json-schema/saved-filter.json
+  - type: JSONSchema
+    url: json-schema/workspace.json
+  - type: JSONSchema
+    url: json-schema/team.json
+  - type: JSONSchema
+    url: json-schema/access-grant.json
+  - type: JSONSchema
+    url: json-schema/budget-alert.json
+  - type: JSONSchema
+    url: json-schema/anomaly-alert.json
+  - type: JSONSchema
+    url: json-schema/recommendation.json
+  - type: JSONSchema
+    url: json-schema/segment.json
+  - type: JSONSchema
+    url: json-schema/integration.json
+  - type: JSONSchema
+    url: json-schema/managed-account.json
+  - type: JSONSchema
+    url: json-schema/cost-provider.json
+  - type: JSONSchema
+    url: json-schema/business-metric.json
+  - type: JSONSchema
+    url: json-schema/resource-report.json
+  - type: JSONSchema
+    url: json-schema/resource.json
+  - type: JSONSchema
+    url: json-schema/network-flow-report.json
+  - type: JSONSchema
+    url: json-schema/financial-commitment-report.json
+  - type: JSONSchema
+    url: json-schema/kubernetes-efficiency-report.json
+  - type: JSONLD
+    url: json-ld/vantage-context.jsonld
+  - type: JSONSchema
+    url: json-schema/provider.json
+  - type: JSONSchema
+    url: json-schema/service.json
+  - type: JSONSchema
+    url: json-schema/product.json
+  - type: JSONSchema
+    url: json-schema/price.json
+- aid: vantage:vantage-kubernetes-api
+  name: Vantage Kubernetes API
+  description: Manage Kubernetes cost data and efficiency reports.
+  humanURL: https://docs.vantage.sh/api
+  baseURL: https://api.vantage.sh/v2
+  tags:
+  - Kubernetes
+  properties:
+  - type: OpenAPI
+    url: openapi/vantage-kubernetes-api-openapi.yml
+  - type: Documentation
+    url: https://vantage.readme.io/reference/general
+  - type: JSONSchema
+    url: json-schema/cost-report.json
+  - type: JSONSchema
+    url: json-schema/cost.json
+  - type: JSONSchema
+    url: json-schema/folder.json
+  - type: JSONSchema
+    url: json-schema/dashboard.json
+  - type: JSONSchema
+    url: json-schema/saved-filter.json
+  - type: JSONSchema
+    url: json-schema/workspace.json
+  - type: JSONSchema
+    url: json-schema/team.json
+  - type: JSONSchema
+    url: json-schema/access-grant.json
+  - type: JSONSchema
+    url: json-schema/budget-alert.json
+  - type: JSONSchema
+    url: json-schema/anomaly-alert.json
+  - type: JSONSchema
+    url: json-schema/recommendation.json
+  - type: JSONSchema
+    url: json-schema/segment.json
+  - type: JSONSchema
+    url: json-schema/integration.json
+  - type: JSONSchema
+    url: json-schema/managed-account.json
+  - type: JSONSchema
+    url: json-schema/cost-provider.json
+  - type: JSONSchema
+    url: json-schema/business-metric.json
+  - type: JSONSchema
+    url: json-schema/resource-report.json
+  - type: JSONSchema
+    url: json-schema/resource.json
+  - type: JSONSchema
+    url: json-schema/network-flow-report.json
+  - type: JSONSchema
+    url: json-schema/financial-commitment-report.json
+  - type: JSONSchema
+    url: json-schema/kubernetes-efficiency-report.json
+  - type: JSONLD
+    url: json-ld/vantage-context.jsonld
+  - type: JSONSchema
+    url: json-schema/provider.json
+  - type: JSONSchema
+    url: json-schema/service.json
+  - type: JSONSchema
+    url: json-schema/product.json
+  - type: JSONSchema
+    url: json-schema/price.json
+- aid: vantage:vantage-managed-accounts-api
+  name: Vantage Managed Accounts API
+  description: Manage linked cloud provider accounts.
+  humanURL: https://docs.vantage.sh/api
+  baseURL: https://api.vantage.sh/v2
+  tags:
+  - Managed Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/vantage-managed-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://vantage.readme.io/reference/general
+  - type: JSONSchema
+    url: json-schema/cost-report.json
+  - type: JSONSchema
+    url: json-schema/cost.json
+  - type: JSONSchema
+    url: json-schema/folder.json
+  - type: JSONSchema
+    url: json-schema/dashboard.json
+  - type: JSONSchema
+    url: json-schema/saved-filter.json
+  - type: JSONSchema
+    url: json-schema/workspace.json
+  - type: JSONSchema
+    url: json-schema/team.json
+  - type: JSONSchema
+    url: json-schema/access-grant.json
+  - type: JSONSchema
+    url: json-schema/budget-alert.json
+  - type: JSONSchema
+    url: json-schema/anomaly-alert.json
+  - type: JSONSchema
+    url: json-schema/recommendation.json
+  - type: JSONSchema
+    url: json-schema/segment.json
+  - type: JSONSchema
+    url: json-schema/integration.json
+  - type: JSONSchema
+    url: json-schema/managed-account.json
+  - type: JSONSchema
+    url: json-schema/cost-provider.json
+  - type: JSONSchema
+    url: json-schema/business-metric.json
+  - type: JSONSchema
+    url: json-schema/resource-report.json
+  - type: JSONSchema
+    url: json-schema/resource.json
+  - type: JSONSchema
+    url: json-schema/network-flow-report.json
+  - type: JSONSchema
+    url: json-schema/financial-commitment-report.json
+  - type: JSONSchema
+    url: json-schema/kubernetes-efficiency-report.json
+  - type: JSONLD
+    url: json-ld/vantage-context.jsonld
+  - type: JSONSchema
+    url: json-schema/provider.json
+  - type: JSONSchema
+    url: json-schema/service.json
+  - type: JSONSchema
+    url: json-schema/product.json
+  - type: JSONSchema
+    url: json-schema/price.json
+- aid: vantage:vantage-network-flow-reports-api
+  name: Vantage Network Flow Reports API
+  description: Create and manage network flow reports.
+  humanURL: https://docs.vantage.sh/api
+  baseURL: https://api.vantage.sh/v2
+  tags:
+  - Network Flow Reports
+  properties:
+  - type: OpenAPI
+    url: openapi/vantage-network-flow-reports-api-openapi.yml
+  - type: Documentation
+    url: https://vantage.readme.io/reference/general
+  - type: JSONSchema
+    url: json-schema/cost-report.json
+  - type: JSONSchema
+    url: json-schema/cost.json
+  - type: JSONSchema
+    url: json-schema/folder.json
+  - type: JSONSchema
+    url: json-schema/dashboard.json
+  - type: JSONSchema
+    url: json-schema/saved-filter.json
+  - type: JSONSchema
+    url: json-schema/workspace.json
+  - type: JSONSchema
+    url: json-schema/team.json
+  - type: JSONSchema
+    url: json-schema/access-grant.json
+  - type: JSONSchema
+    url: json-schema/budget-alert.json
+  - type: JSONSchema
+    url: json-schema/anomaly-alert.json
+  - type: JSONSchema
+    url: json-schema/recommendation.json
+  - type: JSONSchema
+    url: json-schema/segment.json
+  - type: JSONSchema
+    url: json-schema/integration.json
+  - type: JSONSchema
+    url: json-schema/managed-account.json
+  - type: JSONSchema
+    url: json-schema/cost-provider.json
+  - type: JSONSchema
+    url: json-schema/business-metric.json
+  - type: JSONSchema
+    url: json-schema/resource-report.json
+  - type: JSONSchema
+    url: json-schema/resource.json
+  - type: JSONSchema
+    url: json-schema/network-flow-report.json
+  - type: JSONSchema
+    url: json-schema/financial-commitment-report.json
+  - type: JSONSchema
+    url: json-schema/kubernetes-efficiency-report.json
+  - type: JSONLD
+    url: json-ld/vantage-context.jsonld
+  - type: JSONSchema
+    url: json-schema/provider.json
+  - type: JSONSchema
+    url: json-schema/service.json
+  - type: JSONSchema
+    url: json-schema/product.json
+  - type: JSONSchema
+    url: json-schema/price.json
+- aid: vantage:vantage-prices-api
+  name: Vantage Prices API
+  description: Retrieve pricing details for specific products.
+  humanURL: https://docs.vantage.sh/api
+  baseURL: https://api.vantage.sh/v2
+  tags:
+  - Prices
+  properties:
+  - type: OpenAPI
+    url: openapi/vantage-prices-api-openapi.yml
+  - type: Documentation
+    url: https://vantage.readme.io/reference/general
+  - type: JSONSchema
+    url: json-schema/cost-report.json
+  - type: JSONSchema
+    url: json-schema/cost.json
+  - type: JSONSchema
+    url: json-schema/folder.json
+  - type: JSONSchema
+    url: json-schema/dashboard.json
+  - type: JSONSchema
+    url: json-schema/saved-filter.json
+  - type: JSONSchema
+    url: json-schema/workspace.json
+  - type: JSONSchema
+    url: json-schema/team.json
+  - type: JSONSchema
+    url: json-schema/access-grant.json
+  - type: JSONSchema
+    url: json-schema/budget-alert.json
+  - type: JSONSchema
+    url: json-schema/anomaly-alert.json
+  - type: JSONSchema
+    url: json-schema/recommendation.json
+  - type: JSONSchema
+    url: json-schema/segment.json
+  - type: JSONSchema
+    url: json-schema/integration.json
+  - type: JSONSchema
+    url: json-schema/managed-account.json
+  - type: JSONSchema
+    url: json-schema/cost-provider.json
+  - type: JSONSchema
+    url: json-schema/business-metric.json
+  - type: JSONSchema
+    url: json-schema/resource-report.json
+  - type: JSONSchema
+    url: json-schema/resource.json
+  - type: JSONSchema
+    url: json-schema/network-flow-report.json
+  - type: JSONSchema
+    url: json-schema/financial-commitment-report.json
+  - type: JSONSchema
+    url: json-schema/kubernetes-efficiency-report.json
+  - type: JSONLD
+    url: json-ld/vantage-context.jsonld
+  - type: JSONSchema
+    url: json-schema/provider.json
+  - type: JSONSchema
+    url: json-schema/service.json
+  - type: JSONSchema
+    url: json-schema/product.json
+  - type: JSONSchema
+    url: json-schema/price.json
+- aid: vantage:vantage-products-api
+  name: Vantage Products API
+  description: Query cloud infrastructure products and their pricing across providers and services.
+  humanURL: https://docs.vantage.sh/api
+  baseURL: https://api.vantage.sh/v2
+  tags:
+  - Products
+  properties:
+  - type: OpenAPI
+    url: openapi/vantage-products-api-openapi.yml
+  - type: Documentation
+    url: https://vantage.readme.io/reference/general
+  - type: JSONSchema
+    url: json-schema/cost-report.json
+  - type: JSONSchema
+    url: json-schema/cost.json
+  - type: JSONSchema
+    url: json-schema/folder.json
+  - type: JSONSchema
+    url: json-schema/dashboard.json
+  - type: JSONSchema
+    url: json-schema/saved-filter.json
+  - type: JSONSchema
+    url: json-schema/workspace.json
+  - type: JSONSchema
+    url: json-schema/team.json
+  - type: JSONSchema
+    url: json-schema/access-grant.json
+  - type: JSONSchema
+    url: json-schema/budget-alert.json
+  - type: JSONSchema
+    url: json-schema/anomaly-alert.json
+  - type: JSONSchema
+    url: json-schema/recommendation.json
+  - type: JSONSchema
+    url: json-schema/segment.json
+  - type: JSONSchema
+    url: json-schema/integration.json
+  - type: JSONSchema
+    url: json-schema/managed-account.json
+  - type: JSONSchema
+    url: json-schema/cost-provider.json
+  - type: JSONSchema
+    url: json-schema/business-metric.json
+  - type: JSONSchema
+    url: json-schema/resource-report.json
+  - type: JSONSchema
+    url: json-schema/resource.json
+  - type: JSONSchema
+    url: json-schema/network-flow-report.json
+  - type: JSONSchema
+    url: json-schema/financial-commitment-report.json
+  - type: JSONSchema
+    url: json-schema/kubernetes-efficiency-report.json
+  - type: JSONLD
+    url: json-ld/vantage-context.jsonld
+  - type: JSONSchema
+    url: json-schema/provider.json
+  - type: JSONSchema
+    url: json-schema/service.json
+  - type: JSONSchema
+    url: json-schema/product.json
+  - type: JSONSchema
+    url: json-schema/price.json
+- aid: vantage:vantage-providers-api
+  name: Vantage Providers API
+  description: Retrieve available cloud providers.
+  humanURL: https://docs.vantage.sh/api
+  baseURL: https://api.vantage.sh/v2
+  tags:
+  - Providers
+  properties:
+  - type: OpenAPI
+    url: openapi/vantage-providers-api-openapi.yml
+  - type: Documentation
+    url: https://vantage.readme.io/reference/general
+  - type: JSONSchema
+    url: json-schema/cost-report.json
+  - type: JSONSchema
+    url: json-schema/cost.json
+  - type: JSONSchema
+    url: json-schema/folder.json
+  - type: JSONSchema
+    url: json-schema/dashboard.json
+  - type: JSONSchema
+    url: json-schema/saved-filter.json
+  - type: JSONSchema
+    url: json-schema/workspace.json
+  - type: JSONSchema
+    url: json-schema/team.json
+  - type: JSONSchema
+    url: json-schema/access-grant.json
+  - type: JSONSchema
+    url: json-schema/budget-alert.json
+  - type: JSONSchema
+    url: json-schema/anomaly-alert.json
+  - type: JSONSchema
+    url: json-schema/recommendation.json
+  - type: JSONSchema
+    url: json-schema/segment.json
+  - type: JSONSchema
+    url: json-schema/integration.json
+  - type: JSONSchema
+    url: json-schema/managed-account.json
+  - type: JSONSchema
+    url: json-schema/cost-provider.json
+  - type: JSONSchema
+    url: json-schema/business-metric.json
+  - type: JSONSchema
+    url: json-schema/resource-report.json
+  - type: JSONSchema
+    url: json-schema/resource.json
+  - type: JSONSchema
+    url: json-schema/network-flow-report.json
+  - type: JSONSchema
+    url: json-schema/financial-commitment-report.json
+  - type: JSONSchema
+    url: json-schema/kubernetes-efficiency-report.json
+  - type: JSONLD
+    url: json-ld/vantage-context.jsonld
+  - type: JSONSchema
+    url: json-schema/provider.json
+  - type: JSONSchema
+    url: json-schema/service.json
+  - type: JSONSchema
+    url: json-schema/product.json
+  - type: JSONSchema
+    url: json-schema/price.json
+- aid: vantage:vantage-recommendations-api
+  name: Vantage Recommendations API
+  description: Retrieve cost optimization recommendations.
+  humanURL: https://docs.vantage.sh/api
+  baseURL: https://api.vantage.sh/v2
+  tags:
+  - Recommendations
+  properties:
+  - type: OpenAPI
+    url: openapi/vantage-recommendations-api-openapi.yml
+  - type: Documentation
+    url: https://vantage.readme.io/reference/general
+  - type: JSONSchema
+    url: json-schema/cost-report.json
+  - type: JSONSchema
+    url: json-schema/cost.json
+  - type: JSONSchema
+    url: json-schema/folder.json
+  - type: JSONSchema
+    url: json-schema/dashboard.json
+  - type: JSONSchema
+    url: json-schema/saved-filter.json
+  - type: JSONSchema
+    url: json-schema/workspace.json
+  - type: JSONSchema
+    url: json-schema/team.json
+  - type: JSONSchema
+    url: json-schema/access-grant.json
+  - type: JSONSchema
+    url: json-schema/budget-alert.json
+  - type: JSONSchema
+    url: json-schema/anomaly-alert.json
+  - type: JSONSchema
+    url: json-schema/recommendation.json
+  - type: JSONSchema
+    url: json-schema/segment.json
+  - type: JSONSchema
+    url: json-schema/integration.json
+  - type: JSONSchema
+    url: json-schema/managed-account.json
+  - type: JSONSchema
+    url: json-schema/cost-provider.json
+  - type: JSONSchema
+    url: json-schema/business-metric.json
+  - type: JSONSchema
+    url: json-schema/resource-report.json
+  - type: JSONSchema
+    url: json-schema/resource.json
+  - type: JSONSchema
+    url: json-schema/network-flow-report.json
+  - type: JSONSchema
+    url: json-schema/financial-commitment-report.json
+  - type: JSONSchema
+    url: json-schema/kubernetes-efficiency-report.json
+  - type: JSONLD
+    url: json-ld/vantage-context.jsonld
+  - type: JSONSchema
+    url: json-schema/provider.json
+  - type: JSONSchema
+    url: json-schema/service.json
+  - type: JSONSchema
+    url: json-schema/product.json
+  - type: JSONSchema
+    url: json-schema/price.json
+- aid: vantage:vantage-resource-reports-api
+  name: Vantage Resource Reports API
+  description: Create and manage resource reports.
+  humanURL: https://docs.vantage.sh/api
+  baseURL: https://api.vantage.sh/v2
+  tags:
+  - Resource Reports
+  properties:
+  - type: OpenAPI
+    url: openapi/vantage-resource-reports-api-openapi.yml
+  - type: Documentation
+    url: https://vantage.readme.io/reference/general
+  - type: JSONSchema
+    url: json-schema/cost-report.json
+  - type: JSONSchema
+    url: json-schema/cost.json
+  - type: JSONSchema
+    url: json-schema/folder.json
+  - type: JSONSchema
+    url: json-schema/dashboard.json
+  - type: JSONSchema
+    url: json-schema/saved-filter.json
+  - type: JSONSchema
+    url: json-schema/workspace.json
+  - type: JSONSchema
+    url: json-schema/team.json
+  - type: JSONSchema
+    url: json-schema/access-grant.json
+  - type: JSONSchema
+    url: json-schema/budget-alert.json
+  - type: JSONSchema
+    url: json-schema/anomaly-alert.json
+  - type: JSONSchema
+    url: json-schema/recommendation.json
+  - type: JSONSchema
+    url: json-schema/segment.json
+  - type: JSONSchema
+    url: json-schema/integration.json
+  - type: JSONSchema
+    url: json-schema/managed-account.json
+  - type: JSONSchema
+    url: json-schema/cost-provider.json
+  - type: JSONSchema
+    url: json-schema/business-metric.json
+  - type: JSONSchema
+    url: json-schema/resource-report.json
+  - type: JSONSchema
+    url: json-schema/resource.json
+  - type: JSONSchema
+    url: json-schema/network-flow-report.json
+  - type: JSONSchema
+    url: json-schema/financial-commitment-report.json
+  - type: JSONSchema
+    url: json-schema/kubernetes-efficiency-report.json
+  - type: JSONLD
+    url: json-ld/vantage-context.jsonld
+  - type: JSONSchema
+    url: json-schema/provider.json
+  - type: JSONSchema
+    url: json-schema/service.json
+  - type: JSONSchema
+    url: json-schema/product.json
+  - type: JSONSchema
+    url: json-schema/price.json
+- aid: vantage:vantage-resources-api
+  name: Vantage Resources API
+  description: Retrieve resource data from reports.
+  humanURL: https://docs.vantage.sh/api
+  baseURL: https://api.vantage.sh/v2
+  tags:
+  - Resources
+  properties:
+  - type: OpenAPI
+    url: openapi/vantage-resources-api-openapi.yml
+  - type: Documentation
+    url: https://vantage.readme.io/reference/general
+  - type: JSONSchema
+    url: json-schema/cost-report.json
+  - type: JSONSchema
+    url: json-schema/cost.json
+  - type: JSONSchema
+    url: json-schema/folder.json
+  - type: JSONSchema
+    url: json-schema/dashboard.json
+  - type: JSONSchema
+    url: json-schema/saved-filter.json
+  - type: JSONSchema
+    url: json-schema/workspace.json
+  - type: JSONSchema
+    url: json-schema/team.json
+  - type: JSONSchema
+    url: json-schema/access-grant.json
+  - type: JSONSchema
+    url: json-schema/budget-alert.json
+  - type: JSONSchema
+    url: json-schema/anomaly-alert.json
+  - type: JSONSchema
+    url: json-schema/recommendation.json
+  - type: JSONSchema
+    url: json-schema/segment.json
+  - type: JSONSchema
+    url: json-schema/integration.json
+  - type: JSONSchema
+    url: json-schema/managed-account.json
+  - type: JSONSchema
+    url: json-schema/cost-provider.json
+  - type: JSONSchema
+    url: json-schema/business-metric.json
+  - type: JSONSchema
+    url: json-schema/resource-report.json
+  - type: JSONSchema
+    url: json-schema/resource.json
+  - type: JSONSchema
+    url: json-schema/network-flow-report.json
+  - type: JSONSchema
+    url: json-schema/financial-commitment-report.json
+  - type: JSONSchema
+    url: json-schema/kubernetes-efficiency-report.json
+  - type: JSONLD
+    url: json-ld/vantage-context.jsonld
+  - type: JSONSchema
+    url: json-schema/provider.json
+  - type: JSONSchema
+    url: json-schema/service.json
+  - type: JSONSchema
+    url: json-schema/product.json
+  - type: JSONSchema
+    url: json-schema/price.json
+- aid: vantage:vantage-saved-filters-api
+  name: Vantage Saved Filters API
+  description: Manage saved filters for cost data.
+  humanURL: https://docs.vantage.sh/api
+  baseURL: https://api.vantage.sh/v2
+  tags:
+  - Saved Filters
+  properties:
+  - type: OpenAPI
+    url: openapi/vantage-saved-filters-api-openapi.yml
+  - type: Documentation
+    url: https://vantage.readme.io/reference/general
+  - type: JSONSchema
+    url: json-schema/cost-report.json
+  - type: JSONSchema
+    url: json-schema/cost.json
+  - type: JSONSchema
+    url: json-schema/folder.json
+  - type: JSONSchema
+    url: json-schema/dashboard.json
+  - type: JSONSchema
+    url: json-schema/saved-filter.json
+  - type: JSONSchema
+    url: json-schema/workspace.json
+  - type: JSONSchema
+    url: json-schema/team.json
+  - type: JSONSchema
+    url: json-schema/access-grant.json
+  - type: JSONSchema
+    url: json-schema/budget-alert.json
+  - type: JSONSchema
+    url: json-schema/anomaly-alert.json
+  - type: JSONSchema
+    url: json-schema/recommendation.json
+  - type: JSONSchema
+    url: json-schema/segment.json
+  - type: JSONSchema
+    url: json-schema/integration.json
+  - type: JSONSchema
+    url: json-schema/managed-account.json
+  - type: JSONSchema
+    url: json-schema/cost-provider.json
+  - type: JSONSchema
+    url: json-schema/business-metric.json
+  - type: JSONSchema
+    url: json-schema/resource-report.json
+  - type: JSONSchema
+    url: json-schema/resource.json
+  - type: JSONSchema
+    url: json-schema/network-flow-report.json
+  - type: JSONSchema
+    url: json-schema/financial-commitment-report.json
+  - type: JSONSchema
+    url: json-schema/kubernetes-efficiency-report.json
+  - type: JSONLD
+    url: json-ld/vantage-context.jsonld
+  - type: JSONSchema
+    url: json-schema/provider.json
+  - type: JSONSchema
+    url: json-schema/service.json
+  - type: JSONSchema
+    url: json-schema/product.json
+  - type: JSONSchema
+    url: json-schema/price.json
+- aid: vantage:vantage-segments-api
+  name: Vantage Segments API
+  description: Create, update, and delete cost allocation segments.
+  humanURL: https://docs.vantage.sh/api
+  baseURL: https://api.vantage.sh/v2
+  tags:
+  - Segments
+  properties:
+  - type: OpenAPI
+    url: openapi/vantage-segments-api-openapi.yml
+  - type: Documentation
+    url: https://vantage.readme.io/reference/general
+  - type: JSONSchema
+    url: json-schema/cost-report.json
+  - type: JSONSchema
+    url: json-schema/cost.json
+  - type: JSONSchema
+    url: json-schema/folder.json
+  - type: JSONSchema
+    url: json-schema/dashboard.json
+  - type: JSONSchema
+    url: json-schema/saved-filter.json
+  - type: JSONSchema
+    url: json-schema/workspace.json
+  - type: JSONSchema
+    url: json-schema/team.json
+  - type: JSONSchema
+    url: json-schema/access-grant.json
+  - type: JSONSchema
+    url: json-schema/budget-alert.json
+  - type: JSONSchema
+    url: json-schema/anomaly-alert.json
+  - type: JSONSchema
+    url: json-schema/recommendation.json
+  - type: JSONSchema
+    url: json-schema/segment.json
+  - type: JSONSchema
+    url: json-schema/integration.json
+  - type: JSONSchema
+    url: json-schema/managed-account.json
+  - type: JSONSchema
+    url: json-schema/cost-provider.json
+  - type: JSONSchema
+    url: json-schema/business-metric.json
+  - type: JSONSchema
+    url: json-schema/resource-report.json
+  - type: JSONSchema
+    url: json-schema/resource.json
+  - type: JSONSchema
+    url: json-schema/network-flow-report.json
+  - type: JSONSchema
+    url: json-schema/financial-commitment-report.json
+  - type: JSONSchema
+    url: json-schema/kubernetes-efficiency-report.json
+  - type: JSONLD
+    url: json-ld/vantage-context.jsonld
+  - type: JSONSchema
+    url: json-schema/provider.json
+  - type: JSONSchema
+    url: json-schema/service.json
+  - type: JSONSchema
+    url: json-schema/product.json
+  - type: JSONSchema
+    url: json-schema/price.json
+- aid: vantage:vantage-services-api
+  name: Vantage Services API
+  description: The Services API from Vantage — 2 operation(s) for services.
+  humanURL: https://docs.vantage.sh/api
+  baseURL: https://api.vantage.sh/v2
+  tags:
+  - Services
+  properties:
+  - type: OpenAPI
+    url: openapi/vantage-services-api-openapi.yml
+  - type: Documentation
+    url: https://vantage.readme.io/reference/general
+  - type: JSONSchema
+    url: json-schema/cost-report.json
+  - type: JSONSchema
+    url: json-schema/cost.json
+  - type: JSONSchema
+    url: json-schema/folder.json
+  - type: JSONSchema
+    url: json-schema/dashboard.json
+  - type: JSONSchema
+    url: json-schema/saved-filter.json
+  - type: JSONSchema
+    url: json-schema/workspace.json
+  - type: JSONSchema
+    url: json-schema/team.json
+  - type: JSONSchema
+    url: json-schema/access-grant.json
+  - type: JSONSchema
+    url: json-schema/budget-alert.json
+  - type: JSONSchema
+    url: json-schema/anomaly-alert.json
+  - type: JSONSchema
+    url: json-schema/recommendation.json
+  - type: JSONSchema
+    url: json-schema/segment.json
+  - type: JSONSchema
+    url: json-schema/integration.json
+  - type: JSONSchema
+    url: json-schema/managed-account.json
+  - type: JSONSchema
+    url: json-schema/cost-provider.json
+  - type: JSONSchema
+    url: json-schema/business-metric.json
+  - type: JSONSchema
+    url: json-schema/resource-report.json
+  - type: JSONSchema
+    url: json-schema/resource.json
+  - type: JSONSchema
+    url: json-schema/network-flow-report.json
+  - type: JSONSchema
+    url: json-schema/financial-commitment-report.json
+  - type: JSONSchema
+    url: json-schema/kubernetes-efficiency-report.json
+  - type: JSONLD
+    url: json-ld/vantage-context.jsonld
+  - type: JSONSchema
+    url: json-schema/provider.json
+  - type: JSONSchema
+    url: json-schema/service.json
+  - type: JSONSchema
+    url: json-schema/product.json
+  - type: JSONSchema
+    url: json-schema/price.json
+- aid: vantage:vantage-teams-api
+  name: Vantage Teams API
+  description: Create and manage teams.
+  humanURL: https://docs.vantage.sh/api
+  baseURL: https://api.vantage.sh/v2
+  tags:
+  - Teams
+  properties:
+  - type: OpenAPI
+    url: openapi/vantage-teams-api-openapi.yml
+  - type: Documentation
+    url: https://vantage.readme.io/reference/general
+  - type: JSONSchema
+    url: json-schema/cost-report.json
+  - type: JSONSchema
+    url: json-schema/cost.json
+  - type: JSONSchema
+    url: json-schema/folder.json
+  - type: JSONSchema
+    url: json-schema/dashboard.json
+  - type: JSONSchema
+    url: json-schema/saved-filter.json
+  - type: JSONSchema
+    url: json-schema/workspace.json
+  - type: JSONSchema
+    url: json-schema/team.json
+  - type: JSONSchema
+    url: json-schema/access-grant.json
+  - type: JSONSchema
+    url: json-schema/budget-alert.json
+  - type: JSONSchema
+    url: json-schema/anomaly-alert.json
+  - type: JSONSchema
+    url: json-schema/recommendation.json
+  - type: JSONSchema
+    url: json-schema/segment.json
+  - type: JSONSchema
+    url: json-schema/integration.json
+  - type: JSONSchema
+    url: json-schema/managed-account.json
+  - type: JSONSchema
+    url: json-schema/cost-provider.json
+  - type: JSONSchema
+    url: json-schema/business-metric.json
+  - type: JSONSchema
+    url: json-schema/resource-report.json
+  - type: JSONSchema
+    url: json-schema/resource.json
+  - type: JSONSchema
+    url: json-schema/network-flow-report.json
+  - type: JSONSchema
+    url: json-schema/financial-commitment-report.json
+  - type: JSONSchema
+    url: json-schema/kubernetes-efficiency-report.json
+  - type: JSONLD
+    url: json-ld/vantage-context.jsonld
+  - type: JSONSchema
+    url: json-schema/provider.json
+  - type: JSONSchema
+    url: json-schema/service.json
+  - type: JSONSchema
+    url: json-schema/product.json
+  - type: JSONSchema
+    url: json-schema/price.json
+- aid: vantage:vantage-workspaces-api
+  name: Vantage Workspaces API
+  description: Manage workspaces and workspace access.
+  humanURL: https://docs.vantage.sh/api
+  baseURL: https://api.vantage.sh/v2
+  tags:
+  - Workspaces
+  properties:
+  - type: OpenAPI
+    url: openapi/vantage-workspaces-api-openapi.yml
+  - type: Documentation
+    url: https://vantage.readme.io/reference/general
+  - type: JSONSchema
+    url: json-schema/cost-report.json
+  - type: JSONSchema
+    url: json-schema/cost.json
+  - type: JSONSchema
+    url: json-schema/folder.json
+  - type: JSONSchema
+    url: json-schema/dashboard.json
+  - type: JSONSchema
+    url: json-schema/saved-filter.json
+  - type: JSONSchema
+    url: json-schema/workspace.json
+  - type: JSONSchema
+    url: json-schema/team.json
+  - type: JSONSchema
+    url: json-schema/access-grant.json
+  - type: JSONSchema
+    url: json-schema/budget-alert.json
+  - type: JSONSchema
+    url: json-schema/anomaly-alert.json
+  - type: JSONSchema
+    url: json-schema/recommendation.json
+  - type: JSONSchema
+    url: json-schema/segment.json
+  - type: JSONSchema
+    url: json-schema/integration.json
+  - type: JSONSchema
+    url: json-schema/managed-account.json
+  - type: JSONSchema
+    url: json-schema/cost-provider.json
+  - type: JSONSchema
+    url: json-schema/business-metric.json
+  - type: JSONSchema
+    url: json-schema/resource-report.json
+  - type: JSONSchema
+    url: json-schema/resource.json
+  - type: JSONSchema
+    url: json-schema/network-flow-report.json
+  - type: JSONSchema
+    url: json-schema/financial-commitment-report.json
+  - type: JSONSchema
+    url: json-schema/kubernetes-efficiency-report.json
+  - type: JSONLD
+    url: json-ld/vantage-context.jsonld
+  - type: JSONSchema
+    url: json-schema/provider.json
+  - type: JSONSchema
+    url: json-schema/service.json
+  - type: JSONSchema
+    url: json-schema/product.json
+  - type: JSONSchema
+    url: json-schema/price.json
 name: Vantage
 tags:
   - Budgets
@@ -110,7 +1609,20 @@ tags:
   - Costs
   - FinOps
 kind: contract
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/vantage.png
 access: 3rd-Party
 created: '2026-01-02'
 modified: '2026-05-19'

@@ -1,0 +1,3793 @@
+openapi: 3.1.0
+info:
+  title: Vantage Cost Management API
+  description: >-
+    The Vantage Cost Management API provides programmatic access to cloud cost
+    data and enables automation of cost management workflows. You can create and
+    manage Cost Reports, Folders, Dashboards, Saved Filters, Teams, Budgets,
+    Anomaly Alerts, Business Metrics, Network Flow Reports, Financial Commitment
+    Reports, Resource Reports, and more. The API uses the Vantage Query Language
+    (VQL) for filtering cloud cost data with a normalized schema across various
+    cloud providers. Authentication is performed via Bearer tokens using Vantage
+    API tokens.
+  version: 2.0.0
+  contact:
+    name: Vantage Support
+    url: https://www.vantage.sh/
+  license:
+    name: Proprietary
+    url: https://www.vantage.sh/terms
+  termsOfService: https://www.vantage.sh/terms
+servers:
+- url: https://api.vantage.sh/v2
+  description: Vantage API v2 Production
+security:
+- bearerAuth: []
+tags:
+- name: Access Grants
+  description: Manage resource access grants for teams.
+- name: Anomaly Alerts
+  description: Create and manage cost anomaly alerts.
+- name: Budget Alerts
+  description: Create and manage budget alerts.
+- name: Business Metrics
+  description: Create, update, and delete business metrics.
+- name: Cost Providers
+  description: Retrieve available cost providers.
+- name: Cost Reports
+  description: Create, read, update, and delete Cost Reports.
+- name: Costs
+  description: Retrieve cost data for Cost Reports or VQL filters.
+- name: Dashboards
+  description: Create and manage cost dashboards.
+- name: Financial Commitment Reports
+  description: Create and manage financial commitment reports.
+- name: Folders
+  description: Manage folders for organizing Cost Reports.
+- name: Integrations
+  description: Manage cloud provider integrations.
+- name: Kubernetes
+  description: Manage Kubernetes cost data and efficiency reports.
+- name: Managed Accounts
+  description: Manage linked cloud provider accounts.
+- name: Network Flow Reports
+  description: Create and manage network flow reports.
+- name: Recommendations
+  description: Retrieve cost optimization recommendations.
+- name: Resource Reports
+  description: Create and manage resource reports.
+- name: Resources
+  description: Retrieve resource data from reports.
+- name: Saved Filters
+  description: Manage saved filters for cost data.
+- name: Segments
+  description: Create, update, and delete cost allocation segments.
+- name: Teams
+  description: Create and manage teams.
+- name: Workspaces
+  description: Manage workspaces and workspace access.
+paths:
+  /cost_reports:
+    get:
+      operationId: getCostReports
+      summary: Vantage Get All Cost Reports
+      description: Returns all Cost Reports that the current API token has access to.
+      tags:
+      - Cost Reports
+      parameters:
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful response with a list of Cost Reports.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cost_reports:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CostReport'
+              examples:
+                Getcostreports200Example:
+                  summary: Default getCostReports 200 response
+                  x-microcks-default: true
+                  value:
+                    cost_reports:
+                    - token: example_value
+                      title: Example Title
+                      filter: example_value
+                      groupings: example_value
+                      folder_token: example_value
+                      saved_filter_tokens:
+                      - {}
+                      workspace_token: example_value
+                      created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createCostReport
+      summary: Vantage Create a Cost Report
+      description: Creates a new Cost Report.
+      tags:
+      - Cost Reports
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CostReportInput'
+            examples:
+              CreatecostreportRequestExample:
+                summary: Default createCostReport request
+                x-microcks-default: true
+                value:
+                  title: Example Title
+                  filter: example_value
+                  groupings: example_value
+                  folder_token: example_value
+                  saved_filter_tokens:
+                  - example_value
+                  workspace_token: example_value
+      responses:
+        '201':
+          description: Cost Report created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CostReport'
+              examples:
+                Createcostreport201Example:
+                  summary: Default createCostReport 201 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    filter: example_value
+                    groupings: example_value
+                    folder_token: example_value
+                    saved_filter_tokens:
+                    - example_value
+                    workspace_token: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /cost_reports/{cost_report_token}:
+    get:
+      operationId: getCostReport
+      summary: Vantage Get a Cost Report
+      description: Returns a specific Cost Report by token.
+      tags:
+      - Cost Reports
+      parameters:
+      - $ref: '#/components/parameters/CostReportToken'
+      responses:
+        '200':
+          description: Successful response with the Cost Report.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CostReport'
+              examples:
+                Getcostreport200Example:
+                  summary: Default getCostReport 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    filter: example_value
+                    groupings: example_value
+                    folder_token: example_value
+                    saved_filter_tokens:
+                    - example_value
+                    workspace_token: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateCostReport
+      summary: Vantage Update a Cost Report
+      description: Updates an existing Cost Report.
+      tags:
+      - Cost Reports
+      parameters:
+      - $ref: '#/components/parameters/CostReportToken'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CostReportInput'
+            examples:
+              UpdatecostreportRequestExample:
+                summary: Default updateCostReport request
+                x-microcks-default: true
+                value:
+                  title: Example Title
+                  filter: example_value
+                  groupings: example_value
+                  folder_token: example_value
+                  saved_filter_tokens:
+                  - example_value
+                  workspace_token: example_value
+      responses:
+        '200':
+          description: Cost Report updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CostReport'
+              examples:
+                Updatecostreport200Example:
+                  summary: Default updateCostReport 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    filter: example_value
+                    groupings: example_value
+                    folder_token: example_value
+                    saved_filter_tokens:
+                    - example_value
+                    workspace_token: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteCostReport
+      summary: Vantage Delete a Cost Report
+      description: Deletes an existing Cost Report.
+      tags:
+      - Cost Reports
+      parameters:
+      - $ref: '#/components/parameters/CostReportToken'
+      responses:
+        '204':
+          description: Cost Report deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /costs:
+    get:
+      operationId: getCosts
+      summary: Vantage Get Costs
+      description: >-
+        Returns all Costs for a CostReport or VQL filter. You can filter by
+        cost_report_token or provide a VQL query to retrieve specific cost data.
+      tags:
+      - Costs
+      parameters:
+      - name: cost_report_token
+        in: query
+        description: The token of the Cost Report to retrieve costs for.
+        schema:
+          type: string
+        example: example_value
+      - name: start_date
+        in: query
+        description: The start date for the cost data (YYYY-MM-DD).
+        schema:
+          type: string
+          format: date
+        example: '2026-01-15'
+      - name: end_date
+        in: query
+        description: The end date for the cost data (YYYY-MM-DD).
+        schema:
+          type: string
+          format: date
+        example: '2026-01-15'
+      - name: groupings
+        in: query
+        description: Comma-separated list of groupings for cost data.
+        schema:
+          type: string
+        example: example_value
+      - name: vql
+        in: query
+        description: A VQL filter expression to query cost data.
+        schema:
+          type: string
+        example: example_value
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful response with cost data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  costs:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Cost'
+              examples:
+                Getcosts200Example:
+                  summary: Default getCosts 200 response
+                  x-microcks-default: true
+                  value:
+                    costs:
+                    - date: '2026-01-15'
+                      amount: example_value
+                      currency: example_value
+                      provider: example_value
+                      service: example_value
+                      account_id: '500123'
+                      region: example_value
+                      category: example_value
+                      subcategory: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /folders:
+    get:
+      operationId: getFolders
+      summary: Vantage Get All Folders
+      description: Returns all Folders that the current API token has access to.
+      tags:
+      - Folders
+      parameters:
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful response with a list of Folders.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  folders:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Folder'
+              examples:
+                Getfolders200Example:
+                  summary: Default getFolders 200 response
+                  x-microcks-default: true
+                  value:
+                    folders:
+                    - token: example_value
+                      title: Example Title
+                      parent_folder_token: example_value
+                      workspace_token: example_value
+                      created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createFolder
+      summary: Vantage Create a Folder
+      description: Creates a new Folder for organizing Cost Reports.
+      tags:
+      - Folders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FolderInput'
+            examples:
+              CreatefolderRequestExample:
+                summary: Default createFolder request
+                x-microcks-default: true
+                value:
+                  title: Example Title
+                  parent_folder_token: example_value
+                  workspace_token: example_value
+      responses:
+        '201':
+          description: Folder created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Folder'
+              examples:
+                Createfolder201Example:
+                  summary: Default createFolder 201 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    parent_folder_token: example_value
+                    workspace_token: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /folders/{folder_token}:
+    get:
+      operationId: getFolder
+      summary: Vantage Get a Folder
+      description: Returns a specific Folder by token.
+      tags:
+      - Folders
+      parameters:
+      - $ref: '#/components/parameters/FolderToken'
+      responses:
+        '200':
+          description: Successful response with the Folder.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Folder'
+              examples:
+                Getfolder200Example:
+                  summary: Default getFolder 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    parent_folder_token: example_value
+                    workspace_token: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateFolder
+      summary: Vantage Update a Folder
+      description: Updates an existing Folder.
+      tags:
+      - Folders
+      parameters:
+      - $ref: '#/components/parameters/FolderToken'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FolderInput'
+            examples:
+              UpdatefolderRequestExample:
+                summary: Default updateFolder request
+                x-microcks-default: true
+                value:
+                  title: Example Title
+                  parent_folder_token: example_value
+                  workspace_token: example_value
+      responses:
+        '200':
+          description: Folder updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Folder'
+              examples:
+                Updatefolder200Example:
+                  summary: Default updateFolder 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    parent_folder_token: example_value
+                    workspace_token: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteFolder
+      summary: Vantage Delete a Folder
+      description: Deletes an existing Folder.
+      tags:
+      - Folders
+      parameters:
+      - $ref: '#/components/parameters/FolderToken'
+      responses:
+        '204':
+          description: Folder deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /dashboards:
+    get:
+      operationId: getDashboards
+      summary: Vantage Get All Dashboards
+      description: Returns all Dashboards that the current API token has access to.
+      tags:
+      - Dashboards
+      parameters:
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful response with a list of Dashboards.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  dashboards:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Dashboard'
+              examples:
+                Getdashboards200Example:
+                  summary: Default getDashboards 200 response
+                  x-microcks-default: true
+                  value:
+                    dashboards:
+                    - token: example_value
+                      title: Example Title
+                      widget_tokens:
+                      - {}
+                      workspace_token: example_value
+                      created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createDashboard
+      summary: Vantage Create a Dashboard
+      description: Creates a new Dashboard.
+      tags:
+      - Dashboards
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DashboardInput'
+            examples:
+              CreatedashboardRequestExample:
+                summary: Default createDashboard request
+                x-microcks-default: true
+                value:
+                  title: Example Title
+                  widget_tokens:
+                  - example_value
+                  workspace_token: example_value
+      responses:
+        '201':
+          description: Dashboard created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dashboard'
+              examples:
+                Createdashboard201Example:
+                  summary: Default createDashboard 201 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    widget_tokens:
+                    - example_value
+                    workspace_token: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /dashboards/{dashboard_token}:
+    get:
+      operationId: getDashboard
+      summary: Vantage Get a Dashboard
+      description: Returns a specific Dashboard by token.
+      tags:
+      - Dashboards
+      parameters:
+      - $ref: '#/components/parameters/DashboardToken'
+      responses:
+        '200':
+          description: Successful response with the Dashboard.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dashboard'
+              examples:
+                Getdashboard200Example:
+                  summary: Default getDashboard 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    widget_tokens:
+                    - example_value
+                    workspace_token: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateDashboard
+      summary: Vantage Update a Dashboard
+      description: Updates an existing Dashboard.
+      tags:
+      - Dashboards
+      parameters:
+      - $ref: '#/components/parameters/DashboardToken'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DashboardInput'
+            examples:
+              UpdatedashboardRequestExample:
+                summary: Default updateDashboard request
+                x-microcks-default: true
+                value:
+                  title: Example Title
+                  widget_tokens:
+                  - example_value
+                  workspace_token: example_value
+      responses:
+        '200':
+          description: Dashboard updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dashboard'
+              examples:
+                Updatedashboard200Example:
+                  summary: Default updateDashboard 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    widget_tokens:
+                    - example_value
+                    workspace_token: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteDashboard
+      summary: Vantage Delete a Dashboard
+      description: Deletes an existing Dashboard.
+      tags:
+      - Dashboards
+      parameters:
+      - $ref: '#/components/parameters/DashboardToken'
+      responses:
+        '204':
+          description: Dashboard deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /saved_filters:
+    get:
+      operationId: getSavedFilters
+      summary: Vantage Get All Saved Filters
+      description: Returns all Saved Filters that the current API token has access to.
+      tags:
+      - Saved Filters
+      parameters:
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful response with a list of Saved Filters.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  saved_filters:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SavedFilter'
+              examples:
+                Getsavedfilters200Example:
+                  summary: Default getSavedFilters 200 response
+                  x-microcks-default: true
+                  value:
+                    saved_filters:
+                    - token: example_value
+                      title: Example Title
+                      filter: example_value
+                      workspace_token: example_value
+                      created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createSavedFilter
+      summary: Vantage Create a Saved Filter
+      description: Creates a new Saved Filter.
+      tags:
+      - Saved Filters
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SavedFilterInput'
+            examples:
+              CreatesavedfilterRequestExample:
+                summary: Default createSavedFilter request
+                x-microcks-default: true
+                value:
+                  title: Example Title
+                  filter: example_value
+                  workspace_token: example_value
+      responses:
+        '201':
+          description: Saved Filter created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SavedFilter'
+              examples:
+                Createsavedfilter201Example:
+                  summary: Default createSavedFilter 201 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    filter: example_value
+                    workspace_token: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /saved_filters/{saved_filter_token}:
+    get:
+      operationId: getSavedFilter
+      summary: Vantage Get a Saved Filter
+      description: Returns a specific Saved Filter by token.
+      tags:
+      - Saved Filters
+      parameters:
+      - $ref: '#/components/parameters/SavedFilterToken'
+      responses:
+        '200':
+          description: Successful response with the Saved Filter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SavedFilter'
+              examples:
+                Getsavedfilter200Example:
+                  summary: Default getSavedFilter 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    filter: example_value
+                    workspace_token: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateSavedFilter
+      summary: Vantage Update a Saved Filter
+      description: Updates an existing Saved Filter.
+      tags:
+      - Saved Filters
+      parameters:
+      - $ref: '#/components/parameters/SavedFilterToken'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SavedFilterInput'
+            examples:
+              UpdatesavedfilterRequestExample:
+                summary: Default updateSavedFilter request
+                x-microcks-default: true
+                value:
+                  title: Example Title
+                  filter: example_value
+                  workspace_token: example_value
+      responses:
+        '200':
+          description: Saved Filter updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SavedFilter'
+              examples:
+                Updatesavedfilter200Example:
+                  summary: Default updateSavedFilter 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    filter: example_value
+                    workspace_token: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteSavedFilter
+      summary: Vantage Delete a Saved Filter
+      description: Deletes an existing Saved Filter.
+      tags:
+      - Saved Filters
+      parameters:
+      - $ref: '#/components/parameters/SavedFilterToken'
+      responses:
+        '204':
+          description: Saved Filter deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /workspaces:
+    get:
+      operationId: getWorkspaces
+      summary: Vantage Get All Workspaces
+      description: Returns all Workspaces that the current API token has access to.
+      tags:
+      - Workspaces
+      parameters:
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful response with a list of Workspaces.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  workspaces:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Workspace'
+              examples:
+                Getworkspaces200Example:
+                  summary: Default getWorkspaces 200 response
+                  x-microcks-default: true
+                  value:
+                    workspaces:
+                    - token: example_value
+                      name: Example Title
+                      created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /workspaces/{workspace_token}:
+    get:
+      operationId: getWorkspace
+      summary: Vantage Get a Workspace
+      description: Returns a specific Workspace by token.
+      tags:
+      - Workspaces
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceToken'
+      responses:
+        '200':
+          description: Successful response with the Workspace.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workspace'
+              examples:
+                Getworkspace200Example:
+                  summary: Default getWorkspace 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    name: Example Title
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /teams:
+    get:
+      operationId: getTeams
+      summary: Vantage Get All Teams
+      description: Returns all Teams that the current API token has access to.
+      tags:
+      - Teams
+      parameters:
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful response with a list of Teams.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  teams:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Team'
+              examples:
+                Getteams200Example:
+                  summary: Default getTeams 200 response
+                  x-microcks-default: true
+                  value:
+                    teams:
+                    - token: example_value
+                      name: Example Title
+                      description: A sample description.
+                      workspace_token: example_value
+                      user_tokens:
+                      - {}
+                      created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createTeam
+      summary: Vantage Create a Team
+      description: Creates a new Team.
+      tags:
+      - Teams
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamInput'
+            examples:
+              CreateteamRequestExample:
+                summary: Default createTeam request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  description: A sample description.
+                  workspace_token: example_value
+                  user_tokens:
+                  - example_value
+      responses:
+        '201':
+          description: Team created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+              examples:
+                Createteam201Example:
+                  summary: Default createTeam 201 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    name: Example Title
+                    description: A sample description.
+                    workspace_token: example_value
+                    user_tokens:
+                    - example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /teams/{team_token}:
+    get:
+      operationId: getTeam
+      summary: Vantage Get a Team
+      description: Returns a specific Team by token.
+      tags:
+      - Teams
+      parameters:
+      - $ref: '#/components/parameters/TeamToken'
+      responses:
+        '200':
+          description: Successful response with the Team.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+              examples:
+                Getteam200Example:
+                  summary: Default getTeam 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    name: Example Title
+                    description: A sample description.
+                    workspace_token: example_value
+                    user_tokens:
+                    - example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateTeam
+      summary: Vantage Update a Team
+      description: Updates an existing Team.
+      tags:
+      - Teams
+      parameters:
+      - $ref: '#/components/parameters/TeamToken'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamInput'
+            examples:
+              UpdateteamRequestExample:
+                summary: Default updateTeam request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  description: A sample description.
+                  workspace_token: example_value
+                  user_tokens:
+                  - example_value
+      responses:
+        '200':
+          description: Team updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+              examples:
+                Updateteam200Example:
+                  summary: Default updateTeam 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    name: Example Title
+                    description: A sample description.
+                    workspace_token: example_value
+                    user_tokens:
+                    - example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteTeam
+      summary: Vantage Delete a Team
+      description: Deletes an existing Team.
+      tags:
+      - Teams
+      parameters:
+      - $ref: '#/components/parameters/TeamToken'
+      responses:
+        '204':
+          description: Team deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /access_grants:
+    get:
+      operationId: getAccessGrants
+      summary: Vantage Get All Access Grants
+      description: Returns all Access Grants that the current API token has access to.
+      tags:
+      - Access Grants
+      parameters:
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful response with a list of Access Grants.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_grants:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AccessGrant'
+              examples:
+                Getaccessgrants200Example:
+                  summary: Default getAccessGrants 200 response
+                  x-microcks-default: true
+                  value:
+                    access_grants:
+                    - token: example_value
+                      team_token: example_value
+                      resource_token: example_value
+                      access: example_value
+                      created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createAccessGrant
+      summary: Vantage Create an Access Grant
+      description: Creates a new Access Grant for a team.
+      tags:
+      - Access Grants
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccessGrantInput'
+            examples:
+              CreateaccessgrantRequestExample:
+                summary: Default createAccessGrant request
+                x-microcks-default: true
+                value:
+                  team_token: example_value
+                  resource_token: example_value
+                  access: example_value
+      responses:
+        '201':
+          description: Access Grant created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessGrant'
+              examples:
+                Createaccessgrant201Example:
+                  summary: Default createAccessGrant 201 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    team_token: example_value
+                    resource_token: example_value
+                    access: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /access_grants/{access_grant_token}:
+    get:
+      operationId: getAccessGrant
+      summary: Vantage Get an Access Grant
+      description: Returns a specific Access Grant by token.
+      tags:
+      - Access Grants
+      parameters:
+      - $ref: '#/components/parameters/AccessGrantToken'
+      responses:
+        '200':
+          description: Successful response with the Access Grant.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessGrant'
+              examples:
+                Getaccessgrant200Example:
+                  summary: Default getAccessGrant 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    team_token: example_value
+                    resource_token: example_value
+                    access: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteAccessGrant
+      summary: Vantage Delete an Access Grant
+      description: Deletes an existing Access Grant.
+      tags:
+      - Access Grants
+      parameters:
+      - $ref: '#/components/parameters/AccessGrantToken'
+      responses:
+        '204':
+          description: Access Grant deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /budget_alerts:
+    get:
+      operationId: getBudgetAlerts
+      summary: Vantage Get All Budget Alerts
+      description: Returns all Budget Alerts that the current API token has access to.
+      tags:
+      - Budget Alerts
+      parameters:
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful response with a list of Budget Alerts.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  budget_alerts:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BudgetAlert'
+              examples:
+                Getbudgetalerts200Example:
+                  summary: Default getBudgetAlerts 200 response
+                  x-microcks-default: true
+                  value:
+                    budget_alerts:
+                    - token: example_value
+                      cost_report_token: example_value
+                      budget: example_value
+                      period: example_value
+                      created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createBudgetAlert
+      summary: Vantage Create a Budget Alert
+      description: Creates a new Budget Alert.
+      tags:
+      - Budget Alerts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BudgetAlertInput'
+            examples:
+              CreatebudgetalertRequestExample:
+                summary: Default createBudgetAlert request
+                x-microcks-default: true
+                value:
+                  cost_report_token: example_value
+                  budget: example_value
+                  period: example_value
+      responses:
+        '201':
+          description: Budget Alert created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BudgetAlert'
+              examples:
+                Createbudgetalert201Example:
+                  summary: Default createBudgetAlert 201 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    cost_report_token: example_value
+                    budget: example_value
+                    period: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /budget_alerts/{budget_alert_token}:
+    get:
+      operationId: getBudgetAlert
+      summary: Vantage Get a Budget Alert
+      description: Returns a specific Budget Alert by token.
+      tags:
+      - Budget Alerts
+      parameters:
+      - $ref: '#/components/parameters/BudgetAlertToken'
+      responses:
+        '200':
+          description: Successful response with the Budget Alert.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BudgetAlert'
+              examples:
+                Getbudgetalert200Example:
+                  summary: Default getBudgetAlert 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    cost_report_token: example_value
+                    budget: example_value
+                    period: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateBudgetAlert
+      summary: Vantage Update a Budget Alert
+      description: Updates an existing Budget Alert.
+      tags:
+      - Budget Alerts
+      parameters:
+      - $ref: '#/components/parameters/BudgetAlertToken'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BudgetAlertInput'
+            examples:
+              UpdatebudgetalertRequestExample:
+                summary: Default updateBudgetAlert request
+                x-microcks-default: true
+                value:
+                  cost_report_token: example_value
+                  budget: example_value
+                  period: example_value
+      responses:
+        '200':
+          description: Budget Alert updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BudgetAlert'
+              examples:
+                Updatebudgetalert200Example:
+                  summary: Default updateBudgetAlert 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    cost_report_token: example_value
+                    budget: example_value
+                    period: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteBudgetAlert
+      summary: Vantage Delete a Budget Alert
+      description: Deletes an existing Budget Alert.
+      tags:
+      - Budget Alerts
+      parameters:
+      - $ref: '#/components/parameters/BudgetAlertToken'
+      responses:
+        '204':
+          description: Budget Alert deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /anomaly_alerts:
+    get:
+      operationId: getAnomalyAlerts
+      summary: Vantage Get All Anomaly Alerts
+      description: Returns all Anomaly Alerts that the current API token has access to.
+      tags:
+      - Anomaly Alerts
+      parameters:
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful response with a list of Anomaly Alerts.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  anomaly_alerts:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AnomalyAlert'
+              examples:
+                Getanomalyalerts200Example:
+                  summary: Default getAnomalyAlerts 200 response
+                  x-microcks-default: true
+                  value:
+                    anomaly_alerts:
+                    - token: example_value
+                      cost_report_token: example_value
+                      threshold: 42.5
+                      created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createAnomalyAlert
+      summary: Vantage Create an Anomaly Alert
+      description: Creates a new Anomaly Alert.
+      tags:
+      - Anomaly Alerts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnomalyAlertInput'
+            examples:
+              CreateanomalyalertRequestExample:
+                summary: Default createAnomalyAlert request
+                x-microcks-default: true
+                value:
+                  cost_report_token: example_value
+                  threshold: 42.5
+      responses:
+        '201':
+          description: Anomaly Alert created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnomalyAlert'
+              examples:
+                Createanomalyalert201Example:
+                  summary: Default createAnomalyAlert 201 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    cost_report_token: example_value
+                    threshold: 42.5
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /anomaly_alerts/{anomaly_alert_token}:
+    get:
+      operationId: getAnomalyAlert
+      summary: Vantage Get an Anomaly Alert
+      description: Returns a specific Anomaly Alert by token.
+      tags:
+      - Anomaly Alerts
+      parameters:
+      - $ref: '#/components/parameters/AnomalyAlertToken'
+      responses:
+        '200':
+          description: Successful response with the Anomaly Alert.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnomalyAlert'
+              examples:
+                Getanomalyalert200Example:
+                  summary: Default getAnomalyAlert 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    cost_report_token: example_value
+                    threshold: 42.5
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateAnomalyAlert
+      summary: Vantage Update an Anomaly Alert
+      description: Updates an existing Anomaly Alert.
+      tags:
+      - Anomaly Alerts
+      parameters:
+      - $ref: '#/components/parameters/AnomalyAlertToken'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnomalyAlertInput'
+            examples:
+              UpdateanomalyalertRequestExample:
+                summary: Default updateAnomalyAlert request
+                x-microcks-default: true
+                value:
+                  cost_report_token: example_value
+                  threshold: 42.5
+      responses:
+        '200':
+          description: Anomaly Alert updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnomalyAlert'
+              examples:
+                Updateanomalyalert200Example:
+                  summary: Default updateAnomalyAlert 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    cost_report_token: example_value
+                    threshold: 42.5
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteAnomalyAlert
+      summary: Vantage Delete an Anomaly Alert
+      description: Deletes an existing Anomaly Alert.
+      tags:
+      - Anomaly Alerts
+      parameters:
+      - $ref: '#/components/parameters/AnomalyAlertToken'
+      responses:
+        '204':
+          description: Anomaly Alert deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /recommendations:
+    get:
+      operationId: getRecommendations
+      summary: Vantage Get All Recommendations
+      description: >-
+        Returns all cost optimization Recommendations that the current API token
+        has access to.
+      tags:
+      - Recommendations
+      parameters:
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful response with a list of Recommendations.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  recommendations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Recommendation'
+              examples:
+                Getrecommendations200Example:
+                  summary: Default getRecommendations 200 response
+                  x-microcks-default: true
+                  value:
+                    recommendations:
+                    - token: example_value
+                      type: example_value
+                      description: A sample description.
+                      estimated_savings: example_value
+                      provider: example_value
+                      service: example_value
+                      resource_id: '500123'
+                      created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /segments:
+    get:
+      operationId: getSegments
+      summary: Vantage Get All Segments
+      description: >-
+        Returns all cost allocation Segments that the current API token has
+        access to.
+      tags:
+      - Segments
+      parameters:
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful response with a list of Segments.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  segments:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Segment'
+              examples:
+                Getsegments200Example:
+                  summary: Default getSegments 200 response
+                  x-microcks-default: true
+                  value:
+                    segments:
+                    - token: example_value
+                      title: Example Title
+                      filter: example_value
+                      priority: 10
+                      workspace_token: example_value
+                      created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createSegment
+      summary: Vantage Create a Segment
+      description: Creates a new cost allocation Segment.
+      tags:
+      - Segments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SegmentInput'
+            examples:
+              CreatesegmentRequestExample:
+                summary: Default createSegment request
+                x-microcks-default: true
+                value:
+                  title: Example Title
+                  filter: example_value
+                  priority: 10
+                  workspace_token: example_value
+      responses:
+        '201':
+          description: Segment created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Segment'
+              examples:
+                Createsegment201Example:
+                  summary: Default createSegment 201 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    filter: example_value
+                    priority: 10
+                    workspace_token: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /segments/{segment_token}:
+    get:
+      operationId: getSegment
+      summary: Vantage Get a Segment
+      description: Returns a specific Segment by token.
+      tags:
+      - Segments
+      parameters:
+      - $ref: '#/components/parameters/SegmentToken'
+      responses:
+        '200':
+          description: Successful response with the Segment.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Segment'
+              examples:
+                Getsegment200Example:
+                  summary: Default getSegment 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    filter: example_value
+                    priority: 10
+                    workspace_token: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateSegment
+      summary: Vantage Update a Segment
+      description: Updates an existing Segment.
+      tags:
+      - Segments
+      parameters:
+      - $ref: '#/components/parameters/SegmentToken'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SegmentInput'
+            examples:
+              UpdatesegmentRequestExample:
+                summary: Default updateSegment request
+                x-microcks-default: true
+                value:
+                  title: Example Title
+                  filter: example_value
+                  priority: 10
+                  workspace_token: example_value
+      responses:
+        '200':
+          description: Segment updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Segment'
+              examples:
+                Updatesegment200Example:
+                  summary: Default updateSegment 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    filter: example_value
+                    priority: 10
+                    workspace_token: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteSegment
+      summary: Vantage Delete a Segment
+      description: Deletes an existing Segment.
+      tags:
+      - Segments
+      parameters:
+      - $ref: '#/components/parameters/SegmentToken'
+      responses:
+        '204':
+          description: Segment deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /integrations:
+    get:
+      operationId: getIntegrations
+      summary: Vantage Get All Integrations
+      description: >-
+        Returns all cloud provider Integrations that the current API token has
+        access to.
+      tags:
+      - Integrations
+      parameters:
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful response with a list of Integrations.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  integrations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Integration'
+              examples:
+                Getintegrations200Example:
+                  summary: Default getIntegrations 200 response
+                  x-microcks-default: true
+                  value:
+                    integrations:
+                    - token: example_value
+                      provider: example_value
+                      status: example_value
+                      account_identifier: example_value
+                      created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createIntegration
+      summary: Vantage Create an Integration
+      description: Creates a new cloud provider Integration (e.g., Azure, GCP).
+      tags:
+      - Integrations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IntegrationInput'
+            examples:
+              CreateintegrationRequestExample:
+                summary: Default createIntegration request
+                x-microcks-default: true
+                value:
+                  provider: example_value
+                  account_identifier: example_value
+      responses:
+        '201':
+          description: Integration created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Integration'
+              examples:
+                Createintegration201Example:
+                  summary: Default createIntegration 201 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    provider: example_value
+                    status: example_value
+                    account_identifier: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /integrations/{integration_token}:
+    get:
+      operationId: getIntegration
+      summary: Vantage Get an Integration
+      description: Returns a specific Integration by token.
+      tags:
+      - Integrations
+      parameters:
+      - $ref: '#/components/parameters/IntegrationToken'
+      responses:
+        '200':
+          description: Successful response with the Integration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Integration'
+              examples:
+                Getintegration200Example:
+                  summary: Default getIntegration 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    provider: example_value
+                    status: example_value
+                    account_identifier: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteIntegration
+      summary: Vantage Delete an Integration
+      description: Deletes an existing Integration.
+      tags:
+      - Integrations
+      parameters:
+      - $ref: '#/components/parameters/IntegrationToken'
+      responses:
+        '204':
+          description: Integration deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /managed_accounts:
+    get:
+      operationId: getManagedAccounts
+      summary: Vantage Get All Managed Accounts
+      description: >-
+        Returns all Managed Accounts (linked cloud provider accounts) that the
+        current API token has access to.
+      tags:
+      - Managed Accounts
+      parameters:
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful response with a list of Managed Accounts.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  managed_accounts:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ManagedAccount'
+              examples:
+                Getmanagedaccounts200Example:
+                  summary: Default getManagedAccounts 200 response
+                  x-microcks-default: true
+                  value:
+                    managed_accounts:
+                    - token: example_value
+                      name: Example Title
+                      account_identifier: example_value
+                      provider: example_value
+                      created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /cost_providers:
+    get:
+      operationId: getCostProviders
+      summary: Vantage Get All Cost Providers
+      description: Returns all available Cost Providers.
+      tags:
+      - Cost Providers
+      responses:
+        '200':
+          description: Successful response with a list of Cost Providers.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cost_providers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CostProvider'
+              examples:
+                Getcostproviders200Example:
+                  summary: Default getCostProviders 200 response
+                  x-microcks-default: true
+                  value:
+                    cost_providers:
+                    - token: example_value
+                      name: Example Title
+                      description: A sample description.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /business_metrics:
+    get:
+      operationId: getBusinessMetrics
+      summary: Vantage Get All Business Metrics
+      description: >-
+        Returns all Business Metrics that the current API token has access to.
+      tags:
+      - Business Metrics
+      parameters:
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful response with a list of Business Metrics.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  business_metrics:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BusinessMetric'
+              examples:
+                Getbusinessmetrics200Example:
+                  summary: Default getBusinessMetrics 200 response
+                  x-microcks-default: true
+                  value:
+                    business_metrics:
+                    - token: example_value
+                      title: Example Title
+                      cost_report_tokens_with_metadata:
+                      - {}
+                      values:
+                      - {}
+                      created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createBusinessMetric
+      summary: Vantage Create a Business Metric
+      description: Creates a new Business Metric.
+      tags:
+      - Business Metrics
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BusinessMetricInput'
+            examples:
+              CreatebusinessmetricRequestExample:
+                summary: Default createBusinessMetric request
+                x-microcks-default: true
+                value:
+                  title: Example Title
+                  values:
+                  - date: '2026-01-15'
+                    amount: 42.5
+                  cost_report_tokens_with_metadata:
+                  - {}
+      responses:
+        '201':
+          description: Business Metric created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusinessMetric'
+              examples:
+                Createbusinessmetric201Example:
+                  summary: Default createBusinessMetric 201 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    cost_report_tokens_with_metadata:
+                    - {}
+                    values:
+                    - date: '2026-01-15'
+                      amount: 42.5
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /business_metrics/{business_metric_token}:
+    get:
+      operationId: getBusinessMetric
+      summary: Vantage Get a Business Metric
+      description: Returns a specific Business Metric by token.
+      tags:
+      - Business Metrics
+      parameters:
+      - $ref: '#/components/parameters/BusinessMetricToken'
+      responses:
+        '200':
+          description: Successful response with the Business Metric.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusinessMetric'
+              examples:
+                Getbusinessmetric200Example:
+                  summary: Default getBusinessMetric 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    cost_report_tokens_with_metadata:
+                    - {}
+                    values:
+                    - date: '2026-01-15'
+                      amount: 42.5
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateBusinessMetric
+      summary: Vantage Update a Business Metric
+      description: Updates an existing Business Metric.
+      tags:
+      - Business Metrics
+      parameters:
+      - $ref: '#/components/parameters/BusinessMetricToken'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BusinessMetricInput'
+            examples:
+              UpdatebusinessmetricRequestExample:
+                summary: Default updateBusinessMetric request
+                x-microcks-default: true
+                value:
+                  title: Example Title
+                  values:
+                  - date: '2026-01-15'
+                    amount: 42.5
+                  cost_report_tokens_with_metadata:
+                  - {}
+      responses:
+        '200':
+          description: Business Metric updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusinessMetric'
+              examples:
+                Updatebusinessmetric200Example:
+                  summary: Default updateBusinessMetric 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    cost_report_tokens_with_metadata:
+                    - {}
+                    values:
+                    - date: '2026-01-15'
+                      amount: 42.5
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteBusinessMetric
+      summary: Vantage Delete a Business Metric
+      description: Deletes an existing Business Metric.
+      tags:
+      - Business Metrics
+      parameters:
+      - $ref: '#/components/parameters/BusinessMetricToken'
+      responses:
+        '204':
+          description: Business Metric deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /resource_reports:
+    get:
+      operationId: getResourceReports
+      summary: Vantage Get All Resource Reports
+      description: >-
+        Returns all Resource Reports that the current API token has access to.
+      tags:
+      - Resource Reports
+      parameters:
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful response with a list of Resource Reports.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  resource_reports:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ResourceReport'
+              examples:
+                Getresourcereports200Example:
+                  summary: Default getResourceReports 200 response
+                  x-microcks-default: true
+                  value:
+                    resource_reports:
+                    - token: example_value
+                      title: Example Title
+                      filter: example_value
+                      workspace_token: example_value
+                      created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createResourceReport
+      summary: Vantage Create a Resource Report
+      description: Creates a new Resource Report.
+      tags:
+      - Resource Reports
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResourceReportInput'
+            examples:
+              CreateresourcereportRequestExample:
+                summary: Default createResourceReport request
+                x-microcks-default: true
+                value:
+                  title: Example Title
+                  filter: example_value
+                  workspace_token: example_value
+      responses:
+        '201':
+          description: Resource Report created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceReport'
+              examples:
+                Createresourcereport201Example:
+                  summary: Default createResourceReport 201 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    filter: example_value
+                    workspace_token: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /resource_reports/{resource_report_token}:
+    get:
+      operationId: getResourceReport
+      summary: Vantage Get a Resource Report
+      description: Returns a specific Resource Report by token.
+      tags:
+      - Resource Reports
+      parameters:
+      - $ref: '#/components/parameters/ResourceReportToken'
+      responses:
+        '200':
+          description: Successful response with the Resource Report.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceReport'
+              examples:
+                Getresourcereport200Example:
+                  summary: Default getResourceReport 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    filter: example_value
+                    workspace_token: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateResourceReport
+      summary: Vantage Update a Resource Report
+      description: Updates an existing Resource Report.
+      tags:
+      - Resource Reports
+      parameters:
+      - $ref: '#/components/parameters/ResourceReportToken'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResourceReportInput'
+            examples:
+              UpdateresourcereportRequestExample:
+                summary: Default updateResourceReport request
+                x-microcks-default: true
+                value:
+                  title: Example Title
+                  filter: example_value
+                  workspace_token: example_value
+      responses:
+        '200':
+          description: Resource Report updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceReport'
+              examples:
+                Updateresourcereport200Example:
+                  summary: Default updateResourceReport 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    filter: example_value
+                    workspace_token: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteResourceReport
+      summary: Vantage Delete a Resource Report
+      description: Deletes an existing Resource Report.
+      tags:
+      - Resource Reports
+      parameters:
+      - $ref: '#/components/parameters/ResourceReportToken'
+      responses:
+        '204':
+          description: Resource Report deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /resources:
+    get:
+      operationId: getResources
+      summary: Vantage Get Resources
+      description: >-
+        Returns Resources for a Resource Report. Provides detailed resource-level
+        cost and usage data.
+      tags:
+      - Resources
+      parameters:
+      - name: resource_report_token
+        in: query
+        description: The token of the Resource Report to retrieve resources for.
+        required: true
+        schema:
+          type: string
+        example: example_value
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful response with resource data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  resources:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Resource'
+              examples:
+                Getresources200Example:
+                  summary: Default getResources 200 response
+                  x-microcks-default: true
+                  value:
+                    resources:
+                    - token: example_value
+                      name: Example Title
+                      provider: example_value
+                      service: example_value
+                      account_id: '500123'
+                      region: example_value
+                      cost: example_value
+                      metadata: example_value
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /network_flow_reports:
+    get:
+      operationId: getNetworkFlowReports
+      summary: Vantage Get All Network Flow Reports
+      description: >-
+        Returns all Network Flow Reports that the current API token has access
+        to.
+      tags:
+      - Network Flow Reports
+      parameters:
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful response with a list of Network Flow Reports.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  network_flow_reports:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/NetworkFlowReport'
+              examples:
+                Getnetworkflowreports200Example:
+                  summary: Default getNetworkFlowReports 200 response
+                  x-microcks-default: true
+                  value:
+                    network_flow_reports:
+                    - token: example_value
+                      title: Example Title
+                      workspace_token: example_value
+                      created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createNetworkFlowReport
+      summary: Vantage Create a Network Flow Report
+      description: Creates a new Network Flow Report.
+      tags:
+      - Network Flow Reports
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NetworkFlowReportInput'
+            examples:
+              CreatenetworkflowreportRequestExample:
+                summary: Default createNetworkFlowReport request
+                x-microcks-default: true
+                value:
+                  title: Example Title
+                  workspace_token: example_value
+      responses:
+        '201':
+          description: Network Flow Report created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworkFlowReport'
+              examples:
+                Createnetworkflowreport201Example:
+                  summary: Default createNetworkFlowReport 201 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    workspace_token: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /network_flow_reports/{network_flow_report_token}:
+    get:
+      operationId: getNetworkFlowReport
+      summary: Vantage Get a Network Flow Report
+      description: Returns a specific Network Flow Report by token.
+      tags:
+      - Network Flow Reports
+      parameters:
+      - $ref: '#/components/parameters/NetworkFlowReportToken'
+      responses:
+        '200':
+          description: Successful response with the Network Flow Report.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworkFlowReport'
+              examples:
+                Getnetworkflowreport200Example:
+                  summary: Default getNetworkFlowReport 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    workspace_token: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteNetworkFlowReport
+      summary: Vantage Delete a Network Flow Report
+      description: Deletes an existing Network Flow Report.
+      tags:
+      - Network Flow Reports
+      parameters:
+      - $ref: '#/components/parameters/NetworkFlowReportToken'
+      responses:
+        '204':
+          description: Network Flow Report deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /financial_commitment_reports:
+    get:
+      operationId: getFinancialCommitmentReports
+      summary: Vantage Get All Financial Commitment Reports
+      description: >-
+        Returns all Financial Commitment Reports that the current API token has
+        access to.
+      tags:
+      - Financial Commitment Reports
+      parameters:
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: >-
+            Successful response with a list of Financial Commitment Reports.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  financial_commitment_reports:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FinancialCommitmentReport'
+              examples:
+                Getfinancialcommitmentreports200Example:
+                  summary: Default getFinancialCommitmentReports 200 response
+                  x-microcks-default: true
+                  value:
+                    financial_commitment_reports:
+                    - token: example_value
+                      title: Example Title
+                      workspace_token: example_value
+                      created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createFinancialCommitmentReport
+      summary: Vantage Create a Financial Commitment Report
+      description: Creates a new Financial Commitment Report.
+      tags:
+      - Financial Commitment Reports
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FinancialCommitmentReportInput'
+            examples:
+              CreatefinancialcommitmentreportRequestExample:
+                summary: Default createFinancialCommitmentReport request
+                x-microcks-default: true
+                value:
+                  title: Example Title
+                  workspace_token: example_value
+      responses:
+        '201':
+          description: Financial Commitment Report created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FinancialCommitmentReport'
+              examples:
+                Createfinancialcommitmentreport201Example:
+                  summary: Default createFinancialCommitmentReport 201 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    workspace_token: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /financial_commitment_reports/{financial_commitment_report_token}:
+    get:
+      operationId: getFinancialCommitmentReport
+      summary: Vantage Get a Financial Commitment Report
+      description: Returns a specific Financial Commitment Report by token.
+      tags:
+      - Financial Commitment Reports
+      parameters:
+      - $ref: '#/components/parameters/FinancialCommitmentReportToken'
+      responses:
+        '200':
+          description: Successful response with the Financial Commitment Report.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FinancialCommitmentReport'
+              examples:
+                Getfinancialcommitmentreport200Example:
+                  summary: Default getFinancialCommitmentReport 200 response
+                  x-microcks-default: true
+                  value:
+                    token: example_value
+                    title: Example Title
+                    workspace_token: example_value
+                    created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteFinancialCommitmentReport
+      summary: Vantage Delete a Financial Commitment Report
+      description: Deletes an existing Financial Commitment Report.
+      tags:
+      - Financial Commitment Reports
+      parameters:
+      - $ref: '#/components/parameters/FinancialCommitmentReportToken'
+      responses:
+        '204':
+          description: Financial Commitment Report deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /kubernetes:
+    get:
+      operationId: getKubernetesEfficiencyReports
+      summary: Vantage Get Kubernetes Efficiency Reports
+      description: >-
+        Returns Kubernetes efficiency data that the current API token has access
+        to.
+      tags:
+      - Kubernetes
+      parameters:
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/LimitParam'
+      responses:
+        '200':
+          description: Successful response with Kubernetes efficiency data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  kubernetes_efficiency_reports:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/KubernetesEfficiencyReport'
+              examples:
+                Getkubernetesefficiencyreports200Example:
+                  summary: Default getKubernetesEfficiencyReports 200 response
+                  x-microcks-default: true
+                  value:
+                    kubernetes_efficiency_reports:
+                    - token: example_value
+                      cluster_name: example_value
+                      namespace: example_value
+                      idle_cost: example_value
+                      total_cost: example_value
+                      efficiency: 42.5
+                      created_at: '2026-01-15T10:30:00Z'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        Vantage API token. Create an API token from your Vantage account
+        settings page at https://console.vantage.sh/account/api_access_tokens.
+  parameters:
+    PageParam:
+      name: page
+      in: query
+      description: The page of results to return.
+      schema:
+        type: integer
+        default: 1
+    LimitParam:
+      name: limit
+      in: query
+      description: The number of results per page.
+      schema:
+        type: integer
+        default: 25
+    CostReportToken:
+      name: cost_report_token
+      in: path
+      required: true
+      description: The unique token of the Cost Report.
+      schema:
+        type: string
+    FolderToken:
+      name: folder_token
+      in: path
+      required: true
+      description: The unique token of the Folder.
+      schema:
+        type: string
+    DashboardToken:
+      name: dashboard_token
+      in: path
+      required: true
+      description: The unique token of the Dashboard.
+      schema:
+        type: string
+    SavedFilterToken:
+      name: saved_filter_token
+      in: path
+      required: true
+      description: The unique token of the Saved Filter.
+      schema:
+        type: string
+    WorkspaceToken:
+      name: workspace_token
+      in: path
+      required: true
+      description: The unique token of the Workspace.
+      schema:
+        type: string
+    TeamToken:
+      name: team_token
+      in: path
+      required: true
+      description: The unique token of the Team.
+      schema:
+        type: string
+    AccessGrantToken:
+      name: access_grant_token
+      in: path
+      required: true
+      description: The unique token of the Access Grant.
+      schema:
+        type: string
+    BudgetAlertToken:
+      name: budget_alert_token
+      in: path
+      required: true
+      description: The unique token of the Budget Alert.
+      schema:
+        type: string
+    AnomalyAlertToken:
+      name: anomaly_alert_token
+      in: path
+      required: true
+      description: The unique token of the Anomaly Alert.
+      schema:
+        type: string
+    SegmentToken:
+      name: segment_token
+      in: path
+      required: true
+      description: The unique token of the Segment.
+      schema:
+        type: string
+    IntegrationToken:
+      name: integration_token
+      in: path
+      required: true
+      description: The unique token of the Integration.
+      schema:
+        type: string
+    BusinessMetricToken:
+      name: business_metric_token
+      in: path
+      required: true
+      description: The unique token of the Business Metric.
+      schema:
+        type: string
+    ResourceReportToken:
+      name: resource_report_token
+      in: path
+      required: true
+      description: The unique token of the Resource Report.
+      schema:
+        type: string
+    NetworkFlowReportToken:
+      name: network_flow_report_token
+      in: path
+      required: true
+      description: The unique token of the Network Flow Report.
+      schema:
+        type: string
+    FinancialCommitmentReportToken:
+      name: financial_commitment_report_token
+      in: path
+      required: true
+      description: The unique token of the Financial Commitment Report.
+      schema:
+        type: string
+  schemas:
+    CostReport:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The unique token identifier for the Cost Report.
+          example: example_value
+        title:
+          type: string
+          description: The title of the Cost Report.
+          example: Example Title
+        filter:
+          type: string
+          description: The VQL filter applied to the Cost Report.
+          example: example_value
+        groupings:
+          type: string
+          description: The groupings applied to the Cost Report.
+          example: example_value
+        folder_token:
+          type: string
+          description: The token of the Folder this report belongs to.
+          example: example_value
+        saved_filter_tokens:
+          type: array
+          items:
+            type: string
+          description: Tokens of Saved Filters applied to this report.
+          example: []
+        workspace_token:
+          type: string
+          description: The token of the Workspace this report belongs to.
+          example: example_value
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time the Cost Report was created.
+          example: '2026-01-15T10:30:00Z'
+    CostReportInput:
+      type: object
+      required:
+      - title
+      properties:
+        title:
+          type: string
+          description: The title of the Cost Report.
+          example: Example Title
+        filter:
+          type: string
+          description: VQL filter expression for the Cost Report.
+          example: example_value
+        groupings:
+          type: string
+          description: Groupings for the Cost Report.
+          example: example_value
+        folder_token:
+          type: string
+          description: The token of the Folder to place the report in.
+          example: example_value
+        saved_filter_tokens:
+          type: array
+          items:
+            type: string
+          description: Tokens of Saved Filters to apply.
+          example: []
+        workspace_token:
+          type: string
+          description: The token of the Workspace for the report.
+          example: example_value
+    Cost:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+          description: The date of the cost entry.
+          example: '2026-01-15'
+        amount:
+          type: string
+          description: The cost amount.
+          example: example_value
+        currency:
+          type: string
+          description: The currency of the cost amount.
+          example: example_value
+        provider:
+          type: string
+          description: The cloud provider (e.g., aws, azure, gcp).
+          example: example_value
+        service:
+          type: string
+          description: The cloud service name.
+          example: example_value
+        account_id:
+          type: string
+          description: The cloud account identifier.
+          example: '500123'
+        region:
+          type: string
+          description: The cloud region.
+          example: example_value
+        category:
+          type: string
+          description: The cost category.
+          example: example_value
+        subcategory:
+          type: string
+          description: The cost subcategory.
+          example: example_value
+    Folder:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The unique token identifier for the Folder.
+          example: example_value
+        title:
+          type: string
+          description: The title of the Folder.
+          example: Example Title
+        parent_folder_token:
+          type: string
+          description: The token of the parent Folder, if nested.
+          example: example_value
+        workspace_token:
+          type: string
+          description: The token of the Workspace this Folder belongs to.
+          example: example_value
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time the Folder was created.
+          example: '2026-01-15T10:30:00Z'
+    FolderInput:
+      type: object
+      required:
+      - title
+      properties:
+        title:
+          type: string
+          description: The title of the Folder.
+          example: Example Title
+        parent_folder_token:
+          type: string
+          description: The token of the parent Folder for nesting.
+          example: example_value
+        workspace_token:
+          type: string
+          description: The token of the Workspace for the Folder.
+          example: example_value
+    Dashboard:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The unique token identifier for the Dashboard.
+          example: example_value
+        title:
+          type: string
+          description: The title of the Dashboard.
+          example: Example Title
+        widget_tokens:
+          type: array
+          items:
+            type: string
+          description: Tokens of widgets included in the Dashboard.
+          example: []
+        workspace_token:
+          type: string
+          description: The token of the Workspace this Dashboard belongs to.
+          example: example_value
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time the Dashboard was created.
+          example: '2026-01-15T10:30:00Z'
+    DashboardInput:
+      type: object
+      required:
+      - title
+      properties:
+        title:
+          type: string
+          description: The title of the Dashboard.
+          example: Example Title
+        widget_tokens:
+          type: array
+          items:
+            type: string
+          description: Tokens of widgets to include.
+          example: []
+        workspace_token:
+          type: string
+          description: The token of the Workspace for the Dashboard.
+          example: example_value
+    SavedFilter:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The unique token identifier for the Saved Filter.
+          example: example_value
+        title:
+          type: string
+          description: The title of the Saved Filter.
+          example: Example Title
+        filter:
+          type: string
+          description: The VQL filter expression.
+          example: example_value
+        workspace_token:
+          type: string
+          description: The token of the Workspace this Saved Filter belongs to.
+          example: example_value
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time the Saved Filter was created.
+          example: '2026-01-15T10:30:00Z'
+    SavedFilterInput:
+      type: object
+      required:
+      - title
+      - filter
+      properties:
+        title:
+          type: string
+          description: The title of the Saved Filter.
+          example: Example Title
+        filter:
+          type: string
+          description: The VQL filter expression.
+          example: example_value
+        workspace_token:
+          type: string
+          description: The token of the Workspace for the Saved Filter.
+          example: example_value
+    Workspace:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The unique token identifier for the Workspace.
+          example: example_value
+        name:
+          type: string
+          description: The name of the Workspace.
+          example: Example Title
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time the Workspace was created.
+          example: '2026-01-15T10:30:00Z'
+    Team:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The unique token identifier for the Team.
+          example: example_value
+        name:
+          type: string
+          description: The name of the Team.
+          example: Example Title
+        description:
+          type: string
+          description: The description of the Team.
+          example: A sample description.
+        workspace_token:
+          type: string
+          description: The token of the Workspace this Team belongs to.
+          example: example_value
+        user_tokens:
+          type: array
+          items:
+            type: string
+          description: Tokens of users who are members of the Team.
+          example: []
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time the Team was created.
+          example: '2026-01-15T10:30:00Z'
+    TeamInput:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: The name of the Team.
+          example: Example Title
+        description:
+          type: string
+          description: The description of the Team.
+          example: A sample description.
+        workspace_token:
+          type: string
+          description: The token of the Workspace for the Team.
+          example: example_value
+        user_tokens:
+          type: array
+          items:
+            type: string
+          description: Tokens of users to add to the Team.
+          example: []
+    AccessGrant:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The unique token identifier for the Access Grant.
+          example: example_value
+        team_token:
+          type: string
+          description: The token of the Team the grant applies to.
+          example: example_value
+        resource_token:
+          type: string
+          description: The token of the resource being granted access to.
+          example: example_value
+        access:
+          type: string
+          description: The level of access granted.
+          example: example_value
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time the Access Grant was created.
+          example: '2026-01-15T10:30:00Z'
+    AccessGrantInput:
+      type: object
+      required:
+      - team_token
+      - resource_token
+      - access
+      properties:
+        team_token:
+          type: string
+          description: The token of the Team to grant access to.
+          example: example_value
+        resource_token:
+          type: string
+          description: The token of the resource to grant access to.
+          example: example_value
+        access:
+          type: string
+          description: The level of access to grant.
+          example: example_value
+    BudgetAlert:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The unique token identifier for the Budget Alert.
+          example: example_value
+        cost_report_token:
+          type: string
+          description: The token of the associated Cost Report.
+          example: example_value
+        budget:
+          type: string
+          description: The budget amount.
+          example: example_value
+        period:
+          type: string
+          description: The budget period (e.g., monthly).
+          example: example_value
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time the Budget Alert was created.
+          example: '2026-01-15T10:30:00Z'
+    BudgetAlertInput:
+      type: object
+      required:
+      - cost_report_token
+      - budget
+      properties:
+        cost_report_token:
+          type: string
+          description: The token of the Cost Report to set the budget for.
+          example: example_value
+        budget:
+          type: string
+          description: The budget amount.
+          example: example_value
+        period:
+          type: string
+          description: The budget period (e.g., monthly).
+          example: example_value
+    AnomalyAlert:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The unique token identifier for the Anomaly Alert.
+          example: example_value
+        cost_report_token:
+          type: string
+          description: The token of the associated Cost Report.
+          example: example_value
+        threshold:
+          type: number
+          description: The threshold percentage for anomaly detection.
+          example: 42.5
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time the Anomaly Alert was created.
+          example: '2026-01-15T10:30:00Z'
+    AnomalyAlertInput:
+      type: object
+      required:
+      - cost_report_token
+      properties:
+        cost_report_token:
+          type: string
+          description: The token of the Cost Report to monitor.
+          example: example_value
+        threshold:
+          type: number
+          description: The threshold percentage for anomaly detection.
+          example: 42.5
+    Recommendation:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The unique token identifier for the Recommendation.
+          example: example_value
+        type:
+          type: string
+          description: The type of recommendation.
+          example: example_value
+        description:
+          type: string
+          description: A description of the recommendation.
+          example: A sample description.
+        estimated_savings:
+          type: string
+          description: The estimated monthly savings.
+          example: example_value
+        provider:
+          type: string
+          description: The cloud provider.
+          example: example_value
+        service:
+          type: string
+          description: The cloud service.
+          example: example_value
+        resource_id:
+          type: string
+          description: The resource identifier.
+          example: '500123'
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time the Recommendation was generated.
+          example: '2026-01-15T10:30:00Z'
+    Segment:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The unique token identifier for the Segment.
+          example: example_value
+        title:
+          type: string
+          description: The title of the Segment.
+          example: Example Title
+        filter:
+          type: string
+          description: The VQL filter expression for the Segment.
+          example: example_value
+        priority:
+          type: integer
+          description: The priority order of the Segment.
+          example: 10
+        workspace_token:
+          type: string
+          description: The token of the Workspace this Segment belongs to.
+          example: example_value
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time the Segment was created.
+          example: '2026-01-15T10:30:00Z'
+    SegmentInput:
+      type: object
+      required:
+      - title
+      properties:
+        title:
+          type: string
+          description: The title of the Segment.
+          example: Example Title
+        filter:
+          type: string
+          description: The VQL filter expression.
+          example: example_value
+        priority:
+          type: integer
+          description: The priority order of the Segment.
+          example: 10
+        workspace_token:
+          type: string
+          description: The token of the Workspace for the Segment.
+          example: example_value
+    Integration:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The unique token identifier for the Integration.
+          example: example_value
+        provider:
+          type: string
+          description: The cloud provider (e.g., aws, azure, gcp).
+          example: example_value
+        status:
+          type: string
+          description: The current status of the Integration.
+          example: example_value
+        account_identifier:
+          type: string
+          description: The cloud account identifier for the Integration.
+          example: example_value
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time the Integration was created.
+          example: '2026-01-15T10:30:00Z'
+    IntegrationInput:
+      type: object
+      required:
+      - provider
+      properties:
+        provider:
+          type: string
+          description: The cloud provider to integrate with.
+          example: example_value
+        account_identifier:
+          type: string
+          description: The cloud account identifier.
+          example: example_value
+    ManagedAccount:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The unique token identifier for the Managed Account.
+          example: example_value
+        name:
+          type: string
+          description: The name of the Managed Account.
+          example: Example Title
+        account_identifier:
+          type: string
+          description: The cloud provider account identifier.
+          example: example_value
+        provider:
+          type: string
+          description: The cloud provider.
+          example: example_value
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time the Managed Account was created.
+          example: '2026-01-15T10:30:00Z'
+    CostProvider:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The unique token identifier for the Cost Provider.
+          example: example_value
+        name:
+          type: string
+          description: The name of the Cost Provider.
+          example: Example Title
+        description:
+          type: string
+          description: A description of the Cost Provider.
+          example: A sample description.
+    BusinessMetric:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The unique token identifier for the Business Metric.
+          example: example_value
+        title:
+          type: string
+          description: The title of the Business Metric.
+          example: Example Title
+        cost_report_tokens_with_metadata:
+          type: array
+          items:
+            type: object
+          description: Associated cost reports with metadata.
+          example: []
+        values:
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                format: date
+              amount:
+                type: number
+          description: The values of the Business Metric over time.
+          example: []
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time the Business Metric was created.
+          example: '2026-01-15T10:30:00Z'
+    BusinessMetricInput:
+      type: object
+      required:
+      - title
+      properties:
+        title:
+          type: string
+          description: The title of the Business Metric.
+          example: Example Title
+        values:
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                format: date
+              amount:
+                type: number
+          description: The values of the Business Metric.
+          example: []
+        cost_report_tokens_with_metadata:
+          type: array
+          items:
+            type: object
+          description: Associated cost reports with metadata.
+          example: []
+    ResourceReport:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The unique token identifier for the Resource Report.
+          example: example_value
+        title:
+          type: string
+          description: The title of the Resource Report.
+          example: Example Title
+        filter:
+          type: string
+          description: The VQL filter applied to the Resource Report.
+          example: example_value
+        workspace_token:
+          type: string
+          description: The token of the Workspace this report belongs to.
+          example: example_value
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time the Resource Report was created.
+          example: '2026-01-15T10:30:00Z'
+    ResourceReportInput:
+      type: object
+      required:
+      - title
+      properties:
+        title:
+          type: string
+          description: The title of the Resource Report.
+          example: Example Title
+        filter:
+          type: string
+          description: VQL filter expression for the Resource Report.
+          example: example_value
+        workspace_token:
+          type: string
+          description: The token of the Workspace for the report.
+          example: example_value
+    Resource:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The unique identifier for the Resource.
+          example: example_value
+        name:
+          type: string
+          description: The name of the Resource.
+          example: Example Title
+        provider:
+          type: string
+          description: The cloud provider.
+          example: example_value
+        service:
+          type: string
+          description: The cloud service.
+          example: example_value
+        account_id:
+          type: string
+          description: The cloud account identifier.
+          example: '500123'
+        region:
+          type: string
+          description: The region of the resource.
+          example: example_value
+        cost:
+          type: string
+          description: The cost associated with the resource.
+          example: example_value
+        metadata:
+          type: object
+          description: Additional metadata about the resource.
+          example: example_value
+    NetworkFlowReport:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The unique token identifier for the Network Flow Report.
+          example: example_value
+        title:
+          type: string
+          description: The title of the Network Flow Report.
+          example: Example Title
+        workspace_token:
+          type: string
+          description: The token of the Workspace this report belongs to.
+          example: example_value
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time the report was created.
+          example: '2026-01-15T10:30:00Z'
+    NetworkFlowReportInput:
+      type: object
+      required:
+      - title
+      properties:
+        title:
+          type: string
+          description: The title of the Network Flow Report.
+          example: Example Title
+        workspace_token:
+          type: string
+          description: The token of the Workspace for the report.
+          example: example_value
+    FinancialCommitmentReport:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The unique token identifier for the report.
+          example: example_value
+        title:
+          type: string
+          description: The title of the Financial Commitment Report.
+          example: Example Title
+        workspace_token:
+          type: string
+          description: The token of the Workspace this report belongs to.
+          example: example_value
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time the report was created.
+          example: '2026-01-15T10:30:00Z'
+    FinancialCommitmentReportInput:
+      type: object
+      required:
+      - title
+      properties:
+        title:
+          type: string
+          description: The title of the Financial Commitment Report.
+          example: Example Title
+        workspace_token:
+          type: string
+          description: The token of the Workspace for the report.
+          example: example_value
+    KubernetesEfficiencyReport:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The unique token identifier for the report.
+          example: example_value
+        cluster_name:
+          type: string
+          description: The Kubernetes cluster name.
+          example: example_value
+        namespace:
+          type: string
+          description: The Kubernetes namespace.
+          example: example_value
+        idle_cost:
+          type: string
+          description: The idle cost for the cluster/namespace.
+          example: example_value
+        total_cost:
+          type: string
+          description: The total cost for the cluster/namespace.
+          example: example_value
+        efficiency:
+          type: number
+          description: The efficiency percentage.
+          example: 42.5
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time the report was generated.
+          example: '2026-01-15T10:30:00Z'
+    Error:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+                description: A human-readable error message.
+          example: []
+  responses:
+    Unauthorized:
+      description: Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: The request was malformed or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnprocessableEntity:
+      description: The request was well-formed but could not be processed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

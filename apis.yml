@@ -1812,12 +1812,6 @@ common:
     type: Rules
   - url: vocabulary/vantage-vocabulary.yaml
     type: Vocabulary
-  - url: capabilities/shared/cost-management.yaml
-    type: Capabilities
-  - url: capabilities/shared/cloud-pricing.yaml
-    type: Capabilities
-  - url: capabilities/cloud-cost-management.yaml
-    type: Capabilities
   - name: MCP Server
     url: https://github.com/vantage-sh/vantage-mcp-server
     type: MCPServer

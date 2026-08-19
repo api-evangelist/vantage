@@ -1,0 +1,102 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vantage Cloud Pricing Access Grants Network Flow Reports API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Network Flow Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vantage Get All Network Flow Reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v1/network_flow_reports",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns all Network Flow Reports that the current API token has access to."
+        },
+        {
+          "info": {
+            "name": "Vantage Create a Network Flow Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vantage.sh/v1/network_flow_reports",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Network Flow Report."
+        },
+        {
+          "info": {
+            "name": "Vantage Get a Network Flow Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v1/network_flow_reports/:network_flow_report_token",
+            "params": [
+              {
+                "name": "network_flow_report_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Network Flow Report."
+              }
+            ]
+          },
+          "docs": "Returns a specific Network Flow Report by token."
+        },
+        {
+          "info": {
+            "name": "Vantage Delete a Network Flow Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.vantage.sh/v1/network_flow_reports/:network_flow_report_token",
+            "params": [
+              {
+                "name": "network_flow_report_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Network Flow Report."
+              }
+            ]
+          },
+          "docs": "Deletes an existing Network Flow Report."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

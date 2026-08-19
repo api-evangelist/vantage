@@ -1,0 +1,207 @@
+{
+  "item": [
+    {
+      "id": "b080370e-038f-4523-b148-b7fc90413a64",
+      "name": "Resources",
+      "description": {
+        "content": "Retrieve resource data from reports.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ac6e10a4-1c52-4792-a842-b97908d23aa6",
+          "name": "Vantage Get Resources",
+          "request": {
+            "name": "Vantage Get Resources",
+            "description": {
+              "content": "Returns Resources for a Resource Report. Provides detailed resource-level cost and usage data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "resources"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "resource_report_token",
+                  "value": "<string>",
+                  "description": "(Required) The token of the Resource Report to retrieve resources for."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "The page of results to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "The number of results per page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "252ab86b-fe0b-4b9b-b3dc-d8b13fdc667f",
+              "name": "Successful response with resource data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "resource_report_token",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resources\": [\n    {\n      \"token\": \"example_value\",\n      \"name\": \"Example Title\",\n      \"provider\": \"example_value\",\n      \"service\": \"example_value\",\n      \"account_id\": \"500123\",\n      \"region\": \"example_value\",\n      \"cost\": \"example_value\",\n      \"metadata\": \"example_value\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "adc91e5a-3d92-4e14-b4fc-5082a86f37fa",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "resources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "resource_report_token",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.vantage.sh/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "83989c53-5704-4cf9-a1cf-0301063cc8ea",
+    "name": "Vantage Cloud Pricing Access Grants Resources API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Vantage Cloud Pricing API provides programmatic access to cloud infrastructure pricing data across multiple cloud providers. You can query products, services, and providers to retrieve up-to-date pricing information for AWS, Azure, GCP, and other supported cloud platforms. The API is free for all registered Vantage users and returns JSON-encoded responses. An OpenAPI specification is always available at https://api.vantage.sh/v1/swagger.json.\n\nContact Support:\n Name: Vantage Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,1138 @@
+{
+  "item": [
+    {
+      "id": "0d838cdd-f61c-4b75-8c5d-8f42289d596d",
+      "name": "Cost Reports",
+      "description": {
+        "content": "Create, read, update, and delete Cost Reports.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9aaa6341-e3cb-4f3c-9991-b3b8c0cb6abd",
+          "name": "Vantage Get All Cost Reports",
+          "request": {
+            "name": "Vantage Get All Cost Reports",
+            "description": {
+              "content": "Returns all Cost Reports that the current API token has access to.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cost_reports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "The page of results to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "The number of results per page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e4d1fa3c-b273-446c-9935-fac09b50ae28",
+              "name": "Successful response with a list of Cost Reports.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cost_reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cost_reports\": [\n    {\n      \"token\": \"example_value\",\n      \"title\": \"Example Title\",\n      \"filter\": \"example_value\",\n      \"groupings\": \"example_value\",\n      \"folder_token\": \"example_value\",\n      \"saved_filter_tokens\": [\n        {}\n      ],\n      \"workspace_token\": \"example_value\",\n      \"created_at\": \"2026-01-15T10:30:00Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "46b4b840-7106-4a2b-bf5a-b9cf4cec9c97",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cost_reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cbed1be2-a53b-4bff-9d50-3929adcf7671",
+          "name": "Vantage Create a Cost Report",
+          "request": {
+            "name": "Vantage Create a Cost Report",
+            "description": {
+              "content": "Creates a new Cost Report.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cost_reports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"filter\": \"<string>\",\n  \"groupings\": \"<string>\",\n  \"folder_token\": \"<string>\",\n  \"saved_filter_tokens\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"workspace_token\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4339e328-5f79-4f0e-8673-f741b4f4b992",
+              "name": "Cost Report created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cost_reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Example Title\",\n  \"filter\": \"example_value\",\n  \"groupings\": \"example_value\",\n  \"folder_token\": \"example_value\",\n  \"saved_filter_tokens\": [\n    \"example_value\"\n  ],\n  \"workspace_token\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"token\": \"example_value\",\n  \"title\": \"Example Title\",\n  \"filter\": \"example_value\",\n  \"groupings\": \"example_value\",\n  \"folder_token\": \"example_value\",\n  \"saved_filter_tokens\": [\n    \"example_value\"\n  ],\n  \"workspace_token\": \"example_value\",\n  \"created_at\": \"2026-01-15T10:30:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dc41e05c-909d-4b60-bab2-00702751ec9f",
+              "name": "The request was malformed or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cost_reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Example Title\",\n  \"filter\": \"example_value\",\n  \"groupings\": \"example_value\",\n  \"folder_token\": \"example_value\",\n  \"saved_filter_tokens\": [\n    \"example_value\"\n  ],\n  \"workspace_token\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb9cc149-c1f3-451d-baa3-ed58fe8a3bce",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cost_reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Example Title\",\n  \"filter\": \"example_value\",\n  \"groupings\": \"example_value\",\n  \"folder_token\": \"example_value\",\n  \"saved_filter_tokens\": [\n    \"example_value\"\n  ],\n  \"workspace_token\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aa59c8b2-6db6-488f-bcbc-50c8146369a6",
+              "name": "The request was well-formed but could not be processed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cost_reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Example Title\",\n  \"filter\": \"example_value\",\n  \"groupings\": \"example_value\",\n  \"folder_token\": \"example_value\",\n  \"saved_filter_tokens\": [\n    \"example_value\"\n  ],\n  \"workspace_token\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "81c44b49-2b34-4954-b9a2-be14e761996a",
+          "name": "Vantage Get a Cost Report",
+          "request": {
+            "name": "Vantage Get a Cost Report",
+            "description": {
+              "content": "Returns a specific Cost Report by token.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cost_reports",
+                ":cost_report_token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "cost_report_token",
+                  "description": "(Required) The unique token of the Cost Report."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "30e205b6-d906-48c4-85d1-0ca968693f37",
+              "name": "Successful response with the Cost Report.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cost_reports",
+                    ":cost_report_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cost_report_token",
+                      "description": "(Required) The unique token of the Cost Report."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"token\": \"example_value\",\n  \"title\": \"Example Title\",\n  \"filter\": \"example_value\",\n  \"groupings\": \"example_value\",\n  \"folder_token\": \"example_value\",\n  \"saved_filter_tokens\": [\n    \"example_value\"\n  ],\n  \"workspace_token\": \"example_value\",\n  \"created_at\": \"2026-01-15T10:30:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1f9f6b0-9ce9-4acc-afd3-40bae77dd187",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cost_reports",
+                    ":cost_report_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cost_report_token",
+                      "description": "(Required) The unique token of the Cost Report."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e8870ce-403f-4be7-8a90-52e2c6506e0a",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cost_reports",
+                    ":cost_report_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cost_report_token",
+                      "description": "(Required) The unique token of the Cost Report."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9b9f627b-c7f4-4f4e-9e63-db649a26d538",
+          "name": "Vantage Update a Cost Report",
+          "request": {
+            "name": "Vantage Update a Cost Report",
+            "description": {
+              "content": "Updates an existing Cost Report.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cost_reports",
+                ":cost_report_token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "cost_report_token",
+                  "description": "(Required) The unique token of the Cost Report."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"filter\": \"<string>\",\n  \"groupings\": \"<string>\",\n  \"folder_token\": \"<string>\",\n  \"saved_filter_tokens\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"workspace_token\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "baada313-e943-4642-b1fd-68ed73b1288c",
+              "name": "Cost Report updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cost_reports",
+                    ":cost_report_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cost_report_token",
+                      "description": "(Required) The unique token of the Cost Report."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Example Title\",\n  \"filter\": \"example_value\",\n  \"groupings\": \"example_value\",\n  \"folder_token\": \"example_value\",\n  \"saved_filter_tokens\": [\n    \"example_value\"\n  ],\n  \"workspace_token\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"token\": \"example_value\",\n  \"title\": \"Example Title\",\n  \"filter\": \"example_value\",\n  \"groupings\": \"example_value\",\n  \"folder_token\": \"example_value\",\n  \"saved_filter_tokens\": [\n    \"example_value\"\n  ],\n  \"workspace_token\": \"example_value\",\n  \"created_at\": \"2026-01-15T10:30:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "95a3e3e9-4670-48b4-bd7b-1c73280f24b3",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cost_reports",
+                    ":cost_report_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cost_report_token",
+                      "description": "(Required) The unique token of the Cost Report."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Example Title\",\n  \"filter\": \"example_value\",\n  \"groupings\": \"example_value\",\n  \"folder_token\": \"example_value\",\n  \"saved_filter_tokens\": [\n    \"example_value\"\n  ],\n  \"workspace_token\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ecb6a0b9-5e5a-4ace-86ab-34078889f081",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cost_reports",
+                    ":cost_report_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cost_report_token",
+                      "description": "(Required) The unique token of the Cost Report."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Example Title\",\n  \"filter\": \"example_value\",\n  \"groupings\": \"example_value\",\n  \"folder_token\": \"example_value\",\n  \"saved_filter_tokens\": [\n    \"example_value\"\n  ],\n  \"workspace_token\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "89bc0a14-796b-49ef-aa76-c5b146880d6f",
+              "name": "The request was well-formed but could not be processed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cost_reports",
+                    ":cost_report_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cost_report_token",
+                      "description": "(Required) The unique token of the Cost Report."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Example Title\",\n  \"filter\": \"example_value\",\n  \"groupings\": \"example_value\",\n  \"folder_token\": \"example_value\",\n  \"saved_filter_tokens\": [\n    \"example_value\"\n  ],\n  \"workspace_token\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "708aa5cc-52c5-424b-98f2-3f1a985f6b23",
+          "name": "Vantage Delete a Cost Report",
+          "request": {
+            "name": "Vantage Delete a Cost Report",
+            "description": {
+              "content": "Deletes an existing Cost Report.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cost_reports",
+                ":cost_report_token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "cost_report_token",
+                  "description": "(Required) The unique token of the Cost Report."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "feb9009f-410c-4763-8242-35c1ede1d490",
+              "name": "Cost Report deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cost_reports",
+                    ":cost_report_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cost_report_token",
+                      "description": "(Required) The unique token of the Cost Report."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c9ad3fc3-42ff-4e74-a5d0-73a200625246",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cost_reports",
+                    ":cost_report_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cost_report_token",
+                      "description": "(Required) The unique token of the Cost Report."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "36644e6a-a559-494d-8569-05ece7692b00",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cost_reports",
+                    ":cost_report_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "cost_report_token",
+                      "description": "(Required) The unique token of the Cost Report."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.vantage.sh/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "90f603e6-addd-404c-bf3a-caf98ffc2ebf",
+    "name": "Vantage Cloud Pricing Access Grants Cost Reports API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Vantage Cloud Pricing API provides programmatic access to cloud infrastructure pricing data across multiple cloud providers. You can query products, services, and providers to retrieve up-to-date pricing information for AWS, Azure, GCP, and other supported cloud platforms. The API is free for all registered Vantage users and returns JSON-encoded responses. An OpenAPI specification is always available at https://api.vantage.sh/v1/swagger.json.\n\nContact Support:\n Name: Vantage Support",
+      "type": "text/plain"
+    }
+  }
+}

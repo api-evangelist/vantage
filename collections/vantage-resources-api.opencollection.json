@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vantage Cloud Pricing Access Grants Resources API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Resources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vantage Get Resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v1/resources",
+            "params": [
+              {
+                "name": "resource_report_token",
+                "value": "example_value",
+                "type": "query",
+                "description": "The token of the Resource Report to retrieve resources for."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns Resources for a Resource Report. Provides detailed resource-level cost and usage data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

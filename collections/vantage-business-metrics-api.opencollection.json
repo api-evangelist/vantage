@@ -1,0 +1,125 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vantage Cloud Pricing Access Grants Business Metrics API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Business Metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vantage Get All Business Metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v1/business_metrics",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns all Business Metrics that the current API token has access to."
+        },
+        {
+          "info": {
+            "name": "Vantage Create a Business Metric",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vantage.sh/v1/business_metrics",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Business Metric."
+        },
+        {
+          "info": {
+            "name": "Vantage Get a Business Metric",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v1/business_metrics/:business_metric_token",
+            "params": [
+              {
+                "name": "business_metric_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Business Metric."
+              }
+            ]
+          },
+          "docs": "Returns a specific Business Metric by token."
+        },
+        {
+          "info": {
+            "name": "Vantage Update a Business Metric",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.vantage.sh/v1/business_metrics/:business_metric_token",
+            "params": [
+              {
+                "name": "business_metric_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Business Metric."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing Business Metric."
+        },
+        {
+          "info": {
+            "name": "Vantage Delete a Business Metric",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.vantage.sh/v1/business_metrics/:business_metric_token",
+            "params": [
+              {
+                "name": "business_metric_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Business Metric."
+              }
+            ]
+          },
+          "docs": "Deletes an existing Business Metric."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

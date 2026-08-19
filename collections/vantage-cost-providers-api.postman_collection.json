@@ -1,0 +1,162 @@
+{
+  "item": [
+    {
+      "id": "b311d9c5-6f64-4a2a-8664-930429bb7bd1",
+      "name": "Cost Providers",
+      "description": {
+        "content": "Retrieve available cost providers.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9cf29a35-6fd4-472d-81f0-ca1fb0d4e1cd",
+          "name": "Vantage Get All Cost Providers",
+          "request": {
+            "name": "Vantage Get All Cost Providers",
+            "description": {
+              "content": "Returns all available Cost Providers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cost_providers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "63d69561-d8ef-46df-af60-453ef6199732",
+              "name": "Successful response with a list of Cost Providers.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cost_providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cost_providers\": [\n    {\n      \"token\": \"example_value\",\n      \"name\": \"Example Title\",\n      \"description\": \"A sample description.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3bb774da-8fc6-4077-ae65-65550caddd69",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cost_providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.vantage.sh/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "027c5161-8c93-4c8f-9135-8327e13adf6c",
+    "name": "Vantage Cloud Pricing Access Grants Cost Providers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Vantage Cloud Pricing API provides programmatic access to cloud infrastructure pricing data across multiple cloud providers. You can query products, services, and providers to retrieve up-to-date pricing information for AWS, Azure, GCP, and other supported cloud platforms. The API is free for all registered Vantage users and returns JSON-encoded responses. An OpenAPI specification is always available at https://api.vantage.sh/v1/swagger.json.\n\nContact Support:\n Name: Vantage Support",
+      "type": "text/plain"
+    }
+  }
+}

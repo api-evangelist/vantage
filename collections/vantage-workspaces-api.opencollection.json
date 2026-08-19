@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vantage Cloud Pricing Access Grants Workspaces API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Workspaces",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vantage Get All Workspaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v1/workspaces",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns all Workspaces that the current API token has access to."
+        },
+        {
+          "info": {
+            "name": "Vantage Get a Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v1/workspaces/:workspace_token",
+            "params": [
+              {
+                "name": "workspace_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Workspace."
+              }
+            ]
+          },
+          "docs": "Returns a specific Workspace by token."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

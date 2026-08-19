@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vantage Cloud Pricing Access Grants Services API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Services",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vantage Get All Services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v1/services",
+            "params": [
+              {
+                "name": "provider_id",
+                "value": "500123",
+                "type": "query",
+                "description": "Filter services by a specific cloud provider identifier."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns all Services available across all cloud Providers or filtered by a specific Provider."
+        },
+        {
+          "info": {
+            "name": "Vantage Get a Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v1/services/:service_id",
+            "params": [
+              {
+                "name": "service_id",
+                "value": "500123",
+                "type": "path",
+                "description": "The identifier of the service."
+              }
+            ]
+          },
+          "docs": "Returns a specific Service by identifier."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,125 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vantage Cloud Pricing Access Grants Saved Filters API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Saved Filters",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vantage Get All Saved Filters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v1/saved_filters",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns all Saved Filters that the current API token has access to."
+        },
+        {
+          "info": {
+            "name": "Vantage Create a Saved Filter",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vantage.sh/v1/saved_filters",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Saved Filter."
+        },
+        {
+          "info": {
+            "name": "Vantage Get a Saved Filter",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v1/saved_filters/:saved_filter_token",
+            "params": [
+              {
+                "name": "saved_filter_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Saved Filter."
+              }
+            ]
+          },
+          "docs": "Returns a specific Saved Filter by token."
+        },
+        {
+          "info": {
+            "name": "Vantage Update a Saved Filter",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.vantage.sh/v1/saved_filters/:saved_filter_token",
+            "params": [
+              {
+                "name": "saved_filter_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Saved Filter."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing Saved Filter."
+        },
+        {
+          "info": {
+            "name": "Vantage Delete a Saved Filter",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.vantage.sh/v1/saved_filters/:saved_filter_token",
+            "params": [
+              {
+                "name": "saved_filter_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Saved Filter."
+              }
+            ]
+          },
+          "docs": "Deletes an existing Saved Filter."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

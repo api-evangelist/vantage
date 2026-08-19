@@ -1,0 +1,125 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vantage Cloud Pricing Access Grants Segments API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Segments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vantage Get All Segments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v1/segments",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns all cost allocation Segments that the current API token has access to."
+        },
+        {
+          "info": {
+            "name": "Vantage Create a Segment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vantage.sh/v1/segments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new cost allocation Segment."
+        },
+        {
+          "info": {
+            "name": "Vantage Get a Segment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v1/segments/:segment_token",
+            "params": [
+              {
+                "name": "segment_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Segment."
+              }
+            ]
+          },
+          "docs": "Returns a specific Segment by token."
+        },
+        {
+          "info": {
+            "name": "Vantage Update a Segment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.vantage.sh/v1/segments/:segment_token",
+            "params": [
+              {
+                "name": "segment_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Segment."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing Segment."
+        },
+        {
+          "info": {
+            "name": "Vantage Delete a Segment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.vantage.sh/v1/segments/:segment_token",
+            "params": [
+              {
+                "name": "segment_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Segment."
+              }
+            ]
+          },
+          "docs": "Deletes an existing Segment."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

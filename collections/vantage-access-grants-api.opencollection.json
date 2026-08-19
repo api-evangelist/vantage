@@ -1,0 +1,102 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vantage Cloud Pricing Access Grants API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Access Grants",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vantage Get All Access Grants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v1/access_grants",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns all Access Grants that the current API token has access to."
+        },
+        {
+          "info": {
+            "name": "Vantage Create an Access Grant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vantage.sh/v1/access_grants",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Access Grant for a team."
+        },
+        {
+          "info": {
+            "name": "Vantage Get an Access Grant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v1/access_grants/:access_grant_token",
+            "params": [
+              {
+                "name": "access_grant_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Access Grant."
+              }
+            ]
+          },
+          "docs": "Returns a specific Access Grant by token."
+        },
+        {
+          "info": {
+            "name": "Vantage Delete an Access Grant",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.vantage.sh/v1/access_grants/:access_grant_token",
+            "params": [
+              {
+                "name": "access_grant_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Access Grant."
+              }
+            ]
+          },
+          "docs": "Deletes an existing Access Grant."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vantage Cloud Pricing Access Grants Providers API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Providers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vantage Get All Providers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v1/providers",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns all supported cloud Providers with pricing data available in the Vantage database."
+        },
+        {
+          "info": {
+            "name": "Vantage Get a Provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v1/providers/:provider_id",
+            "params": [
+              {
+                "name": "provider_id",
+                "value": "500123",
+                "type": "path",
+                "description": "The identifier of the cloud provider (e.g., aws, azure, gcp)."
+              }
+            ]
+          },
+          "docs": "Returns a specific cloud Provider by identifier."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

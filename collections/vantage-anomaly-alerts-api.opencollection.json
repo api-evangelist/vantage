@@ -1,0 +1,125 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vantage Cloud Pricing Access Grants Anomaly Alerts API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Anomaly Alerts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vantage Get All Anomaly Alerts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v1/anomaly_alerts",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns all Anomaly Alerts that the current API token has access to."
+        },
+        {
+          "info": {
+            "name": "Vantage Create an Anomaly Alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vantage.sh/v1/anomaly_alerts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Anomaly Alert."
+        },
+        {
+          "info": {
+            "name": "Vantage Get an Anomaly Alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v1/anomaly_alerts/:anomaly_alert_token",
+            "params": [
+              {
+                "name": "anomaly_alert_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Anomaly Alert."
+              }
+            ]
+          },
+          "docs": "Returns a specific Anomaly Alert by token."
+        },
+        {
+          "info": {
+            "name": "Vantage Update an Anomaly Alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.vantage.sh/v1/anomaly_alerts/:anomaly_alert_token",
+            "params": [
+              {
+                "name": "anomaly_alert_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Anomaly Alert."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing Anomaly Alert."
+        },
+        {
+          "info": {
+            "name": "Vantage Delete an Anomaly Alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.vantage.sh/v1/anomaly_alerts/:anomaly_alert_token",
+            "params": [
+              {
+                "name": "anomaly_alert_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Anomaly Alert."
+              }
+            ]
+          },
+          "docs": "Deletes an existing Anomaly Alert."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

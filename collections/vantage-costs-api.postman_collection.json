@@ -1,0 +1,263 @@
+{
+  "item": [
+    {
+      "id": "4288b560-74bb-4d48-a919-6899c82d4772",
+      "name": "Costs",
+      "description": {
+        "content": "Retrieve cost data for Cost Reports or VQL filters.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5280b9c4-3580-4e65-9f84-a05d8c414f3e",
+          "name": "Vantage Get Costs",
+          "request": {
+            "name": "Vantage Get Costs",
+            "description": {
+              "content": "Returns all Costs for a CostReport or VQL filter. You can filter by cost_report_token or provide a VQL query to retrieve specific cost data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "costs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cost_report_token",
+                  "value": "<string>",
+                  "description": "The token of the Cost Report to retrieve costs for."
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<date>",
+                  "description": "The start date for the cost data (YYYY-MM-DD)."
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<date>",
+                  "description": "The end date for the cost data (YYYY-MM-DD)."
+                },
+                {
+                  "disabled": false,
+                  "key": "groupings",
+                  "value": "<string>",
+                  "description": "Comma-separated list of groupings for cost data."
+                },
+                {
+                  "disabled": false,
+                  "key": "vql",
+                  "value": "<string>",
+                  "description": "A VQL filter expression to query cost data."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "The page of results to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "The number of results per page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "20656735-0e37-41e8-8c1f-6f0bdfec5b8e",
+              "name": "Successful response with cost data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "costs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cost_report_token",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2026-01-15"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2026-01-15"
+                    },
+                    {
+                      "key": "groupings",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "vql",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"costs\": [\n    {\n      \"date\": \"2026-01-15\",\n      \"amount\": \"example_value\",\n      \"currency\": \"example_value\",\n      \"provider\": \"example_value\",\n      \"service\": \"example_value\",\n      \"account_id\": \"500123\",\n      \"region\": \"example_value\",\n      \"category\": \"example_value\",\n      \"subcategory\": \"example_value\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e7c0668-cafe-4656-96a7-ad74d1fa7252",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "costs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cost_report_token",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "2026-01-15"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "2026-01-15"
+                    },
+                    {
+                      "key": "groupings",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "vql",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.vantage.sh/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7baa05b8-4862-41e1-a105-0da1d8a6517c",
+    "name": "Vantage Cloud Pricing Access Grants Costs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Vantage Cloud Pricing API provides programmatic access to cloud infrastructure pricing data across multiple cloud providers. You can query products, services, and providers to retrieve up-to-date pricing information for AWS, Azure, GCP, and other supported cloud platforms. The API is free for all registered Vantage users and returns JSON-encoded responses. An OpenAPI specification is always available at https://api.vantage.sh/v1/swagger.json.\n\nContact Support:\n Name: Vantage Support",
+      "type": "text/plain"
+    }
+  }
+}

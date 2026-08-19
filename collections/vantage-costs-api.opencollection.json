@@ -1,0 +1,79 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vantage Cloud Pricing Access Grants Costs API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Costs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vantage Get Costs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v1/costs",
+            "params": [
+              {
+                "name": "cost_report_token",
+                "value": "example_value",
+                "type": "query",
+                "description": "The token of the Cost Report to retrieve costs for."
+              },
+              {
+                "name": "start_date",
+                "value": "2026-01-15",
+                "type": "query",
+                "description": "The start date for the cost data (YYYY-MM-DD)."
+              },
+              {
+                "name": "end_date",
+                "value": "2026-01-15",
+                "type": "query",
+                "description": "The end date for the cost data (YYYY-MM-DD)."
+              },
+              {
+                "name": "groupings",
+                "value": "example_value",
+                "type": "query",
+                "description": "Comma-separated list of groupings for cost data."
+              },
+              {
+                "name": "vql",
+                "value": "example_value",
+                "type": "query",
+                "description": "A VQL filter expression to query cost data."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns all Costs for a CostReport or VQL filter. You can filter by cost_report_token or provide a VQL query to retrieve specific cost data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

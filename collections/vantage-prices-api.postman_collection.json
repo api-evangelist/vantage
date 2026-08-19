@@ -1,0 +1,249 @@
+{
+  "item": [
+    {
+      "id": "ab5472d4-9f51-439c-b584-19cbcff14415",
+      "name": "Prices",
+      "description": {
+        "content": "Retrieve pricing details for specific products.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "60d6ed24-a251-4572-9c56-1f31231e7d46",
+          "name": "Vantage Get Prices",
+          "request": {
+            "name": "Vantage Get Prices",
+            "description": {
+              "content": "Returns pricing data for products. Can be filtered by product, provider, service, and region.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "prices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "product_id",
+                  "value": "<string>",
+                  "description": "Filter prices by a specific product identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "provider_id",
+                  "value": "<string>",
+                  "description": "Filter prices by a specific cloud provider identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "service_id",
+                  "value": "<string>",
+                  "description": "Filter prices by a specific service identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "region",
+                  "value": "<string>",
+                  "description": "Filter prices by a specific cloud region."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "The page of results to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "The number of results per page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c5e08d58-22a2-4c74-aa4d-16eb711b4cce",
+              "name": "Successful response with pricing data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "prices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "product_id",
+                      "value": "500123"
+                    },
+                    {
+                      "key": "provider_id",
+                      "value": "500123"
+                    },
+                    {
+                      "key": "service_id",
+                      "value": "500123"
+                    },
+                    {
+                      "key": "region",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"prices\": [\n    {\n      \"id\": \"abc123\",\n      \"unit\": \"example_value\",\n      \"price\": \"example_value\",\n      \"currency\": \"example_value\",\n      \"region\": \"example_value\",\n      \"description\": \"A sample description.\",\n      \"product_id\": \"500123\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30c148aa-e1c6-4dd2-9838-297cd5ee654d",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "prices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "product_id",
+                      "value": "500123"
+                    },
+                    {
+                      "key": "provider_id",
+                      "value": "500123"
+                    },
+                    {
+                      "key": "service_id",
+                      "value": "500123"
+                    },
+                    {
+                      "key": "region",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.vantage.sh/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "bab1083c-d2c3-4203-97e9-c942f07f9007",
+    "name": "Vantage Cloud Pricing Access Grants Prices API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Vantage Cloud Pricing API provides programmatic access to cloud infrastructure pricing data across multiple cloud providers. You can query products, services, and providers to retrieve up-to-date pricing information for AWS, Azure, GCP, and other supported cloud platforms. The API is free for all registered Vantage users and returns JSON-encoded responses. An OpenAPI specification is always available at https://api.vantage.sh/v1/swagger.json.\n\nContact Support:\n Name: Vantage Support",
+      "type": "text/plain"
+    }
+  }
+}

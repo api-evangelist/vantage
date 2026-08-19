@@ -1,0 +1,73 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vantage Cloud Pricing Access Grants Prices API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Prices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vantage Get Prices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v1/prices",
+            "params": [
+              {
+                "name": "product_id",
+                "value": "500123",
+                "type": "query",
+                "description": "Filter prices by a specific product identifier."
+              },
+              {
+                "name": "provider_id",
+                "value": "500123",
+                "type": "query",
+                "description": "Filter prices by a specific cloud provider identifier."
+              },
+              {
+                "name": "service_id",
+                "value": "500123",
+                "type": "query",
+                "description": "Filter prices by a specific service identifier."
+              },
+              {
+                "name": "region",
+                "value": "example_value",
+                "type": "query",
+                "description": "Filter prices by a specific cloud region."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns pricing data for products. Can be filtered by product, provider, service, and region."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,420 @@
+# Vantage
+
+> Vantage is a cloud cost observability and FinOps platform. These docs cover provider integrations (AWS, Azure, GCP, Kubernetes, Snowflake, OpenAI, and more), Cost Reports, budgets, Autopilot, the Vantage MCP and FinOps Agent, the Vantage API, and the Terraform provider.
+
+## Docs
+
+- [Vantage Documentation](https://docs.vantage.sh/index.md): Read comprehensive guides and tutorials to help you get started with Vantage.
+- [Quickstart](https://docs.vantage.sh/getting_started.md): Set up your Vantage account, connect cloud providers, and begin analyzing your infrastructure costs.
+- [Security](https://docs.vantage.sh/security.md): Learn about Vantage's security practices, such as read-only billing access, compliance, data protection, and secure cloud provider integrations.
+- [Account Settings](https://docs.vantage.sh/vantage_account.md): Manage your Vantage account settings; configure personal profiles, API tokens, organizational settings, currency preferences, and user access controls.
+- [Audit Logs](https://docs.vantage.sh/audit_logs.md): Track changes and maintain compliance with Vantage Audit Logs.
+- [Single Sign-On (SSO)](https://docs.vantage.sh/sso.md): Use Vantage SSO to connect your identity provider for secure, streamlined access with Just in Time user provisioning and group mapping capabilities.
+- [Role-Based Access Control (RBAC)](https://docs.vantage.sh/rbac.md): Implement fine-grained access control with Vantage RBAC.
+- [Permissions Reference](https://docs.vantage.sh/rbac_permissions.md): Detailed per-action permission tables for organization-level and team-based RBAC roles.
+- [Workspaces](https://docs.vantage.sh/workspaces.md): Organize cloud cost data with Vantage workspaces.
+- [Tagging](https://docs.vantage.sh/tagging.md): View provider tags, create Virtual Tags, and organize costs with flexible tagging strategies across AWS, Azure, GCP, and other cloud providers in Vantage.
+- [Virtual Tagging Examples](https://docs.vantage.sh/tagging_examples.md): Review practical examples for Virtual Tags, allocation tags, time-bound tagging, untaggable AWS resources, and Tag Key Collapsing in Vantage.
+- [Vantage for MSPs](https://docs.vantage.sh/partners.md): Manage multiple customer accounts with Vantage for MSPs.
+- [SQL Billing Rules](https://docs.vantage.sh/sql_billing_rules.md): Custom billing rules to modify cost data, apply discounts, and exclude items from MSP billing.
+- [MSP Invoicing](https://docs.vantage.sh/msp_invoicing.md): Use the MSP Invoicing tool to generate, review, approve, and distribute invoices directly within Vantage.
+- [Build Hours](https://docs.vantage.sh/build_hours.md): Understand Build Hours in Vantage, a usage metric that reflects the compute used to process your cost data when you customize it with Virtual Tags.
+- [Vantage FinOps Agent](https://docs.vantage.sh/vantage_finops_agent.md): Identify and remediate cloud waste automatically.
+- [Datadog MCP](https://docs.vantage.sh/datadog_agent.md): Connect the Datadog MCP to the Vantage FinOps Agent to join live Datadog telemetry with your Vantage cost data in a single conversation.
+- [Canvas](https://docs.vantage.sh/canvas.md): Create custom, refreshable reports from natural-language prompts.
+- [Vantage MCP](https://docs.vantage.sh/vantage_mcp.md): Use natural language to explore your organization’s cloud costs via MCP clients, like Claude, Cursor, Goose, and others.
+- [Vantage Docs MCP](https://docs.vantage.sh/docs_mcp.md): Use the MCP server to search the Vantage documentation using AI tools.
+- [ChatGPT App](https://docs.vantage.sh/chatgpt_app.md): Use the Vantage ChatGPT app to explore and act on your cloud costs directly from ChatGPT.
+- [Custom LLM Source](https://docs.vantage.sh/custom_llm_source.md): Attribute LLM spend to teams, users, applications, and features by delivering your own per-request token telemetry to an S3 bucket that Vantage reads and joins to your provider costs.
+- [Snowflake Data Sharing](https://docs.vantage.sh/snowflake_data_sharing.md): Query your processed Vantage cost data directly from your Snowflake account using a Secure Data Share.
+- [Terraform Provider](https://docs.vantage.sh/terraform.md): Use Vantage's official Terraform provider and AWS integration module to automate cloud cost management infrastructure as code.
+- [VQL (Vantage Query Language)](https://docs.vantage.sh/vql.md): Learn Vantage Query Language (VQL), a SQL-like language for filtering cloud cost data across providers for API and Terraform integrations.
+- [VQL for Cost Reports](https://docs.vantage.sh/vql_cost_report.md): Learn how to use VQL when querying Cost Reports in the API or using the Terraform Provider.
+- [VQL for Resource Reports](https://docs.vantage.sh/vql_resource_report.md): Learn how to use VQL when querying Resource Reports in the API or using the Terraform Provider.
+- [VQL for Kubernetes Efficiency Reports](https://docs.vantage.sh/vql_kubernetes_efficiency_report.md): Learn how to use VQL when querying Kubernetes Efficiency Reports in the API or using the Terraform Provider.
+- [VQL for Financial Commitment Reports](https://docs.vantage.sh/vql_financial_commitment_report.md): Learn how to use VQL when querying Financial Commitment Reports in the API or using the Terraform Provider.
+- [VQL for Network Flow Reports](https://docs.vantage.sh/vql_network_flow_report.md): Learn how to use VQL when querying Network Flow Reports in the API or using the Terraform Provider.
+- [Data Dictionary](https://docs.vantage.sh/data_dictionary.md): Explore Vantage's normalized data dictionary to understand field mappings across cloud providers.
+- [AWS](https://docs.vantage.sh/connecting_aws.md): Learn how to integrate Vantage with AWS.
+- [AWS Services & Regions for Active Resources](https://docs.vantage.sh/aws_supported_services.md): Vantage supports a number of AWS services for reporting and viewing active resources.
+- [Azure](https://docs.vantage.sh/connecting_azure.md): Learn how to integrate Vantage with Azure.
+- [Azure MCA Account](https://docs.vantage.sh/connecting_azure_mca.md): Learn how to integrate Vantage with Azure MCA.
+- [Azure EA Account](https://docs.vantage.sh/connecting_azure_ea.md): Learn how to integrate Vantage with Azure EA.
+- [Azure CSP Account](https://docs.vantage.sh/connecting_azure_csp.md): Learn how to integrate Vantage with Azure CSP.
+- [Azure Services & Regions for Active Resources](https://docs.vantage.sh/azure_supported_services.md): Vantage supports a number of Azure services for reporting and viewing active resources.
+- [Google Cloud](https://docs.vantage.sh/connecting_gcp.md): Learn how to integrate Vantage with Google Cloud.
+- [Configure GCP Billing Exports](https://docs.vantage.sh/enabling_gcp_billing_export.md): Learn how to configure GCP billing exports as a prerequisite to the Vantage and Google Cloud integration.
+- [GCP Services & Regions for Active Resources](https://docs.vantage.sh/gcp_supported_services.md): Vantage supports a number of GCP services for reporting and viewing active resources.
+- [Kubernetes](https://docs.vantage.sh/connecting_kubernetes.md): Learn how to integrate Vantage with Kubernetes.
+- [Vantage Kubernetes Agent](https://docs.vantage.sh/kubernetes_agent.md): Learn how to set up and configure the Vantage Kubernetes agent.
+- [Kubernetes Costs and Efficiency Metrics](https://docs.vantage.sh/kubernetes.md): Learn how to view Kubernetes costs and efficiency metrics in Vantage.
+- [Kubernetes Network Cost Attribution](https://docs.vantage.sh/kubernetes_network_costs.md): Allocate pod-level network costs from the Vantage Kubernetes agent and view them in Cost Reports.
+- [Anthropic](https://docs.vantage.sh/connecting_anthropic.md): Connect Anthropic to Vantage to track Claude cost and usage from both the Claude API and Claude.ai.
+- [Anyscale](https://docs.vantage.sh/connecting_anyscale.md): Learn how to integrate Vantage with Anyscale.
+- [Baseten](https://docs.vantage.sh/connecting_baseten.md): Learn how to integrate Vantage with Baseten to track AI inference, training, and Model API costs.
+- [CircleCI](https://docs.vantage.sh/connecting_circle_ci.md): Learn how to integrate Vantage with CircleCI.
+- [ClickHouse Cloud](https://docs.vantage.sh/connecting_clickhouse.md): Learn how to integrate Vantage with ClickHouse Cloud.
+- [Cloudflare](https://docs.vantage.sh/connecting_cloudflare.md): Learn how to integrate Vantage with Cloudflare.
+- [Confluent](https://docs.vantage.sh/connecting_confluent.md): Learn how to integrate Vantage with Confluent.
+- [Coralogix](https://docs.vantage.sh/connecting_coralogix.md): Learn how to integrate Vantage with Coralogix.
+- [Cursor](https://docs.vantage.sh/connecting_cursor.md): Learn how to integrate Vantage with Cursor.
+- [Databricks](https://docs.vantage.sh/connecting_databricks.md): Learn how to integrate Vantage with Databricks.
+- [Datadog](https://docs.vantage.sh/connecting_datadog.md): Learn how to integrate Vantage with Datadog.
+- [Elastic](https://docs.vantage.sh/connecting_elastic.md): Learn how to integrate Vantage with Elastic Cloud.
+- [ElevenLabs](https://docs.vantage.sh/connecting_elevenlabs.md): Learn how to integrate Vantage with ElevenLabs to track voice AI cost and usage.
+- [Fastly](https://docs.vantage.sh/connecting_fastly.md): Learn how to integrate Vantage with Fastly.
+- [GitHub](https://docs.vantage.sh/connecting_github.md): Learn how to integrate Vantage with GitHub.
+- [Grafana Cloud](https://docs.vantage.sh/connecting_grafana.md): Learn how to integrate Vantage with Grafana Cloud.
+- [Linode from Akamai Connected Cloud](https://docs.vantage.sh/connecting_linode.md): Learn how to integrate Vantage with Linode.
+- [MongoDB Atlas](https://docs.vantage.sh/connecting_mongodb-atlas.md): Learn how to integrate Vantage with MongoDB Atlas.
+- [Modal](https://docs.vantage.sh/connecting_modal.md): Learn how to integrate Vantage with Modal to track serverless compute costs.
+- [New Relic](https://docs.vantage.sh/connecting_new_relic.md): Learn how to integrate Vantage with New Relic.
+- [OpenAI](https://docs.vantage.sh/connecting_open_ai.md): Learn how to integrate Vantage with OpenAI.
+- [Oracle Cloud](https://docs.vantage.sh/connecting_oracle.md): Learn how to integrate Vantage with Oracle Cloud.
+- [PlanetScale](https://docs.vantage.sh/connecting_planetscale.md): Learn how to integrate Vantage with PlanetScale.
+- [Redis](https://docs.vantage.sh/connecting_redis.md): Learn how to integrate Vantage with Redis.
+- [Snowflake](https://docs.vantage.sh/connecting_snowflake.md): Learn how to integrate Vantage with Snowflake.
+- [Snowflake Costs per Query](https://docs.vantage.sh/snowflake_cost_by_query.md): Use Vantage to identify expensive Snowflake queries by calculating weighted costs per query based on duration.
+- [Temporal Cloud](https://docs.vantage.sh/connecting_temporal.md): Learn how to integrate Vantage with Temporal Cloud.
+- [Twilio](https://docs.vantage.sh/connecting_twilio.md): Learn how to integrate Vantage with Twilio.
+- [Vercel](https://docs.vantage.sh/connecting_vercel.md): Learn how to integrate Vantage with Vercel.
+- [Custom Providers](https://docs.vantage.sh/connecting_custom_providers.md): Learn how to integrate Vantage with Custom Providers.
+- [Provider Data Refresh](https://docs.vantage.sh/provider_data_refresh.md): Understand Vantage's data refresh schedules.
+- [Jira](https://docs.vantage.sh/jira.md): Learn how to integrate Vantage with Jira for issue tracking and management.
+- [Slack](https://docs.vantage.sh/slack.md): Learn how to create an integration with Slack and Vantage to send alerts and notifications.
+- [Microsoft Teams](https://docs.vantage.sh/microsoft_teams.md): Learn how to create an integration with Microsoft Teams and Vantage to send alerts and notifications.
+- [Metronome](https://docs.vantage.sh/metronome.md): Import Metronome revenue and usage data into Vantage as business metrics.
+- [Overview](https://docs.vantage.sh/overview.md): Explore the Vantage Overview page, your executive dashboard for monitoring cloud costs.
+- [Cost Reports](https://docs.vantage.sh/cost_reports.md): Learn how to configure Cost Reports in Vantage to analyze and optimize your cloud infrastructure spending across multiple providers.
+- [Saved Filters](https://docs.vantage.sh/saved_filters.md): Create reusable filter logic with Vantage Saved Filters.
+- [Folders](https://docs.vantage.sh/folders.md): Organize Cost Reports and Resource Reports with Vantage Folders.
+- [Dashboards](https://docs.vantage.sh/dashboards.md): Create customizable dashboards in Vantage to visualize and compare cloud cost data across multiple reports.
+- [Anomaly Detection](https://docs.vantage.sh/cost_anomaly_alerts.md): Detect and alert on unusual cloud cost spikes with Vantage's machine learning–powered anomaly detection.
+- [Report Notifications](https://docs.vantage.sh/report_notifications.md): Set up automated report notifications in Vantage for reports and dashboards via email, Slack, or Microsoft Teams with customizable delivery options.
+- [Cost Alerts](https://docs.vantage.sh/cost_alerts.md): Set up automated cost alerts in Vantage to monitor spending changes with customizable thresholds.
+- [Usage-Based Reporting](https://docs.vantage.sh/usage_based_reporting.md): Track cloud infrastructure consumption with Vantage Usage-Based Reporting.
+- [Annotations](https://docs.vantage.sh/annotations.md): Add contextual notes to Cost Reports and Segment Reports with Vantage Annotations.
+- [Forecasting](https://docs.vantage.sh/forecasting.md): Use Vantage's cost forecasting to predict future cloud spending across all your connected cloud providers.
+- [Resource Reports](https://docs.vantage.sh/active_resources.md): Monitor active cloud resources and their costs with Vantage Resource Reports across AWS, Azure, GCP, and other providers.
+- [Network Flow Reports](https://docs.vantage.sh/network_flow_reports.md): Analyze network traffic costs with Vantage Network Flow Reports and identify cost-driving flows.
+- [Segments](https://docs.vantage.sh/segments.md): Create cost allocation segments in Vantage to organize cloud spending with hierarchical cost governance and showback/chargeback capabilities.
+- [Autopilot for AWS Savings Plans](https://docs.vantage.sh/autopilot.md): Automate AWS Savings Plans purchases with Autopilot.
+- [Budgets](https://docs.vantage.sh/budgets.md): Create and manage budgets in Vantage to track cloud spending, set cost thresholds, and receive alerts.
+- [Business Metrics](https://docs.vantage.sh/business_metrics.md): Import business metrics and apply unit cost, usage unit cost, gross margin, and raw value calculations alongside your cloud costs in Vantage.
+- [Scenario Models](https://docs.vantage.sh/scenario_models.md): Create reusable Scenario Models that represent known future costs, credits, or trends, and combine them into forecasts on your Cost Reports.
+- [Issues](https://docs.vantage.sh/issues.md): Collaborate on cost optimization with Vantage Issues.
+- [Commitments](https://docs.vantage.sh/commitments.md): View and manage your cloud provider financial commitments, such as Reserved Instances and Savings Plans.
+- [Financial Commitment Reports](https://docs.vantage.sh/financial_commitment_reports.md): Track and analyze AWS financial commitments with Vantage.
+- [Savings Planner](https://docs.vantage.sh/savings_planner.md): Plan and forecast AWS Savings Plans with Vantage's Savings Planner tool.
+- [Cost Recommendations](https://docs.vantage.sh/cost_recommendations.md): Get personalized cost optimization recommendations from Vantage to reduce cloud spending across providers.
+- [vantage_access_grants (Data Source)](https://docs.vantage.sh/terraform_docs/data_sources/access_grants.md): Terraform data source reference for vantage_access_grants (Data Source). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_anomaly_notifications (Data Source)](https://docs.vantage.sh/terraform_docs/data_sources/anomaly_notifications.md): Terraform data source reference for vantage_anomaly_notifications (Data Source). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_aws_provider_info (Data Source)](https://docs.vantage.sh/terraform_docs/data_sources/aws_provider_info.md): Terraform data source reference for vantage_aws_provider_info (Data Source). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_billing_profiles (Data Source)](https://docs.vantage.sh/terraform_docs/data_sources/billing_profiles.md): Terraform data source reference for vantage_billing_profiles (Data Source). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_billing_rules (Data Source)](https://docs.vantage.sh/terraform_docs/data_sources/billing_rules.md): Terraform data source reference for vantage_billing_rules (Data Source). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_budgets (Data Source)](https://docs.vantage.sh/terraform_docs/data_sources/budgets.md): Terraform data source reference for vantage_budgets (Data Source). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_business_metrics (Data Source)](https://docs.vantage.sh/terraform_docs/data_sources/business_metrics.md): Terraform data source reference for vantage_business_metrics (Data Source). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_cost_alerts (Data Source)](https://docs.vantage.sh/terraform_docs/data_sources/cost_alerts.md): Terraform data source reference for vantage_cost_alerts (Data Source). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_cost_reports (Data Source)](https://docs.vantage.sh/terraform_docs/data_sources/cost_reports.md): Terraform data source reference for vantage_cost_reports (Data Source). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_dashboards (Data Source)](https://docs.vantage.sh/terraform_docs/data_sources/dashboards.md): Terraform data source reference for vantage_dashboards (Data Source). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_financial_commitment_reports (Data Source)](https://docs.vantage.sh/terraform_docs/data_sources/financial_commitment_reports.md): Terraform data source reference for vantage_financial_commitment_reports (Data Source). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_folder (Data Source)](https://docs.vantage.sh/terraform_docs/data_sources/folder.md): Terraform data source reference for vantage_folder (Data Source). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_folders (Data Source)](https://docs.vantage.sh/terraform_docs/data_sources/folders.md): Terraform data source reference for vantage_folders (Data Source). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_integration_by_name (Data Source)](https://docs.vantage.sh/terraform_docs/data_sources/integration_by_name.md): Terraform data source reference for vantage_integration_by_name (Data Source). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_integrations (Data Source)](https://docs.vantage.sh/terraform_docs/data_sources/integrations.md): Terraform data source reference for vantage_integrations (Data Source). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_invoices (Data Source)](https://docs.vantage.sh/terraform_docs/data_sources/invoices.md): Terraform data source reference for vantage_invoices (Data Source). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_kubernetes_efficiency_reports (Data Source)](https://docs.vantage.sh/terraform_docs/data_sources/kubernetes_efficiency_reports.md): Terraform data source reference for vantage_kubernetes_efficiency_reports (Data Source). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_managed_accounts (Data Source)](https://docs.vantage.sh/terraform_docs/data_sources/managed_accounts.md): Terraform data source reference for vantage_managed_accounts (Data Source). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_network_flow_reports (Data Source)](https://docs.vantage.sh/terraform_docs/data_sources/network_flow_reports.md): Terraform data source reference for vantage_network_flow_reports (Data Source). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_recommendation_views (Data Source)](https://docs.vantage.sh/terraform_docs/data_sources/recommendation_views.md): Terraform data source reference for vantage_recommendation_views (Data Source). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_report_forecasts (Data Source)](https://docs.vantage.sh/terraform_docs/data_sources/report_forecasts.md): Terraform data source reference for vantage_report_forecasts (Data Source). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_report_notifications (Data Source)](https://docs.vantage.sh/terraform_docs/data_sources/report_notifications.md): Terraform data source reference for vantage_report_notifications (Data Source). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_resource_report_columns (Data Source)](https://docs.vantage.sh/terraform_docs/data_sources/resource_report_columns.md): Terraform data source reference for vantage_resource_report_columns (Data Source). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_resource_reports (Data Source)](https://docs.vantage.sh/terraform_docs/data_sources/resource_reports.md): Terraform data source reference for vantage_resource_reports (Data Source). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_saved_filters (Data Source)](https://docs.vantage.sh/terraform_docs/data_sources/saved_filters.md): Terraform data source reference for vantage_saved_filters (Data Source). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_scenario_models (Data Source)](https://docs.vantage.sh/terraform_docs/data_sources/scenario_models.md): Terraform data source reference for vantage_scenario_models (Data Source). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_segments (Data Source)](https://docs.vantage.sh/terraform_docs/data_sources/segments.md): Terraform data source reference for vantage_segments (Data Source). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_teams (Data Source)](https://docs.vantage.sh/terraform_docs/data_sources/teams.md): Terraform data source reference for vantage_teams (Data Source). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_users (Data Source)](https://docs.vantage.sh/terraform_docs/data_sources/users.md): Terraform data source reference for vantage_users (Data Source). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_virtual_tag_configs (Data Source)](https://docs.vantage.sh/terraform_docs/data_sources/virtual_tag_configs.md): Terraform data source reference for vantage_virtual_tag_configs (Data Source). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_workspace (Data Source)](https://docs.vantage.sh/terraform_docs/data_sources/workspace.md): Terraform data source reference for vantage_workspace (Data Source). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_workspaces (Data Source)](https://docs.vantage.sh/terraform_docs/data_sources/workspaces.md): Terraform data source reference for vantage_workspaces (Data Source). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage Provider](https://docs.vantage.sh/terraform_docs/index.md): Terraform provider reference for vantage Provider. Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_access_grant (Resource)](https://docs.vantage.sh/terraform_docs/resources/access_grant.md): Terraform resource reference for vantage_access_grant (Resource). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_anomaly_notification (Resource)](https://docs.vantage.sh/terraform_docs/resources/anomaly_notification.md): Terraform resource reference for vantage_anomaly_notification (Resource). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_aws_provider (Resource)](https://docs.vantage.sh/terraform_docs/resources/aws_provider.md): Terraform resource reference for vantage_aws_provider (Resource). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_billing_profile (Resource)](https://docs.vantage.sh/terraform_docs/resources/billing_profile.md): Terraform resource reference for vantage_billing_profile (Resource). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_billing_rule (Resource)](https://docs.vantage.sh/terraform_docs/resources/billing_rule.md): Terraform resource reference for vantage_billing_rule (Resource). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_budget (Resource)](https://docs.vantage.sh/terraform_docs/resources/budget.md): Terraform resource reference for vantage_budget (Resource). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_business_metric (Resource)](https://docs.vantage.sh/terraform_docs/resources/business_metric.md): Terraform resource reference for vantage_business_metric (Resource). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_canvas (Resource)](https://docs.vantage.sh/terraform_docs/resources/canvas.md): Terraform resource reference for vantage_canvas (Resource). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_cost_alert (Resource)](https://docs.vantage.sh/terraform_docs/resources/cost_alert.md): Terraform resource reference for vantage_cost_alert (Resource). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_cost_report (Resource)](https://docs.vantage.sh/terraform_docs/resources/cost_report.md): Terraform resource reference for vantage_cost_report (Resource). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_custom_provider (Resource)](https://docs.vantage.sh/terraform_docs/resources/custom_provider.md): Terraform resource reference for vantage_custom_provider (Resource). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_custom_provider_costs_upload (Resource)](https://docs.vantage.sh/terraform_docs/resources/custom_provider_costs_upload.md): Terraform resource reference for vantage_custom_provider_costs_upload (Resource). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_dashboard (Resource)](https://docs.vantage.sh/terraform_docs/resources/dashboard.md): Terraform resource reference for vantage_dashboard (Resource). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_financial_commitment_report (Resource)](https://docs.vantage.sh/terraform_docs/resources/financial_commitment_report.md): Terraform resource reference for vantage_financial_commitment_report (Resource). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_folder (Resource)](https://docs.vantage.sh/terraform_docs/resources/folder.md): Terraform resource reference for vantage_folder (Resource). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_invoice (Resource)](https://docs.vantage.sh/terraform_docs/resources/invoice.md): Terraform resource reference for vantage_invoice (Resource). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_kubernetes_efficiency_report (Resource)](https://docs.vantage.sh/terraform_docs/resources/kubernetes_efficiency_report.md): Terraform resource reference for vantage_kubernetes_efficiency_report (Resource). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_managed_account (Resource)](https://docs.vantage.sh/terraform_docs/resources/managed_account.md): Terraform resource reference for vantage_managed_account (Resource). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_network_flow_report (Resource)](https://docs.vantage.sh/terraform_docs/resources/network_flow_report.md): Terraform resource reference for vantage_network_flow_report (Resource). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_recommendation_view (Resource)](https://docs.vantage.sh/terraform_docs/resources/recommendation_view.md): Terraform resource reference for vantage_recommendation_view (Resource). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_report_forecast (Resource)](https://docs.vantage.sh/terraform_docs/resources/report_forecast.md): Terraform resource reference for vantage_report_forecast (Resource). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_report_notification (Resource)](https://docs.vantage.sh/terraform_docs/resources/report_notification.md): Terraform resource reference for vantage_report_notification (Resource). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_resource_report (Resource)](https://docs.vantage.sh/terraform_docs/resources/resource_report.md): Terraform resource reference for vantage_resource_report (Resource). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_saved_filter (Resource)](https://docs.vantage.sh/terraform_docs/resources/saved_filter.md): Terraform resource reference for vantage_saved_filter (Resource). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_scenario_model (Resource)](https://docs.vantage.sh/terraform_docs/resources/scenario_model.md): Terraform resource reference for vantage_scenario_model (Resource). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_segment (Resource)](https://docs.vantage.sh/terraform_docs/resources/segment.md): Terraform resource reference for vantage_segment (Resource). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_team (Resource)](https://docs.vantage.sh/terraform_docs/resources/team.md): Terraform resource reference for vantage_team (Resource). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_virtual_tag_config (Resource)](https://docs.vantage.sh/terraform_docs/resources/virtual_tag_config.md): Terraform resource reference for vantage_virtual_tag_config (Resource). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [vantage_workspace (Resource)](https://docs.vantage.sh/terraform_docs/resources/workspace.md): Terraform resource reference for vantage_workspace (Resource). Auto-generated from the vantage-sh/terraform-provider-vantage repository.
+- [Guides](https://docs.vantage.sh/guides.md): Outcome-oriented guides for using Vantage in common FinOps workflows.
+- [30-Day Getting Started Playbook](https://docs.vantage.sh/guides/getting_started_playbook.md): An opinionated four-week plan to take a new Vantage account from first integration to a working FinOps cadence.
+- [Chargeback and Showback](https://docs.vantage.sh/guides/chargeback_showback.md): Build a practical showback or chargeback model in Vantage with Virtual Tags, Cost Reports, Saved Filters, Budgets, and scheduled distribution.
+- [RBAC Setup Guide](https://docs.vantage.sh/guides/rbac_setup.md): Step-by-step guide to setting up role-based access control for large organizations.
+- [Scaling Virtual Tags](https://docs.vantage.sh/guides/scaling_tagging.md): Keep virtual tag processing fast and predictable as you add providers, values, and nested allocation chains.
+- [FinOps AI Prompt Guide](https://docs.vantage.sh/guides/finops_ai_prompt_guide.md): Learn what the Vantage FinOps Agent can do and how to ask for it in plain language.
+- [FinOps as Code](https://docs.vantage.sh/guides/finops_as_code.md): Use AI and Terraform together to manage Vantage configuration at enterprise scale.
+- [Vantage API](https://docs.vantage.sh/api.md): Access Vantage's REST API to programmatically manage cloud cost data.
+- [Quickstart](https://docs.vantage.sh/api/quickstart.md): Get started with the Vantage API.
+- [Authentication](https://docs.vantage.sh/api/authentication.md): Learn how to authenticate your requests using API keys.
+- [Pagination](https://docs.vantage.sh/api/pagination.md): Understand how to paginate through large sets of data.
+- [Errors](https://docs.vantage.sh/api/errors.md): Understand potential errors and how to correct them when using the Vantage API.
+- [Rate Limiting](https://docs.vantage.sh/api/rate_limiting.md): Understand the rate limiting policies for the Vantage API to ensure optimal usage and avoid interruptions.
+- [Get OpenAPI specification](https://docs.vantage.sh/api/getopenapispecifications.md): Retrieve the OpenAPI 3.0.1 specification for Vantage's API.
+- [Vantage University](https://docs.vantage.sh/vantage_university.md): Learn Vantage through hands-on practice and interactive tutorials.
+- [Account Management](https://docs.vantage.sh/vantage_university_account_management.md): Welcome to the Account Management learning track on Vantage University!
+- [Integrations](https://docs.vantage.sh/vantage_university_integrations.md): Welcome to the Integrations learning track on Vantage University!
+- [Cost Reporting](https://docs.vantage.sh/vantage_university_cost_reporting.md): Welcome to the Cost Reporting learning track on Vantage University!
+- [Per Resource Costs](https://docs.vantage.sh/vantage_university_per_resource_costs.md): Welcome to the Per Resource Costs learning track on Vantage University!
+- [Cost Allocation](https://docs.vantage.sh/vantage_university_cost_allocation.md): Welcome to the Cost Allocation learning track on Vantage University!
+- [Budgeting](https://docs.vantage.sh/vantage_university_budgeting.md): Welcome to the Budgeting learning track on Vantage University!
+- [Observability](https://docs.vantage.sh/vantage_university_observability.md): Welcome to the Observability learning track on Vantage University!
+- [Unit Costs](https://docs.vantage.sh/vantage_university_unit_costs.md): Welcome to the Unit Costs learning track on Vantage University!
+- [Hands-On Demo](https://docs.vantage.sh/vantage_university_demo.md): Interactive demo to practice using Vantage features in a real-world scenario.
+- [FinOps Analyst](https://docs.vantage.sh/vantage_university_finops_analyst.md): Welcome to the FinOps Analyst learning track on Vantage University!
+- [Developer](https://docs.vantage.sh/vantage_university_developer.md): Welcome to the Developer learning track on Vantage University!
+- [Finance Manager](https://docs.vantage.sh/vantage_university_finance_manager.md): Welcome to the Finance Manager learning track on Vantage University!
+- [Vantage Changelog](https://docs.vantage.sh/changelog.md): Product updates and improvements.
+- [Create access grant](https://docs.vantage.sh/api/accessgrants/create-access-grant.md): Create an Access Grant.
+- [Delete access grant](https://docs.vantage.sh/api/accessgrants/delete-access-grant.md): Delete an Access Grant.
+- [Get access grant by token](https://docs.vantage.sh/api/accessgrants/get-access-grant-by-token.md): Return a specific Access Grant.
+- [Get all access grants](https://docs.vantage.sh/api/accessgrants/get-all-access-grants.md): Return all Access Grants that the current API token has access to.
+- [Update access grant](https://docs.vantage.sh/api/accessgrants/update-access-grant.md): Update an AccessGrant.
+- [Create an annotation](https://docs.vantage.sh/api/annotations/create-an-annotation.md): Create an Annotation.
+- [Delete an annotation](https://docs.vantage.sh/api/annotations/delete-an-annotation.md): Delete an Annotation.
+- [Get all annotations](https://docs.vantage.sh/api/annotations/get-all-annotations.md): Return all Annotations.
+- [Update an annotation](https://docs.vantage.sh/api/annotations/update-an-annotation.md): Update an Annotation.
+- [Get all anomaly alerts](https://docs.vantage.sh/api/anomalyalerts/get-all-anomaly-alerts.md): Return all Anomaly Alerts that the current API token has access to.
+- [Get anomaly alert by token](https://docs.vantage.sh/api/anomalyalerts/get-anomaly-alert-by-token.md): Return an AnomalyAlert that the current API token has access to.
+- [Update anomaly alert](https://docs.vantage.sh/api/anomalyalerts/update-anomaly-alert.md): Update an AnomalyAlert.
+- [Create anomaly notification](https://docs.vantage.sh/api/anomalynotifications/create-anomaly-notification.md): Create an Anomaly Notification for a Cost Report.
+- [Delete anomaly notification](https://docs.vantage.sh/api/anomalynotifications/delete-anomaly-notification.md): Delete an Anomaly Notification.
+- [Get all anomaly notifications](https://docs.vantage.sh/api/anomalynotifications/get-all-anomaly-notifications.md): Return all Anomaly Notifications.
+- [Get anomaly notification by token](https://docs.vantage.sh/api/anomalynotifications/get-anomaly-notification-by-token.md): Return an Anomaly Notification that the current API token has access to.
+- [Update anomaly notification](https://docs.vantage.sh/api/anomalynotifications/update-anomaly-notification.md): Update an Anomaly Notification.
+- [Get all audit logs](https://docs.vantage.sh/api/auditlogs/get-all-audit-logs.md): Return all AuditLogs.
+- [Get audit log by token](https://docs.vantage.sh/api/auditlogs/get-audit-log-by-token.md): Return a specific AuditLog.
+- [Create billing profile](https://docs.vantage.sh/api/billingprofiles/create-billing-profile.md): Create a billing profile (MSP invoicing required).
+- [Delete billing profile](https://docs.vantage.sh/api/billingprofiles/delete-billing-profile.md): Requires MSP invoicing to be enabled on the account.
+- [Get all billing profiles](https://docs.vantage.sh/api/billingprofiles/get-all-billing-profiles.md): Returns a list of billing profiles (MSP invoicing required).
+- [Get billing profile by token](https://docs.vantage.sh/api/billingprofiles/get-billing-profile-by-token.md): Requires MSP invoicing to be enabled on the account.
+- [Update billing profile](https://docs.vantage.sh/api/billingprofiles/update-billing-profile.md): Requires MSP invoicing to be enabled on the account.
+- [Create billing rule](https://docs.vantage.sh/api/billingrules/create-billing-rule.md): Create a BillingRule.
+- [Delete billing rule](https://docs.vantage.sh/api/billingrules/delete-billing-rule.md): Delete a BillingRule.
+- [Get all billing rules](https://docs.vantage.sh/api/billingrules/get-all-billing-rules.md): Returns a list of billing rules.
+- [Get billing rule by token](https://docs.vantage.sh/api/billingrules/get-billing-rule-by-token.md): Return a BillingRule.
+- [Update billing rule](https://docs.vantage.sh/api/billingrules/update-billing-rule.md): Update a BillingRule.
+- [Create budget alert](https://docs.vantage.sh/api/budgetalerts/create-budget-alert.md): Create a Budget Alert.
+- [Delete budget alert](https://docs.vantage.sh/api/budgetalerts/delete-budget-alert.md): Delete a BudgetAlert.
+- [Get all budget alerts](https://docs.vantage.sh/api/budgetalerts/get-all-budget-alerts.md): Return all BudgetAlerts.
+- [Get budget alert by token](https://docs.vantage.sh/api/budgetalerts/get-budget-alert-by-token.md): Return a BudgetAlert.
+- [Update budget alert](https://docs.vantage.sh/api/budgetalerts/update-budget-alert.md): Updates an existing BudgetAlert.
+- [Create budget](https://docs.vantage.sh/api/budgets/create-budget.md): Create a Budget.
+- [Delete budget](https://docs.vantage.sh/api/budgets/delete-budget.md): Delete a Budget.
+- [Get all budgets](https://docs.vantage.sh/api/budgets/get-all-budgets.md): Return all Budgets.
+- [Get budget by token](https://docs.vantage.sh/api/budgets/get-budget-by-token.md): Return a Budget.
+- [Update budget](https://docs.vantage.sh/api/budgets/update-budget.md): Update a Budget.
+- [Create business metric](https://docs.vantage.sh/api/businessmetrics/create-business-metric.md): Create a new BusinessMetric.
+- [Delete business metric](https://docs.vantage.sh/api/businessmetrics/delete-business-metric.md): Deletes an existing BusinessMetric.
+- [Delete business metric values](https://docs.vantage.sh/api/businessmetrics/delete-business-metric-values.md): Deletes Business Metric values (historical or forecasted unit metrics). BusinessMetrics whose values are stored in ClickHouse only support deleting every historical value or every forecasted value, so supplying start_date, end_date, or label returns 422.
+- [Get all business metrics](https://docs.vantage.sh/api/businessmetrics/get-all-business-metrics.md): Return all BusinessMetrics that the current API token has access to.
+- [Get business metric by token](https://docs.vantage.sh/api/businessmetrics/get-business-metric-by-token.md): Return a BusinessMetric.
+- [Get business metric forecasted values](https://docs.vantage.sh/api/businessmetrics/get-business-metric-forecasted-values.md): Return forecasted values of a BusinessMetric
+- [Get business metric labels](https://docs.vantage.sh/api/businessmetrics/get-business-metric-labels.md): Return labels of a BusinessMetric.
+- [Get business metric values](https://docs.vantage.sh/api/businessmetrics/get-business-metric-values.md): Return values of a BusinessMetric
+- [Update business metric](https://docs.vantage.sh/api/businessmetrics/update-business-metric.md): Updates an existing BusinessMetric.
+- [Update business metric values from CSV](https://docs.vantage.sh/api/businessmetrics/update-business-metric-values-from-csv.md): Updates the values for an existing BusinessMetric from a CSV file.
+- [Create canvas](https://docs.vantage.sh/api/canvases/create-canvas.md): Create a Canvas.
+- [Delete canvas](https://docs.vantage.sh/api/canvases/delete-canvas.md): Delete a Canvas.
+- [Get all canvases](https://docs.vantage.sh/api/canvases/get-all-canvases.md): Return all Canvases.
+- [Get canvas by token](https://docs.vantage.sh/api/canvases/get-canvas-by-token.md): Return a specific Canvas.
+- [Update canvas](https://docs.vantage.sh/api/canvases/update-canvas.md): Update a Canvas.
+- [Get all cost alert events](https://docs.vantage.sh/api/costalertevents/get-all-cost-alert-events.md): Get all CostAlertEvents
+- [Get cost alert event by token](https://docs.vantage.sh/api/costalertevents/get-cost-alert-event-by-token.md): Get a CostAlertEvent
+- [Create cost alert](https://docs.vantage.sh/api/costalerts/create-cost-alert.md): Create a new Cost Alert
+- [Delete cost alert](https://docs.vantage.sh/api/costalerts/delete-cost-alert.md): Delete a Cost Alert
+- [Get all cost alerts](https://docs.vantage.sh/api/costalerts/get-all-cost-alerts.md): List all Cost Alerts
+- [Get cost alert by token](https://docs.vantage.sh/api/costalerts/get-cost-alert-by-token.md): Get a Cost Alert
+- [Update cost alert](https://docs.vantage.sh/api/costalerts/update-cost-alert.md): Update a Cost Alert
+- [Get cost providers](https://docs.vantage.sh/api/costprovider/get-cost-providers.md): List CostProviders available to query in a given Workspace.
+- [Get all cost provider accounts](https://docs.vantage.sh/api/costprovideraccounts/get-all-cost-provider-accounts.md): List CostProviderAccounts available in a given Workspace.
+- [Create cost report](https://docs.vantage.sh/api/costs/create-cost-report.md): Create a CostReport.
+- [Delete cost report](https://docs.vantage.sh/api/costs/delete-cost-report.md): Delete a CostReport.
+- [Generate cost data export](https://docs.vantage.sh/api/costs/generate-cost-data-export.md): Generate a DataExport of costs.
+- [Get all cost reports](https://docs.vantage.sh/api/costs/get-all-cost-reports.md): Return all CostReports.
+- [Get cost report by token](https://docs.vantage.sh/api/costs/get-cost-report-by-token.md): Return a CostReport.
+- [Get costs for cost report or VQL filter](https://docs.vantage.sh/api/costs/get-costs-for-cost-report-or-vql-filter.md): Return all Costs for a CostReport or VQL filter.
+- [Get forecasted costs for a cost report](https://docs.vantage.sh/api/costs/get-forecasted-costs-for-a-cost-report.md): Return all ForecastedCosts.
+- [Update cost report](https://docs.vantage.sh/api/costs/update-cost-report.md): Update a CostReport.
+- [Get cost services](https://docs.vantage.sh/api/costservice/get-cost-services.md): List CostServices available to query in a given Workspace.
+- [Create dashboard](https://docs.vantage.sh/api/dashboards/create-dashboard.md): Create a Dashboard.
+- [Delete dashboard](https://docs.vantage.sh/api/dashboards/delete-dashboard.md): Delete a Dashboard.
+- [Get all dashboards](https://docs.vantage.sh/api/dashboards/get-all-dashboards.md): Return all Dashboards.
+- [Get dashboard by token](https://docs.vantage.sh/api/dashboards/get-dashboard-by-token.md): Return a specific Dashboard.
+- [Update dashboard](https://docs.vantage.sh/api/dashboards/update-dashboard.md): Update a Dashboard.
+- [Get status of data export](https://docs.vantage.sh/api/dataexports/get-status-of-data-export.md): Get the status of a data export.
+- [Get all exchange rates](https://docs.vantage.sh/api/exchangerates/get-all-exchange-rates.md): Return all Exchange Rates.
+- [Upload exchange rates via CSV](https://docs.vantage.sh/api/exchangerates/upload-exchange-rates-via-csv.md): Upload Exchange Rates via CSV.
+- [Create financial commitment report](https://docs.vantage.sh/api/financialcommitmentreports/create-financial-commitment-report.md): Create a FinancialCommitmentReport.
+- [Delete financial commitment report](https://docs.vantage.sh/api/financialcommitmentreports/delete-financial-commitment-report.md): Delete a FinancialCommitmentReport.
+- [Get all financial commitment reports](https://docs.vantage.sh/api/financialcommitmentreports/get-all-financial-commitment-reports.md): Return all FinancialCommitmentReports.
+- [Get financial commitment report by token](https://docs.vantage.sh/api/financialcommitmentreports/get-financial-commitment-report-by-token.md): Return a FinancialCommitmentReport.
+- [Update financial commitment report](https://docs.vantage.sh/api/financialcommitmentreports/update-financial-commitment-report.md): Update a FinancialCommitmentReport.
+- [Get all financial commitments](https://docs.vantage.sh/api/financialcommitments/get-all-financial-commitments.md): Return all FinancialCommitments.
+- [Create folder](https://docs.vantage.sh/api/folders/create-folder.md): Create a Folder for CostReports.
+- [Delete folder](https://docs.vantage.sh/api/folders/delete-folder.md): Delete a Folder for CostReports.
+- [Get all folders](https://docs.vantage.sh/api/folders/get-all-folders.md): Return all Folders for CostReports.
+- [Get folder by token](https://docs.vantage.sh/api/folders/get-folder-by-token.md): Return a specific Folder for CostReports.
+- [Update folder](https://docs.vantage.sh/api/folders/update-folder.md): Update a Folder for CostReports.
+- [Create Azure integration](https://docs.vantage.sh/api/integrations/create-azure-integration.md): Create an Azure Integration
+- [Create custom provider integration](https://docs.vantage.sh/api/integrations/create-custom-provider-integration.md): Create a Custom Provider Integration
+- [Create GCP integration](https://docs.vantage.sh/api/integrations/create-gcp-integration.md): Create a GCP Integration
+- [Delete integration](https://docs.vantage.sh/api/integrations/delete-integration.md): Delete an Integration.
+- [Delete user costs upload](https://docs.vantage.sh/api/integrations/delete-user-costs-upload.md): Delete a UserCostsUpload.
+- [Get all integrations](https://docs.vantage.sh/api/integrations/get-all-integrations.md): Return all Integrations.
+- [Get all user costs uploads](https://docs.vantage.sh/api/integrations/get-all-user-costs-uploads.md): List UserCostUploads.
+- [Get integration by token](https://docs.vantage.sh/api/integrations/get-integration-by-token.md): Return an Integration.
+- [Update integration](https://docs.vantage.sh/api/integrations/update-integration.md): Update an Integration.
+- [Upload custom provider costs](https://docs.vantage.sh/api/integrations/upload-custom-provider-costs.md): Create UserCostsUpload via CSV for a Custom Provider Integration.
+- [Create invoice](https://docs.vantage.sh/api/invoices/create-invoice.md): Create an invoice (MSP accounts only).
+- [Get all invoices](https://docs.vantage.sh/api/invoices/get-all-invoices.md): Returns a list of invoices (MSP invoicing required).
+- [Get cost report URL](https://docs.vantage.sh/api/invoices/get-cost-report-url.md): Get cost report URL for invoice period.
+- [Get invoice by token](https://docs.vantage.sh/api/invoices/get-invoice-by-token.md): Return an invoice.
+- [Get invoice file](https://docs.vantage.sh/api/invoices/get-invoice-file.md): Download invoice file (PDF or CSV).
+- [Regenerate invoice](https://docs.vantage.sh/api/invoices/regenerate-invoice.md): Regenerate an existing invoice (MSP accounts only).
+- [Send and approve invoice](https://docs.vantage.sh/api/invoices/send-and-approve-invoice.md): Send and approve invoice via email (MSP accounts only).
+- [Send invoice](https://docs.vantage.sh/api/invoices/send-invoice.md): Send invoice via email.
+- [Create Kubernetes efficiency report](https://docs.vantage.sh/api/kubernetesefficiencyreports/create-kubernetes-efficiency-report.md): Create a KubernetesEfficiencyReport.
+- [Delete Kubernetes efficiency report](https://docs.vantage.sh/api/kubernetesefficiencyreports/delete-kubernetes-efficiency-report.md): Delete a KubernetesEfficiencyReport.
+- [Generate Kubernetes efficiency data export](https://docs.vantage.sh/api/kubernetesefficiencyreports/generate-kubernetes-efficiency-data-export.md): Generate a DataExport of Kubernetes efficiency data.
+- [Get all Kubernetes efficiency reports](https://docs.vantage.sh/api/kubernetesefficiencyreports/get-all-kubernetes-efficiency-reports.md): Return all KubernetesEfficiencyReports.
+- [Get Kubernetes efficiency report by token](https://docs.vantage.sh/api/kubernetesefficiencyreports/get-kubernetes-efficiency-report-by-token.md): Return a KubernetesEfficiencyReport.
+- [Update Kubernetes efficiency report](https://docs.vantage.sh/api/kubernetesefficiencyreports/update-kubernetes-efficiency-report.md): Update a KubernetesEfficiencyReport.
+- [Configure SSO for managed account](https://docs.vantage.sh/api/managedaccounts/configure-sso-for-managed-account.md): Configure SSO for a Managed Account.
+- [Create managed account](https://docs.vantage.sh/api/managedaccounts/create-managed-account.md): Create a Managed Account.
+- [Delete managed account](https://docs.vantage.sh/api/managedaccounts/delete-managed-account.md): Delete a Managed Account.
+- [Delete SSO connection for managed account](https://docs.vantage.sh/api/managedaccounts/delete-sso-connection-for-managed-account.md): Delete SSO connection for a Managed Account.
+- [Get all managed accounts](https://docs.vantage.sh/api/managedaccounts/get-all-managed-accounts.md): Returns a list of managed accounts.
+- [Get managed account by token](https://docs.vantage.sh/api/managedaccounts/get-managed-account-by-token.md): Return a Managed Account.
+- [Update managed account](https://docs.vantage.sh/api/managedaccounts/update-managed-account.md): Update a Managed Account.
+- [Update SSO configuration for managed account](https://docs.vantage.sh/api/managedaccounts/update-sso-configuration-for-managed-account.md): Update SSO configuration for a Managed Account.
+- [Get authenticated user info](https://docs.vantage.sh/api/me/get-authenticated-user-info.md): Get information about the authenticated BearerToken.
+- [Update authenticated user](https://docs.vantage.sh/api/me/update-authenticated-user.md): Update the authenticated User.
+- [Get network flow logs](https://docs.vantage.sh/api/networkflowlogs/get-network-flow-logs.md): Return aggregated Network Flow Logs for a saved report or ad hoc VQL query.
+- [Create network flow report](https://docs.vantage.sh/api/networkflowreports/create-network-flow-report.md): Create a NetworkFlowReport.
+- [Delete network flow report](https://docs.vantage.sh/api/networkflowreports/delete-network-flow-report.md): Delete a NetworkFlowReport.
+- [Get all network flow reports](https://docs.vantage.sh/api/networkflowreports/get-all-network-flow-reports.md): Return all NetworkFlowReports.
+- [Get network flow report by token](https://docs.vantage.sh/api/networkflowreports/get-network-flow-report-by-token.md): Return a NetworkFlowReport.
+- [Update network flow report](https://docs.vantage.sh/api/networkflowreports/update-network-flow-report.md): Update a NetworkFlowReport.
+- [Get ping](https://docs.vantage.sh/api/ping/get-ping.md): This is a health check endpoint that can be used to determine Vantage API healthiness. It will return 200 if everything is running smoothly.
+- [Get all products](https://docs.vantage.sh/api/prices/get-all-products.md): Return available Products for a Service. For example, with a Provider of AWS and a Service of EC2, Products will be a list of all EC2 Instances. By default, this endpoint returns all Products across all Services and Providers but has optional query parameters for filtering listed below.
+- [Get price by ID](https://docs.vantage.sh/api/prices/get-price-by-id.md): Returns a price
+- [Get prices for a product](https://docs.vantage.sh/api/prices/get-prices-for-a-product.md): Return available Prices across all Regions for a Product.
+- [Get product by ID](https://docs.vantage.sh/api/prices/get-product-by-id.md): Return a product
+- [Get all recommendations](https://docs.vantage.sh/api/recommendations/get-all-recommendations.md): Return all Recommendations. Use the `type` query parameter with a fuzzy fragment to filter recommendation type case-insensitively (for example: aws, aws:ec2, aws:ec2:rightsizing).
+- [Get all resources for a recommendation](https://docs.vantage.sh/api/recommendations/get-all-resources-for-a-recommendation.md): Return all Active Resources, including Recommendation Actions, referenced in this Recommendation.
+- [Get all resources for a recommendation type](https://docs.vantage.sh/api/recommendations/get-all-resources-for-a-recommendation-type.md): Return all Active Resources associated with recommendations of the specified type.
+- [Get recommendation by token](https://docs.vantage.sh/api/recommendations/get-recommendation-by-token.md): Return a Recommendation.
+- [Get specific resource for a recommendation](https://docs.vantage.sh/api/recommendations/get-specific-resource-for-a-recommendation.md): Return an Active Resource, including Recommendation Actions, referenced in this Recommendation.
+- [Create recommendation view](https://docs.vantage.sh/api/recommendationviews/create-recommendation-view.md): Create a RecommendationView.
+- [Delete recommendation view](https://docs.vantage.sh/api/recommendationviews/delete-recommendation-view.md): Delete a RecommendationView.
+- [Get all recommendation views](https://docs.vantage.sh/api/recommendationviews/get-all-recommendation-views.md): Return all RecommendationViews.
+- [Get recommendation view by token](https://docs.vantage.sh/api/recommendationviews/get-recommendation-view-by-token.md): Return a specific RecommendationView.
+- [Update recommendation view](https://docs.vantage.sh/api/recommendationviews/update-recommendation-view.md): Update a RecommendationView.
+- [Create report forecast](https://docs.vantage.sh/api/reportforecasts/create-report-forecast.md): Create a scenario-model ReportForecast.
+- [Delete report forecast](https://docs.vantage.sh/api/reportforecasts/delete-report-forecast.md): Delete a scenario-model ReportForecast.
+- [Get all report forecasts](https://docs.vantage.sh/api/reportforecasts/get-all-report-forecasts.md): Return all scenario-model ReportForecasts for a CostReport.
+- [Get report forecast by token](https://docs.vantage.sh/api/reportforecasts/get-report-forecast-by-token.md): Return a scenario-model ReportForecast.
+- [Update report forecast](https://docs.vantage.sh/api/reportforecasts/update-report-forecast.md): Update a scenario-model ReportForecast.
+- [Create report notification](https://docs.vantage.sh/api/reportnotifications/create-report-notification.md): Create a ReportNotification.
+- [Delete report notification](https://docs.vantage.sh/api/reportnotifications/delete-report-notification.md): Delete a ReportNotification.
+- [Get all report notifications](https://docs.vantage.sh/api/reportnotifications/get-all-report-notifications.md): Return all ReportNotifications.
+- [Get report notification by token](https://docs.vantage.sh/api/reportnotifications/get-report-notification-by-token.md): Return a ReportNotification.
+- [Update report notification](https://docs.vantage.sh/api/reportnotifications/update-report-notification.md): Update a ReportNotification.
+- [Create resource report](https://docs.vantage.sh/api/resourcereports/create-resource-report.md): Create a ResourceReport.
+- [Delete resource report](https://docs.vantage.sh/api/resourcereports/delete-resource-report.md): Delete a ResourceReport.
+- [Get all resource reports](https://docs.vantage.sh/api/resourcereports/get-all-resource-reports.md): Return all ResourceReports.
+- [Get resource report by token](https://docs.vantage.sh/api/resourcereports/get-resource-report-by-token.md): Return a ResourceReport.
+- [Get resource report columns](https://docs.vantage.sh/api/resourcereports/get-resource-report-columns.md): List available columns for a resource type.
+- [Update resource report](https://docs.vantage.sh/api/resourcereports/update-resource-report.md): Update a ResourceReport.
+- [Get resource by token](https://docs.vantage.sh/api/resources/get-resource-by-token.md): Return a single Resource
+- [Get resources](https://docs.vantage.sh/api/resources/get-resources.md): Return Resources contained in a ResourceReport
+- [Create saved filter](https://docs.vantage.sh/api/savedfilters/create-saved-filter.md): Create a SavedFilter for CostReports.
+- [Delete saved filter](https://docs.vantage.sh/api/savedfilters/delete-saved-filter.md): Delete a SavedFilter for CostReports.
+- [Get all saved filters](https://docs.vantage.sh/api/savedfilters/get-all-saved-filters.md): Return all SavedFilters that can be applied to a CostReport.
+- [Get saved filter by token](https://docs.vantage.sh/api/savedfilters/get-saved-filter-by-token.md): Return a specific SavedFilter.
+- [Update saved filter](https://docs.vantage.sh/api/savedfilters/update-saved-filter.md): Update a SavedFilter for CostReports.
+- [Create scenario model](https://docs.vantage.sh/api/scenariomodels/create-scenario-model.md): Create a ScenarioModel.
+- [Delete scenario model](https://docs.vantage.sh/api/scenariomodels/delete-scenario-model.md): Delete a ScenarioModel.
+- [Get all scenario models](https://docs.vantage.sh/api/scenariomodels/get-all-scenario-models.md): Return all ScenarioModels.
+- [Get scenario model by token](https://docs.vantage.sh/api/scenariomodels/get-scenario-model-by-token.md): Return a ScenarioModel.
+- [Update scenario model](https://docs.vantage.sh/api/scenariomodels/update-scenario-model.md): Update a ScenarioModel.
+- [Create segment](https://docs.vantage.sh/api/segments/create-segment.md): Create a Segment.
+- [Delete segment](https://docs.vantage.sh/api/segments/delete-segment.md): Delete a Segment.
+- [Get all segments](https://docs.vantage.sh/api/segments/get-all-segments.md): Return all Segments.
+- [Get segment by token](https://docs.vantage.sh/api/segments/get-segment-by-token.md): Return a Segment.
+- [Update segment](https://docs.vantage.sh/api/segments/update-segment.md): Update a Segment.
+- [Get all tags](https://docs.vantage.sh/api/tags/get-all-tags.md): Return all Tags that the current API token has access to.
+- [Get tag values](https://docs.vantage.sh/api/tags/get-tag-values.md): Returns corresponding TagValues for a given Tag.
+- [Update tag](https://docs.vantage.sh/api/tags/update-tag.md): Updates an existing Tag.
+- [Add team member](https://docs.vantage.sh/api/teams/add-team-member.md): Add a member to a Team.
+- [Create team](https://docs.vantage.sh/api/teams/create-team.md): Create a new Team.
+- [Delete team](https://docs.vantage.sh/api/teams/delete-team.md): Delete a Team.
+- [Get all teams](https://docs.vantage.sh/api/teams/get-all-teams.md): Return all Teams that the current API token has access to.
+- [Get team by token](https://docs.vantage.sh/api/teams/get-team-by-token.md): Return a specific Team.
+- [Get team members](https://docs.vantage.sh/api/teams/get-team-members.md): Return all members of a Team.
+- [Remove team member](https://docs.vantage.sh/api/teams/remove-team-member.md): Remove a member from a Team.
+- [Update team](https://docs.vantage.sh/api/teams/update-team.md): Update a Team.
+- [Generate data export of unit costs](https://docs.vantage.sh/api/unitcosts/generate-data-export-of-unit-costs.md): Generate a DataExport of unit costs.
+- [Get all unit costs for a cost report](https://docs.vantage.sh/api/unitcosts/get-all-unit-costs-for-a-cost-report.md): Return all UnitCosts for a CostReport.
+- [Submit user feedback](https://docs.vantage.sh/api/userfeedback/submit-user-feedback.md): Provide UserFeedback for our product and features.
+- [Get all users](https://docs.vantage.sh/api/users/get-all-users.md): Return all Users that the current API token has access to.
+- [Get user by token](https://docs.vantage.sh/api/users/get-user-by-token.md): Return a specific User.
+- [Update a user](https://docs.vantage.sh/api/users/update-a-user.md): Update a specific User.
+- [Vantage API Reference](https://docs.vantage.sh/api/vantage_api_reference.md): Complete reference of all Vantage API endpoints. This page is auto-generated from the OpenAPI specification.
+- [Create virtual tag config](https://docs.vantage.sh/api/virtualtags/create-virtual-tag-config.md): Create a new VirtualTagConfig.
+- [Create virtual tag config value](https://docs.vantage.sh/api/virtualtags/create-virtual-tag-config-value.md): Create a VirtualTagConfigValue.
+- [Delete virtual tag config](https://docs.vantage.sh/api/virtualtags/delete-virtual-tag-config.md): Deletes an existing VirtualTagConfig.
+- [Delete virtual tag config value](https://docs.vantage.sh/api/virtualtags/delete-virtual-tag-config-value.md): Delete a VirtualTagConfigValue.
+- [Get all virtual tag configs](https://docs.vantage.sh/api/virtualtags/get-all-virtual-tag-configs.md): Return all VirtualTagConfigs that the current API token has access to.
+- [Get async virtual tag config update status](https://docs.vantage.sh/api/virtualtags/get-async-virtual-tag-config-update-status.md): Check the status of an async VirtualTagConfig update.
+- [Get virtual tag config by token](https://docs.vantage.sh/api/virtualtags/get-virtual-tag-config-by-token.md): Return a specific VirtualTagConfig.
+- [Get virtual tag config processing status](https://docs.vantage.sh/api/virtualtags/get-virtual-tag-config-processing-status.md): Return the processing status of a specific VirtualTagConfig.
+- [Get virtual tag config value by token](https://docs.vantage.sh/api/virtualtags/get-virtual-tag-config-value-by-token.md): Return a VirtualTagConfigValue.
+- [Update virtual tag config](https://docs.vantage.sh/api/virtualtags/update-virtual-tag-config.md): Updates an existing VirtualTagConfig.
+- [Update virtual tag config asynchronously](https://docs.vantage.sh/api/virtualtags/update-virtual-tag-config-asynchronously.md): Asynchronously updates an existing VirtualTagConfig.
+- [Update virtual tag config value](https://docs.vantage.sh/api/virtualtags/update-virtual-tag-config-value.md): Update a VirtualTagConfigValue.
+- [Create workspace](https://docs.vantage.sh/api/workspaces/create-workspace.md): Create a workspace
+- [Delete workspace](https://docs.vantage.sh/api/workspaces/delete-workspace.md): Delete a workspace
+- [Get all workspaces](https://docs.vantage.sh/api/workspaces/get-all-workspaces.md): Return all Workspaces that the current API token has access to.
+- [Get workspace by token](https://docs.vantage.sh/api/workspaces/get-workspace-by-token.md): Return a specific Workspace.
+- [Update workspace](https://docs.vantage.sh/api/workspaces/update-workspace.md): Update a workspace
+- [Enable Hourly Financial Commitment Reports](https://docs.vantage.sh/hourly_fcr.md): Enable hourly granularity for Financial Commitment Reports in Vantage.
+
+## OpenAPI Specs
+
+- [oas_v3](https://api.vantage.sh/v2/oas_v3.json)
+- [v1-openapi](https://docs.vantage.sh/v1-openapi.json)
+- [openapi](https://docs.vantage.sh/openapi.json)

@@ -1,0 +1,125 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vantage Cloud Pricing Access Grants Teams API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Teams",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Vantage Get All Teams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v1/teams",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page of results to return."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page."
+              }
+            ]
+          },
+          "docs": "Returns all Teams that the current API token has access to."
+        },
+        {
+          "info": {
+            "name": "Vantage Create a Team",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.vantage.sh/v1/teams",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Team."
+        },
+        {
+          "info": {
+            "name": "Vantage Get a Team",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.vantage.sh/v1/teams/:team_token",
+            "params": [
+              {
+                "name": "team_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Team."
+              }
+            ]
+          },
+          "docs": "Returns a specific Team by token."
+        },
+        {
+          "info": {
+            "name": "Vantage Update a Team",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.vantage.sh/v1/teams/:team_token",
+            "params": [
+              {
+                "name": "team_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Team."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing Team."
+        },
+        {
+          "info": {
+            "name": "Vantage Delete a Team",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.vantage.sh/v1/teams/:team_token",
+            "params": [
+              {
+                "name": "team_token",
+                "value": "",
+                "type": "path",
+                "description": "The unique token of the Team."
+              }
+            ]
+          },
+          "docs": "Deletes an existing Team."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -11,8 +11,11 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: costManagementApi
-  url: ../openapi/vantage-cost-management-api-openapi.yml
+- name: resourceReportsApi
+  url: ../openapi/vantage-resource-reports-api-openapi.yml
+  type: openapi
+- name: resourcesApi
+  url: ../openapi/vantage-resources-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: resource-report-and-resources

@@ -11,8 +11,11 @@ info:
     underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: costManagementApi
-  url: ../openapi/vantage-cost-management-api-openapi.yml
+- name: budgetAlertsApi
+  url: ../openapi/vantage-budget-alerts-api-openapi.yml
+  type: openapi
+- name: costReportsApi
+  url: ../openapi/vantage-cost-reports-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: create-budget-alert-for-report

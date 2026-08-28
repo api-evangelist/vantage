@@ -13,8 +13,11 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: costManagementApi
-  url: ../openapi/vantage-cost-management-api-openapi.yml
+- name: costProvidersApi
+  url: ../openapi/vantage-cost-providers-api-openapi.yml
+  type: openapi
+- name: recommendationsApi
+  url: ../openapi/vantage-recommendations-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: review-recommendations-by-provider

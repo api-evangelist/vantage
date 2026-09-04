@@ -1634,17 +1634,18 @@ accessModel:
   try_now: true
   public: false
   label: Freemium · Self-serve signup
-  confidence: high
+  confidence: medium
   source:
   - plans
   - authentication
-  generated: '2026-07-22'
+  - security
+  generated: '2026-09-03'
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/vantage.png
 access: 3rd-Party
 created: '2026-01-02'
 modified: '2026-05-19'
-position: Consumer
+position: Consuming
 description: >-
   Vantage is a cloud cost management platform designed for modern engineering teams to monitor, optimize, and control
   their cloud infrastructure spending across multiple providers. The platform helps companies identify immediate cost

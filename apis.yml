@@ -1686,6 +1686,8 @@ maintainers:
     email: kin@apievangelist.com
 specificationVersion: '0.23'
 common:
+  - type: Website
+    url: https://www.vantage.sh/
   - type: AgenticAccess
     url: agentic-access/vantage-agentic-access.yml
   - type: DomainSecurity

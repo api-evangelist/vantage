@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Vantage Cloud Pricing Access Grants Saved Filters API
-  description: The Vantage Cloud Pricing API provides programmatic access to cloud infrastructure pricing data across multiple cloud providers. You can query products, services, and providers to retrieve up-to-date pricing information for AWS, Azure, GCP, and other supported cloud platforms. The API is free for all registered Vantage users and returns JSON-encoded responses. An OpenAPI specification is always available at https://api.vantage.sh/v1/swagger.json.
-  version: 1.0.0
+  title: Vantage Cost Management Saved Filters API
+  description: The Vantage Cost Management API provides programmatic access to cloud cost data and enables automation of cost management workflows.
+  version: 2.0.0
   contact:
     name: Vantage Support
     url: https://www.vantage.sh/
@@ -11,8 +11,8 @@ info:
     url: https://www.vantage.sh/terms
   termsOfService: https://www.vantage.sh/terms
 servers:
-- url: https://api.vantage.sh/v1
-  description: Vantage Cloud Pricing API v1 Production
+- url: https://api.vantage.sh/v2
+  description: Vantage API v2 Production
 security:
 - bearerAuth: []
 tags:
@@ -199,56 +199,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    Unauthorized:
-      description: Authentication credentials are missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    UnprocessableEntity:
-      description: The request was well-formed but could not be processed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    SavedFilterInput:
-      type: object
-      required:
-      - title
-      - filter
-      properties:
-        title:
-          type: string
-          description: The title of the Saved Filter.
-          example: Example Title
-        filter:
-          type: string
-          description: The VQL filter expression.
-          example: example_value
-        workspace_token:
-          type: string
-          description: The token of the Workspace for the Saved Filter.
-          example: example_value
-    Error:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              message:
-                type: string
-                description: A human-readable error message.
-          example: []
     SavedFilter:
       type: object
       properties:
@@ -273,21 +224,56 @@ components:
           format: date-time
           description: The date and time the Saved Filter was created.
           example: '2026-01-15T10:30:00Z'
+    Error:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+                description: A human-readable error message.
+          example: []
+    SavedFilterInput:
+      type: object
+      required:
+      - title
+      - filter
+      properties:
+        title:
+          type: string
+          description: The title of the Saved Filter.
+          example: Example Title
+        filter:
+          type: string
+          description: The VQL filter expression.
+          example: example_value
+        workspace_token:
+          type: string
+          description: The token of the Workspace for the Saved Filter.
+          example: example_value
+  responses:
+    UnprocessableEntity:
+      description: The request was well-formed but could not be processed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
-    SavedFilterToken:
-      name: saved_filter_token
-      in: path
-      required: true
-      description: The unique token of the Saved Filter.
-      schema:
-        type: string
-    LimitParam:
-      name: limit
-      in: query
-      description: The number of results per page.
-      schema:
-        type: integer
-        default: 25
     PageParam:
       name: page
       in: query
@@ -295,8 +281,22 @@ components:
       schema:
         type: integer
         default: 1
+    LimitParam:
+      name: limit
+      in: query
+      description: The number of results per page.
+      schema:
+        type: integer
+        default: 25
+    SavedFilterToken:
+      name: saved_filter_token
+      in: path
+      required: true
+      description: The unique token of the Saved Filter.
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
-      description: Vantage API token. Create a free API key from your Vantage account page at https://console.vantage.sh/account/api_access_tokens.
+      description: Vantage API token. Create an API token from your Vantage account settings page at https://console.vantage.sh/account/api_access_tokens.

@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Vantage Cloud Pricing Access Grants Services API
+  title: Vantage Cloud Pricing Services API
   description: The Vantage Cloud Pricing API provides programmatic access to cloud infrastructure pricing data across multiple cloud providers. You can query products, services, and providers to retrieve up-to-date pricing information for AWS, Azure, GCP, and other supported cloud platforms. The API is free for all registered Vantage users and returns JSON-encoded responses. An OpenAPI specification is always available at https://api.vantage.sh/v1/swagger.json.
   version: 1.0.0
   contact:
@@ -114,6 +114,18 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+                description: A human-readable error message.
+          example: []
     Service:
       type: object
       properties:
@@ -133,26 +145,7 @@ components:
           type: integer
           description: The number of products available in this Service.
           example: 10
-    Error:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              message:
-                type: string
-                description: A human-readable error message.
-          example: []
   parameters:
-    LimitParam:
-      name: limit
-      in: query
-      description: The number of results per page.
-      schema:
-        type: integer
-        default: 25
     PageParam:
       name: page
       in: query
@@ -160,6 +153,13 @@ components:
       schema:
         type: integer
         default: 1
+    LimitParam:
+      name: limit
+      in: query
+      description: The number of results per page.
+      schema:
+        type: integer
+        default: 25
   securitySchemes:
     bearerAuth:
       type: http

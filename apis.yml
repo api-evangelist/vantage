@@ -1549,6 +1549,8 @@ apis:
   humanURL: https://docs.vantage.sh/api
   baseURL: https://api.vantage.sh/v2
   tags:
+  - Workspace
+  tags_raw:
   - Workspaces
   properties:
   - type: OpenAPI

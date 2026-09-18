@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Vantage Cloud Pricing Access Grants Segments API
-  description: The Vantage Cloud Pricing API provides programmatic access to cloud infrastructure pricing data across multiple cloud providers. You can query products, services, and providers to retrieve up-to-date pricing information for AWS, Azure, GCP, and other supported cloud platforms. The API is free for all registered Vantage users and returns JSON-encoded responses. An OpenAPI specification is always available at https://api.vantage.sh/v1/swagger.json.
-  version: 1.0.0
+  title: Vantage Cost Management Segments API
+  description: The Vantage Cost Management API provides programmatic access to cloud cost data and enables automation of cost management workflows.
+  version: 2.0.0
   contact:
     name: Vantage Support
     url: https://www.vantage.sh/
@@ -11,8 +11,8 @@ info:
     url: https://www.vantage.sh/terms
   termsOfService: https://www.vantage.sh/terms
 servers:
-- url: https://api.vantage.sh/v1
-  description: Vantage Cloud Pricing API v1 Production
+- url: https://api.vantage.sh/v2
+  description: Vantage API v2 Production
 security:
 - bearerAuth: []
 tags:
@@ -206,6 +206,12 @@ paths:
         dispatcher: FALLBACK
 components:
   responses:
+    UnprocessableEntity:
+      description: The request was well-formed but could not be processed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Authentication credentials are missing or invalid.
       content:
@@ -218,12 +224,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    UnprocessableEntity:
-      description: The request was well-formed but could not be processed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
     SegmentToken:
       name: segment_token
@@ -232,13 +232,6 @@ components:
       description: The unique token of the Segment.
       schema:
         type: string
-    LimitParam:
-      name: limit
-      in: query
-      description: The number of results per page.
-      schema:
-        type: integer
-        default: 25
     PageParam:
       name: page
       in: query
@@ -246,7 +239,26 @@ components:
       schema:
         type: integer
         default: 1
+    LimitParam:
+      name: limit
+      in: query
+      description: The number of results per page.
+      schema:
+        type: integer
+        default: 25
   schemas:
+    Error:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+                description: A human-readable error message.
+          example: []
     Segment:
       type: object
       properties:
@@ -275,18 +287,6 @@ components:
           format: date-time
           description: The date and time the Segment was created.
           example: '2026-01-15T10:30:00Z'
-    Error:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              message:
-                type: string
-                description: A human-readable error message.
-          example: []
     SegmentInput:
       type: object
       required:
@@ -312,4 +312,4 @@ components:
     bearerAuth:
       type: http
       scheme: bearer
-      description: Vantage API token. Create a free API key from your Vantage account page at https://console.vantage.sh/account/api_access_tokens.
+      description: Vantage API token. Create an API token from your Vantage account settings page at https://console.vantage.sh/account/api_access_tokens.
